@@ -1,0 +1,25 @@
+2018-04-06 15:10:00,437[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/Development/workspace_gamc/iwxxmConverter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2018-04-06 15:10:00,438[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
+2018-04-06 15:10:01,040[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
+2018-04-06 15:10:01,057[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
+2018-04-06 15:10:01,060[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2018-04-06 15:10:01,092[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2018-04-06 15:10:01,437[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/Development/workspace_gamc/iwxxmConverter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2018-04-06 15:10:01,481[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/Development/workspace_gamc/iwxxmConverter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2018-04-06 15:10:01,619[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/Development/workspace_gamc/iwxxmConverter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2018-04-06 15:10:01,853[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/Development/workspace_gamc/iwxxmConverter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2018-04-06 15:10:02,073[ISO8601] [main] DEBUG wmo.WMOCloudRegister  - Total members in Clouds: 18
+2018-04-06 15:10:02,096[ISO8601] [main] DEBUG wmo.WMOPrecipitationRegister  - Total members in precipitation: 401
+2018-04-06 15:10:02,107[ISO8601] [main] DEBUG wmo.WMOCloudTypeRegister  - Total members in CloudTypes : 48
+2018-04-06 15:10:03,592[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2018-04-06 15:10:03,678[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2018-04-06 15:10:03,698[ISO8601] [main] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader sun.misc.Launcher$AppClassLoader@18b4aac2
+2018-04-06 15:10:03,732[ISO8601] [main] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
+2018-04-06 15:10:03,738[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
+2018-04-06 15:10:03,743[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
+2018-04-06 15:10:03,743[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
+2018-04-06 15:10:03,743[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class sun.misc.Launcher$AppClassLoader
+2018-04-06 15:10:04,169[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2018-04-06 15:10:04,195[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2018-04-06 15:10:04,508[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2018-04-06 15:10:04,536[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]

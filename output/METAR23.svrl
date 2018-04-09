@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schematron-output xmlns="http://purl.oclc.org/dsdl/svrl" title="Schematron validation" schemaVersion="">
+  <ns-prefix-in-attribute-values prefix="iwxxm" uri="http://icao.int/iwxxm/2.1" />
+  <ns-prefix-in-attribute-values prefix="sf" uri="http://www.opengis.net/sampling/2.0" />
+  <ns-prefix-in-attribute-values prefix="sams" uri="http://www.opengis.net/samplingSpatial/2.0" />
+  <ns-prefix-in-attribute-values prefix="xlink" uri="http://www.w3.org/1999/xlink" />
+  <ns-prefix-in-attribute-values prefix="xsi" uri="http://www.w3.org/2001/XMLSchema-instance" />
+  <ns-prefix-in-attribute-values prefix="om" uri="http://www.opengis.net/om/2.0" />
+  <ns-prefix-in-attribute-values prefix="gml" uri="http://www.opengis.net/gml/3.2" />
+  <ns-prefix-in-attribute-values prefix="aixm" uri="http://www.aixm.aero/schema/5.1.1" />
+  <active-pattern id="METAR_SPECI.ARS1" name="METAR_SPECI.ARS1" document="" />
+  <fired-rule context="//iwxxm:AerodromeRunwayState" />
+  <active-pattern id="METAR_SPECI.ARS2" name="METAR_SPECI.ARS2" document="" />
+  <fired-rule context="//iwxxm:AerodromeRunwayState" />
+  <active-pattern id="METAR_SPECI.ARVR1" name="METAR_SPECI.ARVR1" document="" />
+  <fired-rule context="//iwxxm:AerodromeRunwayVisualRange" />
+  <active-pattern id="METAR_SPECI.MAORep2" name="METAR_SPECI.MAORep2" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep1" name="METAR_SPECI.MAORep1" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep6" name="METAR_SPECI.MAORep6" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep3" name="METAR_SPECI.MAORep3" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep7" name="METAR_SPECI.MAORep7" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep4" name="METAR_SPECI.MAORep4" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.MAORep5" name="METAR_SPECI.MAORep5" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <active-pattern id="METAR_SPECI.ASS1" name="METAR_SPECI.ASS1" document="" />
+  <active-pattern id="METAR_SPECI.ASS3" name="METAR_SPECI.ASS3" document="" />
+  <active-pattern id="METAR_SPECI.ASS4" name="METAR_SPECI.ASS4" document="" />
+  <active-pattern id="METAR_SPECI.ASS2" name="METAR_SPECI.ASS2" document="" />
+  <active-pattern id="METAR_SPECI.ASS5" name="METAR_SPECI.ASS5" document="" />
+  <active-pattern id="METAR_SPECI.AWS1" name="METAR_SPECI.AWS1" document="" />
+  <fired-rule context="//iwxxm:AerodromeWindShear" />
+  <active-pattern id="METAR_SPECI.MATFR5" name="METAR_SPECI.MATFR5" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
+  <active-pattern id="METAR_SPECI.MATFR1" name="METAR_SPECI.MATFR1" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
+  <active-pattern id="METAR_SPECI.MATFR2" name="METAR_SPECI.MATFR2" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
+  <active-pattern id="METAR_SPECI.MATFR4" name="METAR_SPECI.MATFR4" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
+  <active-pattern id="METAR_SPECI.MATFR3" name="METAR_SPECI.MATFR3" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
+  <active-pattern id="METAR_SPECI.MAORec6" name="METAR_SPECI.MAORec6" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec4" name="METAR_SPECI.MAORec4" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec3" name="METAR_SPECI.MAORec3" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec2" name="METAR_SPECI.MAORec2" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec1" name="METAR_SPECI.MAORec1" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec7" name="METAR_SPECI.MAORec7" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec8" name="METAR_SPECI.MAORec8" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.MAORec5" name="METAR_SPECI.MAORec5" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeObservationRecord" />
+  <active-pattern id="METAR_SPECI.AOC1" name="METAR_SPECI.AOC1" document="" />
+  <fired-rule context="//iwxxm:AerodromeObservedClouds" />
+  <active-pattern id="METAR_SPECI.AOC2" name="METAR_SPECI.AOC2" document="" />
+  <fired-rule context="//iwxxm:AerodromeObservedClouds" />
+  <active-pattern id="METAR_SPECI.ASW3" name="METAR_SPECI.ASW3" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW4" name="METAR_SPECI.ASW4" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW5" name="METAR_SPECI.ASW5" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW6" name="METAR_SPECI.ASW6" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW2" name="METAR_SPECI.ASW2" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW7" name="METAR_SPECI.ASW7" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.ASW1" name="METAR_SPECI.ASW1" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWind" />
+  <active-pattern id="METAR_SPECI.AHV1" name="METAR_SPECI.AHV1" document="" />
+  <fired-rule context="//iwxxm:AerodromeHorizontalVisibility" />
+  <active-pattern id="METAR_SPECI.AHV2" name="METAR_SPECI.AHV2" document="" />
+  <fired-rule context="//iwxxm:AerodromeHorizontalVisibility" />
+  <active-pattern id="METAR_SPECI.AHV3" name="METAR_SPECI.AHV3" document="" />
+  <fired-rule context="//iwxxm:AerodromeHorizontalVisibility" />
+  <active-pattern id="TAF.MAFR2" name="TAF.MAFR2" document="" />
+  <active-pattern id="TAF.MAFR1" name="TAF.MAFR1" document="" />
+  <active-pattern id="TAF.MAFR3" name="TAF.MAFR3" document="" />
+  <active-pattern id="TAF.MAFR4" name="TAF.MAFR4" document="" />
+  <active-pattern id="TAF.AATF1" name="TAF.AATF1" document="" />
+  <active-pattern id="TAF.AATF2" name="TAF.AATF2" document="" />
+  <active-pattern id="TAF.TAF1" name="TAF.TAF1" document="" />
+  <active-pattern id="TAF.TAF18" name="TAF.TAF18" document="" />
+  <active-pattern id="TAF.TAF3" name="TAF.TAF3" document="" />
+  <active-pattern id="TAF.TAF4" name="TAF.TAF4" document="" />
+  <active-pattern id="TAF.TAF5" name="TAF.TAF5" document="" />
+  <active-pattern id="TAF.TAF9" name="TAF.TAF9" document="" />
+  <active-pattern id="TAF.TAF2" name="TAF.TAF2" document="" />
+  <active-pattern id="TAF.TAF11" name="TAF.TAF11" document="" />
+  <active-pattern id="TAF.TAF8" name="TAF.TAF8" document="" />
+  <active-pattern id="TAF.TAF14" name="TAF.TAF14" document="" />
+  <active-pattern id="TAF.TAF16" name="TAF.TAF16" document="" />
+  <active-pattern id="TAF.TAF12" name="TAF.TAF12" document="" />
+  <active-pattern id="TAF.TAF15" name="TAF.TAF15" document="" />
+  <active-pattern id="TAF.TAF17" name="TAF.TAF17" document="" />
+  <active-pattern id="TAF.TAF13" name="TAF.TAF13" document="" />
+  <active-pattern id="TAF.TAF6" name="TAF.TAF6" document="" />
+  <active-pattern id="SIGMET.SIGMET9" name="SIGMET.SIGMET9" document="" />
+  <active-pattern id="SIGMET.SIGMET1" name="SIGMET.SIGMET1" document="" />
+  <active-pattern id="SIGMET.SIGMET2" name="SIGMET.SIGMET2" document="" />
+  <active-pattern id="SIGMET.SIGMET10" name="SIGMET.SIGMET10" document="" />
+  <active-pattern id="SIGMET.SIGMET4" name="SIGMET.SIGMET4" document="" />
+  <active-pattern id="SIGMET.SIGMET7" name="SIGMET.SIGMET7" document="" />
+  <active-pattern id="SIGMET.SIGMET3" name="SIGMET.SIGMET3" document="" />
+  <active-pattern id="SIGMET.SIGMET8" name="SIGMET.SIGMET8" document="" />
+  <active-pattern id="SIGMET.SIGMET5" name="SIGMET.SIGMET5" document="" />
+  <active-pattern id="SIGMET.SEC1" name="SIGMET.SEC1" document="" />
+  <active-pattern id="SIGMET.SEC3" name="SIGMET.SEC3" document="" />
+  <active-pattern id="SIGMET.SEC4" name="SIGMET.SEC4" document="" />
+  <active-pattern id="SIGMET.SEC2" name="SIGMET.SEC2" document="" />
+  <active-pattern id="SIGMET.SECC3" name="SIGMET.SECC3" document="" />
+  <active-pattern id="SIGMET.SECC2" name="SIGMET.SECC2" document="" />
+  <active-pattern id="SIGMET.SECC1" name="SIGMET.SECC1" document="" />
+  <active-pattern id="SIGMET.SPC1" name="SIGMET.SPC1" document="" />
+  <active-pattern id="AIRMET.AECC2" name="AIRMET.AECC2" document="" />
+  <active-pattern id="AIRMET.AECC1" name="AIRMET.AECC1" document="" />
+  <active-pattern id="AIRMET.AEC1" name="AIRMET.AEC1" document="" />
+  <active-pattern id="AIRMET.AEC2" name="AIRMET.AEC2" document="" />
+  <active-pattern id="AIRMET.AEC3" name="AIRMET.AEC3" document="" />
+  <active-pattern id="AIRMET.AEC9" name="AIRMET.AEC9" document="" />
+  <active-pattern id="AIRMET.AEC10" name="AIRMET.AEC10" document="" />
+  <active-pattern id="AIRMET.AEC4" name="AIRMET.AEC4" document="" />
+  <active-pattern id="AIRMET.AEC5" name="AIRMET.AEC5" document="" />
+  <active-pattern id="AIRMET.AEC7" name="AIRMET.AEC7" document="" />
+  <active-pattern id="AIRMET.AEC6" name="AIRMET.AEC6" document="" />
+  <active-pattern id="AIRMET.AEC8" name="AIRMET.AEC8" document="" />
+  <active-pattern id="AIRMET.AIRMET5" name="AIRMET.AIRMET5" document="" />
+  <active-pattern id="AIRMET.AIRMET2" name="AIRMET.AIRMET2" document="" />
+  <active-pattern id="AIRMET.AIRMET3" name="AIRMET.AIRMET3" document="" />
+  <active-pattern id="AIRMET.AIRMET4" name="AIRMET.AIRMET4" document="" />
+  <active-pattern id="AIRMET.AIRMET1" name="AIRMET.AIRMET1" document="" />
+  <active-pattern id="TCA.TCFC1" name="TCA.TCFC1" document="" />
+  <active-pattern id="TCA.TCA4" name="TCA.TCA4" document="" />
+  <active-pattern id="TCA.TCA2" name="TCA.TCA2" document="" />
+  <active-pattern id="TCA.TCA3" name="TCA.TCA3" document="" />
+  <active-pattern id="TCA.TCA1" name="TCA.TCA1" document="" />
+  <active-pattern id="TCA.TCOC1" name="TCA.TCOC1" document="" />
+  <active-pattern id="TCA.TCOC2" name="TCA.TCOC2" document="" />
+  <active-pattern id="TCA.TCOC3" name="TCA.TCOC3" document="" />
+  <active-pattern id="TCA.TCOC4" name="TCA.TCOC4" document="" />
+  <active-pattern id="VAA.VAC1" name="VAA.VAC1" document="" />
+  <active-pattern id="VAA.VAC2" name="VAA.VAC2" document="" />
+  <active-pattern id="VAA.VAC3" name="VAA.VAC3" document="" />
+  <active-pattern id="VAA.VAC4" name="VAA.VAC4" document="" />
+  <active-pattern id="VAA.VAA2" name="VAA.VAA2" document="" />
+  <active-pattern id="VAA.VAA1" name="VAA.VAA1" document="" />
+  <active-pattern id="COMMON.CL1" name="COMMON.CL1" document="" />
+  <fired-rule context="//iwxxm:CloudLayer" />
+  <fired-rule context="//iwxxm:CloudLayer" />
+  <active-pattern id="COMMON.Report4" name="COMMON.Report4" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
+  <active-pattern id="COMMON.Report2" name="COMMON.Report2" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
+  <active-pattern id="COMMON.Report1" name="COMMON.Report1" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
+  <active-pattern id="COMMON.Report3" name="COMMON.Report3" document="" />
+  <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
+  <active-pattern id="COMMON.ACF1" name="COMMON.ACF1" document="" />
+  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
+  <active-pattern id="COMMON.ACF2" name="COMMON.ACF2" document="" />
+  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
+  <active-pattern id="COMMON.ASWF1" name="COMMON.ASWF1" document="" />
+  <active-pattern id="COMMON.ASWTF1" name="COMMON.ASWTF1" document="" />
+  <active-pattern id="COMMON.ASWTF2" name="COMMON.ASWTF2" document="" />
+  <active-pattern id="COMMON.ASWTF3" name="COMMON.ASWTF3" document="" />
+  <active-pattern id="IWXXM.ExtensionAlwaysLast" name="IWXXM.ExtensionAlwaysLast" document="" />
+</schematron-output>
