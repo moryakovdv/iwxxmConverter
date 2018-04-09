@@ -53,7 +53,11 @@ If you're not interested in internal representation just use appropriate convert
     }
 ```
 Similar use TAFConverter and SPECIConverter
-
+Also if you don't know the type of the converter you may delegate to choose one to ConverterFactory by following code:
+```java
+TacConverter<?, ?> converter = ConverterFactory.createForTac(tacMessage);
+String convertedIwxxm = converter.convertTacToXML(tacMessage);
+```
 2. Validation sample. See IwxxmValidator class for details
 ```java
 	@Test
