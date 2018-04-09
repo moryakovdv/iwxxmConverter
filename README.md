@@ -117,19 +117,19 @@ Build project and start embedded web-server by following command with arguments 
 In the case of empty parameters base URI will be (http://localhost:8082/iwxxmConverter/api)
 
 API methods:
- - test if REST is running
- 	**method**: test 
- - get converted TAC in IWXXM format
- 	**method**: convertandvalidate
- 	**parameter**: message 
- - get converted result in IWXXM format and list of validation errors
- 	**method**: convertandvalidate
- 	**parameter**: message
- - get validation results for input IWXXM message
-  	**method**: validate
-  	**parameter**:message
+ - test if REST is running \
+ **method**: test 
+ - get converted TAC in IWXXM format\
+ **method**: convertandvalidate\
+ **parameter**: message 
+ - get converted result in IWXXM format and list of validation errors\
+ **method**: convertandvalidate\
+ **parameter**: message
+ - get validation results for input IWXXM message\
+ **method**: validate\
+ **parameter**:message
   	
-So ask (http://localhost:8082/iwxxmConverter/api/convertandvalidate?message=METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG)
+So ask `http://localhost:8082/iwxxmConverter/api/convertandvalidate?message=METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG`
 to get converted and validated results.
   
   
