@@ -141,9 +141,9 @@ Any help from the community will be highly appreciated. There is a lot of work t
  - RMK sections are waiting for implementation  
 
 ## Licensing
-The IwxxmConverter is distributed under The APACHE 2.0 License
-CRUX software as dependency is distrubuted under The CRUX License
-PH-Schematron as dependency is distributed under The APACHE 2.0 License
+The IwxxmConverter is distributed under The APACHE 2.0 License.
+CRUX software as dependency is distrubuted under The CRUX License.
+PH-Schematron as dependency is distributed under The APACHE 2.0 License.
 
 ## Contacts
 Dmitry Moryakov  
