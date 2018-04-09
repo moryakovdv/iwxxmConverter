@@ -52,7 +52,7 @@ If you're not interested in internal representation just use appropriate convert
         System.out.println(result);
     }
 ```
-Similar use TAFConverter and SPECIConverter
+Similar use TAFConverter and SPECIConverter.\
 Also if you don't know the type of the converter you may delegate to choose one to ConverterFactory by following code:
 ```java
 TacConverter<?, ?> converter = ConverterFactory.createForTac(tacMessage);
