@@ -53,7 +53,8 @@ If you're not interested in internal representation just use appropriate convert
     }
 ```
 Similar use TAFConverter and SPECIConverter.\
-Also if you don't know the type of the converter you may delegate to choose one to ConverterFactory by following code:
+
+Also if you don't know the type of the converter you may delegate to choose one to ``ConverterFactory`` by following code:
 ```java
 TacConverter<?, ?> converter = ConverterFactory.createForTac(tacMessage);
 String convertedIwxxm = converter.convertTacToXML(tacMessage);
@@ -124,7 +125,7 @@ API methods:
  - test if REST is running \
  **method**: test 
  - get converted TAC in IWXXM format\
- **method**: convertandvalidate\
+ **method**: convert\
  **parameter**: message 
  - get converted result in IWXXM format and list of validation errors\
  **method**: convertandvalidate\
