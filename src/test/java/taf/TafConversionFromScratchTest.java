@@ -110,8 +110,7 @@ import tafconverter.TafCommonWeatherSection;
 import wmo.WMOCloudRegister;
 import wmo.WMOPrecipitationRegister;
 
-
-/**Conversion from scratch*/
+/** Conversion from scratch */
 public class TafConversionFromScratchTest {
 
 	/*
@@ -128,7 +127,7 @@ public class TafConversionFromScratchTest {
 	static final DateTimeFormatter dtFormat = DateTimeFormat.forPattern("yyyyMMddHHmm");
 	static final DateTimeFormatter dtFormatISO = ISODateTimeFormat.dateTimeNoMillis();
 
-	//public static final WMOCloudRegister CloudRegister = new WMOCloudRegister();
+	// public static final WMOCloudRegister CloudRegister = new WMOCloudRegister();
 
 	/** Our own helpers to suppress boiler-plate code */
 	static final IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
@@ -144,56 +143,49 @@ public class TafConversionFromScratchTest {
 
 	Pattern selectAllMessages = Pattern.compile("(TAF[^=]*)(?==)");
 
-	//Crux crux = new Crux();
-	
-	
+	// Crux crux = new Crux();
+
 	String schPath = "";
-	
-	//ClassPathResource res = new ClassPathResource("iwxxm/schematron/owxxm.sch");
-	
-	final ISchematronResource aResSCH = SchematronResourceSCH
-			.fromClassPath("iwxxm/schematron/iwxxm.sch");
-			
+
+	// ClassPathResource res = new ClassPathResource("iwxxm/schematron/owxxm.sch");
+
+	final ISchematronResource aResSCH = SchematronResourceSCH.fromClassPath("iwxxm/schematron/iwxxm.sch");
+
 	AtomicInteger failedRulesCounter = new AtomicInteger(0);
-	
+
 	private void testValidation(String inputXmlFile, String outReportFile) throws Exception {
-		
+
 		if (!aResSCH.isValidSchematron())
 			throw new IllegalArgumentException("Invalid Schematron!");
-		
-			System.setProperty("jaxp.debug", "true");
-			
-			 
-			File fTest = new File(inputXmlFile);
-			File fOut = new File(outReportFile);
-			
-			
-				
-			SchematronOutputType results = aResSCH.applySchematronValidationToSVRL(new StreamSource(fTest));
-			
-			List<Object> allAsserts = results.getActivePatternAndFiredRuleAndFailedAssert();
-			for (Object object : allAsserts) {
-				
-				if (object instanceof FiredRule) {
-					FiredRule rule = (FiredRule)object;
-					//System.out.println("Check rule: "+rule);
-				}
-				
-			    if (object instanceof FailedAssert) {
-			        FailedAssert failedAssert = (FailedAssert) object;
-			        System.out.println(failedAssert.getText());
-			        System.out.println(failedAssert.getTest());
-			        failedRulesCounter.incrementAndGet();
-			    }
-			    
-			}	
-			SVRLMarshaller m = new SVRLMarshaller();
-			m.write(results, fOut);
-			
-			 
+
+		System.setProperty("jaxp.debug", "true");
+
+		File fTest = new File(inputXmlFile);
+		File fOut = new File(outReportFile);
+
+		SchematronOutputType results = aResSCH.applySchematronValidationToSVRL(new StreamSource(fTest));
+
+		List<Object> allAsserts = results.getActivePatternAndFiredRuleAndFailedAssert();
+		for (Object object : allAsserts) {
+
+			if (object instanceof FiredRule) {
+				FiredRule rule = (FiredRule) object;
+				// System.out.println("Check rule: "+rule);
+			}
+
+			if (object instanceof FailedAssert) {
+				FailedAssert failedAssert = (FailedAssert) object;
+				System.out.println(failedAssert.getText());
+				System.out.println(failedAssert.getTest());
+				failedRulesCounter.incrementAndGet();
+			}
+
 		}
-	
-	
+		SVRLMarshaller m = new SVRLMarshaller();
+		m.write(results, fOut);
+
+	}
+
 	@Test
 	public void testConversion() throws DatatypeConfigurationException, JAXBException, ParsingException, IOException {
 		System.out.println(convertTacToXML(testTaf));
@@ -211,33 +203,28 @@ public class TafConversionFromScratchTest {
 			// System.out.println(m.group());
 			System.out.println("Message " + counter);
 			String conversionResults = convertTacToXML(m.group());
-			String path = "output/TAF"+counter+".xml";
-			String pathReport = "output/TAF"+counter+".svrl";
-			
+			String path = "output/TAF" + counter + ".xml";
+			String pathReport = "output/TAF" + counter + ".svrl";
+
 			counter++;
-			
+
 			File f = new File(path);
-			
-			try(FileOutputStream fsOut = new FileOutputStream(f);) {
+
+			try (FileOutputStream fsOut = new FileOutputStream(f);) {
 				fsOut.write(conversionResults.getBytes("UTF-8"));
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println(e);
 				continue;
 			}
 			try {
-				//crux.validate(null, "iwxxm/schematron/iwxxm.sch", f.getPath());
-				
+				// crux.validate(null, "iwxxm/schematron/iwxxm.sch", f.getPath());
+
 				testValidation(f.getPath(), pathReport);
-				
-			}
-			catch(Exception e) {
+
+			} catch (Exception e) {
 				System.out.println(e);
 				continue;
 			}
-					
-			
-			
 
 		}
 
@@ -247,14 +234,7 @@ public class TafConversionFromScratchTest {
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
-		tafMessage.getCommonWeatherSection().setAirTemperatureMax(BigDecimal.TEN);
-		tafMessage.getCommonWeatherSection().setAirTemperatureMaxTime(DateTime.now());
-		TAFConverter tc = new TAFConverter();
-		TAFType tt = tc.convertMessage(translatedTaf);
-		tc.marshallMessageToXML(tt);
-		
-		//tafMessage.parseMessage();
-
+		tafMessage.parseMessage();
 		String result = convertTaf(tafMessage);
 
 		return result;
@@ -310,8 +290,7 @@ public class TafConversionFromScratchTest {
 		default:
 			tafRootTag.setStatus(TAFReportStatusType.NORMAL);
 		}
-		
-		
+
 		// Some description
 		tafRootTag.setPermissibleUsageSupplementary("TAF composing test using JAXB");
 
@@ -347,8 +326,8 @@ public class TafConversionFromScratchTest {
 					globalSectionIndex.getAndIncrement());
 			tafRootTag.getChangeForecast().add(trendSectionforecast);
 		}
-		
-		for(TafForecastTimeSection timedSection: translatedTaf.getTimedSections()) {
+
+		for (TafForecastTimeSection timedSection : translatedTaf.getTimedSections()) {
 			timedSection.parseSection();
 			OMObservationPropertyType trendTimedSectionforecast = createTrendForecast(timedSection,
 					globalSectionIndex.getAndIncrement());
@@ -395,13 +374,12 @@ public class TafConversionFromScratchTest {
 		timePeriodType.setEndPosition(timePositionEnd);
 
 		timePeriodProperty.setTimePeriod(timePeriodType);
-		
+
 		return timePeriodProperty;
 	}
 
 	/** create valid period section for trend sections */
-	private TimePeriodPropertyType createTrendPeriodSection(DateTime start, DateTime end,
-			int sectionIndex) {
+	private TimePeriodPropertyType createTrendPeriodSection(DateTime start, DateTime end, int sectionIndex) {
 
 		String sectionTimePeriodBeginPosition = start.toString(dtFormatISO);
 		String sectionTimePeriodEndPosition = end.toString(dtFormatISO);
@@ -442,7 +420,6 @@ public class TafConversionFromScratchTest {
 
 		timePeriodProperty.setTimePeriod(timePeriodType);
 
-		
 		return timePeriodProperty;
 
 	}
@@ -501,7 +478,6 @@ public class TafConversionFromScratchTest {
 		ot.setResult(createBaseResultSection());
 
 		omOM_Observation.setOMObservation(ot);
-		
 
 		return omOM_Observation;
 	}
@@ -545,10 +521,12 @@ public class TafConversionFromScratchTest {
 		sWindType.setVariableWindDirection(translatedTaf.getCommonWeatherSection().isVrb());
 
 		// Set mean wind
-		SpeedType speedMeanType = ofGML.createSpeedType();
-		speedMeanType.setUom(translatedTaf.getCommonWeatherSection().getSpeedUnits().getStringValue());
-		speedMeanType.setValue(translatedTaf.getCommonWeatherSection().getWindSpeed());
-		sWindType.setMeanWindSpeed(speedMeanType);
+		if (translatedTaf.getCommonWeatherSection().getWindSpeed() != null) {
+			SpeedType speedMeanType = ofGML.createSpeedType();
+			speedMeanType.setUom(translatedTaf.getCommonWeatherSection().getSpeedUnits().getStringValue());
+			speedMeanType.setValue(translatedTaf.getCommonWeatherSection().getWindSpeed());
+			sWindType.setMeanWindSpeed(speedMeanType);
+		}
 
 		// Set wind direction
 		if (!translatedTaf.getCommonWeatherSection().isVrb()) {
@@ -599,7 +577,7 @@ public class TafConversionFromScratchTest {
 		// set id
 		recordType.setId(String.format("change-record-%d-%s", sectionIndex, translatedTaf.getIcaoCode()));
 		AerodromeForecastChangeIndicatorType changeIndicator = AerodromeForecastChangeIndicatorType.BECOMING;
-		
+
 		switch (section.getSectionType()) {
 		case BECMG:
 			changeIndicator = AerodromeForecastChangeIndicatorType.BECOMING;
@@ -613,7 +591,7 @@ public class TafConversionFromScratchTest {
 		case PROB40:
 			changeIndicator = AerodromeForecastChangeIndicatorType.PROBABILITY_40;
 			break;
-			
+
 		case PROB30TEMPO:
 			changeIndicator = AerodromeForecastChangeIndicatorType.PROBABILITY_30_TEMPORARY_FLUCTUATIONS;
 			break;
@@ -677,11 +655,8 @@ public class TafConversionFromScratchTest {
 
 		AerodromeCloudForecastPropertyType cloudType = createCloudSectionTag(section.getCommonWeatherSection(),
 				translatedTaf.getIcaoCode(), sectionIndex);
-		
-		recordType.setCloud(cloudType);
-		
 
-		
+		recordType.setCloud(cloudType);
 
 		// forecasted weather
 		for (String weatherCode : section.getCommonWeatherSection().getCurrentWeather()) {
@@ -751,7 +726,7 @@ public class TafConversionFromScratchTest {
 		ot.setResult(createTrendResultsSection(section, sectionIndex));
 
 		omOM_Observation.setOMObservation(ot);
-		
+
 		return omOM_Observation;
 
 	}

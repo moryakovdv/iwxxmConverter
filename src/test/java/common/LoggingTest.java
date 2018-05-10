@@ -20,8 +20,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import wmo.WMOPrecipitationRegister;
 
 
 /**Unit test to check all types of logging*/
@@ -31,7 +31,7 @@ public class LoggingTest {
 	/**General log output*/
 	@Test
 	public void testMainLogger() {
-		Logger log = LoggingClass.INSTANCE.getLoggerInstance();
+		Logger log = LoggerFactory.getLogger(this.getClass());
 		assertNotNull(log);
 		
 		log.debug("test DEBUG");
@@ -40,26 +40,8 @@ public class LoggingTest {
 	}
 	
 	
-	/**Output for named logger NameSpaceMapper*/
-	@Test
-	public void testCustomClassLogger() {
-		Logger log = LoggingClass.INSTANCE.getLoggerInstanceForClass(LoggingTest.class);
-		assertNotNull(log);
 		
-		log.debug("test DEBUG");
-		log.error("test ERROR");
-		log.info("test INFO");
-		
-	}
 	
-	/**Output for the class implementing the LogWriter interface*/
-	@Test
-	public void testInterfaceLogger() {
-		WMOPrecipitationRegister wmor = new WMOPrecipitationRegister();
-		wmor.writeDebug("debug message");
-		wmor.writeError("error message", new Exception("THIS IS TEST EXCEPTION. IT SHOULD BE HERE"));
-		wmor.writeInfo("INFO message");
-	}
 	
 
 }

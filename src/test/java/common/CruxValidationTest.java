@@ -22,6 +22,9 @@ package common;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -33,14 +36,17 @@ import edu.ucar.ral.crux.ValidationException;
 
 public class CruxValidationTest {
 
-	String schPath = "iwxxm/schematron/iwxxm.sch";
+	String schPath = "/iwxxm/schematron/iwxxm.sch";
 	String fPath = "output";
 	  
 	
 	@Test
-	public void cruxTest() throws ValidationException, IOException, SAXException, ParserConfigurationException {
+	public void cruxTest() throws IOException, SAXException, ParserConfigurationException, URISyntaxException {
 		
 		Crux crux = new Crux();
+		
+		URL resource = getClass().getResource(schPath);
+		String schFile  = Paths.get(resource.toURI()).toFile().getAbsolutePath();
 		
 		File fDir = new File(fPath);
 		if (fDir.isDirectory()) {
@@ -54,9 +60,16 @@ public class CruxValidationTest {
 				}
 			});
 			
+			
+			
 			for(File taf:tafs) {
-				crux.validate(null, schPath,1, 
+				try {
+				crux.validate(null, schFile,1, 
 						taf.getPath());
+				}
+				catch(ValidationException e) {
+					System.out.println(e);
+				}
 			}
 			
 		}

@@ -38,9 +38,9 @@ import org.xml.sax.SAXParseException;
  * 
  * @author moryakov
  * */
-public class WMOPrecipitationRegister extends WMORegister {
+public class WMOPrecipitationRegister implements WMORegister {
 
-	private static final String registerFileName = "wmoregisters/precipitation.xml";
+	private static final String registerFileName = "/wmoregisters/precipitation.xml";
 
 	TreeMap<String, String> wmoPrecipitationCodes = new TreeMap<String, String>();
 
@@ -64,8 +64,8 @@ public class WMOPrecipitationRegister extends WMORegister {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
-			ClassLoader classLoader = getClass().getClassLoader();
-			InputStream is = classLoader.getResourceAsStream(registerFileName);
+			
+			InputStream is = this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation
@@ -83,7 +83,7 @@ public class WMOPrecipitationRegister extends WMORegister {
 			
 			NodeList listOfPrecipitationElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 			int totalElements = listOfPrecipitationElements.getLength();
-			writeDebug("Total members in precipitation: " + totalElements);
+			registerLogger.debug("Total members in precipitation: " + totalElements);
 
 			for (int i = 0; i < listOfPrecipitationElements.getLength(); i++) {
 
@@ -105,11 +105,11 @@ public class WMOPrecipitationRegister extends WMORegister {
 				}
 			} 
 		} catch (SAXParseException err) {
-			writeError("Error in parsing ", err);
+			registerLogger.error("Error in parsing ", err);
 		} catch (SAXException e) {
-			writeError("SAX Exception", e);
+			registerLogger.error("SAX Exception", e);
 		} catch (Throwable t) {
-			writeError("Unknown error", t);
+			registerLogger.error("Unknown error", t);
 		}
 
 	}

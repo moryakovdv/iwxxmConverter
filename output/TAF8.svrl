@@ -25,20 +25,10 @@
   <active-pattern id="METAR_SPECI.ASS5" name="METAR_SPECI.ASS5" document="" />
   <active-pattern id="METAR_SPECI.AWS1" name="METAR_SPECI.AWS1" document="" />
   <active-pattern id="METAR_SPECI.MATFR5" name="METAR_SPECI.MATFR5" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
   <active-pattern id="METAR_SPECI.MATFR1" name="METAR_SPECI.MATFR1" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
   <active-pattern id="METAR_SPECI.MATFR2" name="METAR_SPECI.MATFR2" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
   <active-pattern id="METAR_SPECI.MATFR4" name="METAR_SPECI.MATFR4" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
   <active-pattern id="METAR_SPECI.MATFR3" name="METAR_SPECI.MATFR3" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeTrendForecastRecord" />
   <active-pattern id="METAR_SPECI.MAORec6" name="METAR_SPECI.MAORec6" document="" />
   <active-pattern id="METAR_SPECI.MAORec4" name="METAR_SPECI.MAORec4" document="" />
   <active-pattern id="METAR_SPECI.MAORec3" name="METAR_SPECI.MAORec3" document="" />
@@ -61,11 +51,15 @@
   <active-pattern id="METAR_SPECI.AHV3" name="METAR_SPECI.AHV3" document="" />
   <active-pattern id="TAF.MAFR2" name="TAF.MAFR2" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR1" name="TAF.MAFR1" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR3" name="TAF.MAFR3" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR4" name="TAF.MAFR4" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.AATF1" name="TAF.AATF1" document="" />
   <fired-rule context="//iwxxm:AerodromeAirTemperatureForecast" />
@@ -154,7 +148,6 @@
   <active-pattern id="VAA.VAA1" name="VAA.VAA1" document="" />
   <active-pattern id="COMMON.CL1" name="COMMON.CL1" document="" />
   <fired-rule context="//iwxxm:CloudLayer" />
-  <fired-rule context="//iwxxm:CloudLayer" />
   <active-pattern id="COMMON.Report4" name="COMMON.Report4" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
   <active-pattern id="COMMON.Report2" name="COMMON.Report2" document="" />
@@ -166,9 +159,7 @@
   <active-pattern id="COMMON.ACF1" name="COMMON.ACF1" document="" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ACF2" name="COMMON.ACF2" document="" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ASWF1" name="COMMON.ASWF1" document="" />

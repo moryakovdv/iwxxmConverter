@@ -33,8 +33,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.oclc.purl.dsdl.svrl.FailedAssert;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import common.LoggingClass;
 import exceptions.ParsingException;
 import general.ConverterFactory;
 import tac.TacConverter;
@@ -43,7 +43,7 @@ import validation.IwxxmValidator;
 @Path("/api")
 public class IwxxmRestConverter {
 
-	Logger logger = LoggingClass.INSTANCE.getLoggerInstanceForClass(this.getClass());
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**Test rest method. Returns welcome string*/
 	@GET

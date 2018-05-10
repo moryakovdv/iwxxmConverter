@@ -37,9 +37,9 @@ import org.xml.sax.SAXParseException;
  * @see WMORegister
  * 
  * @author moryakov*/
-public class WMORunWayFrictionRegister extends WMORegister {
+public class WMORunWayFrictionRegister implements WMORegister {
 
-	private static final String registerFileName = "wmoregisters/runwayFriction.xml";
+	private static final String registerFileName = "/wmoregisters/runwayFriction.xml";
 	
 	TreeMap<Integer, String> wmoFrictionCodes = new TreeMap<Integer, String>();
 	
@@ -63,8 +63,8 @@ public class WMORunWayFrictionRegister extends WMORegister {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
-			ClassLoader classLoader = getClass().getClassLoader();
-			InputStream is = classLoader.getResourceAsStream(registerFileName);
+			
+			InputStream is = this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation
@@ -82,7 +82,7 @@ public class WMORunWayFrictionRegister extends WMORegister {
 			
 			NodeList listOfCloudElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);//root.getElementsByTagName("member");
 			int totalCloudElements = listOfCloudElements.getLength();
-			writeDebug("Total members in RunwayFriction: " + totalCloudElements);
+			registerLogger.debug("Total members in RunwayFriction: " + totalCloudElements);
 
 			for (int i = 0; i < listOfCloudElements.getLength(); i++) {
 
@@ -111,11 +111,11 @@ public class WMORunWayFrictionRegister extends WMORegister {
 				}
 			} // end of for loop with s var
 		} catch (SAXParseException err) {
-			writeError("Error in parsing ", err);
+			registerLogger.error("Error in parsing ", err);
 		} catch (SAXException e) {
-			writeError("SAX Exception", e);
+			registerLogger.error("SAX Exception", e);
 		} catch (Throwable t) {
-			writeError("Unknown error", t);
+			registerLogger.error("Unknown error", t);
 		}
 		
 	}

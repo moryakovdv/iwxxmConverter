@@ -18,42 +18,28 @@ package wmo;
 
 import java.util.TreeMap;
 
-import common.LogWriter;
-import common.LoggingClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**Base class for parsing WMO XML Registers.
- * Each inheritor should inplement parsing method and method for query WMO url by code
+/**Base interface for parsing WMO XML Registers.
+ * Each class should inplement parsing method and method for query WMO url by code
  * Resource directory stores XML-files dowloaded from WMO 
  * 
  * @author moryakov
  * */
-public abstract class WMORegister implements LogWriter {
+public interface WMORegister {
+	
+	Logger registerLogger = LoggerFactory.getLogger(WMORegister.class);
 	
 	/**Parse XML file and populate TreeMap storage*/
-	public abstract void parseWMOXml();
+	void parseWMOXml();
 	
 	/**Get All content of a registry as a Map of elements*/
-	public abstract TreeMap<?,?> getContent();
+	 TreeMap<?,?> getContent();
 	
 	/**Get particular URL for given code*/
-	public abstract String getWMOUrlByCode(Object code);
+	  String getWMOUrlByCode(Object code);
 	
-	@Override
-	public void writeInfo(String message) {
-		LoggingClass.INSTANCE.getLoggerInstanceForClass(this.getClass()).info(message);
-		
-	}
 	
-	@Override
-	public void writeDebug(String message) {
-		LoggingClass.INSTANCE.getLoggerInstanceForClass(this.getClass()).debug(message);
-		
-	}
-	
-	@Override
-	public void writeError(String message, Throwable err) {
-		LoggingClass.INSTANCE.getLoggerInstanceForClass(this.getClass()).error(message,err);
-		
-	}
 
 }
