@@ -38,10 +38,10 @@ public class SigmetParsingRegexp {
 
 	/**SIGMET Mandatory header*/
 	public final static Pattern sigmetHeader = Pattern.compile(
-			"^(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>.?\\d+)\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s+(?<firCode>[A-Z]{4})\\s+(?<firName>[A-Z]+)\\s+FIR(?<uir>\\/UIR)?");
+			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	
 	/**Pattern for phenomenas except VA,VC*/
-	public final static Pattern sigmetPhenomena = Pattern.compile("(?<phenomenaType>OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atHour>\\d\\d)(?<atMinutes>\\d\\d)Z)?");
+	public final static Pattern sigmetPhenomena = Pattern.compile("(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atHour>\\d\\d)(?<atMinutes>\\d\\d)Z)?");
 	
 	/**Pattern to determine polygon*/
 	public final static Pattern sigmetFirRegion = Pattern.compile("(?<isFirRegion>WI)");
@@ -61,10 +61,13 @@ public class SigmetParsingRegexp {
 	/**Within corridor with distance of certain line*/
 	public final static Pattern sigmetWithin = Pattern.compile("(APRX|WTN)\\s+(?<range>\\d+)\\s?(KM|NM)\\s+(WID|OF)\\s+LINE\\s+(?:BTN|\\/)?");
 	
+	/**Whether phenomena moves or stands and intensity*/
+	public final static Pattern sigmetMoves = Pattern.compile("((?<notMoving>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)(<?speedunits>KMH|KT)?))\\s+(?<force>INTSF|WKN|NC)?");
 	
 	public final static Pattern sigmetSector = Pattern.compile("");
 	
-	
+	/**Vertical length (height) of the phenomena*/
+	public final static Pattern sigmetVerticalHeight = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)M))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
 	
 	
 }
