@@ -43,15 +43,15 @@ public class SigmetParsingRegexp {
 	/**Pattern for phenomenas except VA,VC*/
 	public final static Pattern sigmetPhenomena = Pattern.compile("(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atHour>\\d\\d)(?<atMinutes>\\d\\d)Z)?");
 	
+	/**Pattern to determine entire fir*/
+	public final static Pattern sigmetEntireFir = Pattern.compile("ENTIRE FIR(?:\\/UIR)?");
+	
 	/**Pattern to determine polygon*/
-	public final static Pattern sigmetFirRegion = Pattern.compile("(?<isFirRegion>WI)");
+	public final static Pattern sigmetInPolygon = Pattern.compile("(?<isInPolygon>WI)");
 	
 	/**Pattern to extract coordinate point*/
 	public final static Pattern sigmetCoordPoint = Pattern.compile("(?<point>(?<latitude>N|S)(?<ladeg>\\d{2})(?<lamin>\\d{2})?\\s+(?<longitude>E|W)(?<lodeg>\\d{2,3})(?<lomin>\\d{2})?)");
 
-	/**Pattern to determine entire fir*/
-	public final static Pattern sigmetEntireFir = Pattern.compile("ENTIRE FIR(?:\\/UIR)?");
-	
 	/**Pattern to extract lines into collection*/
 	public final static Pattern sigmetLines = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
 	

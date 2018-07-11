@@ -26,30 +26,25 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
 /**
- * Implemetation of a SIGMET Tac message
+ * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV or WC)
  * 
  * @author moryakov
  */
 public class SIGMETTacMessage extends TacMessageImpl {
 
-	public enum Severity {
-		OBSCURED,SQALL,EMBEDDED,FREQUENT,SEVERE,HEAVY, NOTSET;
+	public enum Type {
+		METEO,VOLCANO,CYCLONE;
 	}
 	
-	public enum ObservationType {
-		FORECAST, OBSERVE, NOTSET;
-	}
-	
+	private DateTime validFrom;
+	private DateTime validTo;
 	private String firName;
-	private String phenomenaName;
-	private boolean isMoving=false;
-	private String movingDirection;
-	private int movingSpeed;
-	private SPEED_UNITS speedUnits;
+	
+	
 	private String fl;
 	
-	private Severity phenomenaSeverity=Severity.NOTSET;
-	private ObservationType phenomenaObservation=ObservationType.NOTSET;
+	
+	
 	
 	
 	
@@ -90,11 +85,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	@Override
 	public Interval getValidityInterval() {
 		
-		/**TODO - calculate sigmet validity!!*/
-		DateTime start = getMessageIssueDateTime();
-		DateTime end = getMessageIssueDateTime().plusMinutes(30);
-		
-		return new Interval(start,end);
+		return new Interval(this.validFrom,this.validTo);
 	}
 
 	@Override
