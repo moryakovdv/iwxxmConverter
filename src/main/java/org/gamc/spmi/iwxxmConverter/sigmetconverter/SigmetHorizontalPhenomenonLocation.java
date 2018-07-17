@@ -16,6 +16,10 @@ public class SigmetHorizontalPhenomenonLocation {
 	/**Describes direction from certain line, e.g 'NE OF LINE ...'*/	
 	public static final class DirectionFromLine implements Serializable {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1937563107841308842L;
 		private RUMB_UNITS direction;
 		private Line sigmetLine;
 		

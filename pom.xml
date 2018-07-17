@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxmConverter</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<version>0.0.9</version>
 
 	<properties>
@@ -212,7 +212,5 @@
 
 	</build>
 
-	<modules>
-		<module>IwxxmConverterRest</module>
-	</modules>
+
 </project>

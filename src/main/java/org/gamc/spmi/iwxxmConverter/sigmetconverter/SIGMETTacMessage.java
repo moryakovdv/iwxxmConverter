@@ -36,17 +36,21 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		METEO,VOLCANO,CYCLONE;
 	}
 	
+	private String sigmetNumber;
+	
+	private Type sigmetType = Type.METEO;
+	
 	private DateTime validFrom;
 	private DateTime validTo;
+	
+	private String watchOffice;
+	private String firCode;
 	private String firName;
 	
-	
-	private String fl;
-	
-	
-	
-	
-	
+	private SigmetPhenomenonDescription phenomenonDescription;
+	private SigmetHorizontalPhenomenonLocation horizontalLocation;
+	private SigmetVerticalPhenomenonLocation verticalLocation;
+		
 	
 	public SIGMETTacMessage(String initialTacMessage) {
 		super(initialTacMessage);
