@@ -36,12 +36,17 @@ import java.util.regex.Pattern;
  * */
 public class SigmetParsingRegexp {
 
+	/**WMO Bulletin header*/
+	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})\\s+(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
+	
 	/**SIGMET Mandatory header*/
 	public final static Pattern sigmetHeader = Pattern.compile(
-			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
-	
+			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
+	       "(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	/**Pattern for phenomenas except VA,VC*/
-	public final static Pattern sigmetPhenomena = Pattern.compile("(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atHour>\\d\\d)(?<atMinutes>\\d\\d)Z)?");
+	public final static Pattern sigmetPhenomena = Pattern.compile("(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
+	public final static Pattern sigmetPhenomenaTimestamp = Pattern
+			.compile("(?<hh>\\d{2})(?<mm>\\d{2})");
 	
 	/**Pattern to determine entire fir*/
 	public final static Pattern sigmetEntireFir = Pattern.compile("ENTIRE FIR(?:\\/UIR)?");
