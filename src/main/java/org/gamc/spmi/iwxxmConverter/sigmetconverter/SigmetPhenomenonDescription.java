@@ -52,17 +52,33 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 			return name;
 		}
 	}
+	
+	public enum Intensity implements IwxxmEnum  {
+		INTSF("INTSF"), WKN("WKN"),NC("NC");
+		private String name;
+
+		private Intensity(String strName) {
+			this.name=strName;
+		}
+
+		@Override
+		public String getStringValue() {
+			return name;
+		}
+	}
 
 	private String phenomenon;
 	private Severity phenomenonSeverity = Severity.NOTSET;
 	private ObservationType phenomenonObservation = ObservationType.NOTSET;
 	private DateTime phenomenonTimeStamp;
 
-	private boolean isMoving = false;
-	private RUMB_UNITS movingDirection;
-	private int movingSpeed;
-	private SPEED_UNITS speedUnits;
+	
 
+	private Intensity intencity = Intensity.NC;
+	
+	private SigmetMovingSection movingSection;
+	private SigmetForecastSection forecastSection;
+	
 	public String getPhenomenon() {
 		return phenomenon;
 	}
@@ -95,36 +111,30 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 		this.phenomenonTimeStamp = phenomenonTimeStamp;
 	}
 
-	public boolean isMoving() {
-		return isMoving;
+	
+
+	public SigmetForecastSection getForecastSection() {
+		return forecastSection;
 	}
 
-	public void setMoving(boolean isMoving) {
-		this.isMoving = isMoving;
+	public void setForecastSection(SigmetForecastSection forecastSection) {
+		this.forecastSection = forecastSection;
 	}
 
-	public RUMB_UNITS getMovingDirection() {
-		return movingDirection;
+	public Intensity getIntencity() {
+		return intencity;
 	}
 
-	public void setMovingDirection(RUMB_UNITS movingDirection) {
-		this.movingDirection = movingDirection;
+	public void setIntencity(Intensity intencity) {
+		this.intencity = intencity;
 	}
 
-	public int getMovingSpeed() {
-		return movingSpeed;
+	public SigmetMovingSection getMovingSection() {
+		return movingSection;
 	}
 
-	public void setMovingSpeed(int movingSpeed) {
-		this.movingSpeed = movingSpeed;
-	}
-
-	public SPEED_UNITS getSpeedUnits() {
-		return speedUnits;
-	}
-
-	public void setSpeedUnits(SPEED_UNITS speedUnits) {
-		this.speedUnits = speedUnits;
+	public void setMovingSection(SigmetMovingSection movingSection) {
+		this.movingSection = movingSection;
 	}
 
 }

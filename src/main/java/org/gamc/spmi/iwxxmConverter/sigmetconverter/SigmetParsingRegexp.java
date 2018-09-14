@@ -44,12 +44,13 @@ public class SigmetParsingRegexp {
 			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	       "(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	/**Pattern for phenomenas except VA,VC*/
-	public final static Pattern sigmetPhenomena = Pattern.compile("(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
+	public final static Pattern sigmetPhenomena = Pattern.compile("((?:\\s+|^)?(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY)\\s+)?(?<phenomena>.+)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
 	public final static Pattern sigmetPhenomenaTimestamp = Pattern
 			.compile("(?<hh>\\d{2})(?<mm>\\d{2})");
 	
 	/**Pattern to determine entire fir*/
 	public final static Pattern sigmetEntireFir = Pattern.compile("ENTIRE FIR(?:\\/UIR)?");
+	
 	
 	/**Pattern to determine polygon*/
 	public final static Pattern sigmetInPolygon = Pattern.compile("(?<isInPolygon>WI)");
@@ -61,18 +62,25 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetLines = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
 	
 	/**Pattern to find sectors */
-	public final static Pattern sigmetSectorPooints = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
+	public final static Pattern sigmetSectorPoints = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
 	
 	/**Within corridor with distance of certain line*/
-	public final static Pattern sigmetWithin = Pattern.compile("(APRX|WTN)\\s+(?<range>\\d+)\\s?(KM|NM)\\s+(WID|OF)\\s+LINE\\s+(?:BTN|\\/)?");
+	public final static Pattern sigmetWithinCorridor = Pattern.compile("(APRX|WTN)\\s+(?<range>\\d+)\\s?(KM|NM)\\s+(WID|OF)\\s+LINE\\s+(?:BTN|\\/)?");
 	
 	/**Whether phenomena moves or stands and intensity*/
-	public final static Pattern sigmetMoves = Pattern.compile("((?<notMoving>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)(<?speedunits>KMH|KT)?))\\s+(?<force>INTSF|WKN|NC)?");
+	public final static Pattern sigmetMovement = Pattern.compile("((?<isStationery>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)(?<speedunits>KMH|KT)?))");
 	
-	public final static Pattern sigmetSector = Pattern.compile("");
+	/**Forecasted position of phenomenon*/
+	public final static Pattern sigmetForecastSection = Pattern.compile("FCST\\s+AT\\s+(?<time>\\d{4})Z\\s+(?<location>.*)");
+	
+	/**Extract single point direction e.g. N OF N2000 AND E OF E5555*/
+	public final static Pattern sigmetOnePointLine = Pattern.compile("(?<direction>(?<azimuth>N|NE|E|SE|S|SW|W|NW)\\s+OF\\s+(?<singlepointcoord>(?<pointCoord>N|S|E|W)(?<deg>\\d{2,3})(?<min>\\d{0,2})))");
 	
 	/**Vertical length (height) of the phenomena*/
-	public final static Pattern sigmetVerticalHeight = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)M))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
+	//public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)M))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
+	public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)(?<units>M|FT)))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
+	public final static Pattern sigmetIntensityChanges=Pattern.compile("(?<intensity>INTSF|WKN|NC)");
+	
 	
 	
 }

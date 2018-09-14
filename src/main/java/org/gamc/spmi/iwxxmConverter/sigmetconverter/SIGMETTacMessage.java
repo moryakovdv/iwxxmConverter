@@ -19,12 +19,17 @@ package org.gamc.spmi.iwxxmConverter.sigmetconverter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
+import org.gamc.spmi.iwxxmConverter.common.Coordinate;
 import org.gamc.spmi.iwxxmConverter.common.IWXXM21Helpers;
+import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
+import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARParsingException;
 import org.gamc.spmi.iwxxmConverter.metarconverter.MetarParsingRegexp;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Intensity;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.ObservationType;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Severity;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
@@ -58,9 +63,12 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	private String firCode;
 	private String firName;
 	
+	
+	
 	private SigmetPhenomenonDescription phenomenonDescription;
-	private SigmetHorizontalPhenomenonLocation horizontalLocation;
-	private SigmetVerticalPhenomenonLocation verticalLocation;
+	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
+	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation(); 
+	
 	
 	public String getSigmetDataType() {
 		return sigmetDataType;
@@ -239,6 +247,11 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			throw new SIGMETParsingException("Mandatory header section is missed in "+getTacStartToken());
 
 		fillAndRemovePhenomenaDescription(tac);
+		fillAndRemoveForecastedLocation(tac);
+		fillLocationSection(tac);
+		fillIntensity(tac);
+		fillMovingSection(tac);
+		fillLevel(tac);
 		
 	}
 	
@@ -255,20 +268,207 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			String obsTypeS = matcherPhenomena.group("obsfcst");
 			String atTimeS = matcherPhenomena.group("atTime");
 			
-			phenom.setPhenomenonSeverity(Severity.valueOf(sevS));
+			if (sevS!=null)
+				phenom.setPhenomenonSeverity(Severity.valueOf(sevS));
 			phenom.setPhenomenon(phS);
 			phenom.setPhenomenonObservation(ObservationType.valueOf(obsTypeS));
 			
 			DateTime parentDateTime = this.getMessageIssueDateTime();
-			DateTime dtAT = phenom.parseSectionDateTimeToken(SigmetParsingRegexp.sigmetPhenomenaTimestamp, atTimeS, parentDateTime);
 			
+			DateTime dtAT = atTimeS==null?parentDateTime:phenom.parseSectionDateTimeToken(SigmetParsingRegexp.sigmetPhenomenaTimestamp, atTimeS, parentDateTime);
 			phenom.setPhenomenonTimeStamp(dtAT);
+
 			this.setPhenomenonDescription(phenom);
 			
 			tac.delete(0, lastIndex);
 		}
 		
 		return tac;
+	}
+	
+	protected StringBuffer fillAndRemoveForecastedLocation(StringBuffer tac) {
+		Matcher matcherFcst = SigmetParsingRegexp.sigmetForecastSection.matcher(tac);
+		if (matcherFcst.find()) {
+			int lastIndex = matcherFcst.end();
+			
+			SigmetForecastSection fSection = new SigmetForecastSection(tac.substring(matcherFcst.start(),lastIndex));
+			this.getPhenomenonDescription().setForecastSection(fSection);
+			String time = matcherFcst.group("time");
+			String location = matcherFcst.group("location");
+			DateTime parentDateTime = this.getMessageIssueDateTime();
+			
+			DateTime dtAT = time==null?parentDateTime:fSection.parseSectionDateTimeToken(SigmetParsingRegexp.sigmetPhenomenaTimestamp, time, parentDateTime);
+			
+			fSection.setForecastedTime(dtAT);
+			Matcher matcherFcstLocation = SigmetParsingRegexp.sigmetOnePointLine.matcher(location);
+			
+			while(matcherFcstLocation.find()) {
+				String azimuth = matcherFcstLocation.group("azimuth");
+				String pointCoord = matcherFcstLocation.group("pointCoord");
+				String pointDeg = matcherFcstLocation.group("deg");
+				String pointMin = matcherFcstLocation.group("min");			
+			
+				Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord),Integer.parseInt(pointDeg),pointMin.isEmpty()?0:Integer.parseInt(pointMin)));
+				DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth),sigmetLine);
+				
+				fSection.getAreas().add(dirLine);
+			}
+			
+			tac.delete(matcherFcst.start(), lastIndex);
+		}
+			
+		
+		
+		return tac;
+	}
+	
+	protected StringBuffer fillLocationSection(StringBuffer tac) {
+		
+		fillEntireFIRLocation(tac);
+		if (this.getHorizontalLocation().isEntireFIR())
+			return tac; // not necessary to check location further
+		
+		fillWithinPolygon(tac);
+		if (this.getHorizontalLocation().isInPolygon())
+			return tac; // not necessary to check location further
+		
+		fillWithinCorridor(tac);
+		if (this.getHorizontalLocation().isWithinCorridor()) 
+			return tac; // not necessary to check location further
+		
+		fillLineAreaLocation(tac);
+		
+		return tac;
+	}
+	
+	protected StringBuffer fillIntensity(StringBuffer tac) {
+		Matcher matcherIntensity = SigmetParsingRegexp.sigmetIntensityChanges.matcher(tac);
+		if (matcherIntensity.find()) {
+			String intensity = matcherIntensity.group("intensity");
+			this.getPhenomenonDescription().setIntencity(Intensity.valueOf(intensity));
+			tac.delete(matcherIntensity.start(),matcherIntensity.end());
+		}
+		return tac;
+	}
+	
+	protected StringBuffer fillLevel(StringBuffer tac) {
+		
+		Matcher matcherLevel = SigmetParsingRegexp.sigmetLevel.matcher(tac);
+		if (matcherLevel.find()) {
+			
+			
+		
+		}
+		
+		return tac;
+	}
+	
+	protected StringBuffer fillMovingSection(StringBuffer tac) {
+		Matcher matcherMov = SigmetParsingRegexp.sigmetMovement.matcher(tac);
+		if (matcherMov.find()) {
+			SigmetMovingSection movSection = new SigmetMovingSection(tac.substring(matcherMov.start(),matcherMov.end()));
+			String stationery = matcherMov.group("isStationery");
+			String direction = matcherMov.group("movDirection");
+			String speed = matcherMov.group("movSpeed");
+			String units = matcherMov.group("speedunits");
+			boolean isMoving = stationery==null||stationery.isEmpty();
+			
+			movSection.setMoving(isMoving);
+			
+			if (isMoving) {
+				movSection.setMovingDirection(RUMB_UNITS.valueOf(direction));
+				movSection.setSpeedUnits(SPEED_UNITS.valueOf(units));
+				movSection.setMovingSpeed(Integer.valueOf(speed));
+		
+			}
+			this.getPhenomenonDescription().setMovingSection(movSection);
+			tac.delete(matcherMov.start(),matcherMov.end());
+		}
+		
+		return tac;
+	}
+	
+	/**check if it has WI flag and fill polygon coordinates*/
+	protected StringBuffer fillWithinPolygon(StringBuffer tac) {
+		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygon.matcher(tac);
+		if (matcherWI.find()) {
+			this.getHorizontalLocation().setInPolygon(true);
+			int startIndex = matcherWI.start();
+			
+			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+			int lastMatch = 0;
+			while(matcherCoordPoint.find()) {
+			
+				String lat = matcherCoordPoint.group("latitude");
+				String laDeg = matcherCoordPoint.group("ladeg");
+				String laMin = matcherCoordPoint.group("lamin");
+				String lon = matcherCoordPoint.group("longitude");
+				String loDeg = matcherCoordPoint.group("lodeg");
+				String loMin = matcherCoordPoint.group("lomin");
+				
+				CoordPoint polygonApex = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg), Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
+				this.getHorizontalLocation().getPolygonPoints().add(polygonApex);
+
+				lastMatch = matcherCoordPoint.end();
+			
+				//matcherCoordPoint.reset();
+			}
+		
+			tac.delete(startIndex, lastMatch);
+		
+		}
+		
+		return tac;
+	}
+	
+	/**Extract location when it is in corridor*/
+	protected StringBuffer fillWithinCorridor(StringBuffer tac) {
+		Matcher matcherCorridor = SigmetParsingRegexp.sigmetWithinCorridor.matcher(tac);
+		if (matcherCorridor.find()) {
+			this.getHorizontalLocation().setWithinCorridor(true);
+			String range = matcherCorridor.group("range");
+			this.getHorizontalLocation().setWideness(Integer.parseInt(range));
+			/**TODO: add center corridor line*/
+		}
+		
+		return tac;
+	}
+	
+	/**check if it has area described by lines e.g. N OF N2000 AND E OF E5555*/
+	protected StringBuffer fillLineAreaLocation(StringBuffer tac) {
+		
+		Matcher matcherDirLine = SigmetParsingRegexp.sigmetOnePointLine.matcher(tac);
+		int lastMatch = 0;
+		while (matcherDirLine.find()) {
+			
+			String azimuth = matcherDirLine.group("azimuth");
+			String pointCoord = matcherDirLine.group("pointCoord");
+			String pointDeg = matcherDirLine.group("deg");
+			String pointMin = matcherDirLine.group("min");			
+		
+			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord),Integer.parseInt(pointDeg),pointMin.isEmpty()?0:Integer.parseInt(pointMin)));
+			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth),sigmetLine);
+			this.getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			lastMatch = matcherDirLine.end();
+		}
+		tac.delete(0, lastMatch);
+		
+		return tac;
+	}
+	
+	/**check if it has ENTIRE FIR/UIR flag*/
+	protected StringBuffer fillEntireFIRLocation(StringBuffer tac) {
+		Matcher matcherFIR = SigmetParsingRegexp.sigmetEntireFir.matcher(tac);
+		if (matcherFIR.find()) {
+			
+			this.getHorizontalLocation().setEntireFIR(true);
+			int lastIndex=matcherFIR.end();
+			tac.delete(0, lastIndex);
+			return tac;
+		}
+		
+		return tac;
+		
 	}
 
 	@Override
@@ -291,5 +491,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	public Pattern getHeaderPattern() {
 		return SigmetParsingRegexp.sigmetHeader;
 	}
+
+	
 
 }

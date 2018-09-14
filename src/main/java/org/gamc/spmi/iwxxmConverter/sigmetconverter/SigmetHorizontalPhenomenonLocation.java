@@ -10,34 +10,17 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 
 /**Describes location of the sigmet phenomenon inside FIR/UIR/CTA*/
-public class SigmetHorizontalPhenomenonLocation {
+public class SigmetHorizontalPhenomenonLocation implements Serializable {
 
 	
-	/**Describes direction from certain line, e.g 'NE OF LINE ...'*/	
-	public static final class DirectionFromLine implements Serializable {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1937563107841308842L;
-		private RUMB_UNITS direction;
-		private Line sigmetLine;
-		
-		public RUMB_UNITS getDirection() {
-			return direction;
-		}
-		public void setDirection(RUMB_UNITS direction) {
-			this.direction = direction;
-		}
-		public Line getSigmetLine() {
-			return sigmetLine;
-		}
-		public void setSigmetLine(Line sigmetLine) {
-			this.sigmetLine = sigmetLine;
-		}
-		
-		
-	}
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4129364922665073405L;
+
+	
 	
 	/**Phenomenon reported for entire FIR/UIR/CTA*/
 	private boolean entireFIR = false;
@@ -55,6 +38,54 @@ public class SigmetHorizontalPhenomenonLocation {
 	private LinkedList<CoordPoint> polygonPoints = new LinkedList<>();
 	
 	private LinkedList<DirectionFromLine> directionsFromLines = new LinkedList<>();
+
+	public boolean isEntireFIR() {
+		return entireFIR;
+	}
+
+	public void setEntireFIR(boolean entireFIR) {
+		this.entireFIR = entireFIR;
+	}
+
+	public boolean isInPolygon() {
+		return inPolygon;
+	}
+
+	public void setInPolygon(boolean inPolygon) {
+		this.inPolygon = inPolygon;
+	}
+
+	public boolean isWithinCorridor() {
+		return withinCorridor;
+	}
+
+	public void setWithinCorridor(boolean withinCorridor) {
+		this.withinCorridor = withinCorridor;
+	}
+
+	public int getWideness() {
+		return wideness;
+	}
+
+	public void setWideness(int wideness) {
+		this.wideness = wideness;
+	}
+
+	public LinkedList<CoordPoint> getPolygonPoints() {
+		return polygonPoints;
+	}
+
+	public void setPolygonPoints(LinkedList<CoordPoint> polygonPoints) {
+		this.polygonPoints = polygonPoints;
+	}
+
+	public LinkedList<DirectionFromLine> getDirectionsFromLines() {
+		return directionsFromLines;
+	}
+
+	public void setDirectionsFromLines(LinkedList<DirectionFromLine> directionsFromLines) {
+		this.directionsFromLines = directionsFromLines;
+	}
 	
 	
 }
