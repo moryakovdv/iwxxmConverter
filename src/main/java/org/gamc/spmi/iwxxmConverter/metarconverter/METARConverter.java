@@ -589,7 +589,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 			} else	{
 			AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
 			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
-					cloudS.getType(), nilReason, LENGTH_UNITS.FEETS));
+					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
 			clouds.getLayer().add(cloudLayer);
 			}
 		}
@@ -621,7 +621,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 			}
 			AerodromeCloudForecastType.Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
 			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
-					cloudS.getType(), nilReason, LENGTH_UNITS.FEETS));
+					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
 			clouds.getLayer().add(cloudLayer);
 		}
 		// Place body into envelop
@@ -779,7 +779,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		DistanceWithNilReasonType depth = ofIWXXM.createDistanceWithNilReasonType();
 		depth.setValue(rwrs.getDepositDepth());
-		depth.setUom(LENGTH_UNITS.MILLIMETERS.getStringValue());
+		depth.setUom(LENGTH_UNITS.MM.getStringValue());
 
 		// JAXBElement<DistanceWithNilReasonType> depthTag =
 		// ofIWXXM.createDistanceWithNilReason(depth);

@@ -141,7 +141,7 @@ public class METARTacMessage extends TacMessageImpl {
 			
 			if (sUnits!=null && sUnits.equalsIgnoreCase("FT")) {
 				
-				rvrSection.setUnits(LENGTH_UNITS.FEETS);
+				rvrSection.setUnits(LENGTH_UNITS.FT);
 			}
 			
 			this.rvrSections.add(rvrSection);

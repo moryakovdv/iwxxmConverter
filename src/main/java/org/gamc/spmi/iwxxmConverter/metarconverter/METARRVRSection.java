@@ -28,7 +28,7 @@ public class METARRVRSection extends TacSectionImpl {
 	private RVRVisibilityTendency tendency;
 	
 	private RVROperator operator;
-	private LENGTH_UNITS units = LENGTH_UNITS.METERS;
+	private LENGTH_UNITS units = LENGTH_UNITS.M;
 	
 	public METARRVRSection(String initialTac,TacMessageImpl parent) {
 		super(initialTac, parent);

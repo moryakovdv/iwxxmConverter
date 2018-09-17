@@ -58,7 +58,7 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 	private Integer prevailVisibility;
 	private Integer minimumVisibility;
 	private RUMB_UNITS minimumVisibilityDirection;
-	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.METERS;
+	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.M;
 
 	private LinkedList<String> currentWeather = new LinkedList<String>();
 	private LinkedList<String> recentWeather = new LinkedList<String>();
@@ -159,7 +159,7 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 			String sPv = matcher.group("visibility");
 
 			if (sPv.endsWith("SM")) {
-				this.setVisibilityUnits(LENGTH_UNITS.STATUTE_MILES);
+				this.setVisibilityUnits(LENGTH_UNITS.SM);
 				sPv = sPv.replaceFirst("SM$", "");
 			}
 

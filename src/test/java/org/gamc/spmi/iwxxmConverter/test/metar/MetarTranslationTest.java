@@ -252,7 +252,7 @@ public class MetarTranslationTest {
 		METARTacMessage metarMessage = new METARTacMessage(metarUS);
 		metarMessage.parseMessage();
 		assertEquals(PRESSURE_UNITS.INCH_OF_MERCURY, metarMessage.getCommonWeatherSection().getQnhUnits());
-		assertEquals(LENGTH_UNITS.STATUTE_MILES, metarMessage.getCommonWeatherSection().getVisibilityUnits());
+		assertEquals(LENGTH_UNITS.SM, metarMessage.getCommonWeatherSection().getVisibilityUnits());
 		
 		assertTrue(metarMessage.getRemarkSections().size()>0);
 			
@@ -263,7 +263,7 @@ public class MetarTranslationTest {
 		METARTacMessage metarMessage = new METARTacMessage(metarUS1);
 		metarMessage.parseMessage();
 		assertEquals(PRESSURE_UNITS.INCH_OF_MERCURY, metarMessage.getCommonWeatherSection().getQnhUnits());
-		assertEquals(LENGTH_UNITS.STATUTE_MILES, metarMessage.getCommonWeatherSection().getVisibilityUnits());
+		assertEquals(LENGTH_UNITS.SM, metarMessage.getCommonWeatherSection().getVisibilityUnits());
 		assertEquals(new BigDecimal("2968"), metarMessage.getCommonWeatherSection().getQnh());
 		assertTrue(metarMessage.getRemarkSections().size()>0);
 			

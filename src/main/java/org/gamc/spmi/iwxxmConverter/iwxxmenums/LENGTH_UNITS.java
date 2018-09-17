@@ -22,7 +22,7 @@ package org.gamc.spmi.iwxxmConverter.iwxxmenums;
  * */
 public enum LENGTH_UNITS implements IwxxmEnum {
 	
-	MILLIMETERS("mm"),METERS("m"), KILOMETERS("km"), FEETS("[ft_i]"), STATUTE_MILES("SM");
+	MM("mm"),M("m"), KM("km"), FT("[ft_i]"), SM("SM");
 
 	private String name;
 	

@@ -398,7 +398,7 @@ public class IWXXM21Helpers {
 	/**Creates tag for vertical visibility*/
 	public JAXBElement<LengthWithNilReasonType> createVerticalVisibilitySection(double visibilityValue) {
 		LengthWithNilReasonType vvType = ofIWXXM.createLengthWithNilReasonType();
-		vvType.setUom(LENGTH_UNITS.FEETS.getStringValue());
+		vvType.setUom(LENGTH_UNITS.FT.getStringValue());
 		vvType.setValue(visibilityValue);
 		return ofIWXXM.createAerodromeCloudForecastTypeVerticalVisibility(vvType);
 		

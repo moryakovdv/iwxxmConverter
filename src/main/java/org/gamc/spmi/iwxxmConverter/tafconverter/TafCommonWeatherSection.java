@@ -72,7 +72,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 	private Double prevailVisibility;
 	private Double minimumVisibility;
 	private RUMB_UNITS minimumVisibilityDirection;
-	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.METERS;
+	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.M;
 
 	private LinkedList<String> currentWeather = new LinkedList<String>();
 	private LinkedList<TAFCloudSection> cloudSections = new LinkedList<TAFCloudSection>();
@@ -200,7 +200,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			String sPv = matcher.group("visibility");
 			boolean isStatuteMiles = false;
 			if (sPv.endsWith("SM")) {
-				this.setVisibilityUnits(LENGTH_UNITS.STATUTE_MILES);
+				this.setVisibilityUnits(LENGTH_UNITS.SM);
 				sPv = sPv.replaceFirst("SM$", "");
 				sPv = sPv.replaceFirst("P", "");
 				isStatuteMiles = true;

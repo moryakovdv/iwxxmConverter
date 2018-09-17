@@ -800,7 +800,7 @@ public class TafConversionFromScratchTest {
 			}
 			Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
 			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudSection.getHeight(),
-					cloudSection.getType(), nilReason, LENGTH_UNITS.FEETS));
+					cloudSection.getType(), nilReason, LENGTH_UNITS.FT));
 			clouds.getLayer().add(cloudLayer);
 		}
 

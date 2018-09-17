@@ -6,10 +6,11 @@ import java.util.LinkedList;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
 import org.gamc.spmi.iwxxmConverter.common.Line;
+import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 
-/**Describes location of the sigmet phenomenon inside FIR/UIR/CTA*/
+/**Describes location of the sigmet phenomenon*/
 public class SigmetHorizontalPhenomenonLocation implements Serializable {
 
 	
@@ -31,8 +32,11 @@ public class SigmetHorizontalPhenomenonLocation implements Serializable {
 	/**Phenomenon reported for aisle(corridor) at both sides of certain line (e.g. WTN 45 NM OF LINE ...)*/
 	private boolean withinCorridor = false;
 	
-	/**Wideness of the aisle(corridor) or radius from certain line*/
+	private boolean withinRadius = false;
+	/**Wideness of the aisle(corridor) or radius from certain line or point*/
 	private int wideness;
+	
+	private LENGTH_UNITS widenessUnits = LENGTH_UNITS.KM;
 	
 	/**Vertexes of polygon*/
 	private LinkedList<CoordPoint> polygonPoints = new LinkedList<>();
@@ -85,6 +89,22 @@ public class SigmetHorizontalPhenomenonLocation implements Serializable {
 
 	public void setDirectionsFromLines(LinkedList<DirectionFromLine> directionsFromLines) {
 		this.directionsFromLines = directionsFromLines;
+	}
+
+	public boolean isWithinRadius() {
+		return withinRadius;
+	}
+
+	public void setWithinRadius(boolean withinRadius) {
+		this.withinRadius = withinRadius;
+	}
+
+	public LENGTH_UNITS getWidenessUnits() {
+		return widenessUnits;
+	}
+
+	public void setWidenessUnits(LENGTH_UNITS widenessUnits) {
+		this.widenessUnits = widenessUnits;
 	}
 	
 	

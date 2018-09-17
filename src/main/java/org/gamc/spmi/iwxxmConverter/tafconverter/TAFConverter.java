@@ -653,7 +653,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 			} else {
 				Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
 				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudSection.getHeight(),
-						cloudSection.getType(), null, LENGTH_UNITS.FEETS));
+						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}
 

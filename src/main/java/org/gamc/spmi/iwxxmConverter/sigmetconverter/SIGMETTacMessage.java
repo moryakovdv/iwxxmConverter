@@ -25,6 +25,7 @@ import org.gamc.spmi.iwxxmConverter.common.IWXXM21Helpers;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
+import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARParsingException;
@@ -336,7 +337,39 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		if (this.getHorizontalLocation().isWithinCorridor()) 
 			return tac; // not necessary to check location further
 		
+		fillWithinRadius(tac);
+		if (this.getHorizontalLocation().isWithinRadius())
+			return tac;
+		
 		fillLineAreaLocation(tac);
+		
+		return tac;
+	}
+	
+	protected StringBuffer fillWithinRadius(StringBuffer tac) {
+		
+		Matcher matcherRadius = SigmetParsingRegexp.sigmetWithinRadius.matcher(tac);
+		if (matcherRadius.find()) {
+			this.getHorizontalLocation().setWithinRadius(true);
+			String radius = matcherRadius.group("radius");
+			String units = matcherRadius.group("radiusUnit");
+			
+			String lat = matcherRadius.group("latitude");
+			String laDeg = matcherRadius.group("ladeg");
+			String laMin = matcherRadius.group("lamin");
+			String lon = matcherRadius.group("longitude");
+			String loDeg = matcherRadius.group("lodeg");
+			String loMin = matcherRadius.group("lomin");
+			this.getHorizontalLocation().setWideness(Integer.valueOf(radius));
+			this.getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
+			CoordPoint center = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg), Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
+			this.getHorizontalLocation().getPolygonPoints().add(center);
+
+			
+			this.getHorizontalLocation().setWideness(Integer.parseInt(radius));
+			/**TODO: add center corridor line*/
+		}
+		
 		
 		return tac;
 	}

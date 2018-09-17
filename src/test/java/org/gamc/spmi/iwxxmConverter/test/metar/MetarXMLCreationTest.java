@@ -439,12 +439,12 @@ public class MetarXMLCreationTest {
 
 		//Minimal visibility
 		LengthType minVis = ofGML.createLengthType();
-		minVis.setUom(LENGTH_UNITS.METERS.getStringValue());
+		minVis.setUom(LENGTH_UNITS.M.getStringValue());
 		minVis.setValue(6000d);
 
 		//Prevailing visibility
 		LengthType prevailVis = ofGML.createLengthType();
-		prevailVis.setUom(LENGTH_UNITS.METERS.getStringValue());
+		prevailVis.setUom(LENGTH_UNITS.M.getStringValue());
 		prevailVis.setValue(10000d);
 
 		visibility.setMinimumVisibility(minVis);
@@ -473,7 +473,7 @@ public class MetarXMLCreationTest {
 		//Create layer
 		AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
 		cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(1, 100,
-				"CB", null, LENGTH_UNITS.FEETS));
+				"CB", null, LENGTH_UNITS.FT));
 		clouds.getLayer().add(cloudLayer);
 		
 		

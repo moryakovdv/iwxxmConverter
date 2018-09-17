@@ -281,7 +281,7 @@ public class TafXMLCreationTest {
 		
 		//visibility
 		LengthType vis = ofGML.createLengthType();
-		vis.setUom(LENGTH_UNITS.METERS.getStringValue());
+		vis.setUom(LENGTH_UNITS.M.getStringValue());
 		vis.setValue(6000d);
 		
 		recordType.setPrevailingVisibility(vis);
@@ -392,10 +392,10 @@ public class TafXMLCreationTest {
 
 		
 		Layer lay1 = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-		lay1.setCloudLayer(iwxxmHelpers.createCloudLayerSection(1, 100, "CB", null, LENGTH_UNITS.FEETS));
+		lay1.setCloudLayer(iwxxmHelpers.createCloudLayerSection(1, 100, "CB", null, LENGTH_UNITS.FT));
 		
 		Layer lay2 = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-		lay2.setCloudLayer(iwxxmHelpers.createCloudLayerSection(2, 300, null, null, LENGTH_UNITS.FEETS));
+		lay2.setCloudLayer(iwxxmHelpers.createCloudLayerSection(2, 300, null, null, LENGTH_UNITS.FT));
 		
 		clouds.getLayer().add(lay1);
 		clouds.getLayer().add(lay2);

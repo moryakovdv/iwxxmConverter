@@ -2,6 +2,7 @@ package org.gamc.spmi.iwxxmConverter.test.sigmet;
 
 import static org.junit.Assert.*;
 
+import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
@@ -29,6 +30,10 @@ public class SigmetTranslationTest {
 			"VHHK SIGMET 1 VALID 180830/181230 VHHHVHHK\r\n" + 
 			"HONG KONG FIR RDOACT CLD FCST E OF E114\r\n" + 
 			"SFC/FL100 MOV E 20KT WKN=";
+	
+	String sigmetWithinRadius = "WSSS20 VHHH 180830\r\n" + 
+			"VHHK SIGMET 1 VALID 180830/181230 VHHHVHHK\r\n" + 
+			"HONG KONG FIR RDOACT CLD OBS AT 0901Z WI 30KM OF N6030 E02550=";
 	@Test
 	public void testGeneral() throws SIGMETParsingException {
 		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetGeneral);
@@ -65,6 +70,20 @@ public class SigmetTranslationTest {
 		assertEquals(sigmetTac.getPhenomenonDescription().getMovingSection().getMovingSpeed(),20);
 		assertEquals(sigmetTac.getPhenomenonDescription().getMovingSection().getSpeedUnits(),SPEED_UNITS.KT);
 		assertEquals(sigmetTac.getPhenomenonDescription().getMovingSection().getMovingDirection(),RUMB_UNITS.E);
+	
+	}
+	
+	@Test
+	public void testWithinRadius() throws SIGMETParsingException {
+		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetWithinRadius);
+		sigmetTac.parseMessage();
+		assertEquals(sigmetTac.getPhenomenonDescription().getPhenomenon(), "RDOACT CLD");
+		assertEquals(sigmetTac.getHorizontalLocation().getWideness(), 30);
+		assertEquals(sigmetTac.getHorizontalLocation().getWidenessUnits(), LENGTH_UNITS.KM);
+		assertEquals(sigmetTac.getHorizontalLocation().getPolygonPoints().size(),1);
+		
+		
+		
 	
 	}
 }
