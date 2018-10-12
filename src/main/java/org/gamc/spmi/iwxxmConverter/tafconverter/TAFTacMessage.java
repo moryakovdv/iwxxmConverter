@@ -24,6 +24,7 @@ import org.gamc.spmi.iwxxmConverter.common.ForecastSectionType;
 import org.gamc.spmi.iwxxmConverter.common.IWXXM21Helpers;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
+import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.ForecastTimedSectionType;
 import org.gamc.spmi.iwxxmConverter.general.TafForecastTimeSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
@@ -88,7 +89,12 @@ public class TAFTacMessage extends TacMessageImpl {
 			this.setIcaoCode(matcher.group("icao"));
 
 			String dt = matcher.group("datetime");
+			try {
 			this.setMessageIssueDateTime(IWXXM21Helpers.parseDateTimeToken(dt));
+			}
+			catch(ParsingException e) {
+				throw new TAFParsingException("Check date and time section");
+			}
 
 			
 			String changeIndicator = matcher.group("changeIndicator");

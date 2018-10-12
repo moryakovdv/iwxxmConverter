@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 
 import org.gamc.spmi.iwxxmConverter.common.IWXXM21Helpers;
+import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.PRESSURE_UNITS;
@@ -304,7 +305,12 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			
 			String sTMaxDay = matcher.group("day");
 			String sTMaxHour = matcher.group("hour");
-			this.setAirTemperatureMaxTime(IWXXM21Helpers.parseDateTimeToken(String.format("%s%s00",sTMaxDay,sTMaxHour)));
+			try {
+				this.setAirTemperatureMaxTime(IWXXM21Helpers.parseDateTimeToken(String.format("%s%s00",sTMaxDay,sTMaxHour)));
+			}
+			catch(ParsingException e) {
+				throw new TAFParsingException("Check air temperature maximum time section");
+			}
 
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
@@ -325,7 +331,12 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			this.setAirTemperatureMin(new BigDecimal(sTmin));
 			String sTMinDay = matcher.group("day");
 			String sTMinHour = matcher.group("hour");
+			try{
 			this.setAirTemperatureMinTime(IWXXM21Helpers.parseDateTimeToken(String.format("%s%s00",sTMinDay,sTMinHour)));
+			}
+			catch(ParsingException e) {
+				throw new TAFParsingException("Check air temperature minimum time section");
+			}
 
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);

@@ -17,6 +17,7 @@
 package org.gamc.spmi.iwxxmConverter.metarconverter;
 
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,7 +95,12 @@ public class METARTacMessage extends TacMessageImpl {
 			this.setIcaoCode(matcher.group("icao"));
 
 			String dt = matcher.group("datetime");
-			this.setMessageIssueDateTime(IWXXM21Helpers.parseDateTimeToken(dt));
+			try {
+				this.setMessageIssueDateTime(IWXXM21Helpers.parseDateTimeToken(dt));
+			}
+			catch(ParsingException e) {
+				throw new METARParsingException("Check date and time");
+			}
 			
 			String changeIndicator = matcher.group("changeIndicator");
 			if (changeIndicator!=null && (! changeIndicator.isEmpty())) {
@@ -174,17 +180,18 @@ public class METARTacMessage extends TacMessageImpl {
 			
 			rwsSection.setCleared(sRWCleared!=null);
 			
-			if (! sType.equalsIgnoreCase("/"))
-				rwsSection.setType(Integer.valueOf(sType));
 			
-			if (! sContamination.equalsIgnoreCase("/"))
-				rwsSection.setContamination(Integer.valueOf(sContamination));
+			if (sType!=null && ! sType.equalsIgnoreCase("/"))
+				rwsSection.setType( Optional.of(Integer.valueOf(sType)));
 			
-			if (! sDepth.equalsIgnoreCase("//"))
-				rwsSection.setDepositDepth(Integer.valueOf(sDepth));
+			if (sContamination!=null && ! sContamination.equalsIgnoreCase("/"))
+				rwsSection.setContamination(Optional.of(Integer.valueOf(sContamination)));
 			
-			if (! sFriction.equalsIgnoreCase("//"))
-				rwsSection.setFriction(Integer.valueOf(sFriction));
+			if (sDepth!=null && ! sDepth.equalsIgnoreCase("//"))
+				rwsSection.setDepositDepth(Optional.of(Integer.valueOf(sDepth)));
+			
+			if (sFriction!=null && ! sFriction.equalsIgnoreCase("//"))
+				rwsSection.setFriction(Optional.of(Integer.valueOf(sFriction)));
 			
 			this.runwayStateSections.add(rwsSection);
 

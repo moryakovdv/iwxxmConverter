@@ -16,6 +16,8 @@
  */
 package org.gamc.spmi.iwxxmConverter.metarconverter;
 
+import java.util.Optional;
+
 import org.gamc.spmi.iwxxmConverter.tac.TacSectionImpl;
 
 /**Describes Runway state entry in METAR*/
@@ -24,10 +26,10 @@ public class METARRunwayStateSection extends TacSectionImpl {
 	private String rvrDesignator;
 	boolean applicableForAllRunways;
 	
-	private Integer type;
-	private Integer contamination;
-	private Integer depositDepth;
-	private Integer friction;
+	private Optional<Integer> type =Optional.empty();
+	private Optional<Integer> contamination=Optional.empty();
+	private Optional<Integer> depositDepth=Optional.empty();
+	private Optional<Integer> friction=Optional.empty();
 	
 	private boolean cleared;
 	
@@ -51,35 +53,35 @@ public class METARRunwayStateSection extends TacSectionImpl {
 		this.applicableForAllRunways = applicableForAllRunways;
 	}
 
-	public Integer getType() {
+	public Optional<Integer> getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(Optional<Integer> type) {
 		this.type = type;
 	}
 
-	public Integer getContamination() {
+	public Optional<Integer> getContamination() {
 		return contamination;
 	}
 
-	public void setContamination(Integer contamination) {
+	public void setContamination(Optional<Integer> contamination) {
 		this.contamination = contamination;
 	}
 
-	public Integer getDepositDepth() {
+	public Optional<Integer> getDepositDepth() {
 		return depositDepth;
 	}
 
-	public void setDepositDepth(Integer depositDepth) {
+	public void setDepositDepth(Optional<Integer> depositDepth) {
 		this.depositDepth = depositDepth;
 	}
 
-	public Integer getFriction() {
+	public Optional<Integer> getFriction() {
 		return friction;
 	}
 
-	public void setFriction(Integer friction) {
+	public void setFriction(Optional<Integer> friction) {
 		this.friction = friction;
 	}
 

@@ -276,7 +276,7 @@ public class MetarTranslationTest {
 		assertTrue(metarMessage.getRunwayStateSections().size()==1);
 		
 		assertFalse(metarMessage.getRunwayStateSections().get(0).isApplicableForAllRunways());
-		assertEquals(56, metarMessage.getRunwayStateSections().get(0).getFriction().intValue());
+		assertEquals(56, metarMessage.getRunwayStateSections().get(0).getFriction().get().intValue());
 		
 		
 	}
@@ -288,8 +288,8 @@ public class MetarTranslationTest {
 		assertTrue(metarMessage.getRunwayStateSections().size()==1);
 		
 		assertTrue(metarMessage.getRunwayStateSections().get(0).isApplicableForAllRunways());
-		assertEquals(56, metarMessage.getRunwayStateSections().get(0).getFriction().intValue());
-		assertNull(metarMessage.getRunwayStateSections().get(0).getDepositDepth());
+		assertEquals(56, metarMessage.getRunwayStateSections().get(0).getFriction().get().intValue());
+		assertFalse(metarMessage.getRunwayStateSections().get(0).getDepositDepth().isPresent());
 		
 		
 	}

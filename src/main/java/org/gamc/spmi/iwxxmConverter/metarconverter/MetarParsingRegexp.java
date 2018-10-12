@@ -36,7 +36,7 @@ public class MetarParsingRegexp {
 	public final static Pattern metarVisibility = Pattern
 			.compile("[^Q|A|TL|AT|FM|\\/](?<visibility>\\d{4}|\\d+SM|\\d+\\/\\d+SM)(?<visibilityDirection>[A-Z]{0,2})");
 
-	public final static Pattern metarRVR = Pattern.compile("R(?<runwayDesignator>\\d{2,3}(?:L|R){0,1})\\/(?<rvrOperator>M|P){0,1}(?<rvr>\\d{2,4})((?<tendency>U|N|P|D)|(?<units>FT)|\\s){1}");
+	public final static Pattern metarRVR = Pattern.compile("R(?<runwayDesignator>\\d{2,3}(?:L|R|C){0,1})\\/(?<rvrOperator>M|P){0,1}(?<rvr>\\d{2,4})((?<tendency>U|N|P|D)|(?<units>FT)|\\s){1}");
 
 	public final static Pattern metarPrecipitation = Pattern
 			.compile("(?:^|\\s)(?!RE|METAR|NOSIG|WS|ALL|RWY|RMK)(?<weather>(?:\\+|-|VC){0,1}[A-Z]{2,6})(?=\\s)");
@@ -49,11 +49,12 @@ public class MetarParsingRegexp {
 	public final static Pattern metarQNH = Pattern.compile("(?<=(?<qnhUnits>Q|A))(?<qnh>(\\d{4}))");
 
 	public final static Pattern metarWindShearAll = Pattern.compile("WS ALL RWY");
-	public final static Pattern metarWindShearRunway = Pattern.compile("WS\\sRWY(?<wsRunway>\\d{2,3}L|R{0,1})");
+	//public final static Pattern metarWindShearRunway = Pattern.compile("WS\\sRWY(?<wsRunway>\\d{2,3}L|R|C{0,1})");
+	public final static Pattern metarWindShearRunway = Pattern.compile("WS\\s+(?:R|RWY)?(?<wsRunway>\\d+(?:L|C|R))");
 
 	//public final static Pattern metarRunwayState = Pattern.compile("R(?<rwCode>\\d\\d(?:L|R){0,1})\\/(?<type>\\d|\\/)(?<contamination>\\d|\\/)(?<depth>\\d{2}|\\/{2})(?<friction>\\d{2}|\\/{2})");
 	
-	public final static Pattern metarRunwayState = Pattern.compile("(R?)(?<rwCode>\\d\\d(?:L|R){0,1})\\/((?<cleared>CLRD)|((?<depositType>\\d|\\/)(?<contamination>\\d|\\/)(?<depth>\\d{2}|\\/{2})))(?<friction>\\d{2}|\\/{2})");
+	public final static Pattern metarRunwayState = Pattern.compile("(R?)(?<rwCode>\\d\\d(?:L|R|C){0,1})\\/((?<cleared>CLRD)|((?<depositType>\\d|\\/)(?<contamination>\\d|\\/)(?<depth>\\d{2}|\\/{2})))(?<friction>\\d{2}|\\/{2})");
 	
 	public final static Pattern metarRecentWeather = Pattern.compile("(?:RE)(?<recentWeather>[A-Z]{2,6})");
 

@@ -26,6 +26,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
@@ -406,8 +407,9 @@ public class IWXXM21Helpers {
 	}
 
 	/** Helper function to parse dateTime */
-	public static DateTime parseDateTimeToken(String dtToken) {
+	public static DateTime parseDateTimeToken(String dtToken) throws ParsingException {
 
+		try {
 		DateTime dtNow = DateTime.now();
 		int year = dtNow.getYear();
 		int month = dtNow.getMonthOfYear();
@@ -431,6 +433,10 @@ public class IWXXM21Helpers {
 		DateTime dtIssued = new DateTime(year, month, day, hour, minute, DateTimeZone.UTC);
 
 		return dtIssued;
+		}
+		catch(Exception e) {
+			throw new ParsingException("Error occured on DateTime parsing");
+		}
 
 	}
 

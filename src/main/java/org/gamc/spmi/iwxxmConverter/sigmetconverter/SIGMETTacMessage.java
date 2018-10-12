@@ -25,6 +25,7 @@ import org.gamc.spmi.iwxxmConverter.common.IWXXM21Helpers;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
+import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
@@ -219,7 +220,12 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			this.setBulletinNumber(Integer.parseInt(matcherBulletin.group("bulletinNumber")));
 			this.setDisseminatingCentre(matcherBulletin.group("disseminatingCentre"));
 			
-			this.setMessageIssueDateTime(IWXXM21Helpers.parseDateTimeToken(matcherBulletin.group("issuedDateTime")));
+			try {
+				this.setMessageIssueDateTime(IWXXM21Helpers.parseDateTimeToken(matcherBulletin.group("issuedDateTime")));
+			}
+			catch(ParsingException e) {
+				throw new SIGMETParsingException("Check date and time");
+			}
 			
 			lastIndex = matcherBulletin.end();
 			tac.delete(0, lastIndex);
@@ -239,8 +245,13 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			this.setWatchOffice(matcher.group("watchOffice"));
 			this.setFirCode(matcher.group("firCode"));
 			this.setFirName(matcher.group("firName"));
-			this.setValidFrom(IWXXM21Helpers.parseDateTimeToken(matcher.group("dateFrom")));
-			this.setValidTo(IWXXM21Helpers.parseDateTimeToken(matcher.group("dateTo")));
+			try {
+				this.setValidFrom(IWXXM21Helpers.parseDateTimeToken(matcher.group("dateFrom")));
+				this.setValidTo(IWXXM21Helpers.parseDateTimeToken(matcher.group("dateTo")));
+			}
+			catch(ParsingException e) {
+				throw new SIGMETParsingException("Check date and time in VALID sections");
+			}
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
 

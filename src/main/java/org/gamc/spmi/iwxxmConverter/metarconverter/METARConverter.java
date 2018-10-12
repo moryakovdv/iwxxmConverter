@@ -766,31 +766,38 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		}
 
 		
-
+		if (rwrs.getType().isPresent()) {
 		RunwayDepositsType dType = ofIWXXM.createRunwayDepositsType();
-		String depUrl = iwxxmHelpers.getRwDepositReg().getWMOUrlByCode(rwrs.getType());
+		String depUrl = iwxxmHelpers.getRwDepositReg().getWMOUrlByCode(rwrs.getType().get());
 		dType.setHref(depUrl);
 		rvrState.setDepositType(dType);
-
+		}
+		
+		if (rwrs.getContamination().isPresent()) {
 		RunwayContaminationType cType = ofIWXXM.createRunwayContaminationType();
-		String contUrl = iwxxmHelpers.getRwContaminationReg().getWMOUrlByCode(rwrs.getContamination());
+		String contUrl = iwxxmHelpers.getRwContaminationReg().getWMOUrlByCode(rwrs.getContamination().get());
 		cType.setHref(contUrl);
 		rvrState.setContamination(cType);
+		}
+		
+		if (rwrs.getDepositDepth().isPresent()) {
+			DistanceWithNilReasonType depth = ofIWXXM.createDistanceWithNilReasonType();
+			depth.setValue(rwrs.getDepositDepth().get());
+			depth.setUom(LENGTH_UNITS.MM.getStringValue());
+			// JAXBElement<DistanceWithNilReasonType> depthTag =
+			// ofIWXXM.createDistanceWithNilReason(depth);
+			JAXBElement<DistanceWithNilReasonType> depthTag = ofIWXXM.createAerodromeRunwayStateTypeDepthOfDeposit(depth);
+			rvrState.setDepthOfDeposit(depthTag);
+		}
 
-		DistanceWithNilReasonType depth = ofIWXXM.createDistanceWithNilReasonType();
-		depth.setValue(rwrs.getDepositDepth());
-		depth.setUom(LENGTH_UNITS.MM.getStringValue());
-
-		// JAXBElement<DistanceWithNilReasonType> depthTag =
-		// ofIWXXM.createDistanceWithNilReason(depth);
-		JAXBElement<DistanceWithNilReasonType> depthTag = ofIWXXM.createAerodromeRunwayStateTypeDepthOfDeposit(depth);
-		rvrState.setDepthOfDeposit(depthTag);
-
-		RunwayFrictionCoefficientType frictionType = ofIWXXM.createRunwayFrictionCoefficientType();
-		String frictionUrl = iwxxmHelpers.getRwFrictionReg().getWMOUrlByCode(rwrs.getFriction());
-		frictionType.setHref(frictionUrl);
-		rvrState.setEstimatedSurfaceFrictionOrBrakingAction(frictionType);
-
+	
+		
+		if (rwrs.getFriction().isPresent()) {
+			RunwayFrictionCoefficientType frictionType = ofIWXXM.createRunwayFrictionCoefficientType();
+			String frictionUrl = iwxxmHelpers.getRwFrictionReg().getWMOUrlByCode(rwrs.getFriction().get());
+			frictionType.setHref(frictionUrl);
+			rvrState.setEstimatedSurfaceFrictionOrBrakingAction(frictionType);
+		}
 		rvrTag.setAerodromeRunwayState(rvrState);
 		return rvrTag;
 

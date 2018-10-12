@@ -201,7 +201,14 @@ public class TafConversionFromScratchTest {
 		while (m.find()) {
 			// System.out.println(m.group());
 			System.out.println("Message " + counter);
-			String conversionResults = convertTacToXML(m.group());
+			String conversionResults ="";
+			try {
+				conversionResults = convertTacToXML(m.group());
+			}
+			catch(ParsingException e) {
+				System.out.println("Skipped message because of Parsing error " + e);
+				continue;
+			}
 			String path = "output/TAF" + counter + ".xml";
 			String pathReport = "output/TAF" + counter + ".svrl";
 

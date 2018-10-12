@@ -139,8 +139,14 @@ public class MetarSpeciFullConversionTest {
 			System.out.println("Message " + counter);
 			String msg = m.group();
 			System.out.println(msg);
-			
-			String conversionResults = convertTacToXML(msg);
+			String conversionResults ="";
+			try {
+				conversionResults = convertTacToXML(m.group());
+			}
+			catch(ParsingException e) {
+				System.out.println("Skipped message because of Parsing error " + e);
+				continue;
+			}
 			String path = "output/"+outputPrefix+counter+".xml";
 			String pathReport = "output/"+outputPrefix+counter+".svrl";
 			
