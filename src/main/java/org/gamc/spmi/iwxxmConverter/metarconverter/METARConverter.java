@@ -114,9 +114,9 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 	IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
 
 	private METARTacMessage translatedMetar;
-	
-	//Storage for created runways description
-	private TreeMap<String,String> createdRunways = new TreeMap<>(); 
+
+	// Storage for created runways description
+	private TreeMap<String, String> createdRunways = new TreeMap<>();
 
 	private String dateTime = "";
 	private String dateTimePosition = "";
@@ -126,7 +126,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 
 		createdRunways.clear();
-		
+
 		METARTacMessage metarMessage = new METARTacMessage(tac);
 		metarMessage.parseMessage();
 
@@ -151,7 +151,8 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		dateTimePosition = translatedMessage.getMessageIssueDateTime().toString(iwxxmHelpers.getDateTimeISOFormat());
 
 		// Id with ICAO code and current timestamp
-		metarRootTag.setId(String.format("metar-%s-%s", translatedMetar.getIcaoCode(), dateTime));
+		metarRootTag.setId(
+				iwxxmHelpers.generateUUIDv4(String.format("metar-%s-%s", translatedMetar.getIcaoCode(), dateTime)));
 
 		// metarRootTag.setAutomatedStation(true);
 
@@ -182,11 +183,11 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		AtomicInteger sectionIndex = new AtomicInteger(0);
 		// TODO : create TrendForecast and possible Extensions (RMK)
-		
+
 		if (translatedMetar.isNoSignificantChanges()) {
-				
-		}	
-		
+
+		}
+
 		for (METARBecomingSection bcmgSection : translatedMetar.getBecomingSections()) {
 			bcmgSection.parseSection();
 			OMObservationPropertyType omptBcmg = createTrendForecast(bcmgSection, sectionIndex.getAndIncrement());
@@ -247,7 +248,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId(String.format("obs-%s-%s", translatedMetar.getIcaoCode(), dateTime));
+		ot.setId(iwxxmHelpers.generateUUIDv4(String.format("obs-%s-%s", translatedMetar.getIcaoCode(), dateTime)));
 
 		// тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -257,7 +258,8 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		// Create instant time section
 		TimeObjectPropertyType timeObjectProperty = ofOM.createTimeObjectPropertyType();
 		TimeInstantType timeInstant = ofGML.createTimeInstantType();
-		timeInstant.setId(String.format("ti-%s-%s", translatedMetar.getIcaoCode(), dateTime));
+		timeInstant
+				.setId(iwxxmHelpers.generateUUIDv4(String.format("ti-%s-%s", translatedMetar.getIcaoCode(), dateTime)));
 		TimePositionType timePosition = ofGML.createTimePositionType();
 		timePosition.getValue().add(dateTimePosition);
 		timeInstant.setTimePosition(timePosition);
@@ -270,12 +272,12 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		// create <resultTime>
 		TimeInstantPropertyType timeInstantResult = ofGML.createTimeInstantPropertyType();
-		timeInstantResult.setHref(timeInstant.getId());// "#ti-UUWW-"+dateTime);
+		timeInstantResult.setHref("#" + timeInstant.getId());// "#ti-UUWW-"+dateTime);
 		ot.setResultTime(timeInstantResult);
 
 		// create <om:procedure> frame
 		ProcessType metceProcess = ofMetce.createProcessType();
-		metceProcess.setId("p-49-2-metar");
+		metceProcess.setId(iwxxmHelpers.generateUUIDv4("p-49-2-metar"));
 
 		StringOrRefType processDescription = ofGML.createStringOrRefType();
 		processDescription.setValue(StringConstants.WMO_49_2_METCE_METAR);
@@ -314,7 +316,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		MeteorologicalAerodromeTrendForecastRecordType metarTrend = ofIWXXM
 				.createMeteorologicalAerodromeTrendForecastRecordType();
 		metarTrendType.setMeteorologicalAerodromeTrendForecastRecord(metarTrend);
-		
+
 		ForecastChangeIndicatorType changeIndicator = ForecastChangeIndicatorType.BECOMING;
 		switch (section.getSectionType()) {
 		case BECMG:
@@ -326,10 +328,11 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		default:
 			break;
 		}
-		metarTrend.setId(String.format("change-record-%d-%s", sectionIndex, translatedMetar.getIcaoCode()));
+		metarTrend.setId(iwxxmHelpers
+				.generateUUIDv4(String.format("change-record-%d-%s", sectionIndex, translatedMetar.getIcaoCode())));
 		metarTrend.setChangeIndicator(changeIndicator);
 		metarTrend.setCloudAndVisibilityOK(section.getCommonWeatherSection().isCavok());
-		
+
 		// visibility
 		if (section.getCommonWeatherSection().getPrevailVisibility() != null) {
 			LengthType vis = ofGML.createLengthType();
@@ -392,7 +395,6 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		// process runways state
 
-		
 		return metarTrendType;
 	}
 
@@ -417,7 +419,8 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		// body
 		MeteorologicalAerodromeObservationRecordType metarRecord = ofIWXXM
 				.createMeteorologicalAerodromeObservationRecordType();
-		metarRecord.setId(String.format("obs-record-%s-%s", translatedMetar.getIcaoCode(), dateTime));
+		metarRecord.setId(iwxxmHelpers
+				.generateUUIDv4(String.format("obs-record-%s-%s", translatedMetar.getIcaoCode(), dateTime)));
 
 		// Set temperature
 		MeasureType mtTemperature = ofGML.createMeasureType();
@@ -463,13 +466,13 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		// set wind shear
 		metarRecord.setWindShear(createWindShearTag());
 
-		//process runway visible range sections
-		for(METARRVRSection rvrs:translatedMetar.getRvrSections()) {
-			
+		// process runway visible range sections
+		for (METARRVRSection rvrs : translatedMetar.getRvrSections()) {
+
 			metarRecord.getRvr().add(createRVRTag(rvrs));
-			
+
 		}
-		
+
 		// process runways state
 		for (METARRunwayStateSection rwState : translatedMetar.getRunwayStateSections()) {
 
@@ -583,18 +586,19 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
 			String nilReason = null;
 			if (cloudAmount == WMOCloudRegister.missingCode) {
-				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers.createVerticalVisibilitySection(cloudS.getHeight());
+				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
+						.createVerticalVisibilitySection(cloudS.getHeight());
 				clouds.setVerticalVisibility(vVisibility);
-				
-			} else	{
-			AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
-			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
-					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
-			clouds.getLayer().add(cloudLayer);
+
+			} else {
+				AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
+						cloudS.getType(), nilReason, LENGTH_UNITS.FT));
+				clouds.getLayer().add(cloudLayer);
 			}
 		}
 		// Place body into envelop
-		//cloudsType.setAerodromeObservedClouds(clouds);
+		// cloudsType.setAerodromeObservedClouds(clouds);
 		cloudSection.setAerodromeObservedClouds(clouds);
 		JAXBElement<MeteorologicalAerodromeObservationRecordType.Cloud> result = ofIWXXM
 				.createMeteorologicalAerodromeObservationRecordTypeCloud(cloudSection);
@@ -611,7 +615,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		// Body
 		AerodromeCloudForecastType clouds = ofIWXXM.createAerodromeCloudForecastType();
-		clouds.setId(String.format("acf-%d-%s", sectionIndex, icaoCode));
+		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		for (METARCloudSection cloudS : section.getCloudSections()) {
 
 			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
@@ -642,7 +646,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 			// Runway description
 			RunwayDirectionPropertyType runwayType = ofIWXXM.createRunwayDirectionPropertyType();
 			RunwayDirectionType runway = ofAIXM.createRunwayDirectionType();
-			runway.setId("runway-" + rwWs);
+			runway.setId(iwxxmHelpers.generateUUIDv4("runway-" + rwWs));
 			CodeType rwCode = ofGML.createCodeType();
 			rwCode.setValue(rwWs);
 			runway.getName().add(rwCode);
@@ -663,18 +667,17 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		AerodromeRunwayVisualRangePropertyType rvrpt = ofIWXXM.createAerodromeRunwayVisualRangePropertyType();
 		AerodromeRunwayVisualRangeType rvrType = ofIWXXM.createAerodromeRunwayVisualRangeType();
 
-		
 		RunwayDirectionPropertyType runwayDir = null;
-		
-		if (! createdRunways.containsKey(rvrs.getRvrDesignator())) {
-			runwayDir = iwxxmHelpers
-					.createRunwayDesignatorSectionTag(translatedMetar.getIcaoCode(), rvrs.getRvrDesignator());
-			createdRunways.put(rvrs.getRvrDesignator(),runwayDir.getRunwayDirection().getId());
+
+		if (!createdRunways.containsKey(rvrs.getRvrDesignator())) {
+			runwayDir = iwxxmHelpers.createRunwayDesignatorSectionTag(translatedMetar.getIcaoCode(),
+					rvrs.getRvrDesignator());
+			createdRunways.put(rvrs.getRvrDesignator(), runwayDir.getRunwayDirection().getId());
 		} else {
 			runwayDir = ofIWXXM.createRunwayDirectionPropertyType();
-			runwayDir.setHref("#"+createdRunways.get(rvrs.getRvrDesignator()));
+			runwayDir.setHref("#" + createdRunways.get(rvrs.getRvrDesignator()));
 		}
-		
+
 		rvrType.setRunway(runwayDir);
 
 		// mean rvr
@@ -749,49 +752,47 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		rvrState.setAllRunways(rwrs.isApplicableForAllRunways());
 		rvrState.setCleared(rwrs.isCleared());
-		
+
 		if (!rwrs.isApplicableForAllRunways()) {
-			RunwayDirectionPropertyType runwayDir=null;
-			
-			if (! createdRunways.containsKey(rwrs.getRvrDesignator())) {
-				runwayDir = iwxxmHelpers
-						.createRunwayDesignatorSectionTag(translatedMetar.getIcaoCode(), rwrs.getRvrDesignator());
-				createdRunways.put(rwrs.getRvrDesignator(),runwayDir.getRunwayDirection().getId());
+			RunwayDirectionPropertyType runwayDir = null;
+
+			if (!createdRunways.containsKey(rwrs.getRvrDesignator())) {
+				runwayDir = iwxxmHelpers.createRunwayDesignatorSectionTag(translatedMetar.getIcaoCode(),
+						rwrs.getRvrDesignator());
+				createdRunways.put(rwrs.getRvrDesignator(), runwayDir.getRunwayDirection().getId());
 			} else {
 				runwayDir = ofIWXXM.createRunwayDirectionPropertyType();
-				runwayDir.setHref("#"+createdRunways.get(rwrs.getRvrDesignator()));
+				runwayDir.setHref("#" + createdRunways.get(rwrs.getRvrDesignator()));
 			}
-			
+
 			rvrState.setRunway(runwayDir);
 		}
 
-		
 		if (rwrs.getType().isPresent()) {
-		RunwayDepositsType dType = ofIWXXM.createRunwayDepositsType();
-		String depUrl = iwxxmHelpers.getRwDepositReg().getWMOUrlByCode(rwrs.getType().get());
-		dType.setHref(depUrl);
-		rvrState.setDepositType(dType);
+			RunwayDepositsType dType = ofIWXXM.createRunwayDepositsType();
+			String depUrl = iwxxmHelpers.getRwDepositReg().getWMOUrlByCode(rwrs.getType().get());
+			dType.setHref(depUrl);
+			rvrState.setDepositType(dType);
 		}
-		
+
 		if (rwrs.getContamination().isPresent()) {
-		RunwayContaminationType cType = ofIWXXM.createRunwayContaminationType();
-		String contUrl = iwxxmHelpers.getRwContaminationReg().getWMOUrlByCode(rwrs.getContamination().get());
-		cType.setHref(contUrl);
-		rvrState.setContamination(cType);
+			RunwayContaminationType cType = ofIWXXM.createRunwayContaminationType();
+			String contUrl = iwxxmHelpers.getRwContaminationReg().getWMOUrlByCode(rwrs.getContamination().get());
+			cType.setHref(contUrl);
+			rvrState.setContamination(cType);
 		}
-		
+
 		if (rwrs.getDepositDepth().isPresent()) {
 			DistanceWithNilReasonType depth = ofIWXXM.createDistanceWithNilReasonType();
 			depth.setValue(rwrs.getDepositDepth().get());
 			depth.setUom(LENGTH_UNITS.MM.getStringValue());
 			// JAXBElement<DistanceWithNilReasonType> depthTag =
 			// ofIWXXM.createDistanceWithNilReason(depth);
-			JAXBElement<DistanceWithNilReasonType> depthTag = ofIWXXM.createAerodromeRunwayStateTypeDepthOfDeposit(depth);
+			JAXBElement<DistanceWithNilReasonType> depthTag = ofIWXXM
+					.createAerodromeRunwayStateTypeDepthOfDeposit(depth);
 			rvrState.setDepthOfDeposit(depthTag);
 		}
 
-	
-		
 		if (rwrs.getFriction().isPresent()) {
 			RunwayFrictionCoefficientType frictionType = ofIWXXM.createRunwayFrictionCoefficientType();
 			String frictionUrl = iwxxmHelpers.getRwFrictionReg().getWMOUrlByCode(rwrs.getFriction().get());
@@ -814,7 +815,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId(String.format("cf-%d-%s", sectionIndex, translatedMetar.getIcaoCode()));
+		ot.setId(iwxxmHelpers.generateUUIDv4(String.format("cf-%d-%s", sectionIndex, translatedMetar.getIcaoCode())));
 
 		// тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -844,7 +845,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		// create <om:procedure> frame
 		OMProcessPropertyType omProcedure = ofOM.createOMProcessPropertyType();
-		omProcedure.setHref("#p-49-2-metar");
+		omProcedure.setHref("#"+iwxxmHelpers.generateUUIDv4(String.format("p-49-2-metar")));
 		ot.setProcedure(omProcedure);
 
 		// тег om:ObserverdProperty

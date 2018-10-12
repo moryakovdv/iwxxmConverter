@@ -128,7 +128,7 @@ public class TafXMLCreationTest {
 		TAFType tafRootTag = ofIWXXM.createTAFType();
 
 		// Id with ICAO code and current timestamp
-		tafRootTag.setId("taf-UUWW-" + testDateTime);
+		tafRootTag.setId(iwxxmHelpers.generateUUIDv4("taf-UUWW-" + testDateTime));
 
 		// Set NON_OPERATIONAL and TEST properties.
 		tafRootTag.setPermissibleUsage(PermissibleUsageType.NON_OPERATIONAL);
@@ -185,11 +185,11 @@ public class TafXMLCreationTest {
 		TimePeriodPropertyType timePeriodProperty = ofGML.createTimePeriodPropertyType();
 		TimePeriodType timePeriodType = ofGML.createTimePeriodType();
 
-		timePeriodType.setId(String.format("tp-%s-%s", testTimePeriodBegin, testTimePeriodEnd));
+		timePeriodType.setId(iwxxmHelpers.generateUUIDv4(String.format("tp-%s-%s", testTimePeriodBegin, testTimePeriodEnd)));
 
 		// begin
 		TimeInstantType timeBeginInstant = ofGML.createTimeInstantType();
-		timeBeginInstant.setId("ti-UUWW-" + testTimePeriodBegin);
+		timeBeginInstant.setId(iwxxmHelpers.generateUUIDv4("ti-UUWW-" + testTimePeriodBegin));
 		TimePositionType timePositionBegin = ofGML.createTimePositionType();
 		timePositionBegin.getValue().add(testTimePeriodBeginPosition);
 		timeBeginInstant.setTimePosition(timePositionBegin);
@@ -201,7 +201,7 @@ public class TafXMLCreationTest {
 
 		// end
 		TimeInstantType timeEndInstant = ofGML.createTimeInstantType();
-		timeEndInstant.setId("ti-UUWW-" + testTimePeriodEnd);
+		timeEndInstant.setId(iwxxmHelpers.generateUUIDv4("ti-UUWW-" + testTimePeriodEnd));
 		TimePositionType timePositionEnd = ofGML.createTimePositionType();
 		timePositionEnd.getValue().add(testTimePeriodEndPosition);
 		timeEndInstant.setTimePosition(timePositionEnd);
@@ -221,7 +221,7 @@ public class TafXMLCreationTest {
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId("obs-UUWW-" + testDateTime);
+		ot.setId(iwxxmHelpers.generateUUIDv4("obs-UUWW-" + testDateTime));
 		
 		// тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -242,7 +242,7 @@ public class TafXMLCreationTest {
 
 		// create <om:procedure> frame
 		ProcessType metceProcess = ofMetce.createProcessType();
-		metceProcess.setId("p-49-2-taf");
+		metceProcess.setId(iwxxmHelpers.generateUUIDv4("p-49-2-taf"));
 
 		StringOrRefType processDescription = ofGML.createStringOrRefType();
 		processDescription.setValue(StringConstants.WMO_49_2_METCE_TAF);
@@ -274,7 +274,7 @@ public class TafXMLCreationTest {
 		MeteorologicalAerodromeForecastRecordType recordType = ofIWXXM.createMeteorologicalAerodromeForecastRecordType();
 		
 		//set id
-		recordType.setId("base-fcst-record-UUWW");
+		recordType.setId(iwxxmHelpers.generateUUIDv4("base-fcst-record-UUWW"));
 		
 		// NOT CAVOK
 		recordType.setCloudAndVisibilityOK(false);

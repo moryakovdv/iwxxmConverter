@@ -20,6 +20,7 @@ package org.gamc.spmi.iwxxmConverter.common;
 import java.io.UnsupportedEncodingException;
 import java.util.GregorianCalendar;
 import java.util.UUID;
+import java.util.WeakHashMap;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -126,7 +127,7 @@ public class IWXXM21Helpers {
 
 		TimeInstantPropertyType timeInstantProperty = ofGML.createTimeInstantPropertyType();
 		TimeInstantType timeInstant = ofGML.createTimeInstantType();
-		timeInstant.setId(String.format("ti-%s-%s", icaoCode, sDateTime));
+		timeInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode, sDateTime)));
 		TimePositionType timePosition = ofGML.createTimePositionType();
 		timePosition.getValue().add(sDateTimePosition);
 		timeInstant.setTimePosition(timePosition);
@@ -175,11 +176,11 @@ public class IWXXM21Helpers {
 		TimePeriodPropertyType timePeriodProperty = ofGML.createTimePeriodPropertyType();
 		TimePeriodType timePeriodType = ofGML.createTimePeriodType();
 
-		timePeriodType.setId(String.format("tp-%d-%s-%s", sectionIndex, sectionTimePeriodBegin, sectionTimePeriodEnd));
+		timePeriodType.setId(generateUUIDv4(String.format("tp-%d-%s-%s", sectionIndex, sectionTimePeriodBegin, sectionTimePeriodEnd)));
 
 		// begin
 		TimeInstantType timeBeginInstant = ofGML.createTimeInstantType();
-		timeBeginInstant.setId(String.format("ti-%d-%s-%s", sectionIndex, icaoCode, sectionTimePeriodBegin));
+		timeBeginInstant.setId(generateUUIDv4(String.format("ti-%d-%s-%s", sectionIndex, icaoCode, sectionTimePeriodBegin)));
 
 		TimePositionType timePositionBegin = ofGML.createTimePositionType();
 		// timePositionBegin.getValue().add(timePeriodBeginPosition);
@@ -191,7 +192,7 @@ public class IWXXM21Helpers {
 
 		// end
 		TimeInstantType timeEndInstant = ofGML.createTimeInstantType();
-		timeEndInstant.setId(String.format("ti-%s-%s", icaoCode, sectionTimePeriodEnd));
+		timeEndInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode, sectionTimePeriodEnd)));
 		TimePositionType timePositionEnd = ofGML.createTimePositionType();
 		timePositionEnd.getValue().add(sectionTimePeriodEndPosition);
 		timeEndInstant.setTimePosition(timePositionEnd);
@@ -219,7 +220,7 @@ public class IWXXM21Helpers {
 
 		FeaturePropertyType airportTag = ofGML.createFeaturePropertyType();
 		SFSpatialSamplingFeatureType sfFeature = ofSams.createSFSpatialSamplingFeatureType();
-		sfFeature.setId("sp-" + icaoCode);
+		sfFeature.setId(generateUUIDv4("sp-" + icaoCode));
 
 		// empty shape tag
 		ShapeType shape = ofSams.createShapeType();
@@ -230,11 +231,11 @@ public class IWXXM21Helpers {
 		sfFeature.setType(sfType);
 
 		AirportHeliportType airportType = ofAIXM.createAirportHeliportType();
-		airportType.setId("aerodrome-" + icaoCode);
+		airportType.setId(generateUUIDv4("aerodrome-" + icaoCode));
 
 		AirportHeliportTimeSlicePropertyType ahTimeSliceProperty = ofAIXM.createAirportHeliportTimeSlicePropertyType();
 		AirportHeliportTimeSliceType ahTimeSliceType = ofAIXM.createAirportHeliportTimeSliceType();
-		ahTimeSliceType.setId(String.format("aerodrome-%s-ts", icaoCode));
+		ahTimeSliceType.setId(generateUUIDv4(String.format("aerodrome-%s-ts", icaoCode)));
 
 		TimePrimitivePropertyType validTime = ofGML.createTimePrimitivePropertyType();
 		ahTimeSliceType.setValidTime(validTime);
@@ -274,7 +275,7 @@ public class IWXXM21Helpers {
 	public RunwayDirectionPropertyType createRunwayDesignatorSectionTag(String icaoCode, String designator) {
 		RunwayDirectionPropertyType runwayDir = ofIWXXM.createRunwayDirectionPropertyType();
 		RunwayDirectionType rdt = ofAIXM.createRunwayDirectionType();
-		rdt.setId(String.format("runway-%s-%s",icaoCode,designator));
+		rdt.setId(generateUUIDv4(String.format("runway-%s-%s",icaoCode,designator)));
 		
 		
 		RunwayDirectionTimeSlicePropertyType rdts = ofAIXM.createRunwayDirectionTimeSlicePropertyType();
@@ -283,7 +284,7 @@ public class IWXXM21Helpers {
 		TextDesignatorType textDesignator = ofAIXM.createTextDesignatorType();
 		textDesignator.setValue(designator);
 		JAXBElement<TextDesignatorType> textDesTag = ofAIXM.createRunwayTimeSliceTypeDesignator(textDesignator);
-		rdtst.setId(String.format("runway-%s-%s-ts",icaoCode,designator));
+		rdtst.setId(generateUUIDv4(String.format("runway-%s-%s-ts",icaoCode,designator)));
 		rdtst.setDesignator(textDesTag);
 		rdtst.setInterpretation("BASELINE");
 		
@@ -440,15 +441,30 @@ public class IWXXM21Helpers {
 
 	}
 
-	/** URN generating Helper */
-	public String generateUUID(String strId) {
+	/** UUID V3 generating Helper */
+	public String generateUUIDv3(String strId) {
 
 		try {
 			return UUID.nameUUIDFromBytes(strId.getBytes("UTF-8")).toString();
 		} catch (UnsupportedEncodingException e) {
-			return UUID.randomUUID().toString();
+			return "uuid."+UUID.randomUUID().toString();
 		}
 	}
+	
+	
+	WeakHashMap<String, UUID> hash = new WeakHashMap<>();
+	
+	/**Generate V4 or find uuid in temporal storage*/
+	public String generateUUIDv4(String key) {
+		UUID hashU = hash.get(key);
+		if (hashU==null) {
+			hashU = UUID.randomUUID();
+			hash.put(key, hashU);
+		}
+		
+		return "uuid."+hashU.toString();
+	}
+	
 
 	/** returns link for WMO weather register for present weather in METAR */
 	public AerodromePresentWeatherType createPresentWeatherSection(String weather) {

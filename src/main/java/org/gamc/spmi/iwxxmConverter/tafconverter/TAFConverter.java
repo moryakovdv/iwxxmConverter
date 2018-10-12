@@ -159,7 +159,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 		TAFType tafRootTag = ofIWXXM.createTAFType();
 
 		// Id with ICAO code and current timestamp
-		tafRootTag.setId(String.format("taf-%s-%s", translatedTaf.getIcaoCode(), dateTime));
+		tafRootTag.setId(iwxxmHelpers.generateUUIDv4(String.format("taf-%s-%s", translatedTaf.getIcaoCode(), dateTime)));
 
 		// Set NON_OPERATIONAL and TEST properties.
 		tafRootTag.setPermissibleUsage(PermissibleUsageType.NON_OPERATIONAL);
@@ -240,11 +240,11 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 		TimePeriodPropertyType timePeriodProperty = ofGML.createTimePeriodPropertyType();
 		TimePeriodType timePeriodType = ofGML.createTimePeriodType();
 
-		timePeriodType.setId(String.format("tp-%s-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin, timePeriodEnd));
+		timePeriodType.setId(iwxxmHelpers.generateUUIDv4(String.format("tp-%s-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin, timePeriodEnd)));
 
 		// begin
 		TimeInstantType timeBeginInstant = ofGML.createTimeInstantType();
-		timeBeginInstant.setId(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin));
+		timeBeginInstant.setId(iwxxmHelpers.generateUUIDv4(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin)));
 		TimePositionType timePositionBegin = ofGML.createTimePositionType();
 		timePositionBegin.getValue().add(timePeriodBeginPosition);
 		timeBeginInstant.setTimePosition(timePositionBegin);
@@ -256,7 +256,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		// end
 		TimeInstantType timeEndInstant = ofGML.createTimeInstantType();
-		timeEndInstant.setId(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodEnd));
+		timeEndInstant.setId(iwxxmHelpers.generateUUIDv4(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodEnd)));
 		TimePositionType timePositionEnd = ofGML.createTimePositionType();
 		timePositionEnd.getValue().add(timePeriodEndPosition);
 		timeEndInstant.setTimePosition(timePositionEnd);
@@ -277,7 +277,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId(String.format("bf-%s-%s", translatedTaf.getIcaoCode(), dateTime));
+		ot.setId(iwxxmHelpers.generateUUIDv4(String.format("bf-%s-%s", translatedTaf.getIcaoCode(), dateTime)));
 
 		// тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -307,7 +307,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		// create <om:procedure> frame
 		ProcessType metceProcess = ofMetce.createProcessType();
-		metceProcess.setId("p-49-2-taf-" + translatedTaf.getIcaoCode());
+		metceProcess.setId(iwxxmHelpers.generateUUIDv4("p-49-2-taf-" + translatedTaf.getIcaoCode()));
 
 		StringOrRefType processDescription = ofGML.createStringOrRefType();
 		processDescription.setValue(StringConstants.WMO_49_2_METCE_TAF);
@@ -340,7 +340,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 				.createMeteorologicalAerodromeForecastRecordType();
 
 		// set id
-		recordType.setId(String.format("base-fcst-record-%s", translatedTaf.getIcaoCode()));
+		recordType.setId(iwxxmHelpers.generateUUIDv4(String.format("base-fcst-record-%s", translatedTaf.getIcaoCode())));
 
 		// CAVOK
 		recordType.setCloudAndVisibilityOK(translatedTaf.getCommonWeatherSection().isCavok());
@@ -422,7 +422,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 				.createMeteorologicalAerodromeForecastRecordType();
 
 		// set id
-		recordType.setId(String.format("change-record-%d-%s", sectionIndex, translatedTaf.getIcaoCode()));
+		recordType.setId(iwxxmHelpers.generateUUIDv4(String.format("change-record-%d-%s", sectionIndex, translatedTaf.getIcaoCode())));
 		AerodromeForecastChangeIndicatorType changeIndicator = AerodromeForecastChangeIndicatorType.BECOMING;
 
 		switch (section.getSectionType()) {
@@ -527,7 +527,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId(String.format("cf-%d-%s", sectionIndex, translatedTaf.getIcaoCode()));
+		ot.setId(iwxxmHelpers.generateUUIDv4(String.format("cf-%d-%s", sectionIndex, translatedTaf.getIcaoCode())));
 
 		// тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -562,7 +562,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		// create <om:procedure> frame
 		OMProcessPropertyType omProcedure = ofOM.createOMProcessPropertyType();
-		omProcedure.setHref("#p-49-2-taf");
+		omProcedure.setHref("#"+iwxxmHelpers.generateUUIDv4(String.format("p-49-2-taf")));
 		ot.setProcedure(omProcedure);
 
 		// тег om:ObserverdProperty
@@ -640,7 +640,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		// Body
 		AerodromeCloudForecastType clouds = ofIWXXM.createAerodromeCloudForecastType();
-		clouds.setId(String.format("acf-%d-%s", sectionIndex, icaoCode));
+		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 

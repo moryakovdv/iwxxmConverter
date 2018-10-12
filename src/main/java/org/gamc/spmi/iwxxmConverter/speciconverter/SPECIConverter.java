@@ -104,7 +104,7 @@ public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType> 
 		dateTimePosition = translatedMessage.getMessageIssueDateTime().toString(iwxxmHelpers.getDateTimeISOFormat());
 
 		// Id with ICAO code and current timestamp
-		speciRootTag.setId(String.format("metar-%s-%s", translatedSpeci.getIcaoCode(), dateTime));
+		speciRootTag.setId(iwxxmHelpers.generateUUIDv4(String.format("metar-%s-%s", translatedSpeci.getIcaoCode(), dateTime)));
 
 		// metarRootTag.setAutomatedStation(true);
 

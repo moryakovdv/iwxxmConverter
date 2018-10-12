@@ -142,7 +142,7 @@ public class MetarXMLCreationTest {
 		METARType metarRootTag = ofIWXXM.createMETARType();
 
 		// Id with ICAO code and current timestamp
-		metarRootTag.setId("metar-UUWW-" + testDateTime);
+		metarRootTag.setId(iwxxmHelpers.generateUUIDv4("metar-UUWW-" + testDateTime));
 
 		// Let it be automated
 		metarRootTag.setAutomatedStation(true);
@@ -201,7 +201,7 @@ public class MetarXMLCreationTest {
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
 
 		OMObservationType ot = ofOM.createOMObservationType();
-		ot.setId("obs-UUWW-" + testDateTime);
+		ot.setId(iwxxmHelpers.generateUUIDv4("obs-UUWW-" + testDateTime));
 		
 		//тип наблюдения - ссылка xlink:href
 		ReferenceType observeType = ofGML.createReferenceType();
@@ -211,7 +211,7 @@ public class MetarXMLCreationTest {
 		//Create instant time section
 		TimeObjectPropertyType timeObjectProperty = ofOM.createTimeObjectPropertyType();
 		TimeInstantType timeInstant = ofGML.createTimeInstantType();
-		timeInstant.setId("ti-UUWW-"+testDateTime);
+		timeInstant.setId(iwxxmHelpers.generateUUIDv4("ti-UUWW-"+testDateTime));
 		TimePositionType timePosition = ofGML.createTimePositionType();
 		timePosition.getValue().add(testDateTimePosition);
 		timeInstant.setTimePosition(timePosition);
@@ -229,7 +229,7 @@ public class MetarXMLCreationTest {
 		
 		//create <om:procedure> frame
 		ProcessType metceProcess = ofMetce.createProcessType();
-		metceProcess.setId("p-49-2-metar");
+		metceProcess.setId(iwxxmHelpers.generateUUIDv4("p-49-2-metar"));
 		
 		StringOrRefType processDescription = ofGML.createStringOrRefType();
 		processDescription.setValue(StringConstants.WMO_49_2_METCE_METAR);
@@ -267,7 +267,7 @@ public class MetarXMLCreationTest {
 
 		FeaturePropertyType airportTag = ofGML.createFeaturePropertyType();
 		SFSpatialSamplingFeatureType sfFeature = ofSams.createSFSpatialSamplingFeatureType();
-		sfFeature.setId("sp-UUWW");
+		sfFeature.setId(iwxxmHelpers.generateUUIDv4("sp-UUWW"));
 		
 		//empty shape tag
 		ShapeType shape = ofSams.createShapeType();
@@ -279,11 +279,11 @@ public class MetarXMLCreationTest {
 		sfFeature.setType(sfType);
 		
 		AirportHeliportType airportType = ofAIXM.createAirportHeliportType();
-		airportType.setId("aerodrome-UUWW");
+		airportType.setId(iwxxmHelpers.generateUUIDv4("aerodrome-UUWW"));
 		
 		AirportHeliportTimeSlicePropertyType ahTimeSliceProperty = ofAIXM.createAirportHeliportTimeSlicePropertyType();
 		AirportHeliportTimeSliceType ahTimeSliceType = ofAIXM.createAirportHeliportTimeSliceType();
-		ahTimeSliceType.setId("aerodrome-UUWW-ts");
+		ahTimeSliceType.setId(iwxxmHelpers.generateUUIDv4("aerodrome-UUWW-ts"));
 		
 		TimePrimitivePropertyType validTime = ofGML.createTimePrimitivePropertyType();
 		ahTimeSliceType.setValidTime(validTime);
@@ -330,7 +330,7 @@ public class MetarXMLCreationTest {
 		//body
 		MeteorologicalAerodromeObservationRecordType metarRecord = ofIWXXM
 				.createMeteorologicalAerodromeObservationRecordType();
-		metarRecord.setId("obs-record-UUWW-" + testDateTime);
+		metarRecord.setId(iwxxmHelpers.generateUUIDv4("obs-record-UUWW-" + testDateTime));
 
 		//Set temperature
 		MeasureType mtTemperature = ofGML.createMeasureType();
@@ -499,7 +499,7 @@ public class MetarXMLCreationTest {
 		RunwayDirectionPropertyType runwayType = ofIWXXM.createRunwayDirectionPropertyType();
 		RunwayDirectionType runway = ofAIXM.createRunwayDirectionType();
 		
-		runway.setId("runway-R24");
+		runway.setId(iwxxmHelpers.generateUUIDv4("runway-R24"));
 		CodeType rwCode = ofGML.createCodeType();
 		rwCode.setValue("R24");
 		runway.getName().add(rwCode);
