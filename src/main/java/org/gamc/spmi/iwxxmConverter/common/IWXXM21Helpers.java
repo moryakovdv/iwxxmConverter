@@ -41,35 +41,35 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-import _int.icao.iwxxm._2.AerodromeForecastWeatherType;
-import _int.icao.iwxxm._2.AerodromePresentWeatherType;
-import _int.icao.iwxxm._2.AerodromeRecentWeatherType;
-import _int.icao.iwxxm._2.CloudAmountReportedAtAerodromeType;
-import _int.icao.iwxxm._2.CloudLayerType;
-import _int.icao.iwxxm._2.DistanceWithNilReasonType;
-import _int.icao.iwxxm._2.LengthWithNilReasonType;
-import _int.icao.iwxxm._2.ReportType;
-import _int.icao.iwxxm._2.RunwayDirectionPropertyType;
-import _int.icao.iwxxm._2.SigConvectiveCloudTypeType;
-import aero.aixm.schema._5_1.AirportHeliportTimeSlicePropertyType;
-import aero.aixm.schema._5_1.AirportHeliportTimeSliceType;
-import aero.aixm.schema._5_1.AirportHeliportType;
-import aero.aixm.schema._5_1.CodeAirportHeliportDesignatorType;
-import aero.aixm.schema._5_1.CodeICAOType;
-import aero.aixm.schema._5_1.RunwayDirectionTimeSlicePropertyType;
-import aero.aixm.schema._5_1.RunwayDirectionTimeSliceType;
-import aero.aixm.schema._5_1.RunwayDirectionType;
-import aero.aixm.schema._5_1.TextDesignatorType;
-import net.opengis.gml.v_3_2_1.FeaturePropertyType;
-import net.opengis.gml.v_3_2_1.ReferenceType;
-import net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
-import net.opengis.gml.v_3_2_1.TimeInstantType;
-import net.opengis.gml.v_3_2_1.TimePeriodPropertyType;
-import net.opengis.gml.v_3_2_1.TimePeriodType;
-import net.opengis.gml.v_3_2_1.TimePositionType;
-import net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
-import net.opengis.samplingspatial._2.SFSpatialSamplingFeatureType;
-import net.opengis.samplingspatial._2.ShapeType;
+import schemabindings21._int.icao.iwxxm._2.AerodromeForecastWeatherType;
+import schemabindings21._int.icao.iwxxm._2.AerodromePresentWeatherType;
+import schemabindings21._int.icao.iwxxm._2.AerodromeRecentWeatherType;
+import schemabindings21._int.icao.iwxxm._2.CloudAmountReportedAtAerodromeType;
+import schemabindings21._int.icao.iwxxm._2.CloudLayerType;
+import schemabindings21._int.icao.iwxxm._2.DistanceWithNilReasonType;
+import schemabindings21._int.icao.iwxxm._2.LengthWithNilReasonType;
+import schemabindings21._int.icao.iwxxm._2.ReportType;
+import schemabindings21._int.icao.iwxxm._2.RunwayDirectionPropertyType;
+import schemabindings21._int.icao.iwxxm._2.SigConvectiveCloudTypeType;
+import schemabindings21.aero.aixm.schema._5_1.AirportHeliportTimeSlicePropertyType;
+import schemabindings21.aero.aixm.schema._5_1.AirportHeliportTimeSliceType;
+import schemabindings21.aero.aixm.schema._5_1.AirportHeliportType;
+import schemabindings21.aero.aixm.schema._5_1.CodeAirportHeliportDesignatorType;
+import schemabindings21.aero.aixm.schema._5_1.CodeICAOType;
+import schemabindings21.aero.aixm.schema._5_1.RunwayDirectionTimeSlicePropertyType;
+import schemabindings21.aero.aixm.schema._5_1.RunwayDirectionTimeSliceType;
+import schemabindings21.aero.aixm.schema._5_1.RunwayDirectionType;
+import schemabindings21.aero.aixm.schema._5_1.TextDesignatorType;
+import schemabindings21.net.opengis.gml.v_3_2_1.FeaturePropertyType;
+import schemabindings21.net.opengis.gml.v_3_2_1.ReferenceType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimeInstantType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimePeriodPropertyType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimePeriodType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimePositionType;
+import schemabindings21.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
+import schemabindings21.net.opengis.samplingspatial._2.SFSpatialSamplingFeatureType;
+import schemabindings21.net.opengis.samplingspatial._2.ShapeType;
 
 /**
  * Set of the helper functions. Provides creation of a common objects to use
@@ -80,13 +80,13 @@ import net.opengis.samplingspatial._2.ShapeType;
  */
 public class IWXXM21Helpers {
 
-	public static final _int.icao.iwxxm._2.ObjectFactory ofIWXXM = new _int.icao.iwxxm._2.ObjectFactory();
-	public static final net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new net.opengis.gml.v_3_2_1.ObjectFactory();
-	public static final net.opengis.om._2.ObjectFactory ofOM = new net.opengis.om._2.ObjectFactory();
-	public static final org.w3._1999.xlink.ObjectFactory ofXLink = new org.w3._1999.xlink.ObjectFactory();
-	public static final aero.aixm.schema._5_1.ObjectFactory ofAIXM = new aero.aixm.schema._5_1.ObjectFactory();
-	public static final _int.wmo.def.metce._2013.ObjectFactory ofMetce = new _int.wmo.def.metce._2013.ObjectFactory();
-	public static final net.opengis.samplingspatial._2.ObjectFactory ofSams = new net.opengis.samplingspatial._2.ObjectFactory();
+	public static final schemabindings21._int.icao.iwxxm._2.ObjectFactory ofIWXXM = new schemabindings21._int.icao.iwxxm._2.ObjectFactory();
+	public static final schemabindings21.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings21.net.opengis.gml.v_3_2_1.ObjectFactory();
+	public static final schemabindings21.net.opengis.om._2.ObjectFactory ofOM = new schemabindings21.net.opengis.om._2.ObjectFactory();
+	public static final schemabindings21.org.w3._1999.xlink.ObjectFactory ofXLink = new schemabindings21.org.w3._1999.xlink.ObjectFactory();
+	public static final schemabindings21.aero.aixm.schema._5_1.ObjectFactory ofAIXM = new schemabindings21.aero.aixm.schema._5_1.ObjectFactory();
+	public static final schemabindings21._int.wmo.def.metce._2013.ObjectFactory ofMetce = new schemabindings21._int.wmo.def.metce._2013.ObjectFactory();
+	public static final schemabindings21.net.opengis.samplingspatial._2.ObjectFactory ofSams = new schemabindings21.net.opengis.samplingspatial._2.ObjectFactory();
 
 	
 	/*WMO registers**/

@@ -36,12 +36,12 @@ import org.gamc.spmi.iwxxmConverter.metarconverter.METARTacMessage;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
 
-import _int.icao.iwxxm._2.METARType;
-import _int.icao.iwxxm._2.MeteorologicalAerodromeReportStatusType;
-import _int.icao.iwxxm._2.PermissibleUsageReasonType;
-import _int.icao.iwxxm._2.PermissibleUsageType;
-import _int.icao.iwxxm._2.SPECIType;
-import net.opengis.om._2.OMObservationPropertyType;
+import schemabindings21._int.icao.iwxxm._2.METARType;
+import schemabindings21._int.icao.iwxxm._2.MeteorologicalAerodromeReportStatusType;
+import schemabindings21._int.icao.iwxxm._2.PermissibleUsageReasonType;
+import schemabindings21._int.icao.iwxxm._2.PermissibleUsageType;
+import schemabindings21._int.icao.iwxxm._2.SPECIType;
+import schemabindings21.net.opengis.om._2.OMObservationPropertyType;
 
 /**
  * Base class to perform conversion of TAC into intermediate object
@@ -49,7 +49,7 @@ import net.opengis.om._2.OMObservationPropertyType;
  */
 public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType> {
 
-	_int.icao.iwxxm._2.ObjectFactory ofIWXXM = new _int.icao.iwxxm._2.ObjectFactory();
+	schemabindings21._int.icao.iwxxm._2.ObjectFactory ofIWXXM = new schemabindings21._int.icao.iwxxm._2.ObjectFactory();
 	IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
 	private SPECITacMessage translatedSpeci;
 
