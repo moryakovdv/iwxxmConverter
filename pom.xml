@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxmConverter</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<version>0.0.9</version>
 
 	<properties>
@@ -23,29 +23,19 @@
 		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
 
-	<dependencyManagement>
-
-		<dependencies>
-
-		
-
-
-
-		</dependencies>
-
-	</dependencyManagement>
+	
 
 
 	<dependencies>
-
-		<!-- Junit -->
+	<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-	<dependency>
+		
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.25</version>
@@ -112,6 +102,7 @@
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-http</artifactId>
 			<version>2.26</version>
+			
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
@@ -121,8 +112,6 @@
 			<version>2.26</version>
 		</dependency>
 		
-
-
 	</dependencies>
 
 
@@ -130,7 +119,7 @@
 	<build>
 
 		<finalName>iwxxmConverter</finalName>
-
+		<pluginManagement>
 		<plugins>
 
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
@@ -217,7 +206,7 @@
 
 
 		</plugins>
-
+		</pluginManagement>
 	</build>
 
 

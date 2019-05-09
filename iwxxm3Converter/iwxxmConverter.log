@@ -1,0 +1,9 @@
+2019-05-09 17:33:37,811[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-05-09 17:33:37,835[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
+2019-05-09 17:33:37,866[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-05-09 17:33:37,882[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-05-09 17:33:37,960[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-05-09 17:33:38,007[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
+2019-05-09 17:33:55,921[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-05-09 17:33:55,937[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-05-09 17:33:55,953[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
