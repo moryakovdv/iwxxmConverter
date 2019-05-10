@@ -99,7 +99,7 @@ public abstract class AbstractFeatureType
     extends AbstractGMLType
 {
 
-    @XmlElement(nillable = true)
+    @XmlElement(/*nillable = true,*/ required=false)
     protected BoundingShapeType boundedBy;
     @XmlElementRef(name = "location", namespace = "http://www.opengis.net/gml/3.2", type = JAXBElement.class, required = false)
     protected JAXBElement<? extends LocationPropertyType> location;

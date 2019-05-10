@@ -47,7 +47,9 @@ public class MetarConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	
+	String metarA3 = "METAR YUDO 221630Z 24004MPS 0600 R12/1000U DZ FG SCT010 OVC020 17/16 Q1018\n" +
+    " BECMG TL1700 0800 FG BECMG AT1800 9999 NSW";
+    
 	String metar = "METAR UUEE 270830Z 02006MPS 2100 -SN OVC009 M04/M06 Q1008 R06L/590230\n" + 
 			"     R06R/590230 TEMPO 1000 SHSN BKN012CB R06L/590330=";
 	

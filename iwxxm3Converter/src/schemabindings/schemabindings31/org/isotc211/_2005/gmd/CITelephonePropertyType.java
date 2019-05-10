@@ -59,8 +59,8 @@ public class CITelephonePropertyType {
      * 
      * 
      */
-    @XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
-    public final static TypeType TYPE = TypeType.SIMPLE;
+    //@XmlAttribute(name = "type", namespace = "http://www.w3.org/1999/xlink")
+    //public final static TypeType TYPE = TypeType.SIMPLE;
     @XmlAttribute(name = "href", namespace = "http://www.w3.org/1999/xlink")
     protected String href;
     @XmlAttribute(name = "role", namespace = "http://www.w3.org/1999/xlink")

@@ -162,6 +162,8 @@
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
+  <fired-rule context="//iwxxm:CloudLayer" />
+  <fired-rule context="//iwxxm:CloudLayer" />
   <active-pattern id="COMMON.Report4" name="COMMON.Report4" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
   <active-pattern id="COMMON.Report2" name="COMMON.Report2" document="" />

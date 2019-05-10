@@ -32,6 +32,7 @@ import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.MetarForecastSection;
+import org.gamc.spmi.iwxxmConverter.general.MetarForecastTimeSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
@@ -40,15 +41,21 @@ import org.gamc.spmi.iwxxmConverter.metarconverter.METARCloudSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARRVRSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARRunwayStateSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARTempoSection;
+import org.gamc.spmi.iwxxmConverter.metarconverter.METARTimedATSection;
+import org.gamc.spmi.iwxxmConverter.metarconverter.METARTimedFMSection;
+import org.gamc.spmi.iwxxmConverter.metarconverter.METARTimedTLSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.MetarCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.joda.time.DateTime;
+import org.joda.time.Interval;
 
+import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudForecastType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudType.Layer;
+import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeObservationType.SurfaceWind;
 import schemabindings31._int.icao.iwxxm._3.AerodromeHorizontalVisibilityType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRunwayStateType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRunwayVisualRangeType;
@@ -77,14 +84,19 @@ import schemabindings31._int.icao.iwxxm._3.RunwayContaminationType;
 import schemabindings31._int.icao.iwxxm._3.RunwayDepositsType;
 import schemabindings31._int.icao.iwxxm._3.RunwayDirectionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.RunwayFrictionCoefficientType;
+import schemabindings31._int.icao.iwxxm._3.TrendForecastTimeIndicatorType;
 import schemabindings31._int.icao.iwxxm._3.VelocityWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.VisualRangeTendencyType;
 import schemabindings31.aero.aixm.schema._5_1.RunwayDirectionType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AngleType;
+import schemabindings31.net.opengis.gml.v_3_2_1.BoundingShapeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
+import schemabindings31.net.opengis.gml.v_3_2_1.EnvelopeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.TimePeriodPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.TimePeriodType;
 
 /**
  * Base class to perform conversion of TAC into intermediate object
@@ -130,7 +142,15 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		// <iwxxm:METAR> root tag
 		METARType metarRootTag = IWXXM31Helpers.ofIWXXM.createMETARType();
-
+		/*
+		BoundingShapeType shape =  IWXXM31Helpers.ofGML.createBoundingShapeType();
+		EnvelopeType env = IWXXM31Helpers.ofGML.createEnvelopeType();
+		
+		shape.setEnvelope(IWXXM31Helpers.ofGML.createEnvelope(env));
+		
+		metarRootTag.setBoundedBy(shape);
+		 */
+		
 		dateTime = translatedMessage.getMessageIssueDateTime().toString(iwxxmHelpers.getDateTimeFormat()) + "Z";
 		dateTimePosition = translatedMessage.getMessageIssueDateTime().toString(iwxxmHelpers.getDateTimeISOFormat());
 
@@ -164,6 +184,11 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		metarRootTag.setAerodrome(createAirportDescriptionSectionTag());
 
+		TimeInstantPropertyType obsTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
+				translatedMetar.getMessageIssueDateTime(), translatedMetar.getIcaoCode());
+		metarRootTag.setIssueTime(obsTimeType);
+		metarRootTag.setObservationTime(obsTimeType);
+
 		// Compose METAR body message and place it in the root
 		MeteorologicalAerodromeObservationPropertyType observation = createMETARRecordTag();
 		JAXBElement<MeteorologicalAerodromeObservationPropertyType> observationTag = IWXXM31Helpers.ofIWXXM
@@ -179,6 +204,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		for (METARBecomingSection bcmgSection : translatedMetar.getBecomingSections()) {
 			bcmgSection.parseSection();
+			if (bcmgSection.getSectionType() == null)
+				continue;
 			MeteorologicalAerodromeTrendForecastPropertyType omptBcmg = createTrendResultsSection(bcmgSection,
 					sectionIndex.getAndIncrement());
 			metarRootTag.getTrendForecast().add(omptBcmg);
@@ -189,6 +216,13 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 			MeteorologicalAerodromeTrendForecastPropertyType omptTempo = createTrendResultsSection(tempoSection,
 					sectionIndex.getAndIncrement());
 			metarRootTag.getTrendForecast().add(omptTempo);
+		}
+
+		for (MetarForecastTimeSection tSection : translatedMetar.getTimedSections()) {
+			tSection.parseSection();
+			MeteorologicalAerodromeTrendForecastPropertyType omptBcmg = createTrendResultsSection(tSection,
+					sectionIndex.getAndIncrement());
+			metarRootTag.getTrendForecast().add(omptBcmg);
 		}
 
 		// create XML representation
@@ -308,7 +342,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		MeteorologicalAerodromeTrendForecastPropertyType metarTrendType = IWXXM31Helpers.ofIWXXM
 				.createMeteorologicalAerodromeTrendForecastPropertyType();
-		MeteorologicalAerodromeTrendForecastType metarTrend = IWXXM31Helpers.ofIWXXM.createMeteorologicalAerodromeTrendForecastType();
+		MeteorologicalAerodromeTrendForecastType metarTrend = IWXXM31Helpers.ofIWXXM
+				.createMeteorologicalAerodromeTrendForecastType();
 		metarTrendType.setMeteorologicalAerodromeTrendForecast(metarTrend);
 
 		ForecastChangeIndicatorType changeIndicator = ForecastChangeIndicatorType.BECOMING;
@@ -338,7 +373,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		// surfaceWind
 		AerodromeSurfaceWindTrendForecastPropertyType sWindpropertyType = IWXXM31Helpers.ofIWXXM
 				.createAerodromeSurfaceWindTrendForecastPropertyType();
-		AerodromeSurfaceWindTrendForecastType sWindType = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindTrendForecastType();
+		AerodromeSurfaceWindTrendForecastType sWindType = IWXXM31Helpers.ofIWXXM
+				.createAerodromeSurfaceWindTrendForecastType();
 		boolean sectionHasWind = false;
 		// Set gust speed
 		if (section.getCommonWeatherSection().getGustSpeed() != null) {
@@ -375,20 +411,42 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		}
 
 		// clouds
-
-		AerodromeCloudForecastPropertyType cloudType = createTrendCloudSectionTag(section.getCommonWeatherSection(),
-				translatedMetar.getIcaoCode(), sectionIndex);
-		JAXBElement<AerodromeCloudForecastPropertyType> cloudTypeEl = IWXXM31Helpers.ofIWXXM
-				.createMeteorologicalAerodromeTrendForecastTypeCloud(cloudType);
-		metarTrend.setCloud(cloudTypeEl);
-
+		if (section.getCommonWeatherSection().getCloudSections().size() > 0) {
+			AerodromeCloudForecastPropertyType cloudType = createCloudSectionTag(section.getCommonWeatherSection(),
+					translatedMetar.getIcaoCode(), sectionIndex);
+			JAXBElement<AerodromeCloudForecastPropertyType> cloudTypeEl = IWXXM31Helpers.ofIWXXM
+					.createMeteorologicalAerodromeTrendForecastTypeCloud(cloudType);
+			metarTrend.setCloud(cloudTypeEl);
+		}
 		// forecasted weather
 		for (String weatherCode : section.getCommonWeatherSection().getCurrentWeather()) {
 			metarTrend.getWeather().add(iwxxmHelpers.createForecastWeatherSection(weatherCode));
 		}
 
-		// process runways state
+		TrendForecastTimeIndicatorType timeIndicator = null;
+		if (section instanceof METARTimedATSection) {
+			timeIndicator = TrendForecastTimeIndicatorType.AT;
 
+		} else if (section instanceof METARTimedFMSection) {
+			timeIndicator = TrendForecastTimeIndicatorType.FROM;
+
+		} else if (section instanceof METARTimedTLSection) {
+			timeIndicator = TrendForecastTimeIndicatorType.UNTIL;
+		}
+
+		if (timeIndicator != null)
+			metarTrend.setTimeIndicator(timeIndicator);
+
+		Interval timeIntreval = section.getTrendValidityInterval();
+		TimePeriodPropertyType period = iwxxmHelpers.createTrendPeriodSection(translatedMetar.getIcaoCode(), timeIntreval.getStart(), timeIntreval.getEnd(), sectionIndex);
+		JAXBElement<TimePeriodType> periodTime = IWXXM31Helpers.ofGML.createTimePeriod(period.getTimePeriod());
+		
+	
+		AbstractTimeObjectPropertyType aTime = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		aTime.setAbstractTimeObject(periodTime);
+	
+		metarTrend.setPhenomenonTime(aTime);
+		
 		return metarTrendType;
 	}
 
@@ -411,7 +469,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		MeteorologicalAerodromeObservationPropertyType metarRecordTag = IWXXM31Helpers.ofIWXXM
 				.createMeteorologicalAerodromeObservationPropertyType();
 		// body
-		MeteorologicalAerodromeObservationType metarRecord = IWXXM31Helpers.ofIWXXM.createMeteorologicalAerodromeObservationType();
+		MeteorologicalAerodromeObservationType metarRecord = IWXXM31Helpers.ofIWXXM
+				.createMeteorologicalAerodromeObservationType();
 		metarRecord.setId(iwxxmHelpers
 				.generateUUIDv4(String.format("obs-record-%s-%s", translatedMetar.getIcaoCode(), dateTime)));
 
@@ -488,10 +547,9 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 	}
 
 	/** Wind section */
-	private MeteorologicalAerodromeObservationType.SurfaceWind createWindSectionTag() {
-		// Envelop
-		AerodromeSurfaceWindPropertyType surfaceWindType = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindPropertyType();
-
+	private SurfaceWind createWindSectionTag() {
+		
+		SurfaceWind result = IWXXM31Helpers.ofIWXXM.createMeteorologicalAerodromeObservationTypeSurfaceWind();
 		// body
 		AerodromeSurfaceWindType surfaceWind = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindType();
 
@@ -503,10 +561,10 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 			speedGustType.setUom(translatedMetar.getCommonWeatherSection().getSpeedUnits().getStringValue());
 			speedGustType.setValue(translatedMetar.getCommonWeatherSection().getGustSpeed().doubleValue());
-			JAXBElement<VelocityWithNilReasonType> sg = IWXXM31Helpers.ofIWXXM.createVelocityWithNilReason(speedGustType);
+			JAXBElement<VelocityWithNilReasonType> sg = IWXXM31Helpers.ofIWXXM
+					.createAerodromeSurfaceWindTypeWindGustSpeed(speedGustType);
 			surfaceWind.setWindGustSpeed(sg);
 		}
-		
 
 		// Set mean wind
 		if (translatedMetar.getCommonWeatherSection().getWindSpeed() != null) {
@@ -516,18 +574,17 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 			speedMeanType.setValue(translatedMetar.getCommonWeatherSection().getWindSpeed().doubleValue());
 			surfaceWind.setMeanWindSpeed(speedMeanType);
 		}
-		
 
 		// Set wind direction
 		if (translatedMetar.getCommonWeatherSection().getWindDir() != null) {
 			AngleWithNilReasonType windAngle = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
-
+			
 			windAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
 			windAngle.setValue(translatedMetar.getCommonWeatherSection().getWindDir().doubleValue());
-			JAXBElement<AngleWithNilReasonType> wa = IWXXM31Helpers.ofIWXXM.createAngleWithNilReason(windAngle);
+			JAXBElement<AngleWithNilReasonType> wa = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindTypeMeanWindDirection(windAngle);
+			wa.setValue(windAngle);
 			surfaceWind.setMeanWindDirection(wa);
 		}
-	
 
 		// Set wind angles
 		if (translatedMetar.getCommonWeatherSection().getWindVariableFrom() != null) {
@@ -535,26 +592,22 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 			windAngleCW.setUom(ANGLE_UNITS.DEGREES.getStringValue());
 			windAngleCW.setValue(translatedMetar.getCommonWeatherSection().getWindVariableFrom());
-			JAXBElement<AngleWithNilReasonType> waCW = IWXXM31Helpers.ofIWXXM.createAngleWithNilReason(windAngleCW);
+			JAXBElement<AngleWithNilReasonType> waCW = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindTypeExtremeClockwiseWindDirection(windAngleCW);
 			surfaceWind.setExtremeClockwiseWindDirection(waCW);
 		}
-	
 
 		if (translatedMetar.getCommonWeatherSection().getWindVariableTo() != null) {
 			AngleWithNilReasonType windAngleCCW = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
 			windAngleCCW.setUom(ANGLE_UNITS.DEGREES.getStringValue());
 			windAngleCCW.setValue(translatedMetar.getCommonWeatherSection().getWindVariableTo());
-			JAXBElement<AngleWithNilReasonType> waCCW = IWXXM31Helpers.ofIWXXM.createAngleWithNilReason(windAngleCCW);
+			JAXBElement<AngleWithNilReasonType> waCCW = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindTypeExtremeCounterClockwiseWindDirection(windAngleCCW);
 			surfaceWind.setExtremeCounterClockwiseWindDirection(waCCW);
 		}
-		
-		// Place body into envelop
-		surfaceWindType.setAerodromeSurfaceWind(surfaceWind);
 
-		MeteorologicalAerodromeObservationType.SurfaceWind resultSurfaceWind = IWXXM31Helpers.ofIWXXM
-				.createMeteorologicalAerodromeObservationTypeSurfaceWind();
-		resultSurfaceWind.setAerodromeSurfaceWind(surfaceWind);
-		return resultSurfaceWind;
+		
+		result.setAerodromeSurfaceWind(surfaceWind);
+		
+		return result;
 	}
 
 	/** Visibility section */
@@ -564,17 +617,22 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		AerodromeHorizontalVisibilityType visibility = IWXXM31Helpers.ofIWXXM.createAerodromeHorizontalVisibilityType();
 
 		// Minimal visibility
-			if (translatedMetar.getCommonWeatherSection().getMinimumVisibility() != null) {
-				DistanceWithNilReasonType minVis = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReasonType();
-				
+		if (translatedMetar.getCommonWeatherSection().getMinimumVisibility() != null) {
+			DistanceWithNilReasonType minVis = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReasonType();
+
 			minVis.setUom(translatedMetar.getCommonWeatherSection().getVisibilityUnits().getStringValue());
 			minVis.setValue(translatedMetar.getCommonWeatherSection().getMinimumVisibility());
-			JAXBElement<DistanceWithNilReasonType> minV = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReason(minVis);
+			JAXBElement<DistanceWithNilReasonType> minV = IWXXM31Helpers.ofIWXXM.createAerodromeHorizontalVisibilityTypeMinimumVisibility(minVis);
 			visibility.setMinimumVisibility(minV);
+			
+			Double dirAngleD = translatedMetar.getCommonWeatherSection().getMinimumVisibilityDirection().getDoubleValue();
+			AngleWithNilReasonType minVisAngle= IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
+			minVisAngle.setValue(dirAngleD);
+			minVisAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
+			JAXBElement<AngleWithNilReasonType> minVisDirection =  IWXXM31Helpers.ofIWXXM.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(minVisAngle);
+			visibility.setMinimumVisibilityDirection(minVisDirection);
 		}
-	
 
-		
 		// Prevailing visibility
 		if (translatedMetar.getCommonWeatherSection().getPrevailVisibility() != null) {
 			DistanceWithNilReasonType prevailVis = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReasonType();
@@ -582,7 +640,6 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 			prevailVis.setValue(translatedMetar.getCommonWeatherSection().getPrevailVisibility());
 			visibility.setPrevailingVisibility(prevailVis);
 		}
-
 
 		MeteorologicalAerodromeObservationType.Visibility resultVisibility = IWXXM31Helpers.ofIWXXM
 				.createMeteorologicalAerodromeObservationTypeVisibility();
@@ -618,11 +675,12 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	}
 
-	private AerodromeCloudForecastPropertyType createTrendCloudSectionTag(MetarCommonWeatherSection section,
-			String icaoCode, int sectionIndex) {
+	private AerodromeCloudForecastPropertyType createCloudSectionTag(MetarCommonWeatherSection section, String icaoCode,
+			int sectionIndex) {
 
 		// Envelop
-		AerodromeCloudForecastPropertyType cloudsType = IWXXM31Helpers.ofIWXXM.createAerodromeCloudForecastPropertyType();
+		AerodromeCloudForecastPropertyType cloudsType = IWXXM31Helpers.ofIWXXM
+				.createAerodromeCloudForecastPropertyType();
 
 		// Body
 		AerodromeCloudForecastType clouds = IWXXM31Helpers.ofIWXXM.createAerodromeCloudForecastType();
@@ -696,16 +754,19 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		rvr.setRunway(runwayDir);
 
 		// mean rvr
-		DistanceWithNilReasonType meanLength = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReasonType();
 		if (rvrs.getRvrValue() != null) {
+			DistanceWithNilReasonType meanLength = IWXXM31Helpers.ofIWXXM.createDistanceWithNilReasonType();
+			
 			meanLength.setUom(rvrs.getUnits().getStringValue());
 			meanLength.setValue(rvrs.getRvrValue());
+			rvr.setMeanRVR(meanLength);
 		}
-		rvr.setMeanRVR(meanLength);
+	
 
 		// mean operator
-		RelationalOperatorType rvrOper = RelationalOperatorType.ABOVE;
+
 		if (rvrs.getOperator() != null) {
+			RelationalOperatorType rvrOper = RelationalOperatorType.ABOVE;
 			switch (rvrs.getOperator()) {
 			case M:
 				rvrOper = RelationalOperatorType.ABOVE;
@@ -714,10 +775,10 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 				rvrOper = RelationalOperatorType.BELOW;
 				break;
 			}
+			JAXBElement<RelationalOperatorType> rwr = IWXXM31Helpers.ofIWXXM
+					.createAerodromeRunwayVisualRangeTypeMeanRVROperator(rvrOper);
+			rvr.setMeanRVROperator(rwr);
 		}
-
-		JAXBElement<RelationalOperatorType> rwr = IWXXM31Helpers.ofIWXXM.createAerodromeRunwayVisualRangeTypeMeanRVROperator(rvrOper);
-		rvr.setMeanRVROperator(rwr);
 
 		// Visal range tendency
 		VisualRangeTendencyType vrTendency = VisualRangeTendencyType.MISSING_VALUE;
@@ -780,14 +841,16 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 				runwayDir.setHref("#" + createdRunways.get(rwrs.getRvrDesignator()));
 			}
 			if (runwayDir != null) {
-				JAXBElement<RunwayDirectionPropertyType> rw = IWXXM31Helpers.ofIWXXM.createAerodromeRunwayStateTypeRunway(runwayDir);
+				JAXBElement<RunwayDirectionPropertyType> rw = IWXXM31Helpers.ofIWXXM
+						.createAerodromeRunwayStateTypeRunway(runwayDir);
 				rvrState.setRunway(rw);
 			}
 		}
 
 		if (rwrs.getType().isPresent()) {
 			RunwayDepositsType dType = IWXXM31Helpers.ofIWXXM.createRunwayDepositsType();
-			JAXBElement<RunwayDepositsType> deposit = IWXXM31Helpers.ofIWXXM.createAerodromeRunwayStateTypeDepositType(dType);
+			JAXBElement<RunwayDepositsType> deposit = IWXXM31Helpers.ofIWXXM
+					.createAerodromeRunwayStateTypeDepositType(dType);
 			String depUrl = iwxxmHelpers.getRwDepositReg().getWMOUrlByCode(rwrs.getType().get());
 			dType.setHref(depUrl);
 			rvrState.setDepositType(deposit);

@@ -164,11 +164,15 @@
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ASWF1" name="COMMON.ASWF1" document="" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="COMMON.ASWTF1" name="COMMON.ASWTF1" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="COMMON.ASWTF2" name="COMMON.ASWTF2" document="" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="COMMON.ASWTF3" name="COMMON.ASWTF3" document="" />
+  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="IWXXM.ExtensionAlwaysLast" name="IWXXM.ExtensionAlwaysLast" document="" />
 </schematron-output>

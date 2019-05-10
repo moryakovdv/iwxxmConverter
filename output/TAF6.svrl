@@ -53,13 +53,7 @@
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR1" name="TAF.MAFR1" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
@@ -67,13 +61,7 @@
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR4" name="TAF.MAFR4" document="" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
@@ -166,8 +154,6 @@
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
-  <fired-rule context="//iwxxm:CloudLayer" />
-  <fired-rule context="//iwxxm:CloudLayer" />
   <active-pattern id="COMMON.Report4" name="COMMON.Report4" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
   <active-pattern id="COMMON.Report2" name="COMMON.Report2" document="" />
@@ -180,13 +166,7 @@
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ACF2" name="COMMON.ACF2" document="" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
-  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
@@ -194,13 +174,7 @@
   <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="COMMON.ASWTF1" name="COMMON.ASWTF1" document="" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
@@ -208,13 +182,7 @@
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <active-pattern id="COMMON.ASWTF3" name="COMMON.ASWTF3" document="" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
-  <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindTrendForecast|//iwxxm:AerodromeSurfaceWindForecast" />

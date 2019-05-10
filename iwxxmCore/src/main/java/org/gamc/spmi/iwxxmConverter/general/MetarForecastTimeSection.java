@@ -21,7 +21,7 @@ package org.gamc.spmi.iwxxmConverter.general;
 /**Interface for AT,TL,FM sections in METARs*/
 public interface MetarForecastTimeSection extends MetarForecastSection {
 	
-
+	
 	
 		
 }

@@ -35,6 +35,10 @@ public enum RUMB_UNITS implements IwxxmEnum {
 		return name;
 	}
 	
+	public Double getDoubleValue() {
+		return Double.valueOf(name);
+	}
+	
 	
 	
 }

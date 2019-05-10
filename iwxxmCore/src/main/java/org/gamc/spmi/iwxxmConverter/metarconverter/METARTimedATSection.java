@@ -17,6 +17,7 @@
 package org.gamc.spmi.iwxxmConverter.metarconverter;
 
 import org.gamc.spmi.iwxxmConverter.common.ForecastSectionType;
+import org.gamc.spmi.iwxxmConverter.general.ForecastTimedSectionType;
 import org.gamc.spmi.iwxxmConverter.general.MetarForecastTimeSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
 import org.gamc.spmi.iwxxmConverter.tac.TacSectionImpl;
@@ -89,5 +90,7 @@ public class METARTimedATSection extends TacSectionImpl implements MetarForecast
 		//DateTime parentDateTimeEnd = this.getParentIssuedDateTime().plusHours(2);
 		return new Interval(dtAT,dtAT);
 	}
+
+	
 
 }

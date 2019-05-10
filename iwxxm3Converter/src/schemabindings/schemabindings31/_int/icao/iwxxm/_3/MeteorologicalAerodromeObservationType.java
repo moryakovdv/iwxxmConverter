@@ -142,8 +142,10 @@ public class MeteorologicalAerodromeObservationType
     protected JAXBElement<MeteorologicalAerodromeObservationType.Visibility> visibility;
     @XmlElement(nillable = true)
     protected List<MeteorologicalAerodromeObservationType.Rvr> rvr;
-    @XmlElement(nillable = true)
+    
+    @XmlElement(nillable = true,required = false)
     protected List<AerodromePresentWeatherType> presentWeather;
+    
     @XmlElementRef(name = "cloud", namespace = "http://icao.int/iwxxm/3.0", type = JAXBElement.class, required = false)
     protected JAXBElement<MeteorologicalAerodromeObservationType.Cloud> cloud;
     @XmlElement(nillable = true)

@@ -51,12 +51,22 @@
   <active-pattern id="METAR_SPECI.AHV3" name="METAR_SPECI.AHV3" document="" />
   <active-pattern id="TAF.MAFR2" name="TAF.MAFR2" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR1" name="TAF.MAFR1" document="" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR3" name="TAF.MAFR3" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR4" name="TAF.MAFR4" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <failed-assert location="/*:TAF[namespace-uri()='http://icao.int/iwxxm/2.1'][1]/*:baseForecast[namespace-uri()='http://icao.int/iwxxm/2.1'][1]/*:OM_Observation[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:result[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:MeteorologicalAerodromeForecastRecord[namespace-uri()='http://icao.int/iwxxm/2.1'][1]" test="(if(exists(iwxxm:prevailingVisibility) and (not(exists(iwxxm:prevailingVisibility/@xsi:nil)) or iwxxm:prevailingVisibility/@xsi:nil != 'true')) then (iwxxm:prevailingVisibility/@uom = 'm') else true())">
+    <text>TAF.MAFR4: prevailingVisibility shall be reported in metres (m).</text>
+  </failed-assert>
+  <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
+  <failed-assert location="/*:TAF[namespace-uri()='http://icao.int/iwxxm/2.1'][1]/*:changeForecast[namespace-uri()='http://icao.int/iwxxm/2.1'][1]/*:OM_Observation[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:result[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:MeteorologicalAerodromeForecastRecord[namespace-uri()='http://icao.int/iwxxm/2.1'][1]" test="(if(exists(iwxxm:prevailingVisibility) and (not(exists(iwxxm:prevailingVisibility/@xsi:nil)) or iwxxm:prevailingVisibility/@xsi:nil != 'true')) then (iwxxm:prevailingVisibility/@uom = 'm') else true())">
+    <text>TAF.MAFR4: prevailingVisibility shall be reported in metres (m).</text>
+  </failed-assert>
   <active-pattern id="TAF.AATF1" name="TAF.AATF1" document="" />
   <fired-rule context="//iwxxm:AerodromeAirTemperatureForecast" />
   <active-pattern id="TAF.AATF2" name="TAF.AATF2" document="" />
@@ -144,6 +154,8 @@
   <active-pattern id="VAA.VAA1" name="VAA.VAA1" document="" />
   <active-pattern id="COMMON.CL1" name="COMMON.CL1" document="" />
   <fired-rule context="//iwxxm:CloudLayer" />
+  <fired-rule context="//iwxxm:CloudLayer" />
+  <fired-rule context="//iwxxm:CloudLayer" />
   <active-pattern id="COMMON.Report4" name="COMMON.Report4" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
   <active-pattern id="COMMON.Report2" name="COMMON.Report2" document="" />
@@ -154,7 +166,9 @@
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI|//iwxxm:TAF|//iwxxm:SIGMET|//iwxxm:VolcanicAshSIGMET|//iwxxm:TropicalCycloneSIGMET|//iwxxm:AIRMET|//iwxxm:TropicalCycloneAdvisory|//iwxxm:VolcanicAshAdvisory" />
   <active-pattern id="COMMON.ACF1" name="COMMON.ACF1" document="" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
+  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ACF2" name="COMMON.ACF2" document="" />
+  <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <fired-rule context="//iwxxm:AerodromeCloudForecast" />
   <active-pattern id="COMMON.ASWF1" name="COMMON.ASWF1" document="" />
   <fired-rule context="//iwxxm:AerodromeSurfaceWindForecast" />

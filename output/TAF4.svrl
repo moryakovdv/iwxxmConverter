@@ -54,9 +54,6 @@
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
-  <failed-assert location="/*:TAF[namespace-uri()='http://icao.int/iwxxm/2.1'][1]/*:changeForecast[namespace-uri()='http://icao.int/iwxxm/2.1'][3]/*:OM_Observation[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:result[namespace-uri()='http://www.opengis.net/om/2.0'][1]/*:MeteorologicalAerodromeForecastRecord[namespace-uri()='http://icao.int/iwxxm/2.1'][1]" test="(if(@cloudAndVisibilityOK = 'true') then empty(iwxxm:cloud) else true())">
-    <text>TAF.MAFR2: cloud should not be reported when cloudAndVisibilityOK is true</text>
-  </failed-assert>
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
   <active-pattern id="TAF.MAFR1" name="TAF.MAFR1" document="" />
   <fired-rule context="//iwxxm:MeteorologicalAerodromeForecastRecord" />
@@ -162,6 +159,7 @@
   <active-pattern id="VAA.VAA2" name="VAA.VAA2" document="" />
   <active-pattern id="VAA.VAA1" name="VAA.VAA1" document="" />
   <active-pattern id="COMMON.CL1" name="COMMON.CL1" document="" />
+  <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
   <fired-rule context="//iwxxm:CloudLayer" />
