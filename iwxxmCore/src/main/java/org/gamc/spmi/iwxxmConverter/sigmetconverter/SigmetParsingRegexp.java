@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 public class SigmetParsingRegexp {
 
 	/**WMO Bulletin header*/
-	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})\\s+(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
+	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
 	
 	/**SIGMET Mandatory header*/
 	public final static Pattern sigmetHeader = Pattern.compile(

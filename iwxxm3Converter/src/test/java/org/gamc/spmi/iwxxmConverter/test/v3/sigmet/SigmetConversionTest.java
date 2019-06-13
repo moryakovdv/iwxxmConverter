@@ -25,6 +25,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
@@ -38,14 +40,14 @@ import org.junit.Test;
 
 public class SigmetConversionTest {
 
-	static IwxxmValidator validator; 
-	
+	static IwxxmValidator validator;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		
+
 		validator = new IwxxmValidator();
 		validator.init();
-		
+
 	}
 
 	@AfterClass
@@ -60,137 +62,27 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	
-	
+	String sigmetA3 = "WSRS31RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
+			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
+			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
+
 	@Test
-	public void testValidTaf() throws Exception {
-		
-		String testSigmet = "TAF LZIB 101058Z 1012/11212 24015KT 9999 -SHRA FEW018 BKN028 TX10/1112Z TN05/1100Z BECMG 1014/1017 18012KT BECMG 1104/1107 14022KT 7000 RADZ SCT010 BKN015CB OVC025";
-		
-		TAFConverterV3 tafconverter = new TAFConverterV3();
-		String iwxxm = tafconverter.convertTacToXML(testSigmet);
-		
-		List<FailedValidationAssert> failedResults = validator.validateString(iwxxm);
-		
-		assertTrue(failedResults.size()==0);
-		
-		
+	public void test()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetA3);
+
+		System.out.println(result);
+
 	}
-	
+
 	@Test
-	public void testVRBTaf() throws TAFParsingException {
-		
-		String tafVrb = "TAF UUWW 241057Z 2412/2512 VRB01MPS 9999 SCT020 TX00/2412Z\n" + 
-				"TNM07/2503Z BECMG 2504/2506 24006MPS";
-		TAFTacMessage ttm = new TAFTacMessage(tafVrb);
-		ttm.parseMessage();
-		
-		assertTrue(ttm.getCommonWeatherSection().isVrb());
-		assertTrue(ttm.getCommonWeatherSection().getWindVrbSpeed()!=null);
-		
-	}
-	
-	@Test(expected =ParsingException.class)
-	/**CAVOK with visibility and clouds */
-	public void testMisplacedCAVOKTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		
-		String testTaf = "TAF UUBW 220457Z 2206/2306 28005MPS CAVOK 8000 BKN012\n" + 
-				"TXM10/2212Z TNM16/2305Z\n" + 
-				"TEMPO 2206/2215 3100 -SHSN BKN015CB=";
-		
-		TAFConverterV3 tafconverter = new TAFConverterV3();
-		String iwxxm = tafconverter.convertTacToXML(testTaf);
-		System.out.println(iwxxm);
-		
-		/*
-		List<FailedAssert> failedResults;
-		try {
-			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()==0);
-		} catch (Exception e) {
-		
-			e.printStackTrace();
-		}
-		
-		*/
-	}
-	
-	@Test()
-	public void testVerticalVisibilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		
-		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 TEMPO 2206/2209\n" + 
-				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
-				"BR BKN003 TEMPO 2217/2306 0400 FZFG=";
-		
-		TAFConverterV3 tafconverter = new TAFConverterV3();
-		String iwxxm = tafconverter.convertTacToXML(testTaf);
-		System.out.println(iwxxm);
-		
-		
-		List<FailedValidationAssert> failedResults;
-		try {
-			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()==0);
-			for(FailedValidationAssert fAssert : failedResults) {
-				System.out.println(fAssert);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
-	
-	@Test()
-	/**Invalid taf - VV misplaced error*/
-	public void testInvalidTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		
-		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 SCT010 TEMPO 2206/2209\n" + 
-				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
-				"BR BKN003 TEMPO 2217/2306 0400 FZFG=";
-		
-		TAFConverterV3 tafconverter = new TAFConverterV3();
-		String iwxxm = tafconverter.convertTacToXML(testTaf);
-		System.out.println(iwxxm);
-		
-		
-		List<FailedValidationAssert> failedResults;
-		try {
-			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()>0);
-			for(FailedValidationAssert fAssert : failedResults) {
-				System.out.println(fAssert);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
-	
-	
-	
-	
-	
-	String testProbabilityTaf = "TAF UUWW 270203Z 2703/2803 36006MPS 3100 -SN BR OVC007 TX00/2703Z\\n\" + \n"
-			+ "			\"TNM06/2724Z TEMPO 2703/2710 0700 +SHSN OVC003 BKN015CB PROB40 TEMPO\\n\" + \n"
-			+ "			\"2703/2710 -FZDZ BECMG 2712/2714 9000 NSW BKN012";
-	@Test
-	public void testProbabilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		TAFConverterV3 tafconverter = new TAFConverterV3();
-		String iwxxm = tafconverter.convertTacToXML(testProbabilityTaf);
-		System.out.println(iwxxm);
-		
-		
-		List<FailedValidationAssert> failedResults;
-		try {
-			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()==0);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	public void testMetarCavok()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		METARConverterV3 mc = new METARConverterV3();
+		// String result = mc.convertTacToXML(metarCavok);
+
+		// System.out.println(result);
 	}
 
 }
