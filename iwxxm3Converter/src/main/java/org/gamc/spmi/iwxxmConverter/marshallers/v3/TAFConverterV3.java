@@ -57,8 +57,12 @@ import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeForecastType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionPropertyType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.TAFType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AngleType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.MeasureType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
@@ -89,6 +93,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 	private TAFTacMessage translatedTaf;
 
+		
 	/**
 	 * Converts given TAC string to IWXXM string
 	 * 
