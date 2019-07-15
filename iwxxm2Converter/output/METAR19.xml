@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<iwxxm:METAR xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gss="http://www.isotc211.org/2005/gss" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:opm="http://def.wmo.int/opm/2013" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:metce="http://def.wmo.int/metce/2013" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:iwxxm="http://icao.int/iwxxm/2.1" xmlns:aixm="http://www.aixm.aero/schema/5.1.1" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:om="http://www.opengis.net/om/2.0" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="NORMAL" permissibleUsage="NON-OPERATIONAL" permissibleUsageReason="TEST" permissibleUsageSupplementary="METAR composing test using JAXB" translatedBulletinID="70cfc9d7-25d0-4807-a08d-a1fb1efa36b4" translatedBulletinReceptionTime="2019-05-08T17:52:05.100+03:00" translationCentreDesignator="UUWW" translationCentreName="Vnukovo, RU" translationTime="2019-05-08T17:52:05.100+03:00" translationFailedTAC="" gml:id="uuid.134c60b5-5adc-44e7-95bb-097b7e1e20eb" xsi:schemaLocation="http://icao.int/iwxxm/2.1 http://schemas.wmo.int/iwxxm/2.1/iwxxm.xsd http://www.aixm.aero/schema/5.1.1 http://www.aixm.aero/schema/5.1.1/AIXM_Features.xsd http://def.wmo.int/metce/2013 http://schemas.wmo.int/metce/1.2/metce.xsd http://www.opengis.net/om/2.0 http://schemas.opengis.net/om/2.0/observation.xsd http://www.opengis.net/sampling/2.0 http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
+<iwxxm:METAR xmlns:gss="http://www.isotc211.org/2005/gss" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:opm="http://def.wmo.int/opm/2013" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:metce="http://def.wmo.int/metce/2013" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:iwxxm="http://icao.int/iwxxm/2.1" xmlns:aixm="http://www.aixm.aero/schema/5.1.1" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:om="http://www.opengis.net/om/2.0" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" status="NORMAL" permissibleUsage="NON-OPERATIONAL" permissibleUsageReason="TEST" permissibleUsageSupplementary="METAR composing test using JAXB" translatedBulletinID="c45d3ae0-7148-4f6c-a810-4f422600fbc5" translatedBulletinReceptionTime="2019-07-01T07:27:04.274Z" translationCentreDesignator="UUWW" translationCentreName="Vnukovo, RU" translationTime="2019-07-01T07:27:04.274Z" translationFailedTAC="" gml:id="uuid.ad7e4988-835a-4ce5-af47-32f4690fd2b0" xsi:schemaLocation="http://icao.int/iwxxm/2.1 http://schemas.wmo.int/iwxxm/2.1/iwxxm.xsd http://www.aixm.aero/schema/5.1.1 http://www.aixm.aero/schema/5.1.1/AIXM_Features.xsd http://def.wmo.int/metce/2013 http://schemas.wmo.int/metce/1.2/metce.xsd http://www.opengis.net/om/2.0 http://schemas.opengis.net/om/2.0/observation.xsd http://www.opengis.net/sampling/2.0 http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
     <gml:boundedBy xsi:nil="true"/>
     <iwxxm:observation xlink:type="simple">
-        <om:OM_Observation gml:id="uuid.19c30141-1742-46ac-b41e-ba67750b0d74">
+        <om:OM_Observation gml:id="uuid.e23e1e41-288c-41f2-b519-3e463b0b9980">
             <gml:boundedBy xsi:nil="true"/>
             <om:type xlink:type="simple" xlink:href="http://codes.wmo.int/49-2/observation-type/IWXXM/2.1/MeteorologicalAerodromeObservation"/>
             <om:phenomenonTime xlink:type="simple">
-                <gml:TimeInstant gml:id="uuid.96bce4cc-9f87-4c8f-b96e-812a72a9688c">
-                    <gml:timePosition>2019-05-27T03:00:00Z</gml:timePosition>
+                <gml:TimeInstant gml:id="uuid.08867cef-a1d5-4847-8c9a-72a8ad4d17f9">
+                    <gml:timePosition>2019-07-27T03:00:00Z</gml:timePosition>
                 </gml:TimeInstant>
             </om:phenomenonTime>
-            <om:resultTime xlink:type="simple" xlink:href="#uuid.96bce4cc-9f87-4c8f-b96e-812a72a9688c"/>
+            <om:resultTime xlink:type="simple" xlink:href="#uuid.08867cef-a1d5-4847-8c9a-72a8ad4d17f9"/>
             <om:procedure xlink:type="simple">
-                <metce:Process gml:id="uuid.0811839e-6abe-4761-bc66-e0241cd613a3">
+                <metce:Process gml:id="uuid.2031f6b7-2956-4890-8285-76ac619da90d">
                     <gml:description xlink:type="simple">WMO No. 49 Volume 2 Meteorological Service for International Air Navigation APPENDIX 3 TECHNICAL SPECIFICATIONS RELATED TO METEOROLOGICAL OBSERVATIONS AND REPORTS</gml:description>
                     <gml:boundedBy xsi:nil="true"/>
                 </metce:Process>
             </om:procedure>
             <om:observedProperty xlink:type="simple" xlink:href="http://codes.wmo.int/49-2/observable-property/MeteorologicalAerodromeObservation" xlink:title="Observed properties for Meteorological Aerodrome Observation Reports (METAR and SPECI)"/>
             <om:featureOfInterest xlink:type="simple">
-                <sams:SF_SpatialSamplingFeature gml:id="uuid.1833eca7-1599-4579-8aa3-ada231d68dd4">
+                <sams:SF_SpatialSamplingFeature gml:id="uuid.1d6238ed-ef49-465c-af7a-62e0a6e23a92">
                     <gml:boundedBy xsi:nil="true"/>
                     <sf:type xlink:type="simple" xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
                     <sf:sampledFeature xlink:type="simple">
-                        <aixm:AirportHeliport gml:id="uuid.04346c45-0347-4792-9d7b-d9c19ed0a833">
+                        <aixm:AirportHeliport gml:id="uuid.732b6e62-0927-4e16-9126-125f69997520">
                             <gml:boundedBy xsi:nil="true"/>
                             <aixm:timeSlice>
-<aixm:AirportHeliportTimeSlice gml:id="uuid.25fbe3aa-bca6-40a3-afd5-98e33cf85082">
+<aixm:AirportHeliportTimeSlice gml:id="uuid.8f956cb2-d577-4afd-b5e7-da373edd15f9">
     <gml:validTime xlink:type="simple"/>
     <aixm:interpretation>BASELINE</aixm:interpretation>
     <aixm:designator>UUEE</aixm:designator>
@@ -39,7 +39,7 @@
                 </sams:SF_SpatialSamplingFeature>
             </om:featureOfInterest>
             <om:result xsi:type="iwxxm:MeteorologicalAerodromeObservationRecordPropertyType" xlink:type="simple">
-                <iwxxm:MeteorologicalAerodromeObservationRecord cloudAndVisibilityOK="false" gml:id="uuid.90ce7b3c-244a-4d07-ae14-2444cb551181">
+                <iwxxm:MeteorologicalAerodromeObservationRecord cloudAndVisibilityOK="false" gml:id="uuid.c4333dd1-c50d-4dc9-b800-bde11669df34">
                     <iwxxm:airTemperature uom="Cel">-3.0</iwxxm:airTemperature>
                     <iwxxm:dewpointTemperature uom="Cel">-4.0</iwxxm:dewpointTemperature>
                     <iwxxm:qnh uom="hPa">1005.0</iwxxm:qnh>
@@ -71,10 +71,10 @@
                     <iwxxm:runwayState>
                         <iwxxm:AerodromeRunwayState allRunways="false" cleared="false">
                             <iwxxm:runway xlink:type="simple">
-<aixm:RunwayDirection gml:id="uuid.588b896b-ef9c-4094-a8aa-131afecdc632">
+<aixm:RunwayDirection gml:id="uuid.1c8efca7-0efa-4b8d-950c-e9f0fb92c865">
     <gml:boundedBy xsi:nil="true"/>
     <aixm:timeSlice>
-        <aixm:RunwayDirectionTimeSlice gml:id="uuid.87d704ea-9baf-4a39-af1d-847539fbb75e">
+        <aixm:RunwayDirectionTimeSlice gml:id="uuid.e27e7207-aa66-4716-a4eb-d977a73f6b7b">
             <gml:validTime xlink:type="simple"/>
             <aixm:interpretation>BASELINE</aixm:interpretation>
             <aixm:designator>06L</aixm:designator>
@@ -91,10 +91,10 @@
                     <iwxxm:runwayState>
                         <iwxxm:AerodromeRunwayState allRunways="false" cleared="false">
                             <iwxxm:runway xlink:type="simple">
-<aixm:RunwayDirection gml:id="uuid.5820c9be-3b3a-412d-b896-d96f49eb75a4">
+<aixm:RunwayDirection gml:id="uuid.faf8cdca-2009-4909-907b-d2a451819564">
     <gml:boundedBy xsi:nil="true"/>
     <aixm:timeSlice>
-        <aixm:RunwayDirectionTimeSlice gml:id="uuid.0dcd8512-5807-4e9c-a85a-753072ae3a11">
+        <aixm:RunwayDirectionTimeSlice gml:id="uuid.620eda39-e3d5-43b7-a202-88ec0ec4d599">
             <gml:validTime xlink:type="simple"/>
             <aixm:interpretation>BASELINE</aixm:interpretation>
             <aixm:designator>06R</aixm:designator>
@@ -113,25 +113,25 @@
         </om:OM_Observation>
     </iwxxm:observation>
     <iwxxm:trendForecast xlink:type="simple">
-        <om:OM_Observation gml:id="uuid.dd6deb35-7a88-4c45-b279-138cf754aa7b">
+        <om:OM_Observation gml:id="uuid.f8dd207e-c07a-44ae-b54c-47257bf3afdc">
             <gml:boundedBy xsi:nil="true"/>
             <om:type xlink:type="simple" xlink:href="http://codes.wmo.int/49-2/observation-type/IWXXM/2.1/MeteorologicalAerodromeObservation"/>
             <om:phenomenonTime xlink:type="simple">
-                <gml:TimePeriod gml:id="uuid.1b34129f-a2af-4294-bf79-110540886989">
-                    <gml:beginPosition>2019-05-27T03:00:00Z</gml:beginPosition>
-                    <gml:endPosition>2019-05-27T03:30:00Z</gml:endPosition>
+                <gml:TimePeriod gml:id="uuid.890995fb-eab5-4f4e-b375-a9a2ce908793">
+                    <gml:beginPosition>2019-07-27T03:00:00Z</gml:beginPosition>
+                    <gml:endPosition>2019-07-27T03:30:00Z</gml:endPosition>
                 </gml:TimePeriod>
             </om:phenomenonTime>
-            <om:resultTime xlink:type="simple" xlink:href="#uuid.96bce4cc-9f87-4c8f-b96e-812a72a9688c"/>
-            <om:procedure xlink:type="simple" xlink:href="#uuid.0811839e-6abe-4761-bc66-e0241cd613a3"/>
+            <om:resultTime xlink:type="simple" xlink:href="#uuid.08867cef-a1d5-4847-8c9a-72a8ad4d17f9"/>
+            <om:procedure xlink:type="simple" xlink:href="#uuid.2031f6b7-2956-4890-8285-76ac619da90d"/>
             <om:observedProperty xlink:type="simple" xlink:href="http://codes.wmo.int/49-2/observable-property/MeteorologicalAerodromeObservation"/>
-            <om:featureOfInterest xlink:type="simple" xlink:href="#uuid.1833eca7-1599-4579-8aa3-ada231d68dd4"/>
+            <om:featureOfInterest xlink:type="simple" xlink:href="#uuid.1d6238ed-ef49-465c-af7a-62e0a6e23a92"/>
             <om:result xsi:type="iwxxm:MeteorologicalAerodromeTrendForecastRecordPropertyType" xlink:type="simple">
-                <iwxxm:MeteorologicalAerodromeTrendForecastRecord changeIndicator="TEMPORARY_FLUCTUATIONS" cloudAndVisibilityOK="false" gml:id="uuid.56e5f6bc-ef88-44b4-a9df-e189d0ba22b0">
+                <iwxxm:MeteorologicalAerodromeTrendForecastRecord changeIndicator="TEMPORARY_FLUCTUATIONS" cloudAndVisibilityOK="false" gml:id="uuid.6bf24eb5-89cc-4e69-ae7c-0c013bdead51">
                     <iwxxm:prevailingVisibility uom="m">1000.0</iwxxm:prevailingVisibility>
                     <iwxxm:forecastWeather xlink:type="simple" xlink:href="http://codes.wmo.int/306/4678/SHSN"/>
                     <iwxxm:cloud xlink:type="simple">
-                        <iwxxm:AerodromeCloudForecast gml:id="uuid.452c704e-80de-4295-9260-ddadb27be994">
+                        <iwxxm:AerodromeCloudForecast gml:id="uuid.60a2737c-0f22-4d57-9aca-40321e59f976">
                             <iwxxm:layer>
 <iwxxm:CloudLayer>
     <iwxxm:amount xlink:type="simple" xlink:href="http://codes.wmo.int/bufr4/codeflag/0-20-008/2"/>

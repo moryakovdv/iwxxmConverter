@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.regex.Matcher;

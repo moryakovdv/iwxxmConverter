@@ -18,6 +18,7 @@ package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,11 +56,9 @@ import schemabindings31._int.icao.iwxxm._3.AerodromeCloudForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudForecastType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudType.Layer;
-import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeObservationType.SurfaceWind;
 import schemabindings31._int.icao.iwxxm._3.AerodromeHorizontalVisibilityType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRunwayStateType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRunwayVisualRangeType;
-import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindTrendForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindTrendForecastType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindType;
@@ -74,6 +73,7 @@ import schemabindings31._int.icao.iwxxm._3.METARType;
 import schemabindings31._int.icao.iwxxm._3.MeasureWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeObservationPropertyType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeObservationType;
+import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeObservationType.SurfaceWind;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeTrendForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeTrendForecastType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
@@ -89,9 +89,7 @@ import schemabindings31._int.icao.iwxxm._3.VelocityWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.VisualRangeTendencyType;
 import schemabindings31.aero.aixm.schema._5_1.RunwayDirectionType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AngleType;
-import schemabindings31.net.opengis.gml.v_3_2_1.BoundingShapeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
-import schemabindings31.net.opengis.gml.v_3_2_1.EnvelopeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.StringOrRefType;
@@ -126,7 +124,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		METARTacMessage metarMessage = new METARTacMessage(tac);
 		metarMessage.parseMessage();
-
+		HashMap<String, Object> strMes = metarMessage.getCommonWeatherSection().getHashNames();
 		METARType result = convertMessage(metarMessage);
 
 		String xmlResult = marshallMessageToXML(result);
@@ -146,7 +144,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		StringOrRefType refTacString = IWXXM31Helpers.ofGML.createStringOrRefType();
 		refTacString.setValue(translatedMessage.getInitialTacString());
 		metarRootTag.setDescription(refTacString);
-	
+
 		/*
 		 * BoundingShapeType shape = IWXXM31Helpers.ofGML.createBoundingShapeType();
 		 * EnvelopeType env = IWXXM31Helpers.ofGML.createEnvelopeType();

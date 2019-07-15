@@ -23,8 +23,14 @@
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
   <active-pattern id="METAR_SPECI.MAORep6" name="METAR_SPECI.MAORep6" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <failed-assert location="/*:SPECI[namespace-uri()='http://icao.int/iwxxm/2.1'][1]" test="(if(exists(.//iwxxm:trendForecast) and not((count(.//iwxxm:trendForecast) eq 1) and (.//iwxxm:trendForecast = ''))) then(empty(distinct-values(for $trend-forecast in .//iwxxm:trendForecast return((deep-equal(.//iwxxm:observation/om:OM_Observation/om:featureOfInterest//sf:sampledFeature,$trend-forecast/om:OM_Observation/om:featureOfInterest//sf:sampledFeature)) or (concat('#', current()//iwxxm:observation/om:OM_Observation/om:featureOfInterest/sams:SF_SpatialSamplingFeature/@gml:id)=$trend-forecast/om:OM_Observation/om:featureOfInterest/@xlink:href)))[.=false()])) else(true()))">
+    <text>METAR_SPECI.MAORep6: The sampled feature should be equal in observation and trendForecast</text>
+  </failed-assert>
   <active-pattern id="METAR_SPECI.MAORep3" name="METAR_SPECI.MAORep3" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
+  <failed-assert location="/*:SPECI[namespace-uri()='http://icao.int/iwxxm/2.1'][1]" test="(((exists(.//om:OM_Observation/om:featureOfInterest//sf:sampledFeature/aixm:AirportHeliport)) or (contains(string(.//om:OM_Observation/om:featureOfInterest//sf:sampledFeature/@xlink:href), 'aerodrome')) ) and ( if(exists(.//om:OM_Observation/om:featureOfInterest/@xlink:href)) then(concat( '#', current()//om:OM_Observation//sams:SF_SpatialSamplingFeature/@gml:id ) = .//om:OM_Observation/om:featureOfInterest/@xlink:href) else(true())))">
+    <text>METAR_SPECI.MAORep3: The sampled feature for a METAR/SPECI observation is an aerodrome</text>
+  </failed-assert>
   <active-pattern id="METAR_SPECI.MAORep7" name="METAR_SPECI.MAORep7" document="" />
   <fired-rule context="//iwxxm:METAR|//iwxxm:SPECI" />
   <active-pattern id="METAR_SPECI.MAORep4" name="METAR_SPECI.MAORep4" document="" />

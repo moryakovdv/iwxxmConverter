@@ -16,10 +16,13 @@
  */
 package org.gamc.spmi.iwxxmConverter.tafconverter;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 
+import org.gamc.spmi.iwxxmConverter.common.AnnotationLocaliedName;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
@@ -39,85 +42,104 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 	private String tacContent;
 
 	boolean failWhenMandatorySectionMissed = true;
-	
+	@AnnotationLocaliedName(name = "Начало действия день")
 	private Integer validityDayFrom;
+	@AnnotationLocaliedName(name = "Начало действия часы")
 	private Integer validityHourFrom;
+	@AnnotationLocaliedName(name = "Конец действия день")
 	private Integer validityDayTo;
+	@AnnotationLocaliedName(name = "Конец действия часы")
 	private Integer validityHourTo;
-	
+	@AnnotationLocaliedName(name = "Направление ветра")
 	private Integer windDir;
+	@AnnotationLocaliedName(name = "Скорость ветра")
 	private Integer windSpeed;
+	@AnnotationLocaliedName(name = "Порыв ветра")
 	private Integer gustSpeed;
+	@AnnotationLocaliedName(name = "Единица измерения скорости ветра")
 	private SPEED_UNITS speedUnits = SPEED_UNITS.MPS;
 
 	// if wind direction variables and speed>6m/s
+	@AnnotationLocaliedName(name = "Изменение направления ветра от")
 	private Integer windVariableFrom;
+	@AnnotationLocaliedName(name = "Изменение направления ветра до")
 	private Integer windVariableTo;
 
 	// VRB if wind direction variables and speed<6m/s
+	@AnnotationLocaliedName(name = "Наличие перменной")
 	private boolean vrb;
+	@AnnotationLocaliedName(name = "Скорость ветра vrb")
 	private Integer windVrbSpeed;
+	@AnnotationLocaliedName(name = "Единица измерения скорости ветра vrb")
 	private SPEED_UNITS vrbSpeedUnits = SPEED_UNITS.MPS;
-
+	
+	@AnnotationLocaliedName(name = "Наличие CAVOK")
 	private boolean cavok = false;
-
+	@AnnotationLocaliedName(name = "Максимальное значение прогнозируемой температуры воздуха")
 	private BigDecimal airTemperatureMax;
+	@AnnotationLocaliedName(name = "Время прогнозируемой максимальной температуры воздуха")
 	private DateTime airTemperatureMaxTime;
-	
+	@AnnotationLocaliedName(name = "Минимальное значение прогнозируемой температуры воздуха")
 	private BigDecimal airTemperatureMin;
+	@AnnotationLocaliedName(name = "Время прогнозируемой минимальной температуры воздуха")
 	private DateTime airTemperatureMinTime;
-	
+	@AnnotationLocaliedName(name = "Давление QNH")
 	private BigDecimal qnh;
+	@AnnotationLocaliedName(name = "Единица измерения давления")
 	private PRESSURE_UNITS qnhUnits = PRESSURE_UNITS.HECTOPASCALS;
-
+	@AnnotationLocaliedName(name = "Преобладающая видимость")
 	private Double prevailVisibility;
+	@AnnotationLocaliedName(name = "Минимальная видимость")
 	private Double minimumVisibility;
+	@AnnotationLocaliedName(name = "Направление минимальной видимости")
 	private RUMB_UNITS minimumVisibilityDirection;
+	@AnnotationLocaliedName(name = "Единица измерения видимости")
 	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.M;
-
+	@AnnotationLocaliedName(name = "Список текущих погодных явлений")
 	private LinkedList<String> currentWeather = new LinkedList<String>();
+	@AnnotationLocaliedName(name = "Список секций вертикальной видимости")
 	private LinkedList<TAFCloudSection> cloudSections = new LinkedList<TAFCloudSection>();
 
-	
-	/**If we parse TEMPO or BECMG sections, we can ask parser NOT to fail when some mandatory section are missed .*/
+	/**
+	 * If we parse TEMPO or BECMG sections, we can ask parser NOT to fail when some
+	 * mandatory section are missed .
+	 */
 	public TafCommonWeatherSection(boolean failWhenMandatorySectionMissed) {
-		
-		this.failWhenMandatorySectionMissed=failWhenMandatorySectionMissed;
-		
+
+		this.failWhenMandatorySectionMissed = failWhenMandatorySectionMissed;
+
 	}
 
 	@Override
 	public StringBuffer parseSection(StringBuffer tac) throws TAFParsingException {
 		this.tacContent = tac.toString();
 
-		//parsing validity times
+		// parsing validity times
 		int lastIndex = 0;
-		
+
 		Matcher matcher = TafParsingRegexp.tafValidity.matcher(tac);
 		if (matcher.find()) {
 			String sTdf = matcher.group("tafDayFrom");
 			String sThf = matcher.group("tafHourFrom");
 			String sTdt = matcher.group("tafDayTo");
 			String sTht = matcher.group("tafHourTo");
-			
-			if (sTdf!=null)
+
+			if (sTdf != null)
 				this.setValidityDayFrom(Integer.valueOf(sTdf));
-			if (sThf!=null)
+			if (sThf != null)
 				this.setValidityHourFrom(Integer.valueOf(sThf));
-			if (sTdt!=null)
+			if (sTdt != null)
 				this.setValidityDayTo(Integer.valueOf(sTdt));
-			if (sTht!=null)
+			if (sTht != null)
 				this.setValidityHourTo(Integer.valueOf(sTht));
-			
+
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
-			
+
 		}
-		
-		
+
 		// parsing Winds
 		boolean hasWindSection = false;
-		
 
 		matcher = TafParsingRegexp.tafWind.matcher(tac);
 		if (matcher.find()) {
@@ -169,7 +191,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			String sVrbU = matcher.group("vrbWindUnits");
 
 			this.setVrb(true);
-			//this.setWindSpeed(Integer.valueOf(sVrbS));
+			// this.setWindSpeed(Integer.valueOf(sVrbS));
 			this.setWindVrbSpeed(Integer.valueOf(sVrbS));
 			this.setSpeedUnits(SPEED_UNITS.valueOf(sVrbU));
 
@@ -207,42 +229,35 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 				isStatuteMiles = true;
 			}
 
-			
 			if (sPv != null) {
-			
-				//parse statute miles,  such as 1 1/4SM, 1/4SM, 4.5SM	
+
+				// parse statute miles, such as 1 1/4SM, 1/4SM, 4.5SM
 				if (isStatuteMiles) {
 					String sms = sPv.replaceFirst("\\s", "+");
-					Expression fExp = new Expression(sms);  
+					Expression fExp = new Expression(sms);
 					double result = fExp.calculate();
 					this.setPrevailVisibility(BigDecimal.valueOf(result).doubleValue());
-				}
-				else
+				} else
 					this.setPrevailVisibility(new BigDecimal(sPv).doubleValue());
 			}
-				
+
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
 		}
 		/*
-		matcher.reset();
-
-		if (matcher.find() && matcher.start() <= 1) {
-
-			if (this.isCavok())
-				throw new TAFParsingException("It is CAVOK");
-
-			String sMv = matcher.group("visibility");
-			String sMVd = matcher.group("visibilityDirection");
-			if (sMv != null)
-				this.setMinimumVisibility(Integer.valueOf(sMv));
-			if (sMVd != null)
-				this.setMinimumVisibilityDirection(RUMB_UNITS.valueOf(sMVd));
-
-			lastIndex = matcher.end();
-			tac.delete(0, lastIndex);
-		}
-*/
+		 * matcher.reset();
+		 * 
+		 * if (matcher.find() && matcher.start() <= 1) {
+		 * 
+		 * if (this.isCavok()) throw new TAFParsingException("It is CAVOK");
+		 * 
+		 * String sMv = matcher.group("visibility"); String sMVd =
+		 * matcher.group("visibilityDirection"); if (sMv != null)
+		 * this.setMinimumVisibility(Integer.valueOf(sMv)); if (sMVd != null)
+		 * this.setMinimumVisibilityDirection(RUMB_UNITS.valueOf(sMVd));
+		 * 
+		 * lastIndex = matcher.end(); tac.delete(0, lastIndex); }
+		 */
 		// process precipitations
 
 		matcher = TafParsingRegexp.tafPrecipitation.matcher(tac);
@@ -277,10 +292,9 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			cloudSec.setAmount(cloudAmount);
 
 			/*
-			// convert to hundreds of feets
-			if (cloudAmount.equalsIgnoreCase("VV"))
-				cloudSec.setVerticalVisibility(true);
-				*/
+			 * // convert to hundreds of feets if (cloudAmount.equalsIgnoreCase("VV"))
+			 * cloudSec.setVerticalVisibility(true);
+			 */
 
 			if (!cloudHeight.equalsIgnoreCase("///"))
 				cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
@@ -302,13 +316,13 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 			String sTmax = matcher.group("tempMax").replace("M", "-");
 			this.setAirTemperatureMax(new BigDecimal(sTmax));
-			
+
 			String sTMaxDay = matcher.group("day");
 			String sTMaxHour = matcher.group("hour");
 			try {
-				this.setAirTemperatureMaxTime(IWXXMHelpers.parseDateTimeToken(String.format("%s%s00",sTMaxDay,sTMaxHour)));
-			}
-			catch(ParsingException e) {
+				this.setAirTemperatureMaxTime(
+						IWXXMHelpers.parseDateTimeToken(String.format("%s%s00", sTMaxDay, sTMaxHour)));
+			} catch (ParsingException e) {
 				throw new TAFParsingException("Check air temperature maximum time section");
 			}
 
@@ -317,24 +331,22 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 		}
 		/*
-		else if (failWhenMandatorySectionMissed) {
-			throw new IllegalArgumentException("Wrong or missed temperature section");
-		}
-		*/
-		
+		 * else if (failWhenMandatorySectionMissed) { throw new
+		 * IllegalArgumentException("Wrong or missed temperature section"); }
+		 */
+
 		matcher = TafParsingRegexp.tafMinAirTemp.matcher(tac);
 		if (matcher.find()) {
 
 			String sTmin = matcher.group("tempMin").replace("M", "-");
-			
 
 			this.setAirTemperatureMin(new BigDecimal(sTmin));
 			String sTMinDay = matcher.group("day");
 			String sTMinHour = matcher.group("hour");
-			try{
-			this.setAirTemperatureMinTime(IWXXMHelpers.parseDateTimeToken(String.format("%s%s00",sTMinDay,sTMinHour)));
-			}
-			catch(ParsingException e) {
+			try {
+				this.setAirTemperatureMinTime(
+						IWXXMHelpers.parseDateTimeToken(String.format("%s%s00", sTMinDay, sTMinHour)));
+			} catch (ParsingException e) {
 				throw new TAFParsingException("Check air temperature minimum time section");
 			}
 
@@ -343,28 +355,23 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 		}
 		/*
-		else if (failWhenMandatorySectionMissed) {
-			throw new IllegalArgumentException("Wrong or missed temperature section");
-		}
-		*/
+		 * else if (failWhenMandatorySectionMissed) { throw new
+		 * IllegalArgumentException("Wrong or missed temperature section"); }
+		 */
 
-/*
-		// QNH
-		matcher = MetarParsingRegexp.metarQNH.matcher(tac);
-		if (matcher.find()) {
-
-			String sQnh = matcher.group("qnh");
-			String sQnhU = matcher.group("qnhUnits");
-			this.setQnhUnits(
-					sQnhU.equalsIgnoreCase("A") ? PRESSURE_UNITS.INCH_OF_MERCURY : PRESSURE_UNITS.HECTOPASCALS);
-			this.setQnh(new BigDecimal(sQnh));
-			lastIndex = matcher.end();
-			tac.delete(0, lastIndex);
-
-		} else if (failWhenMandatorySectionMissed) {
-			throw new IllegalArgumentException("Wrong or missed QNH section");
-		}
-*/
+		/*
+		 * // QNH matcher = MetarParsingRegexp.metarQNH.matcher(tac); if
+		 * (matcher.find()) {
+		 * 
+		 * String sQnh = matcher.group("qnh"); String sQnhU = matcher.group("qnhUnits");
+		 * this.setQnhUnits( sQnhU.equalsIgnoreCase("A") ?
+		 * PRESSURE_UNITS.INCH_OF_MERCURY : PRESSURE_UNITS.HECTOPASCALS);
+		 * this.setQnh(new BigDecimal(sQnh)); lastIndex = matcher.end(); tac.delete(0,
+		 * lastIndex);
+		 * 
+		 * } else if (failWhenMandatorySectionMissed) { throw new
+		 * IllegalArgumentException("Wrong or missed QNH section"); }
+		 */
 		return tac;
 
 	}
@@ -441,7 +448,6 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 		this.vrbSpeedUnits = vrbSpeedUnits;
 	}
 
-	
 	public BigDecimal getQnh() {
 		return qnh;
 	}
@@ -573,7 +579,40 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 	public void setAirTemperatureMinTime(DateTime airTemperatureMinTime) {
 		this.airTemperatureMinTime = airTemperatureMinTime;
 	}
-	
-	
+
+	HashMap<String, Object> hashNames = new HashMap<String, Object>();
+
+	public HashMap<String, Object> getHashNames() {
+		return hashNames;
+	}
+
+	public void setHashNames(HashMap<String, Object> hashNames) {
+		this.hashNames = hashNames;
+	}
+
+	public HashMap<String, Object> getLocalizedNameValues() {
+
+		Field[] flds = this.getClass().getDeclaredFields();
+		for (Field f : flds) {
+
+			AnnotationLocaliedName ann = f.getAnnotation(AnnotationLocaliedName.class);
+			if (ann != null) {
+
+				String lname = ann.name();
+				try {
+					f.setAccessible(true);
+					Object fieldValue = f.get(this);
+					hashNames.put(lname, fieldValue);
+					f.setAccessible(false);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return hashNames;
+
+	}
 
 }

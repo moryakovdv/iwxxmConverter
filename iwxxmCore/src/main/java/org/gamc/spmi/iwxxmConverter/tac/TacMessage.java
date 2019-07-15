@@ -21,26 +21,33 @@ import org.gamc.spmi.iwxxmConverter.common.MessageType;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.joda.time.DateTime;
 
-/**General interface for TAC messages*/
+/** General interface for TAC messages */
 public interface TacMessage {
+	
+	@interface localizeName {
+		String name();
+	}
 
-	/**@return the initial TAC*/
+	/** @return the initial TAC */
 	String getInitialTacString();
-	
-	/**@return the start token to recognize message type*/
-	String getTacStartToken(); 
-	
-	/**@return the {@link org.gamc.spmi.iwxxmConverter.common.MessageType} for this message*/
+
+	/** @return the start token to recognize message type */
+	String getTacStartToken();
+
+	/**
+	 * @return the {@link org.gamc.spmi.iwxxmConverter.common.MessageType} for this
+	 *         message
+	 */
 	MessageType getMessageType();
-	
+
 	MessageStatusType getMessageStatusType();
-	
+
 	DateTime getMessageIssueDateTime();
-	
-	/**ICAO code*/
+
+	/** ICAO code */
 	String getIcaoCode();
 
-	/**Perform the parsing from initial tac string*/
+	/** Perform the parsing from initial tac string */
 	void parseMessage() throws ParsingException;
-	
+
 }

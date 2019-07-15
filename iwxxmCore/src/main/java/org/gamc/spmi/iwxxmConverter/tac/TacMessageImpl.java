@@ -16,66 +16,72 @@
  */
 package org.gamc.spmi.iwxxmConverter.tac;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import org.gamc.spmi.iwxxmConverter.common.AnnotationLocaliedName;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
-/**Base implementation of a TacMessage object*/
+/** Base implementation of a TacMessage object */
 public abstract class TacMessageImpl implements TacMessage {
 
 	private String icaoCode;
 	private DateTime messageIssueDateTime;
-	
-	
+
 	private String initialTacMessage;
-	
-	/**Constructor to be overridden in children
+
+	/**
+	 * Constructor to be overridden in children
+	 * 
 	 * @param initialTacMessage string representation of a TAC message
-	 * */
+	 */
 	public TacMessageImpl(String initialTacMessage) {
-		this.initialTacMessage=initialTacMessage;
-	}  
-	
-	
+		this.initialTacMessage = initialTacMessage;
+	}
+
 	@Override
 	public String getInitialTacString() {
 		return initialTacMessage;
 	}
 
-
-	/**@return airport icao code*/
+	/** @return airport icao code */
 	public String getIcaoCode() {
 		return icaoCode;
 	}
 
-	/**set airport icao code
-	 * @param icaoCode valid ICAO identifier 
-	 * */
+	/**
+	 * set airport icao code
+	 * 
+	 * @param icaoCode valid ICAO identifier
+	 */
 	public void setIcaoCode(String icaoCode) {
 		this.icaoCode = icaoCode;
 	}
 
-	/**@return Message issue date and time*/
+	/** @return Message issue date and time */
 	public DateTime getMessageIssueDateTime() {
 		return messageIssueDateTime;
 	}
 
-	/**Sets Message issue date and time
+	/**
+	 * Sets Message issue date and time
+	 * 
 	 * @param messageIssueDateTime - date and time
-	 * **/
+	 **/
 	public void setMessageIssueDateTime(DateTime messageIssueDateTime) {
 		this.messageIssueDateTime = messageIssueDateTime;
 	}
-	
-	
-	
-	
+
 	@Override
 	public abstract void parseMessage() throws ParsingException;
-	
+
 	public abstract Interval getValidityInterval();
-	
+
 	public abstract Pattern getHeaderPattern();
+
+	
+
 }
