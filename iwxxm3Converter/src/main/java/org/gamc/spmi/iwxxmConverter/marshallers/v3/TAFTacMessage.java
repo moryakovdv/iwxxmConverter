@@ -140,12 +140,13 @@ public class TAFTacMessage extends TacMessageImpl {
 	/**Applying regexp to parse and remove probaility sections (e.g. PROB30 TEMPO)*/
 	private StringBuffer fillAndRemoveProbabilitySections(StringBuffer tac) {
 		Matcher matcher = TafParsingRegexp.tafProbabilitySection.matcher(tac);
-		int start = 0, end = 0;
+		int lastIndex = 0;
 		while (matcher.find()) {
-			if (start == 0)
-				start = matcher.start();
+			
 
-			end = matcher.end();
+			int startIndex=matcher.start();
+			lastIndex = matcher.end();
+			
 			String ps = matcher.group("prob");
 			String prsnt = matcher.group("percent");
 			String isTempo = matcher.group("tempo");
@@ -161,12 +162,12 @@ public class TAFTacMessage extends TacMessageImpl {
 			
 			
 			this.probabilitySections.add(probSection);
+			tac.delete(startIndex, lastIndex);
+			matcher.reset();
 		}
 		
 		
-		if (this.probabilitySections.size() > 0) {
-			tac.delete(start, end);
-		}
+		
 
 		return tac;
 	}

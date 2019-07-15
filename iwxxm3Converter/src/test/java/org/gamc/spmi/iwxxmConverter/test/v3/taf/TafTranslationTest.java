@@ -66,6 +66,26 @@ public class TafTranslationTest {
 			+ "			\"TNM06/2724Z TEMPO 2703/2710 0700 +SHSN OVC003 BKN015CB PROB40 TEMPO\\n\" + \n"
 			+ "			\"2703/2710 -FZDZ BECMG 2712/2714 9000 NSW BKN012";
 
+	String tafManyTempoTest = "TAF UUBW 151055Z 1512/1612 22003MPS 9999 SCT020\n" + 
+			"TX22/1612Z TN11/1601Z\n" + 
+			"TEMPO 1512/1518 3100 -SHRA SCT012 SCT020CB\n" + 
+			"PROB40 TEMPO 1512/1518 -TSRA BKN020CB\n" + 
+			"TEMPO 1521/1604 3100 BR FEW004\n" + 
+			"TEMPO 1606/1612 12005MPS -SHRA SCT020CB\n" + 
+			"PROB40 TEMPO 1608/1612 -TSRA BKN020CB"; 
+	
+	@Test
+	public void testManyTempoTaf() throws TAFParsingException {
+		
+		TAFTacMessage tafMessage = new TAFTacMessage(tafManyTempoTest);
+		tafMessage.parseMessage();
+		
+		assertEquals(3, tafMessage.getTempoSections().size());
+		assertEquals(2, tafMessage.getProbabilitySections().size());
+		
+	}
+	
+	
 	/** Initial parsing tests */
 	@Test
 	public void testTafCommonWeatherSection() throws TAFParsingException {
