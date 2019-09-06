@@ -62,7 +62,7 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	String sigmetA3 = "WSRS312RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
+	String sigmetA3 = "WSRS3162RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
