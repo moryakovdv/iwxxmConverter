@@ -62,27 +62,32 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	String sigmetA3 = "WSRS3162RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
+	String sigmetLineCoords = "WSRS3162RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
+	String sigmentLines = "UEEE SIGMET 2 VALID 090500/090900 UEEE-\n" + 
+			"UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + 
+			"FL310/440 STNR NC=";
+	
 	@Test
-	public void test()
+	public void testSigmetWithLineCoords()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
-		String result = mc.convertTacToXML(sigmetA3);
+		String result = mc.convertTacToXML(sigmetLineCoords);
 
 		System.out.println(result);
 
 	}
 
 	@Test
-	public void testMetarCavok()
+	public void testLine()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		METARConverterV3 mc = new METARConverterV3();
-		// String result = mc.convertTacToXML(metarCavok);
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmentLines);
 
-		// System.out.println(result);
+		System.out.println(result);
+		
 	}
 
 }
