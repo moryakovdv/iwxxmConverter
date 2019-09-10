@@ -16,10 +16,13 @@
  */
 package org.gamc.spmi.iwxxmConverter.metarconverter;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 
+import org.gamc.spmi.iwxxmConverter.common.AnnotationLocaliedName;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.PRESSURE_UNITS;
@@ -31,45 +34,62 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
  * in METAR itself, BECMG or TEMPO sections
  */
 public class MetarCommonWeatherSection implements CommonWeatherSection {
-
 	boolean failWhenMandatorySectionMissed = true;
-	
+	@AnnotationLocaliedName(name = "Направление ветра")
 	private Integer windDir;
+	@AnnotationLocaliedName(name = "Скорость ветра")
 	private Integer windSpeed;
+	@AnnotationLocaliedName(name = "Порыв ветра")
 	private Integer gustSpeed;
+	@AnnotationLocaliedName(name = "Единица измерения скорости ветра")
 	private SPEED_UNITS speedUnits = SPEED_UNITS.MPS;
 
 	// if wind direction variables and speed>6m/s
+	@AnnotationLocaliedName(name = "Изменение направления ветра от")
 	private Integer windVariableFrom;
+	@AnnotationLocaliedName(name = "Изменение направления ветра до")
 	private Integer windVariableTo;
 
 	// VRB if wind direction variables and speed<6m/s
+	@AnnotationLocaliedName(name = "Наличие перменной")
 	private boolean vrb;
+	@AnnotationLocaliedName(name = "Скорость ветра vrb")
 	private Integer windVrbSpeed;
+	@AnnotationLocaliedName(name = "Единица измерения скорости ветра vrb")
 	private SPEED_UNITS vrbSpeedUnits = SPEED_UNITS.MPS;
-
+	@AnnotationLocaliedName(name = "Наличие CAVOK")
 	private boolean cavok = false;
-
+	@AnnotationLocaliedName(name = "Температура")
 	private BigDecimal airTemperature;
+	@AnnotationLocaliedName(name = "Точка росы")
 	private BigDecimal dewPoint;
+	@AnnotationLocaliedName(name = "Давление QNH")
 	private BigDecimal qnh;
+	@AnnotationLocaliedName(name = "Единица измерения давления")
 	private PRESSURE_UNITS qnhUnits = PRESSURE_UNITS.HECTOPASCALS;
-
+	@AnnotationLocaliedName(name = "Преобладающая видимость")
 	private Integer prevailVisibility;
+	@AnnotationLocaliedName(name = "Минимальная видимость")
 	private Integer minimumVisibility;
+	@AnnotationLocaliedName(name = "Направление минимальной видимости")
 	private RUMB_UNITS minimumVisibilityDirection;
+	@AnnotationLocaliedName(name = "Единица измерения видимости")
 	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.M;
-
+	@AnnotationLocaliedName(name = "Список текущих погодных явлений")
 	private LinkedList<String> currentWeather = new LinkedList<String>();
+	@AnnotationLocaliedName(name = "Список недавних погодных явлений")
 	private LinkedList<String> recentWeather = new LinkedList<String>();
+	@AnnotationLocaliedName(name = "Список секций вертикальной видимости")
 	private LinkedList<METARCloudSection> cloudSections = new LinkedList<METARCloudSection>();
 
-	
-	/**If we parse TEMPO or BECMG sections, we can ask parser NOT to fail when some mandatory section are missed .*/
+	/**
+	 * If we parse TEMPO or BECMG sections, we can ask parser NOT to fail when some
+	 * mandatory section are missed .
+	 */
 	public MetarCommonWeatherSection(boolean failWhenMandatorySectionMissed) {
-		
-		this.failWhenMandatorySectionMissed=failWhenMandatorySectionMissed;
-		
+
+		this.failWhenMandatorySectionMissed = failWhenMandatorySectionMissed;
+
 	}
 
 	public StringBuffer parseSection(StringBuffer tac) throws METARParsingException {
@@ -269,25 +289,23 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 		} else if (failWhenMandatorySectionMissed) {
 			throw new IllegalArgumentException("Wrong or missed QNH section");
 		}
-		
-		
-		
-		//process recent weather
+
+		// process recent weather
 		matcher = MetarParsingRegexp.metarRecentWeather.matcher(tac);
-		int start =0;
+		int start = 0;
 		while (matcher.find()) {
 
 			String recWeather = matcher.group("recentWeather");
-			if (start==0) {
+			if (start == 0) {
 				start = matcher.start();
 			}
-			
+
 			this.getRecentWeather().add(recWeather);
 
 			lastIndex = matcher.end();
 
 		}
-		
+
 		if (this.getRecentWeather().size() > 0)
 			tac.delete(start, lastIndex);
 
@@ -459,4 +477,38 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 		this.recentWeather = recentWeather;
 	}
 
+	HashMap<String, Object> hashNames = new HashMap<String, Object>();
+
+	public HashMap<String, Object> getHashNames() {
+		return hashNames;
+	}
+
+	public void setHashNames(HashMap<String, Object> hashNames) {
+		this.hashNames = hashNames;
+	}
+
+	public HashMap<String, Object> getLocalizedNameValues() {
+
+		Field[] flds = this.getClass().getDeclaredFields();
+		for (Field f : flds) {
+
+			AnnotationLocaliedName ann = f.getAnnotation(AnnotationLocaliedName.class);
+			if (ann != null) {
+
+				String lname = ann.name();
+				try {
+					f.setAccessible(true);
+					Object fieldValue = f.get(this);
+					hashNames.put(lname, fieldValue);
+					f.setAccessible(false);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return hashNames;
+
+	}
 }
