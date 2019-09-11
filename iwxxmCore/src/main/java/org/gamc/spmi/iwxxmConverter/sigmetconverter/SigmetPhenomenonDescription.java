@@ -23,7 +23,7 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 	private static final long serialVersionUID = 7906212608215801464L;
 
 	public enum Severity implements IwxxmEnum {
-		ISOL("ISOL"), OBS("OBSC"), SQL("SQL"), EMBD("EMBD"), FRQ("FRQ"), SEV("SEV"),
+		ISOL("ISOL"), OBSC("OBSC"), SQL("SQL"), EMBD("EMBD"), FRQ("FRQ"), SEV("SEV"),
 		HVY("HVY"), NOTSET("");
 
 		private String name;

@@ -172,7 +172,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// issuetime and valid period are top-level tags
 		tafRootTag.setIssueTime(createIssueTimesection());
-		tafRootTag.setValidPeriod(createValidityPeriodSection());
+		tafRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedTaf.getIcaoCode(),translatedTaf.getValidityInterval().getStart(), translatedTaf.getValidityInterval().getEnd()));
 
 		// Compose TAF body message and place it in the root
 		tafRootTag.setBaseForecast(createBaseResultSection());
@@ -219,41 +219,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		return iwxxmHelpers.createJAXBTimeSection(translatedTaf.getMessageIssueDateTime(), translatedTaf.getIcaoCode());
 	}
 
-	/** Creates valid period section */
-	private TimePeriodPropertyType createValidityPeriodSection() {
-		TimePeriodPropertyType timePeriodProperty = IWXXM31Helpers.ofGML.createTimePeriodPropertyType();
-		TimePeriodType timePeriodType = IWXXM31Helpers.ofGML.createTimePeriodType();
-
-		timePeriodType.setId(iwxxmHelpers.generateUUIDv4(String.format("tp-%s-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin, timePeriodEnd)));
-
-		// begin
-		TimeInstantType timeBeginInstant = IWXXM31Helpers.ofGML.createTimeInstantType();
-		timeBeginInstant.setId(iwxxmHelpers.generateUUIDv4(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodBegin)));
-		TimePositionType timePositionBegin = IWXXM31Helpers.ofGML.createTimePositionType();
-		timePositionBegin.getValue().add(timePeriodBeginPosition);
-		timeBeginInstant.setTimePosition(timePositionBegin);
-
-		TimeInstantPropertyType timeBeginProperty = IWXXM31Helpers.ofGML.createTimeInstantPropertyType();
-		timeBeginProperty.setTimeInstant(timeBeginInstant);
-
-		timePeriodType.setBeginPosition(timePositionBegin);
-
-		// end
-		TimeInstantType timeEndInstant = IWXXM31Helpers.ofGML.createTimeInstantType();
-		timeEndInstant.setId(iwxxmHelpers.generateUUIDv4(String.format("ti-%s-%s", translatedTaf.getIcaoCode(), timePeriodEnd)));
-		TimePositionType timePositionEnd = IWXXM31Helpers.ofGML.createTimePositionType();
-		timePositionEnd.getValue().add(timePeriodEndPosition);
-		timeEndInstant.setTimePosition(timePositionEnd);
-
-		TimeInstantPropertyType timeEndProperty = IWXXM31Helpers.ofGML.createTimeInstantPropertyType();
-		timeEndProperty.setTimeInstant(timeEndInstant);
-
-		timePeriodType.setEndPosition(timePositionEnd);
-
-		timePeriodProperty.setTimePeriod(timePeriodType);
-
-		return timePeriodProperty;
-	}
+	
 
 	/** Creates base section of IWXXM TAF */
 	/*

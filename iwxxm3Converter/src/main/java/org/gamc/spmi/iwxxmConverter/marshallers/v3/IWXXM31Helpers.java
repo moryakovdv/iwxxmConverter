@@ -45,15 +45,21 @@ import schemabindings31._int.icao.iwxxm._3.LengthWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.ReportType;
 import schemabindings31._int.icao.iwxxm._3.RunwayDirectionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SigConvectiveCloudTypeType;
+import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirportHeliportTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirportHeliportTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.AirportHeliportType;
 import schemabindings31.aero.aixm.schema._5_1.CodeAirportHeliportDesignatorType;
+import schemabindings31.aero.aixm.schema._5_1.CodeAuthorityType;
 import schemabindings31.aero.aixm.schema._5_1.CodeICAOType;
 import schemabindings31.aero.aixm.schema._5_1.RunwayDirectionTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.RunwayDirectionTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.RunwayDirectionType;
 import schemabindings31.aero.aixm.schema._5_1.TextDesignatorType;
+import schemabindings31.aero.aixm.schema._5_1.UnitTimeSlicePropertyType;
+import schemabindings31.aero.aixm.schema._5_1.UnitTimeSliceType;
+import schemabindings31.aero.aixm.schema._5_1.UnitType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CodeWithAuthorityType;
 import schemabindings31.net.opengis.gml.v_3_2_1.FeaturePropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantType;
@@ -189,6 +195,45 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return timePeriodProperty;
 
 	}
+	
+	
+	public TimePeriodPropertyType createTimePeriod(String icaoCode, DateTime from, DateTime to) {
+		
+		TimePeriodPropertyType timePeriodProperty = IWXXM31Helpers.ofGML.createTimePeriodPropertyType();
+		TimePeriodType timePeriodType = IWXXM31Helpers.ofGML.createTimePeriodType();
+
+		timePeriodType.setId(generateUUIDv4(String.format("tp-%s-%s-%s", icaoCode, from.toString(), to.toString())));
+
+		// begin
+		TimeInstantType timeBeginInstant = IWXXM31Helpers.ofGML.createTimeInstantType();
+		timeBeginInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode,from.toString())));
+		TimePositionType timePositionBegin = IWXXM31Helpers.ofGML.createTimePositionType();
+		timePositionBegin.getValue().add(from.toString());
+		timeBeginInstant.setTimePosition(timePositionBegin);
+
+		TimeInstantPropertyType timeBeginProperty = IWXXM31Helpers.ofGML.createTimeInstantPropertyType();
+		timeBeginProperty.setTimeInstant(timeBeginInstant);
+
+		timePeriodType.setBeginPosition(timePositionBegin);
+
+		// end
+		TimeInstantType timeEndInstant = IWXXM31Helpers.ofGML.createTimeInstantType();
+		timeEndInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode, to.toString())));
+		TimePositionType timePositionEnd = IWXXM31Helpers.ofGML.createTimePositionType();
+		timePositionEnd.getValue().add(to.toString());
+		timeEndInstant.setTimePosition(timePositionEnd);
+
+		TimeInstantPropertyType timeEndProperty = IWXXM31Helpers.ofGML.createTimeInstantPropertyType();
+		timeEndProperty.setTimeInstant(timeEndInstant);
+
+		timePeriodType.setEndPosition(timePositionEnd);
+
+		timePeriodProperty.setTimePeriod(timePeriodType);
+
+		return timePeriodProperty;
+		
+	}
+	
 
 	/**
 	 * Сreates FeaturePropertyType for given aerodrome icao code  <iwxxm:aerodrome>
@@ -391,6 +436,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return recentWeather;
 	}
 
+	
+	
+	
+	
 	/**
 	 * returns link for WMO weather register for forecasted weather in METAR and TAF
 	 */

@@ -62,7 +62,10 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	String sigmetLineCoords = "WSRS3162RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
+	String sigmetCommonTest = "WSRS31RUMA 111143 XXX\n" +  " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n" + 
+			"      YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+	
+	String sigmetLineCoords = "WSRS31RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
@@ -71,6 +74,17 @@ public class SigmetConversionTest {
 			"FL310/440 STNR NC=";
 	
 	@Test
+	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetCommonTest);
+
+		System.out.println(result);
+
+	}
+	
+	
+	//@Test
 	public void testSigmetWithLineCoords()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
