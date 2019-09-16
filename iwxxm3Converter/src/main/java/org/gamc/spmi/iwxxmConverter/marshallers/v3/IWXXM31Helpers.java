@@ -32,6 +32,7 @@ import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
 import org.joda.time.DateTime;
 
 import schemabindings31._int.icao.iwxxm._3.AerodromeForecastWeatherType;
@@ -91,6 +92,9 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	/*WMO registers**/
 	final WMOCloudRegister cloudReg = new WMOCloudRegister();
 	final WMOCloudTypeRegister cloudTypeReg = new WMOCloudTypeRegister();
+	
+	final WMOSigConvectiveCloudTypeRegister sigCloudTypeReg = new WMOSigConvectiveCloudTypeRegister();
+
 	final WMOPrecipitationRegister precipitationReg = new WMOPrecipitationRegister();
 
 	final WMORunWayContaminationRegister rwContaminationReg = new WMORunWayContaminationRegister();
@@ -396,7 +400,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 			// Get the right link to WMO code table for cloud type
 
-			cloudType.setHref(cloudTypeReg.getWMOUrlByCode(cloudTypeReg.getCloudTypeByStringCode(cloudTypeCode)));
+			cloudType.setHref(sigCloudTypeReg.getWMOUrlByCode(sigCloudTypeReg.getCloudTypeByStringCode(cloudTypeCode)));
 			currentLayer.setCloudType(ofIWXXM.createCloudLayerTypeCloudType(cloudType));
 		}
 
@@ -457,6 +461,8 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public WMOCloudTypeRegister getCloudTypeReg() {
 		return cloudTypeReg;
 	}
+	
+	
 
 	public WMOPrecipitationRegister getPrecipitationReg() {
 		return precipitationReg;
@@ -473,5 +479,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public WMORunWayFrictionRegister getRwFrictionReg() {
 		return rwFrictionReg;
 	}
+	
+	public WMOSigConvectiveCloudTypeRegister getSigCloudTypeReg() {
+		return sigCloudTypeReg;
+	}
+
 
 }
