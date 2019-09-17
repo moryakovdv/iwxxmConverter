@@ -143,10 +143,9 @@ to get converted and validated results.
   
 ## Contribution
 Any help from the community will be highly appreciated. There is a lot of work to be done =):
- - This project needs much more test cases with tricky not well-formed TAC messages.
- - It currently supports only IWXXM2.1 METAR, SPECI and TAF, so it should be extended for all documented IWXXM format
- - After final release of the IWXXM 3 this project should be refactored to support new format
- - RMK sections are waiting for implementation  
+ - This project needs much more test cases with tricky not well-formed TAC messages;
+ - We need SIGMET, AIRMET, SPACEWEATHER, TC, VA implementation in IWXXM v3 format;
+ - RMK sections are waiting for implementation;
 
 ## Licensing
  - The IwxxmConverter is distributed under The APACHE 2.0 License
