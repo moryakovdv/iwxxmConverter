@@ -2,6 +2,7 @@ package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.util.TreeMap;
 import java.util.UUID;
 
@@ -17,24 +18,46 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
 
+import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
+import schemabindings31._int.icao.iwxxm._3.AeronauticalSignificantWeatherPhenomenonType;
 import schemabindings31._int.icao.iwxxm._3.AirspacePropertyType;
+import schemabindings31._int.icao.iwxxm._3.AirspaceVolumePropertyType;
+import schemabindings31._int.icao.iwxxm._3.AngleWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionPropertyType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
+import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
 import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceType;
+import schemabindings31.aero.aixm.schema._5_1.AirspaceVolumeType;
 import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceDesignatorType;
 import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceType;
+import schemabindings31.aero.aixm.schema._5_1.CodeVerticalReferenceType;
 import schemabindings31.aero.aixm.schema._5_1.CodeYesNoType;
+import schemabindings31.aero.aixm.schema._5_1.SurfacePropertyType;
+import schemabindings31.aero.aixm.schema._5_1.SurfaceType;
 import schemabindings31.aero.aixm.schema._5_1.TextNameType;
 import schemabindings31.aero.aixm.schema._5_1.UnitTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.UnitTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.UnitType;
+import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AbstractSurfacePatchType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
+import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
+import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
+import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
+import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.StringOrRefType;
+import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimePeriodPropertyType;
@@ -128,12 +151,93 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		
 		sigmetRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedSigmet.getIcaoCode(),translatedSigmet.getValidFrom(),translatedSigmet.getValidTo()));
 		
+		sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
 		
+		
+		sigmetRootTag.getAnalysis().add(setAssociationRoleType());
 		// create XML representation
 		return sigmetRootTag;
 	}
 
-	
+	public AssociationRoleType setAssociationRoleType() {
+		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
+		SIGMETEvolvingConditionCollectionType evolving = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionCollectionType();
+		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionCollection(evolving);
+		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
+		AirspaceVolumeType airS = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
+		ValDistanceVerticalType valty = IWXXM31Helpers.ofAIXM.createValDistanceVerticalType();
+		valty.setUom("uom");
+		valty.setValue("value");
+		JAXBElement<ValDistanceVerticalType> value3 = IWXXM31Helpers.ofAIXM
+				.createApproachAltitudeTableTypeAltitude(valty);
+		airS.setUpperLimit(value3);
+		CodeVerticalReferenceType valueCode = IWXXM31Helpers.ofAIXM.createCodeVerticalReferenceType();
+		valueCode.setValue("value");
+		JAXBElement<CodeVerticalReferenceType> value4 = IWXXM31Helpers.ofAIXM
+				.createAerialRefuellingAnchorTypeRefuellingBaseLevelReference(valueCode);
+		airS.setUpperLimitReference(value4);
+		SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
+		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
+		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("xyu-xyu-%d-%s", 1, translatedSigmet.getIcaoCode())));
+		BigInteger intDim = BigInteger.valueOf(2);
+		typeSyr.setSrsDimension(intDim);
+		typeSyr.getAxisLabels().add("Lat Long");
+		typeSyr.setSrsName("http://www.opengis.net/def/crs/EPSG/0/4326");
+		SurfacePatchArrayPropertyType patch = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		PolygonPatchType patchSurf = IWXXM31Helpers.ofGML.createPolygonPatchType();
+		AbstractRingPropertyType exType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();
+		LinearRingType ringAb = IWXXM31Helpers.ofGML.createLinearRingType();
+		DirectPositionListType postDir = IWXXM31Helpers.ofGML.createDirectPositionListType();
+		postDir.getValue().add(54.0);
+		postDir.getValue().add(-12.0);
+		postDir.getValue().add(54.0);
+		postDir.getValue().add(-8.0);
+		postDir.getValue().add(50.0);
+		postDir.getValue().add(-12.0);
+		postDir.getValue().add(54.0);
+		postDir.getValue().add(-12.0);
+		ringAb.setPosList(postDir);
+		JAXBElement<AbstractRingType> ringAbAr = IWXXM31Helpers.ofGML.createAbstractRing(ringAb);
+		exType.setAbstractRing(ringAbAr);
+		patchSurf.setExterior(exType);
+		JAXBElement<AbstractSurfacePatchType> arrSurf = IWXXM31Helpers.ofGML.createAbstractSurfacePatch(patchSurf);
+		patch.getAbstractSurfacePatch().add(arrSurf);
+		JAXBElement<SurfacePatchArrayPropertyType> pathPol = IWXXM31Helpers.ofGML.createPatches(patch);
+		typeSyr.setPatches(pathPol);
+		JAXBElement<SurfaceType> surAr = IWXXM31Helpers.ofAIXM.createSurface(typeSyr);
+		surType.setSurface(surAr);
+		JAXBElement<SurfacePropertyType> surArType = IWXXM31Helpers.ofAIXM
+				.createAerialRefuellingAnchorTypeExtent(surType);
+		airS.setHorizontalProjection(surArType);
+		AirspaceVolumePropertyType air = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
+		air.setAirspaceVolume(airS);
+		evolvingType.setGeometry(air);
+		AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
+		motion.setUom("uom");
+		motion.setValue(90);
+		JAXBElement<AngleWithNilReasonType> dirMo = IWXXM31Helpers.ofIWXXM
+				.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(motion);
+		evolvingType.setDirectionOfMotion(dirMo);
+		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
+		speedType.setUom("uom");
+		speedType.setValue(20);
+		evolvingType.setSpeedOfMotion(speedType);
+		AbstractTimeObjectPropertyType typeAb = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		typeAb.getNilReason().add("http://codes.wmo.int/common/nil/missing");
+		// typeAb.get
+		SIGMETEvolvingConditionPropertyType evolvingType1 = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionPropertyType();
+		evolving.setPhenomenonTime(typeAb);
+		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
+		evolving.getMember().add(evolvingType1);
+		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
+		evolving.setTimeIndicator(timeIn);
+		asType.setAny(evolvingAr);
+		return asType;
+		
+	}
 	
 	
 	/**
@@ -145,7 +249,12 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
     </iwxxm:validPeriod>
 	 * **/
 	
-	
+	public AeronauticalSignificantWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
+		AeronauticalSignificantWeatherPhenomenonType typePhen = IWXXM31Helpers.ofIWXXM
+				.createAeronauticalSignificantWeatherPhenomenonType();
+		return typePhen;
+		
+	}
 	public UnitPropertyType createUnitPropertyTypeNode(String icaoCode, String firname, String type,
 			String interpretation) {
 		UnitPropertyType pt = IWXXM31Helpers.ofIWXXM.createUnitPropertyType();
