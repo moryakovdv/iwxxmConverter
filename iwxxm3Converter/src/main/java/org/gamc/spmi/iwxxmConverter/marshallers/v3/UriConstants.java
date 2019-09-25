@@ -27,6 +27,8 @@ public class UriConstants {
 
 	/**Schemas list for header in XML*/
 	public static final String GLOBAL_SCHEMAS_LOCATION = "http://icao.int/iwxxm/3.0 http://def.wmo.int/metce/2013 http://def.wmo.int/opm/2013 http://www.aixm.aero/schema/5.1.1 http://www.opengis.net/gml/3.2 http://www.opengis.net/om/2.0 http://www.isotc211.org/2005/gco http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gsr http://www.isotc211.org/2005/gss http://www.isotc211.org/2005/gts http://www.w3.org/1999/xlink";
+	
+	public static final String GLOBAL_SCHEMAS_LOCATION_V3 = "http://icao.int/iwxxm/3.0 http://schemas.wmo.int/iwxxm/3.0/iwxxm.xsd";
 
 	/** Причина отсутствия значения */
 	public static final String NIL_REASON_NOSIG = "http://codes.wmo.int/common/nil/nothingOfOperationalSignificance";

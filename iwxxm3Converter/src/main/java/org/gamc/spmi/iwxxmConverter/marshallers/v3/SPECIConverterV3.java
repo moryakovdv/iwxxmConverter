@@ -59,11 +59,11 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(SPECIType.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
+		
 		// output pretty printed
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION);
+		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION_V3);
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 

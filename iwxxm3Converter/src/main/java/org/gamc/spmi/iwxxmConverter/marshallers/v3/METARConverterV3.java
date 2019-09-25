@@ -189,9 +189,13 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 		metarRootTag.setAerodrome(createAirportDescriptionSectionTag());
 
+		TimeInstantPropertyType issueTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
+				translatedMetar.getMessageIssueDateTime(), translatedMetar.getIcaoCode(),"issue");
+		metarRootTag.setIssueTime(issueTimeType);
+		
 		TimeInstantPropertyType obsTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
-				translatedMetar.getMessageIssueDateTime(), translatedMetar.getIcaoCode());
-		metarRootTag.setIssueTime(obsTimeType);
+				translatedMetar.getMessageIssueDateTime(), translatedMetar.getIcaoCode(),"observation");
+		
 		metarRootTag.setObservationTime(obsTimeType);
 
 		// Compose METAR body message and place it in the root
@@ -250,12 +254,12 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		// output pretty printed
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION);
+		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION_V3);
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
 		JAXBElement<METARType> metarRootElement = IWXXM31Helpers.ofIWXXM.createMETAR(metar);
-
+		
 		jaxbMarshaller.marshal(metarRootElement, stream);
 
 		return stream.toString("UTF-8");
