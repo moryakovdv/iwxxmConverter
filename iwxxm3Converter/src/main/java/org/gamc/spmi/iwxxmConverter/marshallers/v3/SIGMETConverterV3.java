@@ -180,7 +180,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		airS.setUpperLimitReference(value4);
 		SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
 		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
-		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("xyu-xyu-%d-%s", 1, translatedSigmet.getIcaoCode())));
+		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("sft-%d-%s", 1, translatedSigmet.getIcaoCode())));
 		BigInteger intDim = BigInteger.valueOf(2);
 		typeSyr.setSrsDimension(intDim);
 		typeSyr.getAxisLabels().add("Lat Long");
