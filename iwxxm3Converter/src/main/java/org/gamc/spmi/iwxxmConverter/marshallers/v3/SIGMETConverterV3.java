@@ -12,9 +12,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 
+import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
 import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
 
@@ -26,6 +28,7 @@ import schemabindings31._int.icao.iwxxm._3.AngleWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
@@ -41,6 +44,7 @@ import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceDesignatorType;
 import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceType;
 import schemabindings31.aero.aixm.schema._5_1.CodeVerticalReferenceType;
 import schemabindings31.aero.aixm.schema._5_1.CodeYesNoType;
+import schemabindings31.aero.aixm.schema._5_1.CurvePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.SurfacePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.SurfaceType;
 import schemabindings31.aero.aixm.schema._5_1.TextNameType;
@@ -70,8 +74,8 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	String airTrafficUnit = "FIC";
 	String watchOfficeType = "MWO";
 	String firType = "OTHER:FIR_UIR";
-	String interpretation =  "SNAPSHOT";
-	
+	String interpretation = "SNAPSHOT";
+
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 	private String dateTime = "";
 	private String dateTimePosition = "";
@@ -117,8 +121,6 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		// Some description
 		sigmetRootTag.setPermissibleUsageSupplementary("SIGMET composing test using JAXB");
 
-
-		
 		// COR, NIL, NORMAL
 		switch (translatedSigmet.getMessageStatusType()) {
 		case MISSING:
@@ -137,23 +139,22 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 		StringWithNilReasonType seq = iwxxmHelpers.ofIWXXM.createStringWithNilReasonType();
 		seq.setValue(translatedSigmet.getSigmetNumber());
-		
-		sigmetRootTag.setSequenceNumber(seq);
-		
-		sigmetRootTag.setIssuingAirTrafficServicesUnit(createUnitPropertyTypeNode(translatedSigmet.getIcaoCode(),
-				translatedSigmet.getIcaoCode(), airTrafficUnit,interpretation));
-		sigmetRootTag.setIssuingAirTrafficServicesRegion(createAirspacePropertyTypeNode(translatedSigmet.getIcaoCode(),
-				translatedSigmet.getFirName(), firType,interpretation));
-				
-		sigmetRootTag.setOriginatingMeteorologicalWatchOffice(createUnitPropertyTypeNode(translatedSigmet.getIcaoCode(),
-				translatedSigmet.getWatchOffice(), watchOfficeType,interpretation));
 
-		
-		sigmetRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedSigmet.getIcaoCode(),translatedSigmet.getValidFrom(),translatedSigmet.getValidTo()));
-		
+		sigmetRootTag.setSequenceNumber(seq);
+
+		sigmetRootTag.setIssuingAirTrafficServicesUnit(createUnitPropertyTypeNode(translatedSigmet.getIcaoCode(),
+				translatedSigmet.getIcaoCode(), airTrafficUnit, interpretation));
+		sigmetRootTag.setIssuingAirTrafficServicesRegion(createAirspacePropertyTypeNode(translatedSigmet.getIcaoCode(),
+				translatedSigmet.getFirName(), firType, interpretation));
+
+		sigmetRootTag.setOriginatingMeteorologicalWatchOffice(createUnitPropertyTypeNode(translatedSigmet.getIcaoCode(),
+				translatedSigmet.getWatchOffice(), watchOfficeType, interpretation));
+
+		sigmetRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedSigmet.getIcaoCode(),
+				translatedSigmet.getValidFrom(), translatedSigmet.getValidTo()));
+
 		sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
-		
-		
+
 		sigmetRootTag.getAnalysis().add(setAssociationRoleType());
 		// create XML representation
 		return sigmetRootTag;
@@ -161,100 +162,116 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 	public AssociationRoleType setAssociationRoleType() {
 		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
-		SIGMETEvolvingConditionCollectionType evolving = IWXXM31Helpers.ofIWXXM
+		SIGMETEvolvingConditionCollectionType sicol = IWXXM31Helpers.ofIWXXM
 				.createSIGMETEvolvingConditionCollectionType();
-		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionCollection(evolving);
-		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
-		AirspaceVolumeType airS = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
-		ValDistanceVerticalType valty = IWXXM31Helpers.ofAIXM.createValDistanceVerticalType();
-		valty.setUom("uom");
-		valty.setValue("value");
-		JAXBElement<ValDistanceVerticalType> value3 = IWXXM31Helpers.ofAIXM
-				.createApproachAltitudeTableTypeAltitude(valty);
-		airS.setUpperLimit(value3);
-		CodeVerticalReferenceType valueCode = IWXXM31Helpers.ofAIXM.createCodeVerticalReferenceType();
-		valueCode.setValue("value");
-		JAXBElement<CodeVerticalReferenceType> value4 = IWXXM31Helpers.ofAIXM
-				.createAerialRefuellingAnchorTypeRefuellingBaseLevelReference(valueCode);
-		airS.setUpperLimitReference(value4);
-		SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
-		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
-		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("xyu-xyu-%d-%s", 1, translatedSigmet.getIcaoCode())));
-		BigInteger intDim = BigInteger.valueOf(2);
-		typeSyr.setSrsDimension(intDim);
-		typeSyr.getAxisLabels().add("Lat Long");
-		typeSyr.setSrsName("http://www.opengis.net/def/crs/EPSG/0/4326");
-		SurfacePatchArrayPropertyType patch = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		SIGMETEvolvingConditionPropertyType evolvingType1 = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionPropertyType();
+		AbstractTimeObjectPropertyType absTime = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
+		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
+		AirspaceVolumePropertyType air = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
 		PolygonPatchType patchSurf = IWXXM31Helpers.ofGML.createPolygonPatchType();
 		AbstractRingPropertyType exType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();
 		LinearRingType ringAb = IWXXM31Helpers.ofGML.createLinearRingType();
 		DirectPositionListType postDir = IWXXM31Helpers.ofGML.createDirectPositionListType();
-		postDir.getValue().add(54.0);
-		postDir.getValue().add(-12.0);
-		postDir.getValue().add(54.0);
-		postDir.getValue().add(-8.0);
-		postDir.getValue().add(50.0);
-		postDir.getValue().add(-12.0);
-		postDir.getValue().add(54.0);
-		postDir.getValue().add(-12.0);
-		ringAb.setPosList(postDir);
-		JAXBElement<AbstractRingType> ringAbAr = IWXXM31Helpers.ofGML.createAbstractRing(ringAb);
-		exType.setAbstractRing(ringAbAr);
-		patchSurf.setExterior(exType);
+		SurfacePatchArrayPropertyType patch = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
+		AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
+		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionCollection(sicol);
 		JAXBElement<AbstractSurfacePatchType> arrSurf = IWXXM31Helpers.ofGML.createAbstractSurfacePatch(patchSurf);
 		patch.getAbstractSurfacePatch().add(arrSurf);
-		JAXBElement<SurfacePatchArrayPropertyType> pathPol = IWXXM31Helpers.ofGML.createPatches(patch);
-		typeSyr.setPatches(pathPol);
-		JAXBElement<SurfaceType> surAr = IWXXM31Helpers.ofAIXM.createSurface(typeSyr);
-		surType.setSurface(surAr);
-		JAXBElement<SurfacePropertyType> surArType = IWXXM31Helpers.ofAIXM
-				.createAerialRefuellingAnchorTypeExtent(surType);
-		airS.setHorizontalProjection(surArType);
-		AirspaceVolumePropertyType air = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
-		air.setAirspaceVolume(airS);
-		evolvingType.setGeometry(air);
-		AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
-		motion.setUom("uom");
-		motion.setValue(90);
 		JAXBElement<AngleWithNilReasonType> dirMo = IWXXM31Helpers.ofIWXXM
 				.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(motion);
+		JAXBElement<AbstractRingType> ringAbAr = IWXXM31Helpers.ofGML.createAbstractRing(ringAb);
+		for (DirectionFromLine dir : translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
+			postDir.getValue().add(dir.getDirection().getDoubleValue());
+		}
+		ringAb.setPosList(postDir);
+		exType.setAbstractRing(ringAbAr);
+		patchSurf.setExterior(exType);
+		air.setAirspaceVolume(setAirspaceVolume());
+		evolvingType.setGeometry(air);
+		motion.setUom(
+				translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
+		motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().getDoubleValue());
 		evolvingType.setDirectionOfMotion(dirMo);
-		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
-		speedType.setUom("uom");
-		speedType.setValue(20);
+		speedType.setUom(
+				translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits().getStringValue());
+		speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
 		evolvingType.setSpeedOfMotion(speedType);
-		AbstractTimeObjectPropertyType typeAb = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
-		typeAb.getNilReason().add("http://codes.wmo.int/common/nil/missing");
-		// typeAb.get
-		SIGMETEvolvingConditionPropertyType evolvingType1 = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionPropertyType();
-		evolving.setPhenomenonTime(typeAb);
 		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
-		evolving.getMember().add(evolvingType1);
-		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
-		evolving.setTimeIndicator(timeIn);
+		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		sicol.setPhenomenonTime(absTime);
+		sicol.getMember().add(evolvingType1);
+		sicol.setTimeIndicator(timeIn);
 		asType.setAny(evolvingAr);
 		return asType;
-		
+
 	}
-	
-	
+
+	private AirspaceVolumeType setAirspaceVolume() {
+		AirspaceVolumeType airS = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
+		SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
+		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
+		ValDistanceVerticalType valDis = IWXXM31Helpers.ofAIXM.createValDistanceVerticalType();
+		CodeVerticalReferenceType valueCode = IWXXM31Helpers.ofAIXM.createCodeVerticalReferenceType();
+		CurvePropertyType valueCode1 = IWXXM31Helpers.ofAIXM.createCurvePropertyType();
+		SurfacePropertyType srfType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
+		SurfacePatchArrayPropertyType srfArrType = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		JAXBElement<CodeVerticalReferenceType> value4 = IWXXM31Helpers.ofAIXM
+				.createAerialRefuellingAnchorTypeRefuellingBaseLevelReference(valueCode);
+		JAXBElement<SurfaceType> surAr = IWXXM31Helpers.ofAIXM.createSurface(typeSyr);
+		JAXBElement<ValDistanceVerticalType> valDisJax = IWXXM31Helpers.ofAIXM
+				.createApproachAltitudeTableTypeAltitude(valDis);
+		JAXBElement<CurvePropertyType> value2 = IWXXM31Helpers.ofAIXM.createAirspaceVolumeTypeCentreline(valueCode1);
+		JAXBElement<SurfacePropertyType> surPropType = IWXXM31Helpers.ofAIXM
+				.createAerialRefuellingAnchorTypeExtent(srfType);
+		JAXBElement<SurfacePatchArrayPropertyType> pathPol = IWXXM31Helpers.ofGML.createPatches(srfArrType);
+		BigInteger intDim = BigInteger.valueOf(2);		
+		valDis.setUom(translatedSigmet.getHorizontalLocation().getWidenessUnits().getStringValue());
+		valDis.setValue(String.valueOf(translatedSigmet.getHorizontalLocation().getWideness()));
+		valDisJax.setValue(valDis);
+		typeSyr.setSrsDimension(intDim);
+		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%d-%s", 1, translatedSigmet.getIcaoCode())));
+		typeSyr.getAxisLabels().add("Lat Long");
+		typeSyr.setSrsName("");
+		valueCode.setValue("value");
+		surType.setSurface(surAr);
+		airS.setUpperLimit(valDisJax);
+		airS.setUpperLimitReference(value4);
+		typeSyr.setPatches(pathPol);
+		airS.setHorizontalProjection(surPropType);
+		airS.setLowerLimit(valDisJax);
+		airS.setLowerLimit(valDisJax);
+		airS.setMaximumLimit(valDisJax);
+		airS.setMaximumLimitReference(value4);
+		airS.setCentreline(value2);
+		return airS;
+
+	}
+
+	private JAXBElement<SurfacePropertyType> setHorizontalProjection(AirspaceVolumePropertyType airSpace) {
+		return null;
+
+	}
+
 	/**
-	 *  <iwxxm:validPeriod>
-        <gml:TimePeriod gml:id="uuid.18e9591a-b3f0-4927-b723-b4f66d7c386f">
-            <gml:beginPosition>2012-08-10T12:00:00Z</gml:beginPosition>
-            <gml:endPosition>2012-08-10T16:00:00Z</gml:endPosition>
-        </gml:TimePeriod>
-    </iwxxm:validPeriod>
-	 * **/
-	
+	 * <iwxxm:validPeriod>
+	 * <gml:TimePeriod gml:id="uuid.18e9591a-b3f0-4927-b723-b4f66d7c386f">
+	 * <gml:beginPosition>2012-08-10T12:00:00Z</gml:beginPosition>
+	 * <gml:endPosition>2012-08-10T16:00:00Z</gml:endPosition> </gml:TimePeriod>
+	 * </iwxxm:validPeriod>
+	 **/
+
 	public AeronauticalSignificantWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
 		AeronauticalSignificantWeatherPhenomenonType typePhen = IWXXM31Helpers.ofIWXXM
 				.createAeronauticalSignificantWeatherPhenomenonType();
+		typePhen.setHref(translatedSigmet.getPhenomenonDescription().getPhenomenon());
 		return typePhen;
-		
+
 	}
+
 	public UnitPropertyType createUnitPropertyTypeNode(String icaoCode, String firname, String type,
 			String interpretation) {
 		UnitPropertyType pt = IWXXM31Helpers.ofIWXXM.createUnitPropertyType();
@@ -268,101 +285,88 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		UnitTimeSliceType tst = IWXXM31Helpers.ofAIXM.createUnitTimeSliceType();
 		tst.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", icaoCode)));
 		tst.setInterpretation(interpretation);
-		
+
 		// tst.setValidTime(value);
 
 		tspt.setUnitTimeSlice(tst);
-		
-		
+
 		/**
-		 *  <aixm:interpretation>SNAPSHOT</aixm:interpretation>
-            <aixm:type>OTHER:FIR_UIR</aixm:type>
-            <aixm:designator>YUDD</aixm:designator>
-		    <aixm:name>SHANLON FIR/UIR</aixm:name>
+		 * <aixm:interpretation>SNAPSHOT</aixm:interpretation>
+		 * <aixm:type>OTHER:FIR_UIR</aixm:type> <aixm:designator>YUDD</aixm:designator>
+		 * <aixm:name>SHANLON FIR/UIR</aixm:name>
 		 * 
 		 * 
-		 * */
-		
-		//add name
-		TextNameType nType =  IWXXM31Helpers.ofAIXM.createTextNameType();
-		nType.setValue(firname+" "+type);
+		 */
+
+		// add name
+		TextNameType nType = IWXXM31Helpers.ofAIXM.createTextNameType();
+		nType.setValue(firname + " " + type);
 		JAXBElement<TextNameType> ntType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeName(nType);
 		tst.getRest().add(ntType);
-		
-		//add type
+
+		// add type
 		CodeAirspaceType asType = IWXXM31Helpers.ofAIXM.createCodeAirspaceType();
 		asType.setValue(type);
 		JAXBElement<CodeAirspaceType> astType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeType(asType);
 		tst.getRest().add(astType);
-		
-		//add designator
+
+		// add designator
 		CodeAirspaceDesignatorType cadType = IWXXM31Helpers.ofAIXM.createCodeAirspaceDesignatorType();
 		cadType.setValue(firname);
-		JAXBElement<CodeAirspaceDesignatorType> cast = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeDesignator(cadType);
+		JAXBElement<CodeAirspaceDesignatorType> cast = IWXXM31Helpers.ofAIXM
+				.createAirspaceTimeSliceTypeDesignator(cadType);
 		tst.getRest().add(cast);
-		
-		
-		
-		
 
 		ut.getTimeSlice().add(tspt);
 
 		return pt;
 	}
-	
+
 	public AirspacePropertyType createAirspacePropertyTypeNode(String icaoCode, String firname, String type,
 			String interpretation) {
-		
+
 		AirspacePropertyType pt = IWXXM31Helpers.ofIWXXM.createAirspacePropertyType();
 		AirspaceType ast = IWXXM31Helpers.ofAIXM.createAirspaceType();
 		ast.setId(iwxxmHelpers.generateUUIDv4(String.format("airspace-%s", icaoCode)));
 		pt.setAirspace(ast);
-		
-		AirspaceTimeSlicePropertyType tsp =  IWXXM31Helpers.ofAIXM.createAirspaceTimeSlicePropertyType();
+
+		AirspaceTimeSlicePropertyType tsp = IWXXM31Helpers.ofAIXM.createAirspaceTimeSlicePropertyType();
 		AirspaceTimeSliceType ts = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceType();
 		ts.setId(iwxxmHelpers.generateUUIDv4(String.format("airspace-%s-ts", icaoCode)));
-		
+
 		ts.setInterpretation(interpretation);
-		
-		
-		
+
 		/**
-		 *  <aixm:interpretation>SNAPSHOT</aixm:interpretation>
-            <aixm:type>OTHER:FIR_UIR</aixm:type>
-            <aixm:designator>YUDD</aixm:designator>
-		    <aixm:name>SHANLON FIR/UIR</aixm:name>
+		 * <aixm:interpretation>SNAPSHOT</aixm:interpretation>
+		 * <aixm:type>OTHER:FIR_UIR</aixm:type> <aixm:designator>YUDD</aixm:designator>
+		 * <aixm:name>SHANLON FIR/UIR</aixm:name>
 		 * 
 		 * 
-		 * */
-		
-		//add name
-		TextNameType nType =  IWXXM31Helpers.ofAIXM.createTextNameType();
+		 */
+
+		// add name
+		TextNameType nType = IWXXM31Helpers.ofAIXM.createTextNameType();
 		nType.setValue(firname);
 		JAXBElement<TextNameType> ntType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeName(nType);
 		ts.getRest().add(ntType);
-		
-		//add type
+
+		// add type
 		CodeAirspaceType asType = IWXXM31Helpers.ofAIXM.createCodeAirspaceType();
 		asType.setValue(type);
 		JAXBElement<CodeAirspaceType> astType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeType(asType);
 		ts.getRest().add(astType);
-		
-		//add designator
+
+		// add designator
 		CodeAirspaceDesignatorType cadType = IWXXM31Helpers.ofAIXM.createCodeAirspaceDesignatorType();
 		cadType.setValue(icaoCode);
-		JAXBElement<CodeAirspaceDesignatorType> cast = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeDesignator(cadType);
+		JAXBElement<CodeAirspaceDesignatorType> cast = IWXXM31Helpers.ofAIXM
+				.createAirspaceTimeSliceTypeDesignator(cadType);
 		ts.getRest().add(cast);
-		
-		
-		
-		
+
 		tsp.setAirspaceTimeSlice(ts);
-		
-		ast.getTimeSlice().add(tsp);	
-		
-				
-		
-		
+
+		ast.getTimeSlice().add(tsp);
+
 		return pt;
 	}
 
