@@ -70,14 +70,14 @@ import schemabindings31.net.opengis.gml.v_3_2_1.TimePositionType;
 
 public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETType> {
 	private TreeMap<String, String> createdRunways = new TreeMap<>();
-
+	//new class change
 	String airTrafficUnit = "FIC";
 	String watchOfficeType = "MWO";
 	String firType = "OTHER:FIR_UIR";
 	String interpretation = "SNAPSHOT";
 
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
-	private String dateTime = "";
+	 private String dateTime = "";
 	private String dateTimePosition = "";
 	private SIGMETTacMessage translatedSigmet;
 
