@@ -37,7 +37,7 @@ import edu.ucar.ral.crux.ValidationException;
 public class CruxValidationTest {
 
 	String schPath = "/iwxxm/schematron/iwxxm.sch";
-	String fPath = "output";
+	String fPath = "/output";
 	  
 	
 	@Test
@@ -48,7 +48,10 @@ public class CruxValidationTest {
 		URL resource = getClass().getResource(schPath);
 		String schFile  = Paths.get(resource.toURI()).toFile().getAbsolutePath();
 		
-		File fDir = new File(fPath);
+		URL resourceOut = getClass().getResource(fPath);
+		String outFile  = Paths.get(resourceOut.toURI()).toFile().getAbsolutePath();
+		
+		File fDir = new File(outFile);
 		if (fDir.isDirectory()) {
 			
 			File[] tafs = fDir.listFiles(new FileFilter() {
