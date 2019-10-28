@@ -530,7 +530,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 			minTemperature.setValue(translatedTaf.getCommonWeatherSection().getAirTemperatureMin().doubleValue());
 
 			TimeInstantPropertyType timeInstantMinTempProperty = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
-					translatedTaf.getCommonWeatherSection().getAirTemperatureMinTime(), translatedTaf.getIcaoCode());
+					translatedTaf.getCommonWeatherSection().getAirTemperatureMinTime(), translatedTaf.getIcaoCode(),"tn");
 
 			temps.setMinimumAirTemperature(minTemperature);
 			temps.setMinimumAirTemperatureTime(timeInstantMinTempProperty);
@@ -543,7 +543,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 			maxTemperature.setUom(TEMPERATURE_UNITS.CELSIUS.getStringValue());
 			maxTemperature.setValue(translatedTaf.getCommonWeatherSection().getAirTemperatureMax().doubleValue());
 			TimeInstantPropertyType timeInstantMaxTempProperty = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
-					translatedTaf.getCommonWeatherSection().getAirTemperatureMaxTime(), translatedTaf.getIcaoCode());
+					translatedTaf.getCommonWeatherSection().getAirTemperatureMaxTime(), translatedTaf.getIcaoCode(),"tx");
 
 			// Time of the min temp forecasted
 
@@ -636,7 +636,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		// output pretty printed
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION);
+		jaxbMarshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, UriConstants.GLOBAL_SCHEMAS_LOCATION_V3);
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 

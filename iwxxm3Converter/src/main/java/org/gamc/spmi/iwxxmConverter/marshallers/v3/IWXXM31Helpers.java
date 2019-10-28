@@ -85,7 +85,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public static final schemabindings31.net.opengis.om._2.ObjectFactory ofOM = new schemabindings31.net.opengis.om._2.ObjectFactory();
 	public static final schemabindings31.org.w3._1999.xlink.ObjectFactory ofXLink = new schemabindings31.org.w3._1999.xlink.ObjectFactory();
 	public static final schemabindings31.aero.aixm.schema._5_1.ObjectFactory ofAIXM = new schemabindings31.aero.aixm.schema._5_1.ObjectFactory();
-	public static final schemabindings31._int.wmo.def.metce._2013.ObjectFactory ofMetce = new schemabindings31._int.wmo.def.metce._2013.ObjectFactory();
+	//public static final schemabindings31._int.wmo.def.metce._2013.ObjectFactory ofMetce = new schemabindings31._int.wmo.def.metce._2013.ObjectFactory();
 	//public static final schemabindings31.net.opengis.samplingspatial._3.ObjectFactory ofSams = new schemabindings31.net.opengis.samplingspatial._3.ObjectFactory();
 
 	
@@ -111,14 +111,14 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	 *            - aerodrome ICAO code
 	 * @return {@link TimeInstantPropertyType}
 	 */
-	public TimeInstantPropertyType createTimeInstantPropertyTypeForDateTime(DateTime dt, String icaoCode) {
+	public TimeInstantPropertyType createTimeInstantPropertyTypeForDateTime(DateTime dt, String icaoCode, String suffix) {
 
 		String sDateTime = dt.toString(getDateTimeFormat()) + "Z";
 		String sDateTimePosition = dt.toString(getDateTimeISOFormat());
 
 		TimeInstantPropertyType timeInstantProperty = ofGML.createTimeInstantPropertyType();
 		TimeInstantType timeInstant = ofGML.createTimeInstantType();
-		timeInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode, sDateTime)));
+		timeInstant.setId(generateUUIDv4(String.format("ti-%s-%s-%s", icaoCode, sDateTime,suffix)));
 		TimePositionType timePosition = ofGML.createTimePositionType();
 		timePosition.getValue().add(sDateTimePosition);
 		timeInstant.setTimePosition(timePosition);
@@ -138,7 +138,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	 *         embed into getRest() part of the root tag
 	 */
 	public TimeInstantPropertyType createJAXBTimeSection(DateTime dt, String icaoCode) {
-		TimeInstantPropertyType timeProperty = createTimeInstantPropertyTypeForDateTime(dt, icaoCode);
+		TimeInstantPropertyType timeProperty = createTimeInstantPropertyTypeForDateTime(dt, icaoCode,"timeproperty");
 		return timeProperty;
 
 	}

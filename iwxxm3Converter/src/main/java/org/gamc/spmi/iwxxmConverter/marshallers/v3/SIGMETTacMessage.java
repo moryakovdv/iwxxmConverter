@@ -264,7 +264,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 	}
 
-	protected StringBuffer fillAndRemovePhenomenaDescription(StringBuffer tac) {
+	protected StringBuffer fillAndRemovePhenomenaDescription(StringBuffer tac) throws SIGMETParsingException {
 
 		Matcher matcherPhenomena = SigmetParsingRegexp.sigmetPhenomena.matcher(tac);
 		if (matcherPhenomena.find()) {
@@ -293,6 +293,8 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 			tac.delete(0, lastIndex);
 		}
+		else
+			throw new SIGMETParsingException("No phenomena description found!");
 
 		return tac;
 	}
@@ -388,6 +390,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		Matcher matcherIntensity = SigmetParsingRegexp.sigmetIntensityChanges.matcher(tac);
 		if (matcherIntensity.find()) {
 			String intensity = matcherIntensity.group("intensity");
+			
 			this.getPhenomenonDescription().setIntencity(Intensity.valueOf(intensity));
 			tac.delete(matcherIntensity.start(), matcherIntensity.end());
 		}
