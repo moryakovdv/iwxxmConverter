@@ -35,6 +35,7 @@ import org.gamc.spmi.iwxxmConverter.general.MetarForecastSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
+
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARBecomingSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARCloudSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARRVRSection;
@@ -126,14 +127,22 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 
 		createdRunways.clear();
 
-		METARTacMessage metarMessage = new METARTacMessage(tac);
-		metarMessage.parseMessage();
+	
 
-		METARType result = convertMessage(metarMessage);
+		METARTacMessage metarMessage = new METARTacMessage(tac);
+		METARType result;
+		try {
+			metarMessage.parseMessage();
+			 result = convertMessage(metarMessage);
+		}
+		catch(ParsingException pe) {
+			result = IWXXM21Helpers.ofIWXXM.createMETARType();
+			result.setTranslationFailedTAC(tac);
+		}
 
 		String xmlResult = marshallMessageToXML(result);
 

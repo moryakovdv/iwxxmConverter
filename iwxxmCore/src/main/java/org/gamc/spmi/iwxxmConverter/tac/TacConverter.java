@@ -31,7 +31,7 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 public interface TacConverter<T, R> {
 
 	String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException;
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException;
 
 	R convertMessage(T translatedMessage)
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException;

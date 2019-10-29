@@ -76,11 +76,17 @@ public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType> 
 	}
 
 	@Override
-	public String convertTacToXML(String tac) throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public String convertTacToXML(String tac) throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 		SPECITacMessage speciMessage = new SPECITacMessage(tac);
-		speciMessage.parseMessage();
-
-		SPECIType result = convertMessage(speciMessage);
+		SPECIType result;
+		try {
+			speciMessage.parseMessage();
+			 result = convertMessage(speciMessage);
+		}
+		catch(ParsingException pe) {
+			result = IWXXM21Helpers.ofIWXXM.createSPECIType();
+			result.setTranslationFailedTAC(tac);
+		}
 
 		String xmlResult = marshallMessageToXML(result); 
 		

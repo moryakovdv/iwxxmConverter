@@ -35,6 +35,7 @@ import org.gamc.spmi.iwxxmConverter.general.TafForecastTimeSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
+
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFCloudSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection;
@@ -115,12 +116,18 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 	 */
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
-		tafMessage.parseMessage();
-
-		TAFType result = convertMessage(tafMessage);
+		TAFType result;
+		try {
+			tafMessage.parseMessage();
+			 result = convertMessage(tafMessage);
+		}
+		catch(ParsingException pe) {
+			result = IWXXM21Helpers.ofIWXXM.createTAFType();
+			result.setTranslationFailedTAC(tac);
+		}
 
 		String xmlResult = marshallMessageToXML(result);
 		return xmlResult;

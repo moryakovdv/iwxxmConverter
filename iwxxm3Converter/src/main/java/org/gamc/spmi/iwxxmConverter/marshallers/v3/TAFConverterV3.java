@@ -103,13 +103,20 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	 */
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
-		tafMessage.parseMessage();
+		
 
-		TAFType result = convertMessage(tafMessage);
-
+		TAFType result;
+		try {
+			tafMessage.parseMessage();
+			 result = convertMessage(tafMessage);
+		}
+		catch(ParsingException pe) {
+			result = IWXXM31Helpers.ofIWXXM.createTAFType();
+			result.setTranslationFailedTAC(tac);
+		}
 		String xmlResult = marshallMessageToXML(result);
 		return xmlResult;
 	}

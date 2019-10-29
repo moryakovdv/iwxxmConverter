@@ -79,14 +79,23 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 		createdRunways.clear();
 
 		SIGMETTacMessage sigmetMessage = new SIGMETTacMessage(tac);
-		sigmetMessage.parseMessage();
-
-		SIGMETType result = convertMessage(sigmetMessage);
-
+		
+		SIGMETType result;
+		
+		try {
+			sigmetMessage.parseMessage();
+			result = convertMessage(sigmetMessage);
+		}
+		catch(ParsingException pa) {
+			result = IWXXM31Helpers.ofIWXXM.createSIGMETType();
+			result.setTranslationFailedTAC(tac);
+			
+		}
+		
 		String xmlResult = marshallMessageToXML(result);
 
 		return xmlResult;
@@ -97,6 +106,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
 		this.translatedSigmet = translatedMessage;
 		SIGMETType sigmetRootTag = IWXXM31Helpers.ofIWXXM.createSIGMETType();
+		
 		StringOrRefType refTacString = IWXXM31Helpers.ofGML.createStringOrRefType();
 		refTacString.setValue(translatedMessage.getInitialTacString());
 		sigmetRootTag.setDescription(refTacString);
@@ -370,7 +380,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	public SIGMETType addTranslationCentreHeader(SIGMETType report) throws DatatypeConfigurationException {
 		report = iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWV", "Moscow, RU");
-		report.setTranslationFailedTAC("");
+		//report.setTranslationFailedTAC("");
 		return report;
 	}
 

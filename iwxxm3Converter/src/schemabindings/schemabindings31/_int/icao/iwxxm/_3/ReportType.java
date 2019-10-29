@@ -11,6 +11,7 @@ package schemabindings31._int.icao.iwxxm._3;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
@@ -82,8 +83,9 @@ public abstract class ReportType
     @XmlAttribute(name = "translationTime")
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar translationTime;
-    @XmlAttribute(name = "translationFailedTAC")
-    protected String translationFailedTAC;
+    
+    @XmlAttribute(name = "translationFailedTAC", required = false)
+    protected String translationFailedTAC = null;
 
     /**
      * Gets the value of the reportStatus property.

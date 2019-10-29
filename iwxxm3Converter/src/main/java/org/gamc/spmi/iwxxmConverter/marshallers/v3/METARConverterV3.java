@@ -120,14 +120,21 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 
 		createdRunways.clear();
 
 		METARTacMessage metarMessage = new METARTacMessage(tac);
-		metarMessage.parseMessage();
-
-		METARType result = convertMessage(metarMessage);
+		METARType result;
+		try {
+			metarMessage.parseMessage();
+			 result = convertMessage(metarMessage);
+		}
+		catch(ParsingException pe) {
+			result = IWXXM31Helpers.ofIWXXM.createMETARType();
+			result.setTranslationFailedTAC(tac);
+		}
+		
 
 		String xmlResult = marshallMessageToXML(result);
 
