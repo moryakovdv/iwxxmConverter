@@ -73,10 +73,24 @@ public class SigmetConversionTest {
 			"UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + 
 			"FL310/440 STNR NC=";
 	
+
+	String sigmetSevIce = "WSRS31RUMA 111143 XXX\n" + "LIMM SIGMET 1 VALID 281135/281435 LIIP- LIMM MILANO FIR SEV ICE OBS \n" + 
+			"    AT 1120Z WI N4526 E01147 - N4442 E01107 - N4352 E01219 - N4404 \n" + 
+			"    E01330 - N4526 E01147 FL180/240 MOV E NC";
+
 	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" +  " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n" + 
 			"      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+
 	
 	@Test
+	public void testModIceSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetSevIce);
+
+		System.out.println(result);
+	}
+	
+	//@Test
 	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
