@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
@@ -42,7 +43,7 @@ import org.xml.sax.SAXParseException;
  * @author moryakov*/
 public class WMOCloudRegister implements WMORegister {
 
-	private static final String registerFileName = "/wmoregisters/clouds.xml";
+	private static final String registerFileName = "codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf";
 	public static final int missingCode = 31;
 	
 	
@@ -64,12 +65,12 @@ public class WMOCloudRegister implements WMORegister {
 
 	@Override
 	public void parseWMOXml() {
-		try {
+		try (InputStream is = new FileInputStream(registerFileName)) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			InputStream is = this.getClass().getResourceAsStream(registerFileName);
+			//this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation
@@ -81,7 +82,7 @@ public class WMOCloudRegister implements WMORegister {
             // Create XPath object
             XPath xpath = xpathFactory.newXPath();
 			
-			XPathExpression expr =xpath.compile("/RDF/RegisterItem/register/Register/member/Concept");
+			XPathExpression expr =xpath.compile("/RDF/Container/member/Concept"); //"/RDF/RegisterItem/register/Register/member/Concept");
 	          
 			
 			

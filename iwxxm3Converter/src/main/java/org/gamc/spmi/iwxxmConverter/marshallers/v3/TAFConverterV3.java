@@ -51,6 +51,8 @@ import schemabindings31._int.icao.iwxxm._3.AerodromeForecastWeatherType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeSurfaceWindForecastType;
 import schemabindings31._int.icao.iwxxm._3.AirportHeliportPropertyType;
+import schemabindings31._int.icao.iwxxm._3.CloudLayerPropertyType;
+import schemabindings31._int.icao.iwxxm._3.CloudLayerType;
 import schemabindings31._int.icao.iwxxm._3.LengthWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeForecastType;
@@ -354,7 +356,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// forecasted weather
 		for (String weatherCode : translatedTaf.getCommonWeatherSection().getCurrentWeather()) {
-			recordType.getWeather().add(createWeatherSection(weatherCode));
+				recordType.getWeather().add(createWeatherSection(weatherCode));
 		}
 
 		
@@ -584,7 +586,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		// Body
 		AerodromeCloudForecastType clouds = IWXXM31Helpers.ofIWXXM.createAerodromeCloudForecastType();
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
-
+		
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 
 			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudSection.getAmount());
@@ -594,7 +596,10 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 				clouds.setVerticalVisibility(vVisibility);
 
 			} else {
-				Layer cloudLayer = IWXXM31Helpers.ofIWXXM.createAerodromeCloudTypeLayer();
+				
+				
+				
+				CloudLayerPropertyType cloudLayer = IWXXM31Helpers.ofIWXXM.createCloudLayerPropertyType();
 				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudSection.getHeight(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);

@@ -20,13 +20,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
-import javax.imageio.stream.FileImageInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,40 +35,42 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+
+
 /**Class for parsing WMO Cloud codes
  * @see WMORegister
  * 
  * @author moryakov*/
-public class WMOCloudTypeRegister implements WMORegister {
+public class WMOSigWXRegister implements WMORegister {
 
-	private static final String registerFileName = "codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
+	private static final String registerFileName = "codes.wmo.int-49-2-SigWxPhenomena.rdf";
 	
-	TreeMap<Integer, String> wmoCloudTypeCodes = new TreeMap<Integer, String>();
-	public static final int missingCode = 63; 
 	
+	
+	TreeMap<String, String> wmoPhenomenaCodes = new TreeMap<String, String>();
 	
 	@Override
-	public TreeMap<Integer, String> getContent() {
+	public TreeMap<String, String> getContent() {
 		// TODO Auto-generated method stub
-		return wmoCloudTypeCodes;
+		return wmoPhenomenaCodes;
 	}
 
 	@Override
 	public String getWMOUrlByCode(Object code) {
-		if (wmoCloudTypeCodes.size()==0)
+		if (wmoPhenomenaCodes.size()==0)
 			parseWMOXml();
 		
-		return wmoCloudTypeCodes.get(code);
+		return wmoPhenomenaCodes.get(code);
 	}
 
 	@Override
 	public void parseWMOXml() {
-		try (InputStream is = new FileInputStream(registerFileName)) {
+		try (InputStream is = new FileInputStream(registerFileName);) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			
+			// this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation
@@ -80,33 +82,46 @@ public class WMOCloudTypeRegister implements WMORegister {
             // Create XPath object
             XPath xpath = xpathFactory.newXPath();
 			
-			XPathExpression expr =xpath.compile("/RDF/Container/member/Concept");
+			XPathExpression expr =xpath.compile("/RDF/RegisterItem");
 	          
 			
 			
 			NodeList listOfCloudElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);//root.getElementsByTagName("member");
 			int totalCloudElements = listOfCloudElements.getLength();
-			registerLogger.debug("Total members in CloudTypes : " + totalCloudElements);
+			registerLogger.debug("Total members in SigWx phenomenas: " + totalCloudElements);
 
 			for (int i = 0; i < listOfCloudElements.getLength(); i++) {
 
 				Node currentNode = listOfCloudElements.item(i);
 				if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 					
-					Integer code=-1;
+					String code="";
 					String url="";
 					
-					Element concept = (Element) currentNode;
-					url = concept.getAttribute("rdf:about");
 					
-					NodeList notationList = concept.getElementsByTagName("skos:notation");
+					
+					Element concept = (Element) currentNode;
+					
+					
+						
+					
+					
+					NodeList notationList = concept.getElementsByTagName("reg:notation");
 					if (notationList!=null && notationList.getLength()>0) {
 						Element notation = (Element) notationList.item(0);
-						code = Integer.valueOf(notation.getTextContent());
+						code = (notation.getTextContent());
+						
 					}
 					
-					if (code>-1 && url.length()>0)
-						wmoCloudTypeCodes.put(code, url);
+					notationList = concept.getElementsByTagName("reg:definition");
+					if (notationList!=null && notationList.getLength()>0) {
+						Element notation = (Element) notationList.item(0);
+						url = notation.getElementsByTagName("reg:entity").item(0).getAttributes().getNamedItem("rdf:resource").getTextContent();
+						
+					}
+					
+					if (code.length()>0 && url.length()>0)
+						wmoPhenomenaCodes.put(code, url);
 
 				}
 			} 
@@ -120,18 +135,5 @@ public class WMOCloudTypeRegister implements WMORegister {
 		
 	}
 	
-	/**Returns integer code for string cloud amount representation, e.g. FEW=1*/
-	public Integer getCloudTypeByStringCode(String strAmount) {
-		
-		switch(strAmount) {
-			case "CB":
-				return 9;
-			default:
-				return missingCode;
-		}
-		
-		 
-	}
 	
-
 }

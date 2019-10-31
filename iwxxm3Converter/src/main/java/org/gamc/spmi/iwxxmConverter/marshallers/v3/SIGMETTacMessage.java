@@ -292,8 +292,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			this.setPhenomenonDescription(phenom);
 
 			tac.delete(0, lastIndex);
-		}
-		else
+		} else
 			throw new SIGMETParsingException("No phenomena description found!");
 
 		return tac;
@@ -390,7 +389,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		Matcher matcherIntensity = SigmetParsingRegexp.sigmetIntensityChanges.matcher(tac);
 		if (matcherIntensity.find()) {
 			String intensity = matcherIntensity.group("intensity");
-			
+
 			this.getPhenomenonDescription().setIntencity(Intensity.valueOf(intensity));
 			tac.delete(matcherIntensity.start(), matcherIntensity.end());
 		}
@@ -409,13 +408,11 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			boolean hasBothFL = matcherLevel.group("hasbothfls") != null;
 			boolean aboveFL = matcherLevel.group("above") != null;
 
-						
-
 			level.setBottomMarginOnSurface(onSurface);
 			level.setTopMarginAboveFl(aboveFL);
 
 			// top FL
-			
+
 			if (hasTop) {
 				String topFL = matcherLevel.group("fl");
 				Optional<Integer> oTop = Optional.of(Integer.valueOf(topFL));
@@ -436,7 +433,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			if (hasBothFL) {
 				String lowFL = matcherLevel.group("lowfl");
 				String highFL = matcherLevel.group("highfl");
-				
+
 				// low
 				Optional<Integer> oLowFL = Optional.of(Integer.valueOf(lowFL));
 				level.setBottomFL(oLowFL);
@@ -445,7 +442,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 				Optional<Integer> oHighFL = Optional.of(Integer.valueOf(highFL));
 				level.setTopFL(oHighFL);
 			}
-			
+
 			this.setVerticalLocation(level);
 			tac.delete(matcherLevel.start(), matcherLevel.end());
 		}
@@ -468,9 +465,10 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 			if (isMoving) {
 				movSection.setMovingDirection(RUMB_UNITS.valueOf(direction));
-				movSection.setSpeedUnits(SPEED_UNITS.valueOf(units));
-				movSection.setMovingSpeed(Integer.valueOf(speed));
-
+				if (speed != null && units != null) {
+					movSection.setSpeedUnits(SPEED_UNITS.valueOf(units));
+					movSection.setMovingSpeed(Integer.valueOf(speed));
+				}
 			}
 			this.getPhenomenonDescription().setMovingSection(movSection);
 			tac.delete(matcherMov.start(), matcherMov.end());

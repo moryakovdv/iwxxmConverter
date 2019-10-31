@@ -36,7 +36,7 @@ public class SigmetTranslationTest {
 	String sigmetWithinRadius = "WSSS20 VHHH 180830\r\n" + 
 			"VHHK SIGMET 1 VALID 180830/181230 VHHHVHHK\r\n" + 
 			"HONG KONG FIR RDOACT CLD OBS AT 0901Z WI 30KM OF N6030 E02550=";
-	@Test
+	@Test(expected = SIGMETParsingException.class)
 	public void testGeneral() throws SIGMETParsingException {
 		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetGeneral);
 		sigmetTac.parseMessage();
@@ -54,7 +54,7 @@ public class SigmetTranslationTest {
 		
 	}
 	
-	@Test
+	@Test(expected = SIGMETParsingException.class)
 	public void testPolygon() throws SIGMETParsingException {
 		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetPolygon);
 		sigmetTac.parseMessage();
@@ -63,7 +63,7 @@ public class SigmetTranslationTest {
 		
 		
 	}
-	@Test
+	@Test(expected = SIGMETParsingException.class)
 	public void testMOving() throws SIGMETParsingException {
 		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetMoving);
 		sigmetTac.parseMessage();
@@ -75,7 +75,7 @@ public class SigmetTranslationTest {
 	
 	}
 	
-	@Test
+	@Test(expected = SIGMETParsingException.class)
 	public void testWithinRadius() throws SIGMETParsingException {
 		SIGMETTacMessage sigmetTac = new SIGMETTacMessage(sigmetWithinRadius);
 		sigmetTac.parseMessage();

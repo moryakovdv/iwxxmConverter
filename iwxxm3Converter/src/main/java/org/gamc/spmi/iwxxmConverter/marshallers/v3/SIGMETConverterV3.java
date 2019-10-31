@@ -76,7 +76,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	String interpretation = "SNAPSHOT";
 
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
-	 private String dateTime = "";
+	private String dateTime = "";
 	private String dateTimePosition = "";
 	private SIGMETTacMessage translatedSigmet;
 
@@ -86,19 +86,18 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		createdRunways.clear();
 
 		SIGMETTacMessage sigmetMessage = new SIGMETTacMessage(tac);
-		
+
 		SIGMETType result;
-		
+
 		try {
 			sigmetMessage.parseMessage();
 			result = convertMessage(sigmetMessage);
-		}
-		catch(ParsingException pa) {
+		} catch (ParsingException pa) {
 			result = IWXXM31Helpers.ofIWXXM.createSIGMETType();
 			result.setTranslationFailedTAC(tac);
-			
+
 		}
-		
+
 		String xmlResult = marshallMessageToXML(result);
 
 		return xmlResult;
@@ -109,7 +108,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
 		this.translatedSigmet = translatedMessage;
 		SIGMETType sigmetRootTag = IWXXM31Helpers.ofIWXXM.createSIGMETType();
-		
+
 		StringOrRefType refTacString = IWXXM31Helpers.ofGML.createStringOrRefType();
 		refTacString.setValue(translatedMessage.getInitialTacString());
 		sigmetRootTag.setDescription(refTacString);
@@ -143,7 +142,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		}
 		sigmetRootTag = addTranslationCentreHeader(sigmetRootTag);
 		TimeInstantPropertyType obsTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
-				translatedSigmet.getMessageIssueDateTime(), translatedSigmet.getIcaoCode(),"issue");
+				translatedSigmet.getMessageIssueDateTime(), translatedSigmet.getIcaoCode(), "issue");
 		sigmetRootTag.setIssueTime(obsTimeType);
 
 		StringWithNilReasonType seq = iwxxmHelpers.ofIWXXM.createStringWithNilReasonType();
@@ -201,15 +200,21 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		patchSurf.setExterior(exType);
 		air.setAirspaceVolume(setAirspaceVolume());
 		evolvingType.setGeometry(air);
-		motion.setUom(
-				translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
-		motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().getDoubleValue());
-		evolvingType.setDirectionOfMotion(dirMo);
-		speedType.setUom(
-				translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits().getStringValue());
-		speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
+		if (translatedSigmet.getPhenomenonDescription().getMovingSection() != null) {
+			motion.setUom(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
+			motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection()
+					.getDoubleValue());
+			evolvingType.setDirectionOfMotion(dirMo);
+			
+			if (translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits()!=null && translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed()>0) {
+			speedType.setUom(
+					translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits().getStringValue());
+			speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
+			}
+		}
 		evolvingType.setSpeedOfMotion(speedType);
 		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
+
 		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
 		sicol.setPhenomenonTime(absTime);
 		sicol.getMember().add(evolvingType1);
@@ -378,7 +383,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	public SIGMETType addTranslationCentreHeader(SIGMETType report) throws DatatypeConfigurationException {
 		report = iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWV", "Moscow, RU");
-		//report.setTranslationFailedTAC("");
+		// report.setTranslationFailedTAC("");
 		return report;
 	}
 

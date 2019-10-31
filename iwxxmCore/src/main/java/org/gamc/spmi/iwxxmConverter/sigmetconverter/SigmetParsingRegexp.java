@@ -68,7 +68,7 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetWithinCorridor = Pattern.compile("(APRX|WTN)\\s+(?<range>\\d+)\\s?(KM|NM)\\s+(WID|OF)\\s+LINE\\s+(?:BTN|\\/)?");
 	
 	/**Whether phenomena moves or stands and intensity*/
-	public final static Pattern sigmetMovement = Pattern.compile("((?<isStationery>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)(?<speedunits>KMH|KT)?))");
+	public final static Pattern sigmetMovement = Pattern.compile("((?<isStationery>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)?(?<speedunits>KMH|KT)?))");
 	
 	/**Forecasted position of phenomenon*/
 	public final static Pattern sigmetForecastSection = Pattern.compile("FCST\\s+AT\\s+(?<time>\\d{4})Z\\s+(?<location>.*)");

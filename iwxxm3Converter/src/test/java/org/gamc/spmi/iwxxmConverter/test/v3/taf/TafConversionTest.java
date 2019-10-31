@@ -90,9 +90,9 @@ public class TafConversionTest {
 		
 	}
 	
-	@Test(expected =ParsingException.class)
+	@Test
 	/**CAVOK with visibility and clouds */
-	public void testMisplacedCAVOKTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testMisplacedCAVOKTaf() throws Exception {
 		
 		String testTaf = "TAF UUBW 220457Z 2206/2306 28005MPS CAVOK 8000 BKN012\n" + 
 				"TXM10/2212Z TNM16/2305Z\n" + 
@@ -102,25 +102,22 @@ public class TafConversionTest {
 		String iwxxm = tafconverter.convertTacToXML(testTaf);
 		System.out.println(iwxxm);
 		
-		/*
-		List<FailedAssert> failedResults;
-		try {
+		
+		List<FailedValidationAssert> failedResults;
+		
 			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()==0);
-		} catch (Exception e) {
+			assertTrue(failedResults.size()>0);
 		
-			e.printStackTrace();
-		}
 		
-		*/
 	}
 	
 	@Test()
-	public void testVerticalVisibilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testVerticalVisibilityTaf() throws Exception {
 		
-		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 TEMPO 2206/2209\n" + 
-				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
-				"BR BKN003 TEMPO 2217/2306 0400 FZFG=";
+		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 "
+				+ "TEMPO 2206/2209 1500 BR OVC002 "
+				+ "BECMG 2209/2210 6000 NSW SCT011 "
+				+ "BECMG 2215/2217 3100 BR BKN003 TEMPO 2217/2306 0400 FZFG=";
 		
 		TAFConverterV3 tafconverter = new TAFConverterV3();
 		String iwxxm = tafconverter.convertTacToXML(testTaf);
@@ -128,22 +125,19 @@ public class TafConversionTest {
 		
 		
 		List<FailedValidationAssert> failedResults;
-		try {
+		
 			failedResults = validator.validateString(iwxxm);
 			assertTrue(failedResults.size()==0);
 			for(FailedValidationAssert fAssert : failedResults) {
 				System.out.println(fAssert);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 	}
 	
 	@Test()
 	/**Invalid taf - VV misplaced error*/
-	public void testInvalidTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testInvalidTaf() throws Exception {
 		
 		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 SCT010 TEMPO 2206/2209\n" + 
 				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
@@ -155,15 +149,12 @@ public class TafConversionTest {
 		
 		
 		List<FailedValidationAssert> failedResults;
-		try {
+		
 			failedResults = validator.validateString(iwxxm);
 			assertTrue(failedResults.size()>0);
 			for(FailedValidationAssert fAssert : failedResults) {
 				System.out.println(fAssert);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 	}

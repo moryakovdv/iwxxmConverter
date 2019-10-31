@@ -24,6 +24,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
@@ -40,6 +41,7 @@ import schemabindings31._int.icao.iwxxm._3.AerodromePresentWeatherType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRecentWeatherType;
 import schemabindings31._int.icao.iwxxm._3.AirportHeliportPropertyType;
 import schemabindings31._int.icao.iwxxm._3.CloudAmountReportedAtAerodromeType;
+import schemabindings31._int.icao.iwxxm._3.CloudLayerPropertyType;
 import schemabindings31._int.icao.iwxxm._3.CloudLayerType;
 import schemabindings31._int.icao.iwxxm._3.DistanceWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.LengthWithNilReasonType;
@@ -101,6 +103,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	final WMORunWayDepositsRegister rwDepositReg = new WMORunWayDepositsRegister();
 	final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
 
+	public static final String NSW = "NSW";
 	
 	/**
 	 * Creates TimeInstantPropertyType from given DateTime
@@ -377,6 +380,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		// Cloud amount seems to conform WMO schemas with
 		CloudAmountReportedAtAerodromeType amount = ofIWXXM.createCloudAmountReportedAtAerodromeType();
+		
 
 		// Get the right link to WMO code table for cloud amount octant
 
@@ -409,6 +413,8 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 	}
 	
+	
+	
 	/**Creates tag for vertical visibility*/
 	public JAXBElement<LengthWithNilReasonType> createVerticalVisibilitySection(double visibilityValue) {
 		LengthWithNilReasonType vvType = ofIWXXM.createLengthWithNilReasonType();
@@ -424,7 +430,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public AerodromePresentWeatherType createPresentWeatherSection(String weather) {
 
 		AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
-
+		if (weather.equalsIgnoreCase(NSW)) {
+			presentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			return presentWeather;
+		}
 		presentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 
 		return presentWeather;
@@ -435,6 +444,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		AerodromeRecentWeatherType recentWeather = ofIWXXM.createAerodromeRecentWeatherType();
 
+		if (weather.equalsIgnoreCase(NSW)) {
+			recentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			return recentWeather;
+		}
 		recentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 
 		return recentWeather;
@@ -449,9 +462,18 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	 */
 	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) {
 		AerodromeForecastWeatherType fcstWeather = ofIWXXM.createAerodromeForecastWeatherType();
-
+		
+		if (weather.equalsIgnoreCase(NSW)) {
+			fcstWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			return fcstWeather;
+		}
+		
+		
 		fcstWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 		return fcstWeather;
+		
+	
+		
 	}
 
 	public WMOCloudRegister getCloudReg() {

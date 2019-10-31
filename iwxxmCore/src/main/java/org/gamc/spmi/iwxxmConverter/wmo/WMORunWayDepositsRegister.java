@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
@@ -33,13 +34,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import com.helger.commons.id.factory.FileIntIDFactory;
+
 /**Class for parsing WMO deposit codes (0-20-086)
  * @see WMORegister
  * 
  * @author moryakov*/
 public class WMORunWayDepositsRegister implements WMORegister {
 
-	private static final String registerFileName = "/wmoregisters/deposits.xml";
+	private static final String registerFileName = "codes.wmo.int-bufr4-codeflag-0-20-086.rdf";
 	
 	TreeMap<Integer, String> wmoDepositsCodes = new TreeMap<Integer, String>();
 	
@@ -59,12 +62,12 @@ public class WMORunWayDepositsRegister implements WMORegister {
 
 	@Override
 	public void parseWMOXml() {
-		try {
+		try(InputStream is = new FileInputStream(registerFileName);) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			InputStream is = this.getClass().getResourceAsStream(registerFileName);
+			//this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation

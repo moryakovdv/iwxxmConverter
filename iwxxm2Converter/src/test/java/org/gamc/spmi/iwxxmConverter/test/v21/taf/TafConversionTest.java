@@ -90,9 +90,9 @@ public class TafConversionTest {
 		
 	}
 	
-	@Test(expected =ParsingException.class)
+	@Test
 	/**CAVOK with visibility and clouds */
-	public void testMisplacedCAVOKTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testMisplacedCAVOKTaf() throws Exception {
 		
 		String testTaf = "TAF UUBW 220457Z 2206/2306 28005MPS CAVOK 8000 BKN012\n" + 
 				"TXM10/2212Z TNM16/2305Z\n" + 
@@ -102,17 +102,12 @@ public class TafConversionTest {
 		String iwxxm = tafconverter.convertTacToXML(testTaf);
 		System.out.println(iwxxm);
 		
-		/*
-		List<FailedAssert> failedResults;
-		try {
-			failedResults = validator.validateString(iwxxm);
-			assertTrue(failedResults.size()==0);
-		} catch (Exception e) {
 		
-			e.printStackTrace();
-		}
+		List<FailedValidationAssert> failedResults = validator.validateString(iwxxm);
 		
-		*/
+		assertTrue(failedResults.size()>0);
+		
+		
 	}
 	
 	@Test()

@@ -29,4 +29,5 @@ public class StringConstants {
 	public static final String WMO_METAR_OBSERVED_PROPERTY_TITLE = "Observed properties for Meteorological Aerodrome Observation Reports (METAR and SPECI)";
 	public static final String WMO_TAF_OBSERVED_PROPERTY_TITLE = "Observed properties for Meteorological Aerodrome Observation Reports (METAR and SPECI)";
 	public static final String SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME = "com.sun.xml.bind.namespacePrefixMapper"; //com.sun.xml.internal.bind.namespacePrefixMapper";
+	public static final String NO_SIGNIFICANT_CHANGES = "http://codes.wmo.int/common/nil/nothingOfOperationalSignificance";
 }

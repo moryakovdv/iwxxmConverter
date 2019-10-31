@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
@@ -39,7 +40,7 @@ import org.xml.sax.SAXParseException;
  * @author moryakov*/
 public class WMORunWayFrictionRegister implements WMORegister {
 
-	private static final String registerFileName = "/wmoregisters/runwayFriction.xml";
+	private static final String registerFileName = "codes.wmo.int-bufr4-codeflag-0-20-089.rdf";
 	
 	TreeMap<Integer, String> wmoFrictionCodes = new TreeMap<Integer, String>();
 	
@@ -59,12 +60,12 @@ public class WMORunWayFrictionRegister implements WMORegister {
 
 	@Override
 	public void parseWMOXml() {
-		try {
+		try(InputStream is = new FileInputStream(registerFileName);) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			InputStream is = this.getClass().getResourceAsStream(registerFileName);
+			
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation

@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
@@ -40,7 +41,7 @@ import org.xml.sax.SAXParseException;
  * */
 public class WMOPrecipitationRegister implements WMORegister {
 
-	private static final String registerFileName = "/wmoregisters/precipitation.xml";
+	private static final String registerFileName = "codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf";
 
 	TreeMap<String, String> wmoPrecipitationCodes = new TreeMap<String, String>();
 
@@ -60,12 +61,12 @@ public class WMOPrecipitationRegister implements WMORegister {
 
 	@Override
 	public void parseWMOXml() {
-		try {
+		try(InputStream is = new FileInputStream(registerFileName)) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			InputStream is = this.getClass().getResourceAsStream(registerFileName);
+			//this.getClass().getResourceAsStream(registerFileName);
 			Document doc = docBuilder.parse(is);
 
 			// normalize text representation

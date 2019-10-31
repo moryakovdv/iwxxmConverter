@@ -132,6 +132,8 @@
             <j.0:fxy>020012</j.0:fxy>
           </skos:Concept>
         </skos:member>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2014-09-03T09:54:43.408Z</dct:modified>
         <skos:member>
           <skos:Concept rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/16">
             <rdfs:label xml:lang="en">Cirrus (often in bands) and Cirrostratus, or Cirrostratus alone, progressively Invading the sky; they generally thicken as a whole; the continuous veil extends more than 45 degrees above the horizon, without the sky being totally covered</rdfs:label>
@@ -311,8 +313,6 @@
             <j.0:fxy>020012</j.0:fxy>
           </skos:Concept>
         </skos:member>
-        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-        >2014-09-03T09:54:43.408Z</dct:modified>
         <skos:member>
           <skos:Concept rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/30">
             <rdfs:label xml:lang="en">No CL clouds</rdfs:label>
@@ -431,12 +431,12 @@
         </skos:member>
       </skos:Collection>
     </reg:register>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.473Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/18"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_18:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.473Z</dct:dateSubmitted>
     <rdfs:label xml:lang="en">Cirrostratus not progressively invading the sky and not entirely covering it</rdfs:label>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
@@ -459,8 +459,6 @@
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >61</reg:notation>
     <rdfs:label xml:lang="en">CM clouds invisible owing to darkness, fog, blowing dust or sand, or other similar phenomena, or because of continuous layer of lower clouds</rdfs:label>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.615Z</dct:dateSubmitted>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:submitter rdf:parseType="Resource">
@@ -468,6 +466,8 @@
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.615Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_19">
     <reg:definition rdf:parseType="Resource">
@@ -478,10 +478,10 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
-    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.49Z</dct:dateSubmitted>
+    <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
@@ -497,12 +497,12 @@
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.624Z</dct:dateSubmitted>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >62</reg:notation>
     <rdfs:label xml:lang="en">CL clouds invisible owing to darkness, fog, blowing dust or sand, or other similar phenomena</rdfs:label>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.624Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -512,8 +512,6 @@
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_28">
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >28</reg:notation>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.443Z</dct:dateSubmitted>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -523,6 +521,8 @@
     </reg:definition>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.443Z</dct:dateSubmitted>
     <rdfs:label xml:lang="en">Altocumulus castellanus or floccus</rdfs:label>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
@@ -562,9 +562,9 @@
     </reg:definition>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
-    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.628Z</dct:dateSubmitted>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >15</reg:notation>
@@ -585,9 +585,9 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
+    <rdfs:label xml:lang="en">Altocumulus of a chaotic sky, generally at several levels</rdfs:label>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.52Z</dct:dateSubmitted>
-    <rdfs:label xml:lang="en">Altocumulus of a chaotic sky, generally at several levels</rdfs:label>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_17">
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -595,6 +595,8 @@
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/17"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_17:1#graph"/>
     </reg:definition>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.632Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
@@ -603,8 +605,6 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.632Z</dct:dateSubmitted>
     <rdfs:label xml:lang="en">Cirrostratus covering the whole sky</rdfs:label>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
@@ -616,8 +616,6 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.548Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/60"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_60:1#graph"/>
@@ -625,6 +623,8 @@
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <rdfs:label xml:lang="en">CH clouds invisible owing to darkness, fog, blowing dust or sand, or other similar phenomena, or because of a continuous layer of lower clouds</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.548Z</dct:dateSubmitted>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >60</reg:notation>
@@ -635,12 +635,12 @@
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >38</reg:notation>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.558Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/38"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_38:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.558Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:submitter rdf:parseType="Resource">
@@ -659,8 +659,6 @@
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.455Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -668,14 +666,16 @@
     <rdfs:label xml:lang="en">Stratus fractus or Cumulus fractus of bad weather,* or both (pannus), usually below Altostratus or Nimbostratus</rdfs:label>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >37</reg:notation>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.455Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_25">
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >25</reg:notation>
+    <rdfs:label xml:lang="en">Altocumulus translucidus in bands, or one or more layers of Altocumulus translucidus or opacus, progressively invading the sky; these Altocumulus clouds generally thicken as a whole</rdfs:label>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.417Z</dct:dateSubmitted>
-    <rdfs:label xml:lang="en">Altocumulus translucidus in bands, or one or more layers of Altocumulus translucidus or opacus, progressively invading the sky; these Altocumulus clouds generally thicken as a whole</rdfs:label>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
@@ -699,10 +699,10 @@
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >13</reg:notation>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.507Z</dct:dateSubmitted>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.507Z</dct:dateSubmitted>
     <rdfs:label xml:lang="en">Cirrus spissatus cumulonimbogenitus</rdfs:label>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/13"/>
@@ -719,8 +719,6 @@
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/7"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_7:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.611Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
@@ -728,6 +726,8 @@
     </reg:submitter>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.611Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_39">
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -765,17 +765,17 @@
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/27"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_27:1#graph"/>
     </reg:definition>
-    <rdfs:label xml:lang="en">Altocumulus translucidus or opacus in two or more layers, or Altocumulus opacus in a single layer, not progressively invading the sky, or Altocumulus with Altostratus or Nimbostratus</rdfs:label>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.512Z</dct:dateSubmitted>
+    <rdfs:label xml:lang="en">Altocumulus translucidus or opacus in two or more layers, or Altocumulus opacus in a single layer, not progressively invading the sky, or Altocumulus with Altostratus or Nimbostratus</rdfs:label>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_26">
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.43Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >26</reg:notation>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.43Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -810,6 +810,8 @@
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_8">
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.553Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/8"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_8:1#graph"/>
@@ -817,8 +819,6 @@
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <rdfs:label xml:lang="en">Cumulus (Cu)</rdfs:label>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.553Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
@@ -844,10 +844,10 @@
     >1</owl:versionInfo>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdfs:label xml:lang="en">Cirrus fibratus, sometimes uncinus, not progressively invading the sky</rdfs:label>
-    <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
-    >11</reg:notation>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.499Z</dct:dateSubmitted>
+    <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >11</reg:notation>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_59">
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
@@ -858,11 +858,11 @@
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/59"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_59:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.434Z</dct:dateSubmitted>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <rdfs:label xml:lang="en">Cloud not visible owing to darkness, fog, duststorm, sandstorm, or other analogous phenomena</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.434Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -890,9 +890,9 @@
     >2014-09-03T09:54:43.604Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_23">
-    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.636Z</dct:dateSubmitted>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -919,8 +919,6 @@
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.619Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >9</reg:notation>
@@ -928,6 +926,8 @@
     >1</owl:versionInfo>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdfs:label xml:lang="en">Cumulonimbus (Cb)</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.619Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_36">
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
@@ -959,19 +959,17 @@
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_24:1#graph"/>
     </reg:definition>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.57Z</dct:dateSubmitted>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >24</reg:notation>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.57Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_12">
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.583Z</dct:dateSubmitted>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:submitter rdf:parseType="Resource">
@@ -981,6 +979,8 @@
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >12</reg:notation>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.583Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/12"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_12:1#graph"/>
@@ -993,8 +993,6 @@
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.597Z</dct:dateSubmitted>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >33</reg:notation>
     <rdfs:label xml:lang="en">Cumulonimbus calvus, with or without Cumulus, Stratocumulus or Stratus</rdfs:label>
@@ -1007,6 +1005,8 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.597Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_21">
@@ -1039,13 +1039,13 @@
     >1</owl:versionInfo>
     <rdfs:label xml:lang="en">Altocumulus (Ac)</rdfs:label>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.608Z</dct:dateSubmitted>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/3"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_3:1#graph"/>
     </reg:definition>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.608Z</dct:dateSubmitted>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >3</reg:notation>
   </reg:RegisterItem>
@@ -1060,10 +1060,10 @@
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >22</reg:notation>
-    <rdfs:label xml:lang="en">Altostratus opacus or Nimbostratus</rdfs:label>
-    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.566Z</dct:dateSubmitted>
+    <rdfs:label xml:lang="en">Altostratus opacus or Nimbostratus</rdfs:label>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/22"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_22:1#graph"/>
@@ -1072,14 +1072,14 @@
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_10">
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.477Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/10"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_10:1#graph"/>
     </reg:definition>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >10</reg:notation>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.477Z</dct:dateSubmitted>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -1104,21 +1104,21 @@
     >4</reg:notation>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
-    <rdfs:label xml:lang="en">Altostratus (As)</rdfs:label>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.532Z</dct:dateSubmitted>
+    <rdfs:label xml:lang="en">Altostratus (As)</rdfs:label>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_34">
     <rdfs:label xml:lang="en">Stratocumulus cumulogenitus</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.447Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/34"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_34:1#graph"/>
     </reg:definition>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >34</reg:notation>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.447Z</dct:dateSubmitted>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <reg:submitter rdf:parseType="Resource">
@@ -1135,11 +1135,11 @@
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.408Z</dct:dateSubmitted>
     <rdfs:label>Cloud type</rdfs:label>
     <reg:itemClass rdf:resource="http://purl.org/linked-data/registry#Register"/>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag"/>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.408Z</dct:dateSubmitted>
     <reg:notation>0-20-012</reg:notation>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
@@ -1215,11 +1215,11 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.459Z</dct:dateSubmitted>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.459Z</dct:dateSubmitted>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >20</reg:notation>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
@@ -1234,10 +1234,10 @@
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/6"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_6:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.537Z</dct:dateSubmitted>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.537Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
@@ -1250,8 +1250,6 @@
     >6</reg:notation>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_41">
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.482Z</dct:dateSubmitted>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >41</reg:notation>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
@@ -1267,16 +1265,18 @@
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
     <rdfs:label xml:lang="en">CM</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.482Z</dct:dateSubmitted>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_42">
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.426Z</dct:dateSubmitted>
     <reg:submitter rdf:parseType="Resource">
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.426Z</dct:dateSubmitted>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/42"/>
@@ -1301,22 +1301,22 @@
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >30</reg:notation>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.575Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/30"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_30:1#graph"/>
     </reg:definition>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.575Z</dct:dateSubmitted>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_0">
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.438Z</dct:dateSubmitted>
     <rdfs:label xml:lang="en">Cirrus (Ci)</rdfs:label>
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >0</reg:notation>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.438Z</dct:dateSubmitted>
     <reg:definition rdf:parseType="Resource">
       <reg:entity rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/0"/>
       <reg:sourceGraph rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012/_0:1#graph"/>
@@ -1333,9 +1333,9 @@
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</reg:notation>
-    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
     >2014-09-03T09:54:43.516Z</dct:dateSubmitted>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
     <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >1</owl:versionInfo>
     <rdfs:label xml:lang="en">Cirrocumulus (Cc)</rdfs:label>
@@ -1350,6 +1350,8 @@
     <reg:register rdf:resource="http://codes.wmo.int/bufr4/codeflag/0-20-012"/>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_63">
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:54:43.463Z</dct:dateSubmitted>
     <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <reg:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
     >63</reg:notation>
@@ -1366,8 +1368,6 @@
       <foaf:name>marqh (admin)</foaf:name>
       <foaf:openid rdf:resource="https://profiles.google.com/100578379482821123729"/>
     </reg:submitter>
-    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2014-09-03T09:54:43.463Z</dct:dateSubmitted>
   </reg:RegisterItem>
   <reg:RegisterItem rdf:about="http://codes.wmo.int/bufr4/codeflag/0-20-012/_2">
     <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>

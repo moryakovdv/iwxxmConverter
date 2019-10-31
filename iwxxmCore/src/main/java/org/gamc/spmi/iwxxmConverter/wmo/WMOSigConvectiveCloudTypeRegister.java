@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.TreeMap;
 
@@ -39,7 +40,8 @@ import org.xml.sax.SAXParseException;
  * @author moryakov*/
 public class WMOSigConvectiveCloudTypeRegister implements WMORegister {
 
-	private static final String registerFileName = "/wmoregisters/codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
+	//private static final String registerFileName = "/wmoregisters/codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
+	private static final String registerFileName = "codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
 	
 	TreeMap<Integer, String> wmoCloudTypeCodes = new TreeMap<Integer, String>();
 	//public static final int missingCode = 63; 
@@ -61,12 +63,13 @@ public class WMOSigConvectiveCloudTypeRegister implements WMORegister {
 
 	@Override
 	public void parseWMOXml() {
-		try {
+		try(InputStream is = new FileInputStream(registerFileName);) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			
 			
-			InputStream is = this.getClass().getResourceAsStream(registerFileName);
+						
+					//this.getClass().getResourceAsStream(registerFileName);
 		
 			Document doc = docBuilder.parse(is);
 
