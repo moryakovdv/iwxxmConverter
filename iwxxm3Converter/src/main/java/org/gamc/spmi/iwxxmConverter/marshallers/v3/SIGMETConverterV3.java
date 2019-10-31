@@ -170,136 +170,92 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	}
 
 	public AssociationRoleType setAssociationRoleType() {
-		//tag <iwxxm:analysis> initialization
 		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
-		//--------------------------------------------------------
-		//tag  <iwxxm:SIGMETEvolvingConditionCollection> initialization
 		SIGMETEvolvingConditionCollectionType sicol = IWXXM31Helpers.ofIWXXM
 				.createSIGMETEvolvingConditionCollectionType();
-		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
-		sicol.setTimeIndicator(timeIn);
-		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionCollection(sicol);
-		asType.setAny(evolvingAr);
-		//--------------------------------------------------------
-		//tag  <iwxxm:phenomenonTime> initialization
-		AbstractTimeObjectPropertyType absTime = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
-		sicol.setPhenomenonTime(absTime);
-		//--------------------------------------------------------
-		//tag  <iwxxm:member> initialization
 		SIGMETEvolvingConditionPropertyType evolvingType1 = IWXXM31Helpers.ofIWXXM
 				.createSIGMETEvolvingConditionPropertyType();
-		sicol.getMember().add(evolvingType1);
-		//--------------------------------------------------------
-		//tag  <iwxxm:SIGMETEvolvingCondition> initialization
-		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
-		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
-		//--------------------------------------------------------
-		//tag  <iwxxm:geometry> initialization
+		AbstractTimeObjectPropertyType absTime = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
+		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
 		AirspaceVolumePropertyType air = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
-		evolvingType.setGeometry(air);
-		//--------------------------------------------------------
-		//tag  <aixm:AirspaceVolume> initialization
+		PolygonPatchType patchSurf = IWXXM31Helpers.ofGML.createPolygonPatchType();
+		AbstractRingPropertyType exType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();
+		LinearRingType ringAb = IWXXM31Helpers.ofGML.createLinearRingType();
+		DirectPositionListType postDir = IWXXM31Helpers.ofGML.createDirectPositionListType();
+		SurfacePatchArrayPropertyType patch = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
+		AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
+		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionCollection(sicol);
+		JAXBElement<AbstractSurfacePatchType> arrSurf = IWXXM31Helpers.ofGML.createAbstractSurfacePatch(patchSurf);
+		patch.getAbstractSurfacePatch().add(arrSurf);
+		JAXBElement<AngleWithNilReasonType> dirMo = IWXXM31Helpers.ofIWXXM
+				.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(motion);
+		JAXBElement<AbstractRingType> ringAbAr = IWXXM31Helpers.ofGML.createAbstractRing(ringAb);
+		for (DirectionFromLine dir : translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
+			postDir.getValue().add(dir.getDirection().getDoubleValue());
+		}
+		ringAb.setPosList(postDir);
+		exType.setAbstractRing(ringAbAr);
+		patchSurf.setExterior(exType);
 		air.setAirspaceVolume(setAirspaceVolume());
-		//--------------------------------------------------------
-		
-		//evolvingType.setSpeedOfMotion(speedType);
-		//evolvingType1.setSIGMETEvolvingCondition(evolvingType);
+		evolvingType.setGeometry(air);
+		motion.setUom(
+				translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
+		motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().getDoubleValue());
+		evolvingType.setDirectionOfMotion(dirMo);
+		speedType.setUom(
+				translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits().getStringValue());
+		speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
+		evolvingType.setSpeedOfMotion(speedType);
+		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
+		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		sicol.setPhenomenonTime(absTime);
+		sicol.getMember().add(evolvingType1);
+		sicol.setTimeIndicator(timeIn);
+		asType.setAny(evolvingAr);
 		return asType;
 
 	}
 
 	private AirspaceVolumeType setAirspaceVolume() {
-		//tag  <aixm:AirspaceVolume> initialization
 		AirspaceVolumeType airS = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
-		//--------------------------------------------------------
-		//tag <aixm:upperLimit> initialization
+		SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
+		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
 		ValDistanceVerticalType valDis = IWXXM31Helpers.ofAIXM.createValDistanceVerticalType();
-		JAXBElement<ValDistanceVerticalType> valArDisJax = IWXXM31Helpers.ofAIXM
-				.createApproachAltitudeTableTypeAltitude(valDis);
-		airS.setUpperLimit(valArDisJax);
-		//--------------------------------------------------------
-		//tag  <aixm:upperLimitReference> initialization
 		CodeVerticalReferenceType valueCode = IWXXM31Helpers.ofAIXM.createCodeVerticalReferenceType();
-		JAXBElement<CodeVerticalReferenceType> valueArUpperLimRef = IWXXM31Helpers.ofAIXM
-				.createAerialRefuellingAnchorTypeRefuellingBaseLevelReference(valueCode);
-		airS.setUpperLimitReference(valueArUpperLimRef);
-		//--------------------------------------------------------
-		//tag  <aixm:horizontalProjection> initialization
+		CurvePropertyType valueCode1 = IWXXM31Helpers.ofAIXM.createCurvePropertyType();
 		SurfacePropertyType srfType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
+		SurfacePatchArrayPropertyType srfArrType = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		JAXBElement<CodeVerticalReferenceType> value4 = IWXXM31Helpers.ofAIXM
+				.createAerialRefuellingAnchorTypeRefuellingBaseLevelReference(valueCode);
+		JAXBElement<SurfaceType> surAr = IWXXM31Helpers.ofAIXM.createSurface(typeSyr);
+		JAXBElement<ValDistanceVerticalType> valDisJax = IWXXM31Helpers.ofAIXM
+				.createApproachAltitudeTableTypeAltitude(valDis);
+		JAXBElement<CurvePropertyType> value2 = IWXXM31Helpers.ofAIXM.createAirspaceVolumeTypeCentreline(valueCode1);
 		JAXBElement<SurfacePropertyType> surPropType = IWXXM31Helpers.ofAIXM
 				.createAerialRefuellingAnchorTypeExtent(srfType);
-		airS.setHorizontalProjection(surPropType);
-		//--------------------------------------------------------
-		//tag  <aixm:Surface> initialization
-		//SurfacePropertyType surType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
-		//surType.setSurface(surAr);
-		SurfaceType typeSyr = IWXXM31Helpers.ofAIXM.createSurfaceType();
-		JAXBElement<SurfaceType> surAr = IWXXM31Helpers.ofAIXM.createSurface(typeSyr);	
-		srfType.setSurface(surAr);
-		//--------------------------------------------------------
-		//tag  <gml:polygonPatches> initialization
-		SurfacePatchArrayPropertyType srfArrType = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
 		JAXBElement<SurfacePatchArrayPropertyType> pathPol = IWXXM31Helpers.ofGML.createPatches(srfArrType);
-		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%d-%s", 1, translatedSigmet.getIcaoCode())));
-		typeSyr.setPatches(pathPol);
-		//--------------------------------------------------------
-		//tag  <gml:polygonPatch> how initialization not found
-		//IWXXM31Helpers.ofGML.createpa		
-		PolygonPatchType patchSurf = IWXXM31Helpers.ofGML.createPolygonPatchType();
-		JAXBElement<AbstractSurfacePatchType> abstArSurf = IWXXM31Helpers.ofGML.createAbstractSurfacePatch(patchSurf);
-		srfArrType.getAbstractSurfacePatch().add(abstArSurf);
-		//--------------------------------------------------------
-		//tag   <gml:exterior> initialization
-		AbstractRingPropertyType exType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();	
-		patchSurf.setExterior(exType);
-		//--------------------------------------------------------
-		//tag   <gml:LinearRing> initialization
-		LinearRingType ringAb = IWXXM31Helpers.ofGML.createLinearRingType();
-		JAXBElement<AbstractRingType> ringAbAr = IWXXM31Helpers.ofGML.createAbstractRing(ringAb);	
-		exType.setAbstractRing(ringAbAr);
-		//--------------------------------------------------------
-		//tag   <gml:posList> initialization
-		DirectPositionListType postDir = IWXXM31Helpers.ofGML.createDirectPositionListType();
-		for (DirectionFromLine dir : translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
-			postDir.getValue().add(dir.getDirection().getDoubleValue());
-		}
-		ringAb.setPosList(postDir);
-		//--------------------------------------------------------
-		
-		
-		/*CurvePropertyType valueCode1 = IWXXM31Helpers.ofAIXM.createCurvePropertyType();
-		JAXBElement<CurvePropertyType> value2 = IWXXM31Helpers.ofAIXM.createAirspaceVolumeTypeCentreline(valueCode1);
-		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();	
-		SurfacePatchArrayPropertyType patch = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();		
-		JAXBElement<AbstractSurfacePatchType> arrSurf = IWXXM31Helpers.ofGML.createAbstractSurfacePatch(patchSurf);
-		patch.getAbstractSurfacePatch().add(arrSurf);
-		//JAXBElement<AngleWithNilReasonType> dirMo = IWXXM31Helpers.ofIWXXM
-		//		.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(motion);
-		exType.setAbstractRing(ringAbAr);
-		AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
-		motion.setUom(
-				translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
-		motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().getDoubleValue());
-		//evolvingType.setDirectionOfMotion(dirMo);
-		speedType.setUom(
-				translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits().getStringValue());
-		speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
 		BigInteger intDim = BigInteger.valueOf(2);
 		valDis.setUom(translatedSigmet.getHorizontalLocation().getWidenessUnits().getStringValue());
 		valDis.setValue(String.valueOf(translatedSigmet.getHorizontalLocation().getWideness()));
-//		valDisJax.setValue(valDis);
-//		airS.setLowerLimit(valDisJax);
-//		airS.setLowerLimit(valDisJax);
-//		airS.setMaximumLimit(valDisJax);
-//		airS.setMaximumLimitReference(value4);
+		valDisJax.setValue(valDis);
 		typeSyr.setSrsDimension(intDim);
+		typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%d-%s", 1, translatedSigmet.getIcaoCode())));
 		typeSyr.getAxisLabels().add("Lat Long");
 		typeSyr.setSrsName("");
 		valueCode.setValue("value");
-		typeSyr.setPatches(pathPol);		
-		airS.setCentreline(value2);*/
+		surType.setSurface(surAr);
+		airS.setUpperLimit(valDisJax);
+		airS.setUpperLimitReference(value4);
+		typeSyr.setPatches(pathPol);
+		airS.setHorizontalProjection(surPropType);
+		airS.setLowerLimit(valDisJax);
+		airS.setLowerLimit(valDisJax);
+		airS.setMaximumLimit(valDisJax);
+		airS.setMaximumLimitReference(value4);
+		airS.setCentreline(value2);
 		return airS;
 
 	}
