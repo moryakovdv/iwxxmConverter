@@ -62,47 +62,57 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	String sigmetCommonTest = "WSRS31RUMA 111143 XXX\n" +  " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n" + 
-			"      YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
-	
+	String sigmetCommonTest = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
+			+ "      YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+
 	String sigmetLineCoords = "WSRS31RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
-	String sigmentLines = "UEEE SIGMET 2 VALID 090500/090900 UEEE-\n" + 
-			"UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + 
-			"FL310/440 STNR NC=";
-	
+	String sigmentLines = "UEEE SIGMET 2 VALID 090500/090900 UEEE-\n"
+			+ "UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + "FL310/440 STNR NC=";
 
-	String sigmetSevIce = "WSRS31RUMA 111143 XXX\n" + "LIMM SIGMET 1 VALID 281135/281435 LIIP- LIMM MILANO FIR SEV ICE OBS \n" + 
-			"    AT 1120Z WI N4526 E01147 - N4442 E01107 - N4352 E01219 - N4404 \n" + 
-			"    E01330 - N4526 E01147 FL180/240 MOV E NC";
+	String sigmetSevIce = "WSRS31RUMA 111143 XXX\n"
+			+ "LIMM SIGMET 1 VALID 281135/281435 LIIP- LIMM MILANO FIR SEV ICE OBS \n"
+			+ "    AT 1120Z WI N4526 E01147 - N4442 E01107 - N4352 E01219 - N4404 \n"
+			+ "    E01330 - N4526 E01147 FL180/240 MOV E NC";
 
-	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" +  " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n" + 
-			"      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
+			+ "      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
-	
+	String sigmetTestEGGX = "YUDD SIGMET 2 VALID 101200/101600 YUSO-\r\n"
+			+ "YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+
 	@Test
-	public void testModIceSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testModIceSigmet()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetSevIce);
 
 		System.out.println(result);
 	}
-	
-	//@Test
-	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		
+
+	@Test
+	public void testAlexeyTest()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetTestEGGX);
+
+		System.out.println(result);
+	}
+
+	// @Test
+	public void testCommonSigmet()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetHeavyGR);
 
 		System.out.println(result);
 
 	}
-	
-	
-	
-	//@Test
+
+	// @Test
 	public void testSigmetWithLineCoords()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -112,14 +122,14 @@ public class SigmetConversionTest {
 
 	}
 
-	//@Test
+	// @Test
 	public void testLine()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmentLines);
 
 		System.out.println(result);
-		
+
 	}
 
 }
