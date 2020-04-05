@@ -80,10 +80,12 @@ public class SigmetConversionTest {
 	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
 			+ "      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
-	String sigmetTestEGGX = "YUDD SIGMET 2 VALID 101200/101600 YUSO-\r\n"
+	String sigmetTestEGGX = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 2 VALID 101200/101600 YUSO-\r\n"
 			+ "YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+	String sigmetTestCnsl = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
+			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
 
-	@Test
+	//@Test
 	public void testModIceSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -100,7 +102,15 @@ public class SigmetConversionTest {
 
 		System.out.println(result);
 	}
+	
+	//@Test
+	public void testAlexeyCnslTest()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetTestCnsl);
 
+		System.out.println(result);
+	}
 	// @Test
 	public void testCommonSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
