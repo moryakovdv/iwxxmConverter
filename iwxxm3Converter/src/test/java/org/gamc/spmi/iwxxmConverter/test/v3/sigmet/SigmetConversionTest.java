@@ -80,9 +80,9 @@ public class SigmetConversionTest {
 	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
 			+ "      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
-	String sigmetTestEGGX = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 2 VALID 101200/101600 YUSO-\r\n"
-			+ "YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
-	String sigmetTestCnsl = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
+	String sigmetTestYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 2 VALID 101200/101600 YUSO-\r\n" + 
+			"      YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
+	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
 			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
 
 	@Test
@@ -95,20 +95,20 @@ public class SigmetConversionTest {
 	}
 
 	/**@author alex*/
-	//@Test
-	public void testAlexeyTest()
+	@Test
+	public void testTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
-		String result = mc.convertTacToXML(sigmetTestEGGX);
+		String result = mc.convertTacToXML(sigmetTestYUDD);
 
 		System.out.println(result);
 	}
-	
+	/**@author alex*/
 	//@Test
-	public void testAlexeyCnslTest()
+	public void testCnslTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
-		String result = mc.convertTacToXML(sigmetTestCnsl);
+		String result = mc.convertTacToXML(sigmetTestCnslYUDD);
 
 		System.out.println(result);
 	}

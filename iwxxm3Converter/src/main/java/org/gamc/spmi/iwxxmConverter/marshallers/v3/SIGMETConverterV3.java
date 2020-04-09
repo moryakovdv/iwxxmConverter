@@ -26,6 +26,7 @@ import schemabindings31._int.icao.iwxxm._3.AeronauticalSignificantWeatherPhenome
 import schemabindings31._int.icao.iwxxm._3.AirspacePropertyType;
 import schemabindings31._int.icao.iwxxm._3.AirspaceVolumePropertyType;
 import schemabindings31._int.icao.iwxxm._3.AngleWithNilReasonType;
+import schemabindings31._int.icao.iwxxm._3.ExpectedIntensityChangeType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.ReportPropertyType;
@@ -57,6 +58,8 @@ import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractSurfacePatchType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AbstractTimeComplexType;
+import schemabindings31.net.opengis.gml.v_3_2_1.AbstractTimeObjectType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
@@ -162,7 +165,6 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 		sigmetRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedSigmet.getIcaoCode(),
 				translatedSigmet.getValidFrom(), translatedSigmet.getValidTo()));
-
 		sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
 		if (translatedSigmet.messageStatusType != MessageStatusType.CANCEL) {
 			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
@@ -184,17 +186,16 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		// ---------------SIGMETEvolvingConditionType----------------//
 		SIGMETEvolvingConditionCollectionType sicol = IWXXM31Helpers.ofIWXXM
 				.createSIGMETEvolvingConditionCollectionType();
-		SIGMETEvolvingConditionPropertyType evolvingType1 = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionPropertyType();
 		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
 				.createSIGMETEvolvingConditionCollection(sicol);
 		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
 		evolvingType.setGeometry(air);
+		// ---------------SIGMETEvolvingConditionType(Speed-Motion-Id-Intencity)----------------//
 		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
 		if (translatedSigmet.getPhenomenonDescription().getMovingSection() != null) {
 			AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
 			JAXBElement<AngleWithNilReasonType> dirMo = IWXXM31Helpers.ofIWXXM
-					.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(motion);
+					.createSIGMETEvolvingConditionTypeDirectionOfMotion(motion);
 			motion.setUom(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection().name());
 			motion.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingDirection()
 					.getDoubleValue());
@@ -208,13 +209,41 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 			}
 		}
 		evolvingType.setSpeedOfMotion(speedType);
-		evolvingType1.setSIGMETEvolvingCondition(evolvingType);
+		evolvingType.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("INTSF")) {
+			evolvingType.setIntensityChange(ExpectedIntensityChangeType.INTENSIFY);
+		} else if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("WKN")) {
+			evolvingType.setIntensityChange(ExpectedIntensityChangeType.WEAKEN);
+		} else if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("NC")) {
+			evolvingType.setIntensityChange(ExpectedIntensityChangeType.NO_CHANGE);
+		}	
 		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		// ---------------SIGMETEvolvingConditionType(Time)----------------//
 		AbstractTimeObjectPropertyType absTime = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		if (translatedSigmet.getPhenomenonDescription().getPhenomenon().equals("VA")
+				|| translatedSigmet.getPhenomenonDescription().getPhenomenon().equals("TC")) {
+			TimeInstantType tmIn = IWXXM31Helpers.ofGML.createTimeInstantType();
+			tmIn.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+			TimePositionType tm = IWXXM31Helpers.ofGML.createTimePositionType();
+			tm.getValue().add(translatedSigmet.getPhenomenonDescription().getPhenomenonTimeStamp().toString());
+			tmIn.setTimePosition(tm);
+			JAXBElement<TimeInstantType> elTmIn = IWXXM31Helpers.ofGML.createTimeInstant(tmIn);
+			absTime.setAbstractTimeObject(elTmIn);
+		} else {
+			absTime.getNilReason().add("http://codes.wmo.int/common/nil/missing");
+		}
 		sicol.setPhenomenonTime(absTime);
-		sicol.getMember().add(evolvingType1);
-		TimeIndicatorType timeIn = TimeIndicatorType.FORECAST;
-		sicol.setTimeIndicator(timeIn);
+		// ---------------SIGMETEvolvingConditionType----------------//
+		SIGMETEvolvingConditionPropertyType evolvingTypeProp = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionPropertyType();
+		evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+		sicol.getMember().add(evolvingTypeProp);
+		// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+		if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+			sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
+		} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+			sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
+		}
 		// ---------------Association Role----------------//
 		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
 		asType.setAny(evolvingAr);
@@ -253,14 +282,14 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		SurfacePropertyType srfType = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
 		srfType.setSurface(surAr);
 		JAXBElement<SurfacePropertyType> surArHor = IWXXM31Helpers.ofAIXM
-				.createAirspaceVolumeTypeHorizontalProjection(srfType);	
+				.createAirspaceVolumeTypeHorizontalProjection(srfType);
 		// ---------------Distance Vertical----------------//
 		ValDistanceVerticalType valDisUp = IWXXM31Helpers.ofAIXM.createValDistanceVerticalType();
 		valDisUp.setUom("FL");
 		valDisUp.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getTopFL().get()));
 		JAXBElement<ValDistanceVerticalType> valDisJaxUp = IWXXM31Helpers.ofAIXM
 				.createAirspaceLayerTypeUpperLimit(valDisUp);
-		// ---------------Vertical Reference----------------//
+		// ---------------Vertical Refeence----------------//
 		CodeVerticalReferenceType valueCode = IWXXM31Helpers.ofAIXM.createCodeVerticalReferenceType();
 		valueCode.setValue("STD");
 		JAXBElement<CodeVerticalReferenceType> vertCodeType = IWXXM31Helpers.ofAIXM
