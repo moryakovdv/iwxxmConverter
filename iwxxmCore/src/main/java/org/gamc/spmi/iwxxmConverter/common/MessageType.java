@@ -21,5 +21,5 @@ package org.gamc.spmi.iwxxmConverter.common;
 /**Enum to describe common MET messages*/
 public enum MessageType {
 
-	METAR, SPECI, TAF, SIGMET;
+	METAR, SPECI, TAF, SIGMET, SPACEWEATHER;
 }

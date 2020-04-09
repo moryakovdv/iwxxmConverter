@@ -1,616 +1,725 @@
-2019-05-08 17:51:17,572[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:31,110[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/C:/Users/sit/git/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2019-05-08 17:51:31,112[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
-2019-05-08 17:51:33,122[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
-2019-05-08 17:51:33,178[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
-2019-05-08 17:51:33,193[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/C:/Users/sit/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2019-05-08 17:51:33,327[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/C:/Users/sit/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2019-05-08 17:51:34,470[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/C:/Users/sit/git/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2019-05-08 17:51:34,624[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/C:/Users/sit/git/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2019-05-08 17:51:34,978[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/C:/Users/sit/git/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2019-05-08 17:51:35,534[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/C:/Users/sit/git/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2019-05-08 17:51:35,663[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:35,800[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:35,858[ISO8601] [main] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader sun.misc.Launcher$AppClassLoader@18b4aac2
-2019-05-08 17:51:35,944[ISO8601] [main] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
-2019-05-08 17:51:35,954[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
-2019-05-08 17:51:35,965[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
-2019-05-08 17:51:35,965[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
-2019-05-08 17:51:35,965[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class sun.misc.Launcher$AppClassLoader
-2019-05-08 17:51:37,236[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:39,204[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:39,296[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:39,398[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:41,135[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:41,177[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:41,247[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:41,257[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:43,236[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:43,305[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:43,377[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:43,391[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:43,402[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:43,407[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:43,413[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:43,422[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:44,763[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:44,827[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:44,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:44,892[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:44,908[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:44,913[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:44,917[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:44,926[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:46,294[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:46,340[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:46,412[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:46,419[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:46,423[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:46,427[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:46,432[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:46,448[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:48,049[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:48,115[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:48,153[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:48,162[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:48,165[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:48,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:48,178[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:48,187[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:49,595[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:49,627[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:49,655[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:49,660[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:49,664[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:49,667[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:49,672[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:49,682[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:51,115[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:51,144[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:51,186[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:51,192[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:51,198[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:51,202[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:51,205[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:51,210[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:52,544[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:52,586[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:52,621[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:52,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:52,631[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:52,634[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:52,636[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:52,642[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:54,044[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:54,072[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:54,101[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:54,105[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:54,108[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:54,110[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:54,115[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:54,124[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:55,432[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:55,456[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:55,480[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:55,484[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:55,487[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:55,490[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:55,494[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:55,501[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:56,699[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:56,723[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:56,772[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:56,776[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:56,779[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:56,781[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:56,784[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:56,790[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:57,984[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:58,012[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:58,036[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:58,042[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:58,045[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:58,049[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:58,053[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:58,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:51:59,313[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:51:59,334[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:51:59,353[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:51:59,359[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:51:59,362[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:51:59,366[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:51:59,373[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:51:59,380[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:02,266[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:02,296[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:02,327[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:02,330[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:02,332[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:02,335[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:02,339[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:02,346[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:03,651[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:03,686[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:03,716[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:03,720[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:03,725[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:03,728[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:03,733[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:03,741[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:05,060[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:05,087[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:05,109[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:05,114[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:05,118[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:05,121[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:05,125[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:05,131[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:06,365[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:06,399[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:06,422[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:06,427[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:06,432[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:06,435[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:06,439[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:06,444[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:07,973[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:07,995[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:08,020[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:08,025[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:08,032[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:08,036[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:08,039[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:08,044[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:09,448[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:09,470[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:09,496[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:09,500[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:09,509[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:09,512[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:09,515[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:09,519[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:11,019[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:11,056[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:11,085[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:11,090[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:11,098[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:11,102[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:11,106[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:11,109[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:12,789[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:12,809[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:12,828[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:12,831[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:12,835[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:12,838[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:12,840[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:12,845[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:14,276[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:14,307[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:14,339[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:14,343[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:14,350[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:14,353[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:14,356[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:14,360[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:16,161[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:16,213[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:16,249[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:16,254[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:16,263[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:16,267[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:16,271[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:16,285[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:17,926[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:17,960[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:17,987[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:17,991[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:17,994[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:17,997[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:18,001[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:18,008[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:19,486[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:19,507[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:19,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:19,535[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:19,539[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:19,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:19,561[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:19,569[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:21,305[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:21,348[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:21,399[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:21,404[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:21,407[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:21,411[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:21,416[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:21,429[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:22,841[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:22,862[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:22,878[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:22,882[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:22,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:22,887[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:22,890[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:24,324[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:24,353[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:24,379[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:24,383[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:24,387[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:24,390[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:24,403[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:26,425[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:26,467[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:26,494[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:26,497[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:26,501[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:28,302[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:28,325[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:28,346[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:28,349[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:28,353[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:29,852[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:29,862[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:29,874[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:29,876[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:29,879[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:31,385[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:31,398[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:31,412[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:31,415[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:31,417[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:33,062[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:33,082[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:33,103[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:33,106[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:33,109[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:33,114[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:34,487[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:34,498[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:34,511[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:34,513[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:34,515[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:34,518[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:35,945[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:35,957[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:35,974[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:35,978[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:35,981[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:35,986[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:37,594[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:37,617[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:37,635[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:37,638[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:37,641[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:37,644[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:39,065[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:39,078[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:39,092[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:39,094[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:39,096[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:39,099[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:40,473[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:40,485[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:40,501[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:40,504[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:40,506[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:40,510[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:41,980[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:42,007[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:42,024[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:42,027[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:42,030[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:42,037[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:43,474[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:43,486[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:43,500[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:43,502[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:43,504[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:43,509[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:45,169[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:45,194[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:45,223[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:45,227[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:45,232[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:45,241[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:47,051[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:47,065[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:47,079[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:47,081[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:47,083[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:47,088[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:48,858[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:48,884[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:48,902[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:48,905[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:48,908[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:48,911[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:48,917[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:50,373[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:50,389[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:50,403[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:50,407[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:50,410[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:50,412[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:50,416[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:51,997[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:52,023[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:52,112[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:52,115[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:52,118[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:52,121[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:52,125[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:52,131[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:53,646[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:53,676[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:53,702[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:53,707[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:53,709[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:53,712[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:53,718[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:53,725[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:55,307[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:55,338[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:55,359[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:55,365[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:55,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:55,369[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:55,372[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:55,379[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:56,926[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:56,951[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:56,967[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:56,970[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:56,972[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:56,974[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:56,977[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:56,982[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:58,357[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:58,392[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:58,408[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:58,413[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:58,417[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:58,420[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:58,425[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:58,431[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:52:59,804[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:52:59,825[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:52:59,842[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:52:59,845[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:52:59,849[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:52:59,852[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:52:59,857[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:52:59,862[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:01,561[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:01,598[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:01,622[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:01,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:01,631[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:01,634[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:01,638[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:01,646[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:03,258[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:03,288[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:03,306[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:03,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:03,315[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:03,318[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:03,320[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:03,322[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:04,684[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:04,708[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:04,722[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:04,725[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:04,728[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:04,730[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:04,732[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:04,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:06,227[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:06,266[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:06,289[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:06,293[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:06,300[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:06,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:06,305[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:06,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:07,993[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:08,022[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:08,041[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:08,045[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:08,051[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:08,053[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:08,055[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:08,059[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:09,596[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:09,632[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:09,655[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:09,658[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:09,665[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:09,668[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:09,671[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:09,676[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:11,056[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:11,084[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:11,100[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:11,102[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:11,106[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:11,109[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:11,111[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:11,115[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:12,845[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:12,884[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:12,904[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:12,908[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:12,913[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:12,916[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:12,919[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:12,923[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:14,408[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:14,435[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:14,453[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:14,455[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:14,458[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:14,461[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:14,465[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:14,471[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:16,035[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:16,079[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:16,105[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:16,110[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:16,113[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:16,115[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:16,119[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:16,127[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:17,589[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:17,625[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:17,648[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:17,652[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:17,655[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:17,658[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:17,663[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:17,669[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:18,993[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:19,014[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:19,032[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:19,035[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:19,037[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:19,039[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:19,041[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:19,046[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:20,269[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:20,292[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:20,307[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:20,310[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:20,312[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:20,314[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:20,317[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:20,323[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:21,714[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:21,736[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:21,751[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:21,754[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:21,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:21,758[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:21,760[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:21,766[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:23,314[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:23,356[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:23,383[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:23,388[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:23,392[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:23,396[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:23,400[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:23,409[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:24,755[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:24,788[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:24,809[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:24,813[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:24,816[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:24,818[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:24,822[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:24,830[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:26,282[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:26,315[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:26,335[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:26,339[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:26,341[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:26,343[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:26,346[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:26,353[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:27,885[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:27,910[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:27,932[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:27,936[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:27,940[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:27,942[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:27,947[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:27,952[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:29,306[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:29,352[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:29,376[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:29,381[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:29,387[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:29,391[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:29,393[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:29,398[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:30,765[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:30,784[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:30,806[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:30,811[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:30,817[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:30,820[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:30,823[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:30,826[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:32,347[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:32,368[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:32,384[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:32,390[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:32,394[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:32,397[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:32,403[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:32,409[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:33,777[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:33,809[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:33,836[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:33,841[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:33,845[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:33,847[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:33,854[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:33,861[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:35,219[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:35,252[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:35,268[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:35,271[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:35,273[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:35,276[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:35,281[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:35,286[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:36,813[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:36,833[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:36,849[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:36,852[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:36,854[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:36,856[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:36,858[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:36,862[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:38,394[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:38,427[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:38,454[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:38,459[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:38,463[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:38,465[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:38,470[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:38,475[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:39,938[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:39,966[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:39,986[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:39,989[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:39,991[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:39,994[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:39,998[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:40,003[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:41,326[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:41,351[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:41,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:41,369[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:41,371[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:41,373[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:41,376[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:41,385[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:42,886[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:42,911[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:42,926[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:42,929[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:42,931[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:42,932[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:42,935[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:42,940[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 48
-2019-05-08 17:53:44,285[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:44,326[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2019-05-08 17:53:44,353[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-05-08 17:53:44,356[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 18
-2019-05-08 17:53:44,358[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-05-08 17:53:44,360[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-05-08 17:53:44,364[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-05-08 17:53:45,771[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2019-05-08 17:53:45,791[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:07,092[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:07,097[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:07,101[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:07,104[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:07,108[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:07,115[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:08,683[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:08,687[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:08,689[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:09,240[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:09,242[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:09,244[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:09,700[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:09,702[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:09,705[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:09,707[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:09,710[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:09,713[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:10,133[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:10,135[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:10,137[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:10,529[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:10,900[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2019-10-31 18:09:10,900[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
+2019-10-31 18:09:11,527[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
+2019-10-31 18:09:11,551[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
+2019-10-31 18:09:11,553[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2019-10-31 18:09:11,600[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2019-10-31 18:09:12,084[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2019-10-31 18:09:12,201[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2019-10-31 18:09:12,407[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2019-10-31 18:09:12,756[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2019-10-31 18:09:12,792[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:12,855[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:12,873[ISO8601] [main] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader sun.misc.Launcher$AppClassLoader@7f31245a
+2019-10-31 18:09:12,910[ISO8601] [main] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
+2019-10-31 18:09:12,916[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
+2019-10-31 18:09:12,931[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
+2019-10-31 18:09:12,932[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
+2019-10-31 18:09:12,932[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class sun.misc.Launcher$AppClassLoader
+2019-10-31 18:09:13,712[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:14,175[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:14,198[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:14,251[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:14,957[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:14,973[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:14,993[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:14,995[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:15,363[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:15,378[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:15,396[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:15,398[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:15,399[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:15,400[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:15,401[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:15,403[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:15,762[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:15,777[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:15,799[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:15,802[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:15,803[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:15,805[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:15,807[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:15,810[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:16,199[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:16,214[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:16,228[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:16,230[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:16,231[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:16,232[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:16,234[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:16,236[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:16,535[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:16,558[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:16,572[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:16,573[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:16,575[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:16,576[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:16,578[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:16,580[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:16,893[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:16,919[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:16,931[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:16,933[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:16,934[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:16,935[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:16,938[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:16,940[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:17,225[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:17,239[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:17,247[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:17,248[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:17,249[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:17,250[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:17,251[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:17,252[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:17,692[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:17,719[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:17,730[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:17,732[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:17,733[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:17,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:17,736[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:17,739[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:18,521[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:18,543[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:18,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:18,556[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:18,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:18,559[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:18,560[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:18,567[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:18,895[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:18,918[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:18,932[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:18,936[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:18,945[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:18,947[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:18,950[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:18,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:19,443[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:19,460[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:19,468[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:19,470[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:19,471[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:19,472[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:19,474[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:19,475[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:19,959[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:19,986[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:19,993[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:19,994[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:19,995[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:19,996[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:19,997[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:19,998[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:20,370[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:20,383[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:20,390[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:20,392[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:20,393[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:20,393[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:20,395[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:20,396[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:20,697[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:20,711[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:20,718[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:20,720[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:20,721[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:20,721[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:20,723[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:20,724[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:21,040[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:21,055[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:21,062[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:21,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:21,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:21,064[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:21,065[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:21,066[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:21,351[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:21,365[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:21,371[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:21,373[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:21,374[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:21,375[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:21,376[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:21,377[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:21,668[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:21,682[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:21,688[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:21,690[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:21,691[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:21,692[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:21,693[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:21,694[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:22,027[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:22,050[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:22,056[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:22,057[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:22,058[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:22,059[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:22,060[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:22,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:22,380[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:22,395[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:22,401[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:22,402[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:22,403[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:22,404[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:22,405[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:22,406[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:22,698[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:22,712[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:22,717[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:22,718[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:22,719[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:22,720[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:22,721[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:22,722[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:23,036[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:23,049[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:23,054[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:23,055[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:23,056[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:23,056[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:23,057[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:23,058[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:23,414[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:23,443[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:23,455[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:23,457[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:23,457[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:23,459[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:23,459[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:23,461[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:23,800[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:23,813[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:23,818[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:23,818[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:23,819[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:23,820[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:23,821[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:23,821[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:24,123[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:24,140[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:24,145[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:24,146[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:24,147[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:24,148[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:24,149[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:24,150[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:24,448[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:24,463[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:24,467[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:24,468[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:24,469[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:24,470[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:24,471[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:24,473[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:24,768[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:24,796[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:24,801[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:24,802[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:24,803[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:24,804[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:24,805[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:24,806[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:25,092[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:25,109[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:25,116[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:25,117[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:25,118[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:25,119[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:25,121[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:25,405[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:25,425[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:25,433[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:25,435[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:25,436[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:25,436[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:25,437[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:25,755[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:25,768[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:25,772[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:25,773[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:25,774[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:26,058[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:26,064[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:26,067[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:26,068[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:26,069[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:26,363[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:26,371[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:26,374[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:26,375[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:26,376[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:26,689[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:26,699[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:26,702[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:26,703[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:26,704[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:26,995[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:27,002[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:27,006[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:27,006[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:27,007[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:27,008[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:27,296[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:27,303[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:27,306[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:27,307[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:27,307[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:27,308[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:27,616[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:27,625[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:27,628[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:27,629[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:27,630[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:27,631[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:27,934[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:27,942[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:27,945[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:27,946[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:27,947[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:27,948[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:28,232[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:28,239[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:28,243[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:28,243[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:28,244[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:28,245[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:28,546[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:28,556[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:28,560[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:28,561[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:28,562[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:28,563[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:28,840[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:28,848[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:28,851[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:28,851[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:28,852[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:28,853[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:29,128[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:29,135[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:29,138[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:29,139[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:29,139[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:29,140[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:29,414[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:29,435[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:29,440[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:29,441[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:29,442[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:29,443[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:29,723[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:29,731[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:29,734[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:29,734[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:29,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:29,736[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:30,009[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:30,018[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:30,021[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:30,022[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:30,023[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:30,023[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:30,025[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:30,299[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:30,321[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:30,325[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:30,325[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:30,326[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:30,327[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:30,328[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:30,613[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:30,621[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:30,626[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:30,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:30,628[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:30,628[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:30,629[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:30,631[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:30,931[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:30,946[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:30,951[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:30,953[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:30,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:30,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:30,956[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:30,957[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:31,320[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:31,344[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:31,361[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:31,363[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:31,365[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:31,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:31,370[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:31,376[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:31,799[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:31,829[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:31,838[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:31,842[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:31,843[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:31,843[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:31,845[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:31,846[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:32,217[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:32,230[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:32,234[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:32,235[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:32,236[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:32,236[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:32,237[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:32,238[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:32,646[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:32,659[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:32,665[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:32,666[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:32,666[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:32,667[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:32,668[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:32,669[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:32,993[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:33,006[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:33,011[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:33,011[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:33,012[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:33,012[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:33,013[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:33,013[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:33,302[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:33,316[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:33,321[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:33,323[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:33,324[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:33,324[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:33,325[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:33,327[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:33,637[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:33,650[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:33,655[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:33,655[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:33,656[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:33,656[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:33,657[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:33,658[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:33,933[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:33,947[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:33,953[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:33,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:33,955[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:33,955[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:33,956[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:33,957[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:34,238[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:34,252[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:34,258[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:34,260[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:34,260[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:34,261[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:34,261[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:34,262[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:34,560[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:34,574[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:34,579[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:34,579[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:34,580[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:34,581[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:34,581[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:34,582[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:34,914[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:34,928[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:34,933[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:34,933[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:34,934[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:34,934[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:34,935[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:34,936[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:35,220[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:35,234[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:35,240[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:35,240[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:35,241[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:35,241[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:35,242[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:35,243[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:35,591[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:35,605[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:35,610[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:35,611[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:35,611[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:35,612[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:35,613[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:35,613[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:35,919[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:35,932[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:35,936[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:35,937[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:35,937[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:35,938[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:35,939[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:35,939[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:36,293[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:36,308[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:36,313[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:36,313[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:36,314[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:36,315[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:36,315[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:36,316[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:36,712[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:36,739[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:36,745[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:36,748[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:36,753[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:36,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:36,758[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:36,761[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:37,139[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:37,155[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:37,160[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:37,160[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:37,161[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:37,161[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:37,162[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:37,163[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:37,508[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:37,522[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:37,526[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:37,527[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:37,528[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:37,528[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:37,529[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:37,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:37,951[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:37,964[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:37,968[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:37,969[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:37,970[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:37,970[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:37,971[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:37,971[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:38,280[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:38,291[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:38,295[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:38,296[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:38,296[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:38,297[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:38,298[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:38,298[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:38,582[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:38,593[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:38,599[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:38,599[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:38,600[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:38,601[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:38,601[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:38,602[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:38,905[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:38,917[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:38,922[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:38,923[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:38,923[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:38,923[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:38,924[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:38,925[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:39,203[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:39,216[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:39,220[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:39,221[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:39,221[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:39,222[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:39,222[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:39,224[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:39,506[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:39,518[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:39,522[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:39,522[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:39,523[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:39,523[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:39,524[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:39,525[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:39,827[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:39,841[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:39,847[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:39,848[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:39,849[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:39,850[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:39,851[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:39,852[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:40,138[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:40,150[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:40,154[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:40,155[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:40,156[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:40,156[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:40,157[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:40,157[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:40,435[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:40,448[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:40,452[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:40,453[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:40,454[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:40,454[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:40,455[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:40,455[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:40,754[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:40,767[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:40,771[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:40,772[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:40,772[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:40,773[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:40,774[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:40,775[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:41,055[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:41,068[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:41,073[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:41,074[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:41,074[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:41,075[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:41,076[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:41,077[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:41,358[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:41,386[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:41,390[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:41,391[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:41,392[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:41,392[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:41,393[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:41,394[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:41,676[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:41,690[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:41,694[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:41,695[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:41,696[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:41,696[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:41,697[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:41,698[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:41,975[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:41,988[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:41,994[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:41,995[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:41,996[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:41,996[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:41,997[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:41,998[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:42,291[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:42,306[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:42,311[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:42,312[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:42,312[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2019-10-31 18:09:42,313[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2019-10-31 18:09:42,313[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2019-10-31 18:09:42,595[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:42,608[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:42,615[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:42,617[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:42,618[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:42,900[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:42,915[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:43,214[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:43,231[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:43,512[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:43,513[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:43,796[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:43,814[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:44,121[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:44,145[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:44,151[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:44,154[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2019-10-31 18:09:44,155[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2019-10-31 18:09:44,704[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:44,724[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:44,997[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:45,031[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:45,307[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:45,327[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:45,609[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:45,628[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:45,941[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:45,956[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:46,256[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:46,271[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:46,586[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:46,601[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:46,921[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:46,933[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:47,259[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:47,273[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:47,580[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:47,591[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:47,910[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:47,923[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:48,245[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:48,263[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:48,574[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:48,595[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:48,929[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:48,951[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:49,254[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:49,278[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:49,577[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:49,598[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:49,915[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:49,924[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:50,241[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:50,258[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:50,568[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:50,593[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:50,915[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:50,928[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:51,230[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:51,244[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:51,546[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:51,566[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:51,883[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:51,895[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:52,202[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:52,233[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:52,532[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:52,543[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:52,870[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:52,893[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:53,199[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:53,206[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:53,525[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:53,540[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:53,869[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:53,886[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:54,191[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:54,201[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:54,501[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:54,511[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:54,830[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:54,839[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:55,138[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:55,150[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:55,451[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:55,469[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:55,791[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2019-10-31 18:09:55,802[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2019-10-31 18:09:55,815[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2019-10-31 18:09:55,815[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
