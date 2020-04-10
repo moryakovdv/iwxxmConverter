@@ -4,57 +4,49 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetParsingRegexp;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
+import org.gamc.spmi.ixwwmConverter.spaceweatherconverter.SPACEWEATHERParsingException;
 import org.gamc.spmi.ixwwmConverter.spaceweatherconverter.SpaceWeatherEffectLocation;
 import org.gamc.spmi.ixwwmConverter.spaceweatherconverter.SpaceWeatherParsingRegexp;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Interval;
 
 /**Class describes the model of Space Weather(SWX) advisory object*/
-/**Sample
-* SWX ADVISORY
-* DTG:                20161108/0100Z 
-* SWXC:               DONLON
-* ADVISORY NR:        2016/2
-* SWX EFFECT:         HF COM MOD AND GNSS MOD 
-* NR RPLC :           2016/1
-* OBS SWX:            08/0100Z HNH HSH E18000 - W18000 
-* FCST SWX +6 HR:     08/0700Z HNH HSH E18000 - W18000
-* FCST SWX +12 HR:    08/1300Z HNH HSH E18000 - W18000
-* FCST SWX +18 HR:    08/1900Z HNH HSH E18000 - W18000
-* FCST SWX +24 HR:    09/0100Z NO SWX EXP
-* RMK:                LOW LVL GEOMAGNETIC STORMING CAUSING INCREASED AURORAL ACT AND SUBSEQUENT MOD DEGRADATION OF GNSS AND HF COM AVBL IN THE AURORAL ZONE. THIS STORMING EXP TO SUBSIDE IN THE FCST PERIOD. SEE WWW.SPACEWEATHERPROVIDER.WEB 
-* NXT ADVISORY:       NO FURTHER ADVISORIES
+/**
+ * Sample SWX ADVISORY DTG: 20161108/0100Z SWXC: DONLON ADVISORY NR: 2016/2 SWX
+ * EFFECT: HF COM MOD AND GNSS MOD NR RPLC : 2016/1 OBS SWX: 08/0100Z HNH HSH
+ * E18000 - W18000 FCST SWX +6 HR: 08/0700Z HNH HSH E18000 - W18000 FCST SWX +12
+ * HR: 08/1300Z HNH HSH E18000 - W18000 FCST SWX +18 HR: 08/1900Z HNH HSH E18000
+ * - W18000 FCST SWX +24 HR: 09/0100Z NO SWX EXP RMK: LOW LVL GEOMAGNETIC
+ * STORMING CAUSING INCREASED AURORAL ACT AND SUBSEQUENT MOD DEGRADATION OF GNSS
+ * AND HF COM AVBL IN THE AURORAL ZONE. THIS STORMING EXP TO SUBSIDE IN THE FCST
+ * PERIOD. SEE WWW.SPACEWEATHERPROVIDER.WEB NXT ADVISORY: NO FURTHER ADVISORIES
  *
- * **/
+ **/
 public class SPACEWEATHERTacMessage extends TacMessageImpl {
 
-	
-	
-	
 	private MessageStatusType messageStatusType = MessageStatusType.NORMAL;
-	private DateTime  issued;
+	private DateTime issued;
 	private String issuingCenter;
-	
+
 	private String advisoryNumber;
 	private String replaceNumber;
-	
-	
+
 	private SpaceWeatherEffectLocation observedLocation;
 	private TreeSet<SpaceWeatherEffectLocation> forecastedLocations;
 	private LinkedList<String> effects;
-	
-	
-	
-	private DateTime  nextAdvDateTime;
-	
-	
+
+	private DateTime nextAdvDateTime;
+
 	public SPACEWEATHERTacMessage(String initialTacMessage) {
 		super(initialTacMessage);
 		// TODO Auto-generated constructor stub
@@ -67,7 +59,7 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 
 	@Override
 	public MessageType getMessageType() {
-		
+
 		return MessageType.SPACEWEATHER;
 	}
 
@@ -78,14 +70,123 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 
 	@Override
 	public void parseMessage() throws ParsingException {
-		// TODO Auto-generated method stub
-		
-	}
+		StringBuffer tac = new StringBuffer(getInitialTacString());
 
+		int lastIndex = 0;
+
+		// check whether valid header presents
+		Matcher matcherHeader = SpaceWeatherParsingRegexp.spaceWeatherHeader.matcher(tac);
+		if (!matcherHeader.find())
+			throw new SPACEWEATHERParsingException("Mandatory header section is missed");
+
+		lastIndex = matcherHeader.end();
+		tac.delete(matcherHeader.start(), lastIndex);
+
+		// extract time of issuing
+		Matcher matcherDtGenerated = SpaceWeatherParsingRegexp.spaceWeatherDateTimeGenerated.matcher(tac);
+		if (matcherDtGenerated.find()) {
+			String yearS = matcherDtGenerated.group("year");
+			String monthS = matcherDtGenerated.group("month");
+			String dayS = matcherDtGenerated.group("day");
+			String hourS = matcherDtGenerated.group("hour");
+			String minuteS = matcherDtGenerated.group("minute");
+			this.issued = new DateTime(Integer.valueOf(yearS), Integer.valueOf(monthS), Integer.valueOf(dayS),
+					Integer.valueOf(hourS), Integer.valueOf(minuteS), DateTimeZone.UTC);
+			lastIndex = matcherDtGenerated.end();
+			tac.delete(matcherDtGenerated.start(), lastIndex);
+		}
+
+		// extract issuing center
+		Matcher matcherIssuingCenter = SpaceWeatherParsingRegexp.spaceWeatherCenter.matcher(tac);
+		if (matcherIssuingCenter.find()) {
+			this.issuingCenter = matcherIssuingCenter.group("center");
+			lastIndex = matcherIssuingCenter.end();
+			tac.delete(matcherIssuingCenter.start(), lastIndex);
+		}
+
+		// extract advisory number
+		Matcher matcherNumber = SpaceWeatherParsingRegexp.spaceWeatherAdvisoryNumber.matcher(tac);
+		if (matcherNumber.find()) {
+			this.advisoryNumber = matcherNumber.group("advisoryNumber");
+			lastIndex = matcherNumber.end();
+			tac.delete(matcherNumber.start(), lastIndex);
+		}
+		// extract replace number
+		Matcher matcherReplacingNumber = SpaceWeatherParsingRegexp.spaceWeatherAdvisoryReplacingNumber.matcher(tac);
+		if (matcherReplacingNumber.find()) {
+			this.replaceNumber = matcherReplacingNumber.group("advisoryReplaceNumber");
+			lastIndex = matcherReplacingNumber.end();
+			tac.delete(matcherReplacingNumber.start(), lastIndex);
+		}
+		
+		// extract effects
+		tac = parseEffects(tac);
+		
+		//fill observe section
+		tac = parseObservationSection(tac);
+		
+
+	}
+	
+	/***parse and fill the list of effects*/
+	private StringBuffer parseEffects(StringBuffer tac) {
+		Matcher matcherEffects = SpaceWeatherParsingRegexp.spaceWeatherEffects.matcher(tac);
+		this.effects=new LinkedList<String>();
+		if (matcherEffects.find()) {
+			String effects = matcherEffects.group("effects");
+			String[] splitted = effects.split("\\s*AND\\s*");
+			for(String effect:splitted) {
+				String eff = effect.trim().replaceAll("\\s+", "_");
+				this.effects.add(eff);
+			}
+			
+			
+			int lastIndex = matcherEffects.end();
+			tac.delete(matcherEffects.start(), lastIndex);
+		}
+		return tac;
+	}
+	/**parse and fill observation section - time and location*/
+	private StringBuffer parseObservationSection(StringBuffer tac) {
+		Matcher matcherObservation = SpaceWeatherParsingRegexp.spaceWeatherObserveArea.matcher(tac);
+		
+		if (matcherObservation.find()) {
+			String dayS = matcherObservation.group("day");
+			String hourS = matcherObservation.group("hour");
+			String minuteS = matcherObservation.group("minute");
+			
+			String daylight = matcherObservation.group("daylight");
+			
+			String hemi1 = matcherObservation.group("hemi1");
+			
+			String hemi2 = matcherObservation.group("hemi2");
+			
+			String latStart = matcherObservation.group("latStart");
+			String latEnd = matcherObservation.group("latEnd");
+			
+			String fl = matcherObservation.group("fl");
+			
+			SpaceWeatherEffectLocation observeLocation = new SpaceWeatherEffectLocation();
+			observeLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+			
+			
+			int lastIndex = matcherObservation.end();
+			tac.delete(matcherObservation.start(), lastIndex);
+		}
+		return tac;
+	}
+	
 	@Override
 	public Interval getValidityInterval() {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.getObservedLocation() == null)
+			return null;
+		if (forecastedLocations == null)
+			return new Interval(this.getObservedLocation().getEffectsDateTime(),
+					this.getObservedLocation().getEffectsDateTime().plusHours(24));
+
+		return new Interval(this.getObservedLocation().getEffectsDateTime(),
+				forecastedLocations.last().getEffectsDateTime());
+
 	}
 
 	@Override
