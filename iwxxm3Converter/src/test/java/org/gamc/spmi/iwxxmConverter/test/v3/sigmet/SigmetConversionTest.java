@@ -85,7 +85,7 @@ public class SigmetConversionTest {
 	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
 			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
 
-	//@Test
+	@Test
 	public void testModIceSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -93,6 +93,7 @@ public class SigmetConversionTest {
 
 		System.out.println(result);
 	}
+
 	/**@author alex*/
 	@Test
 	public void testTest()
