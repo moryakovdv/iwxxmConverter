@@ -167,11 +167,13 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	public SigmetPhenomenonDescription getPhenomenonDescription() {
 		return phenomenonDescription;
 	}
-
+	
+	/**Description of phenomena*/
 	public void setPhenomenonDescription(SigmetPhenomenonDescription phenomenonDescription) {
 		this.phenomenonDescription = phenomenonDescription;
 	}
 
+	/**Horizontal location of phenomena*/
 	public SigmetHorizontalPhenomenonLocation getHorizontalLocation() {
 		return horizontalLocation;
 	}
@@ -180,6 +182,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		this.horizontalLocation = horizontalLocation;
 	}
 
+	/**Vertical extension of phenomena*/
 	public SigmetVerticalPhenomenonLocation getVerticalLocation() {
 		return verticalLocation;
 	}

@@ -27,8 +27,10 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
@@ -86,6 +88,19 @@ public class SigmetConversionTest {
 	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
 			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
 
+	String sigmetObsAt = "WSRS31LTAA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\n" + 
+			"\n" + 
+			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
+	
+	@Test
+	public void testObsAtSigmet() throws SIGMETParsingException {
+		SIGMETTacMessage sgTac = new SIGMETTacMessage(sigmetObsAt);
+		sgTac.parseMessage();
+		assertTrue(sgTac.getPhenomenonDescription().getPhenomenonTimeStamp()!=null);
+		
+		
+	}
+	
 	@Test
 	public void testModIceSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
@@ -96,7 +111,7 @@ public class SigmetConversionTest {
 	}
 
 	/**@author alex*/
-	@Test
+	//@Test
 	public void testTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();

@@ -29,21 +29,21 @@ public class SpaceWeatherParsingRegexp {
 
 	/**SWX Mandatory header*/
 	public final static Pattern spaceWeatherHeader = Pattern.compile(
-	       "SWX\\s+ADVISORY$");
+	       "SWX\\s+ADVISORY");
 	/**Pattern for date time of creation*/
-	public final static Pattern spaceWeatherDateTimeGenerated = Pattern.compile("DTG\\s*:\\s+(?<year>\\d{4})(?<month>\\d{2})(?<day>\\d{2})\\/(?<hour>\\d{2})(?<minute>\\d{2})Z\\s*$");
+	public final static Pattern spaceWeatherDateTimeGenerated = Pattern.compile("DTG\\s*:\\s+(?<year>\\d{4})(?<month>\\d{2})(?<day>\\d{2})\\/(?<hour>\\d{2})(?<minute>\\d{2})Z");
 	
 	/**issued by*/
-	public final static Pattern spaceWeatherCenter = Pattern.compile("SWXC\\s*:\\s+(?<center>.*)\\s*$");
+	public final static Pattern spaceWeatherCenter = Pattern.compile("SWXC\\s*:\\s+(?<center>.*)\\s*");
 	
 	/**advisory number*/
-	public final static Pattern spaceWeatherAdvisoryNumber = Pattern.compile("ADVISORY\\sNR\\s*:\\s+(?<advisoryNumber>.*)\\s*$");
+	public final static Pattern spaceWeatherAdvisoryNumber = Pattern.compile("ADVISORY\\sNR\\s*:\\s+(?<advisoryNumber>.*)\\s*");
 	
 	/**advisory replacing number*/
-	public final static Pattern spaceWeatherAdvisoryReplacingNumber = Pattern.compile("NR RPLC\\s*:\\s+(?<advisoryReplaceNumber>.*)\\s*$");
+	public final static Pattern spaceWeatherAdvisoryReplacingNumber = Pattern.compile("NR RPLC\\s*:\\s+(?<advisoryReplaceNumber>.*)\\s*");
 	
 	/**effects*/
-	public final static Pattern spaceWeatherEffects = Pattern.compile("(?:SWX\\s+EFFECT:)\\s*(?<effects>.*)\\s*$");
+	public final static Pattern spaceWeatherEffects = Pattern.compile("(?:SWX\\s+EFFECT:)\\s*(?<effects>.*)\\s*");
 	
 	/**Observation area and time*/
 	public final static Pattern spaceWeatherObserveArea = Pattern.compile("(?:OBS\\s+SWX:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?");
