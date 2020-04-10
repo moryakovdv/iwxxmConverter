@@ -170,9 +170,6 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
 		} else {
 			ReportPropertyType reprop = IWXXM31Helpers.ofIWXXM.createReportPropertyType();
-			// IWXXM31Helpers.ofIWXXM.createReportPropertyType();
-			// IWXXM31Helpers.ofIWXXM.createReport(value)
-			// reprop.setReport(value);
 			sigmetRootTag.setReportStatus(reprop.getReport().getValue().getReportStatus());
 		}
 		// create XML representation
