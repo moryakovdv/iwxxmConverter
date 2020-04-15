@@ -146,6 +146,10 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 		}
 		return tac;
 	}
+	
+	
+	
+	
 	/**parse and fill observation section - time and location*/
 	private StringBuffer parseObservationSection(StringBuffer tac) {
 		Matcher matcherObservation = SpaceWeatherParsingRegexp.spaceWeatherObserveArea.matcher(tac);
@@ -167,12 +171,80 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 			String fl = matcherObservation.group("fl");
 			
 			SpaceWeatherEffectLocation observeLocation = new SpaceWeatherEffectLocation();
-			observeLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
 			
+			int dayObs = Integer.valueOf(dayS);
+			int hourObs = Integer.valueOf(hourS);
+			int minuteObs = Integer.valueOf(minuteS);
+			
+			DateTime obsDateTime = new DateTime(this.getIssued().getYear(),this.getIssued().getMonthOfYear(),dayObs,hourObs,minuteObs,DateTimeZone.UTC);;
+			if (dayObs<this.getIssued().getDayOfYear()) {
+				obsDateTime = this.getIssued().plusHours(24).withHourOfDay(hourObs).withMinuteOfHour(minuteObs);
+			}
+			
+			if (hemi1!=null)
+				observeLocation.getHemiSpheres().add(hemi1);
+			if (hemi2!=null)
+				observeLocation.getHemiSpheres().add(hemi2);
+			
+			observeLocation.setLatStart(latStart);
+			observeLocation.setLatEnd(latEnd);
+			
+				
+			observeLocation.setDayLightSide(daylight!=null);
+			observeLocation.setEffectsDateTime(obsDateTime);
+			observeLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+			this.setObservedLocation(observeLocation);
 			
 			int lastIndex = matcherObservation.end();
 			tac.delete(matcherObservation.start(), lastIndex);
 		}
+		return tac;
+	}
+	
+	/**parse and fill forecasted sections - time and location*/
+	private StringBuffer parseForecastedSections(StringBuffer tac) {
+		Matcher matcherForecast = SpaceWeatherParsingRegexp.spaceWeatherForecastArea.matcher(tac);
+		
+		while (matcherForecast.find()) {
+			
+			String forecastHours = matcherForecast.group("forecastHour");
+			int hoursToAdd = Integer.valueOf(forecastHours);
+			
+			String daylight = matcherForecast.group("daylight");
+			
+			String hemi1 = matcherForecast.group("hemi1");
+			
+			String hemi2 = matcherForecast.group("hemi2");
+			
+			String latStart = matcherForecast.group("latStart");
+			String latEnd = matcherForecast.group("latEnd");
+			
+			String fl = matcherForecast.group("fl");
+			
+			SpaceWeatherEffectLocation forecastLocation = new SpaceWeatherEffectLocation();
+			
+			
+			DateTime forecastDateTime = this.getObservedLocation().getEffectsDateTime().plusHours(hoursToAdd);
+			forecastLocation.setEffectsDateTime(forecastDateTime);
+			
+			if (hemi1!=null)
+				forecastLocation.getHemiSpheres().add(hemi1);
+			if (hemi2!=null)
+				forecastLocation.getHemiSpheres().add(hemi2);
+			
+			forecastLocation.setLatStart(latStart);
+			forecastLocation.setLatEnd(latEnd);
+			
+				
+			forecastLocation.setDayLightSide(daylight!=null);
+			forecastLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+			
+			
+			
+		}
+		
+		int lastIndex = matcherForecast.end();
+		tac.delete(matcherForecast.start(), lastIndex);
 		return tac;
 	}
 	

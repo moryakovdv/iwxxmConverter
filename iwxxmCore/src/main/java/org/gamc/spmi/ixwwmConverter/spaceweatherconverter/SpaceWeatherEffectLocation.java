@@ -13,11 +13,11 @@ import org.joda.time.DateTime;
  * */
 public class SpaceWeatherEffectLocation implements Comparable<SpaceWeatherEffectLocation>{
 	private DateTime effectsDateTime;
-	private LinkedList<String> hemiSpheres;
+	private LinkedList<String> hemiSpheres = new LinkedList<>();
 	private String latStart;
 	private String latEnd;
 	private Optional<Integer> aboveFL;
-	
+	private boolean dayLightSide;
 	
 	public DateTime getEffectsDateTime() {
 		return effectsDateTime;
@@ -53,6 +53,12 @@ public class SpaceWeatherEffectLocation implements Comparable<SpaceWeatherEffect
 	public int compareTo(SpaceWeatherEffectLocation o) {
 		// TODO Auto-generated method stub
 		return effectsDateTime.compareTo(o.effectsDateTime);
+	}
+	public boolean isDayLightSide() {
+		return dayLightSide;
+	}
+	public void setDayLightSide(boolean dayLightSide) {
+		this.dayLightSide = dayLightSide;
 	}
 	
 	
