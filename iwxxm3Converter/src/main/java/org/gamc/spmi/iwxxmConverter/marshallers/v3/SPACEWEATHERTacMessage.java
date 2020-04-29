@@ -42,9 +42,11 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 	private String replaceNumber;
 
 	private SpaceWeatherEffectLocation observedLocation;
-	private TreeSet<SpaceWeatherEffectLocation> forecastedLocations;
-	private LinkedList<String> effects;
+	private TreeSet<SpaceWeatherEffectLocation> forecastedLocations = new TreeSet<SpaceWeatherEffectLocation>();
+	private LinkedList<String> effects = new LinkedList<String>();
 
+	private String remark;
+	
 	private DateTime nextAdvDateTime;
 
 	public SPACEWEATHERTacMessage(String initialTacMessage) {
@@ -124,8 +126,45 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 		
 		//fill observe section
 		tac = parseObservationSection(tac);
+		tac = parseForecastedSections(tac);
 		
-
+		Matcher matcherRemark = SpaceWeatherParsingRegexp.spaceWeatherRemark.matcher(tac);
+		if (matcherRemark.find()) {
+			String rmk = matcherRemark.group("remark");
+			this.setRemark(rmk);
+			lastIndex = matcherRemark.end();
+			tac.delete(matcherRemark.start(), lastIndex);
+		}
+		
+		
+		Matcher matcherNextAdv = SpaceWeatherParsingRegexp.spaceWeatherNextAdvisory.matcher(tac);
+		if (matcherNextAdv.find()) {
+			
+			
+			
+			
+			 
+			String nextAdvDatetime = matcherNextAdv.group("nextAdv");
+			if (nextAdvDatetime.equalsIgnoreCase("NO FURTHER ADVISORIES")) {
+				return;
+			}
+				
+			Matcher matcherNextAdvDateTime = SpaceWeatherParsingRegexp.timeStamp.matcher(nextAdvDatetime);
+			
+			String yearS = matcherNextAdvDateTime.group("year");
+			String monthS = matcherNextAdvDateTime.group("month");
+			String dayS = matcherNextAdvDateTime.group("day");
+			String hourS = matcherNextAdvDateTime.group("hour");
+			String minuteS = matcherNextAdvDateTime.group("minute");
+			 this.nextAdvDateTime = new DateTime(Integer.valueOf(yearS), Integer.valueOf(monthS), Integer.valueOf(dayS),
+					Integer.valueOf(hourS), Integer.valueOf(minuteS), DateTimeZone.UTC);
+			 
+			 
+			 
+		
+			 lastIndex = matcherNextAdvDateTime.end();
+			tac.delete(matcherNextAdvDateTime.start(), lastIndex);
+		}
 	}
 	
 	/***parse and fill the list of effects*/
@@ -238,13 +277,15 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 				
 			forecastLocation.setDayLightSide(daylight!=null);
 			forecastLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+			this.forecastedLocations.add(forecastLocation);
 			
-			
-			
+			int lastIndex = matcherForecast.end();
+			tac = tac.delete(matcherForecast.start(), lastIndex);
+			matcherForecast.reset();
 		}
 		
-		int lastIndex = matcherForecast.end();
-		tac.delete(matcherForecast.start(), lastIndex);
+		
+	
 		return tac;
 	}
 	
@@ -332,6 +373,18 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 
 	public void setMessageStatusType(MessageStatusType messageStatusType) {
 		this.messageStatusType = messageStatusType;
+	}
+	
+	public boolean hasNextAdvisory() {
+		return this.nextAdvDateTime!=null;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

@@ -440,9 +440,9 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
-		JAXBElement<SIGMETType> metarRootElement = IWXXM31Helpers.ofIWXXM.createSIGMET(reportType);
+		JAXBElement<SIGMETType> sigmetRootElement = IWXXM31Helpers.ofIWXXM.createSIGMET(reportType);
 
-		jaxbMarshaller.marshal(metarRootElement, stream);
+		jaxbMarshaller.marshal(sigmetRootElement, stream);
 
 		return stream.toString("UTF-8");
 	}

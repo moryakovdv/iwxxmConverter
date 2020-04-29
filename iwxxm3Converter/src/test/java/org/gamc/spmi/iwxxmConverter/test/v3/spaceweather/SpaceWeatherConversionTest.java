@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.test.v3.spaceweather;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
@@ -89,7 +90,10 @@ public class SpaceWeatherConversionTest {
 		
 		assertTrue(swxTac.getEffects().size()>0);
 		assertTrue(swxTac.getEffects().get(1).equalsIgnoreCase("GNSS_MOD"));
-		
+		assertTrue(swxTac.getObservedLocation().getHemiSpheres().contains("HNH"));
+		assertTrue(swxTac.getForecastedLocations().size()==4);
+		assertTrue(swxTac.getRemark().contains("INCREASED AURORAL ACT"));
+		assertFalse(swxTac.hasNextAdvisory());
 	}
 	
 	

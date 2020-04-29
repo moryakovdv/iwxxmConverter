@@ -30,6 +30,9 @@ public class SpaceWeatherParsingRegexp {
 	/**SWX Mandatory header*/
 	public final static Pattern spaceWeatherHeader = Pattern.compile(
 	       "SWX\\s+ADVISORY");
+	
+	public final static Pattern timeStamp = Pattern.compile("(?<year>\\d{4})(?<month>\\d{2})(?<day>\\d{2})\\/(?<hour>\\d{2})(?<minute>\\d{2})Z");  
+	
 	/**Pattern for date time of creation*/
 	public final static Pattern spaceWeatherDateTimeGenerated = Pattern.compile("DTG\\s*:\\s+(?<year>\\d{4})(?<month>\\d{2})(?<day>\\d{2})\\/(?<hour>\\d{2})(?<minute>\\d{2})Z");
 	
@@ -52,7 +55,7 @@ public class SpaceWeatherParsingRegexp {
 	public final static Pattern spaceWeatherForecastArea = Pattern.compile("(?:FCST\\s+SWX\\s+\\+(?<forecastHour>\\d{1,2})\\s+HR\\s*:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?(?<notExpected>NO\\s+SWX\\s+EXP)?");
 	
 	/**Remark description**/
-	public final static Pattern spaceWeatherRemark = Pattern.compile("RMK\\s*:\\s+(?<remark>.+)$|NXT");
+	public final static Pattern spaceWeatherRemark = Pattern.compile("RMK\\s*:\\s+(?<remark>.+)(?=\r|\n|NXT|$)");
 	
 	/**next advisory if mentioned
 	 * Otherwise should lead to  <iwxxm:nextAdvisoryTime nilReason="http://codes.wmo.int/common/nil/inapplicable"/>*/

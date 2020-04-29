@@ -34,8 +34,11 @@ import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister;
 import org.joda.time.DateTime;
 
+import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeForecastWeatherType;
 import schemabindings31._int.icao.iwxxm._3.AerodromePresentWeatherType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeRecentWeatherType;
@@ -48,6 +51,7 @@ import schemabindings31._int.icao.iwxxm._3.LengthWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.ReportType;
 import schemabindings31._int.icao.iwxxm._3.RunwayDirectionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SigConvectiveCloudTypeType;
+import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirportHeliportTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirportHeliportTimeSliceType;
@@ -103,6 +107,9 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	final WMORunWayDepositsRegister rwDepositReg = new WMORunWayDepositsRegister();
 	final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
 
+	final WMOSpaceWeatherRegister swxEffectsRegister = new WMOSpaceWeatherRegister();
+	final WMOSpaceWeatherLocationRegister swxLocationRegister = new WMOSpaceWeatherLocationRegister();
+	
 	public static final String NSW = "NSW";
 	
 	/**
@@ -129,6 +136,23 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		return timeInstantProperty;
 	}
+	
+	public StringWithNilReasonType createStringWithNilReasonForString(String value, String nilReason) {
+		StringWithNilReasonType snrType = ofIWXXM.createStringWithNilReasonType();
+		if (value==null)
+			snrType.getNilReason().add(nilReason);
+		else
+			snrType.setValue(value);
+
+		return snrType;
+	}
+	
+	public JAXBElement<StringWithNilReasonType> createTagForStringWithNilReasonForString(String value, String nilReason) {
+		StringWithNilReasonType snrType = createStringWithNilReasonForString(value,nilReason);
+		JAXBElement<StringWithNilReasonType> result = ofIWXXM.createStringWithNilReason(snrType);
+		return result;
+		
+	}
 
 	/**
 	 * Сreates JAXB TimeInstantSection for a given DateTime
@@ -146,6 +170,14 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 	}
 
+	
+	public AbstractTimeObjectPropertyType createAbstractTimeObject(DateTime dt, String icaoCode) {
+		TimeInstantPropertyType timeProperty = this.createTimeInstantPropertyTypeForDateTime(dt,icaoCode, "adt");			
+		JAXBElement<TimeInstantType> to = IWXXM31Helpers.ofGML.createTimeInstant(timeProperty.getTimeInstant());
+		AbstractTimeObjectPropertyType t = IWXXM31Helpers.ofIWXXM.createAbstractTimeObjectPropertyType();
+		t.setAbstractTimeObject(to);
+		return t;
+	}
 	/**
 	 * Creates valid period section for trend sections
 	 * 
@@ -505,6 +537,12 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public WMOSigConvectiveCloudTypeRegister getSigCloudTypeReg() {
 		return sigCloudTypeReg;
 	}
-
+	
+	public WMOSpaceWeatherRegister getSpaceWeatherReg() {
+		return swxEffectsRegister;
+	}
+	public WMOSpaceWeatherLocationRegister getSpaceWeatherLocationReg() {
+		return swxLocationRegister;
+	}
 
 }

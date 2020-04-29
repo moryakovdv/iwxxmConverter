@@ -30,6 +30,7 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.ForecastSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SPACEWEATHERConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFBecomingSection;
@@ -41,7 +42,27 @@ import org.junit.Test;
 
 public class SpaceWeatherTranslationTest {
 
+	String swxCommonTest = "SWX ADVISORY\n" + 
+			"DTG:                20161108/0100Z \n" + 
+			"SWXC:               DONLON\n" + 
+			"ADVISORY NR:        2016/2\n" + 
+			"SWX EFFECT:         HF COM MOD AND GNSS MOD \n" + 
+			"NR RPLC :           2016/1\n" + 
+			"OBS SWX:            08/0100Z HNH HSH E18000 - W18000 \n" + 
+			"FCST SWX +6 HR:     08/0700Z HNH HSH E18000 - W18000\n" + 
+			"FCST SWX +12 HR:    08/1300Z HNH HSH E18000 - W18000\n" + 
+			"FCST SWX +18 HR:    08/1900Z HNH HSH E18000 - W18000\n" + 
+			"FCST SWX +24 HR:    09/0100Z NO SWX EXP\n" + 
+			"RMK:                LOW LVL GEOMAGNETIC STORMING CAUSING INCREASED AURORAL ACT AND SUBSEQUENT MOD DEGRADATION OF GNSS AND HF COM AVBL IN THE AURORAL ZONE. THIS STORMING EXP TO SUBSIDE IN THE FCST PERIOD. SEE WWW.SPACEWEATHERPROVIDER.WEB \n" + 
+			"NXT ADVISORY:       NO FURTHER ADVISORIES";
 	
+	@Test
+	public void convertSimple() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		SPACEWEATHERConverterV3 converter = new SPACEWEATHERConverterV3();
+		String xmlResult = converter.convertTacToXML(swxCommonTest);
+		
+		System.out.println(xmlResult);
+	}
 
 	
 }
