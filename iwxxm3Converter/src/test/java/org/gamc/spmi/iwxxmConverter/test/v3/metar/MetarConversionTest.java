@@ -17,6 +17,8 @@
 package org.gamc.spmi.iwxxmConverter.test.v3.metar;
 
 import java.io.UnsupportedEncodingException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -47,6 +49,9 @@ public class MetarConversionTest {
 	public void tearDown() throws Exception {
 	}
 
+	
+	
+	
 	String metarA3 = "METAR YUDO 221630Z 24004MPS 0600 R12/1000U DZ FG SCT010 OVC020 17/16 Q1018\n" +
     " BECMG TL1700 0800 FG BECMG AT1800 9999 NSW";
     

@@ -64,6 +64,10 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 	private String sigmetNumber;
 	private Type sigmetType = Type.METEO;
+	
+	private String cancelSigmetNumber;
+	private DateTime cancelSigmetDateTimeFrom;
+	private DateTime cancelSigmetDateTimeTo;
 
 	private DateTime validFrom;
 	private DateTime validTo;
@@ -252,6 +256,21 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			} catch (ParsingException e) {
 				throw new SIGMETParsingException("Check date and time in VALID sections");
 			}
+			
+			//Check if sigmet is CNL
+			boolean isCancel = matcher.group("isCancel")!=null;
+			if (isCancel) {
+				this.setMessageStatusType(MessageStatusType.CANCEL);
+				this.setCancelSigmetNumber(matcher.group("cancelNumber"));
+				try {
+					this.setCancelSigmetDateTimeFrom(IWXXM31Helpers.parseDateTimeToken(matcher.group("cancelDateFrom")));
+					this.setCancelSigmetDateTimeTo(IWXXM31Helpers.parseDateTimeToken(matcher.group("cancelDateTo")));
+				} catch (ParsingException e) {
+					throw new SIGMETParsingException("Check date and time for CANCEL section");
+				}
+				return;
+			}
+			
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
 
@@ -410,9 +429,11 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			boolean onSurface = matcherLevel.group("hassurface") != null;
 			boolean hasBothFL = matcherLevel.group("hasbothfls") != null;
 			boolean aboveFL = matcherLevel.group("above") != null;
+			boolean belowFl = matcherLevel.group("below") !=null;
 
 			level.setBottomMarginOnSurface(onSurface);
 			level.setTopMarginAboveFl(aboveFL);
+			level.setTopMarginBelowFl(belowFl);
 
 			// top FL
 
@@ -585,6 +606,30 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	@Override
 	public Pattern getHeaderPattern() {
 		return SigmetParsingRegexp.sigmetHeader;
+	}
+
+	public String getCancelSigmetNumber() {
+		return cancelSigmetNumber;
+	}
+
+	public void setCancelSigmetNumber(String cancelSigmetNumber) {
+		this.cancelSigmetNumber = cancelSigmetNumber;
+	}
+
+	public DateTime getCancelSigmetDateTimeFrom() {
+		return cancelSigmetDateTimeFrom;
+	}
+
+	public void setCancelSigmetDateTimeFrom(DateTime cancelSigmetDateTimeFrom) {
+		this.cancelSigmetDateTimeFrom = cancelSigmetDateTimeFrom;
+	}
+
+	public DateTime getCancelSigmetDateTimeTo() {
+		return cancelSigmetDateTimeTo;
+	}
+
+	public void setCancelSigmetDateTimeTo(DateTime cancelSigmetDateTimeTo) {
+		this.cancelSigmetDateTimeTo = cancelSigmetDateTimeTo;
 	}
 
 }

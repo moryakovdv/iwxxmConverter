@@ -29,11 +29,13 @@ import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister;
 import org.joda.time.DateTime;
@@ -96,6 +98,8 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 	
 	/*WMO registers**/
+	final WMONilReasonRegister nilRegister = new WMONilReasonRegister();
+	
 	final WMOCloudRegister cloudReg = new WMOCloudRegister();
 	final WMOCloudTypeRegister cloudTypeReg = new WMOCloudTypeRegister();
 	
@@ -106,6 +110,9 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	final WMORunWayContaminationRegister rwContaminationReg = new WMORunWayContaminationRegister();
 	final WMORunWayDepositsRegister rwDepositReg = new WMORunWayDepositsRegister();
 	final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
+
+	final WMOSigWXRegister sigWxPhenomenaRegister = new WMOSigWXRegister();
+	
 
 	final WMOSpaceWeatherRegister swxEffectsRegister = new WMOSpaceWeatherRegister();
 	final WMOSpaceWeatherLocationRegister swxLocationRegister = new WMOSpaceWeatherLocationRegister();
@@ -538,11 +545,19 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return sigCloudTypeReg;
 	}
 	
+	public WMOSigWXRegister getSigWxPhenomenaRegister() {
+		return sigWxPhenomenaRegister;
+	}
+	
 	public WMOSpaceWeatherRegister getSpaceWeatherReg() {
 		return swxEffectsRegister;
 	}
 	public WMOSpaceWeatherLocationRegister getSpaceWeatherLocationReg() {
 		return swxLocationRegister;
+	}
+
+	public WMONilReasonRegister getNilRegister() {
+		return nilRegister;
 	}
 
 }

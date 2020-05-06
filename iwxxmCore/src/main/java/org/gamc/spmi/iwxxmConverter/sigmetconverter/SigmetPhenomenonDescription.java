@@ -136,5 +136,14 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 	public void setMovingSection(SigmetMovingSection movingSection) {
 		this.movingSection = movingSection;
 	}
+	
+	/**returns string to find the correcsponding link in thw WMO registry*/
+	public String getPhenomenonForLink() {
+		if (this.phenomenonSeverity.equals(Severity.NOTSET)) {
+			return this.phenomenon;
+		}
+		else
+			return this.phenomenonSeverity.name+"_"+this.phenomenon;
+	}
 
 }

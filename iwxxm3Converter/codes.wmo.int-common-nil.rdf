@@ -1,0 +1,378 @@
+<rdf:RDF
+    xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    xmlns:ldp="http://www.w3.org/ns/ldp#"
+    xmlns:version="http://purl.org/linked-data/version#"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:ui="http://purl.org/linked-data/registry-ui#"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:qudt-dimension="http://qudt.org/vocab/dimension#"
+    xmlns:ssd="http://www.w3.org/ns/sparql-service-description#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:reg="http://purl.org/linked-data/registry#"
+    xmlns:bufr4-core="http://codes.wmo.int/bufr4/schema/core/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:void="http://rdfs.org/ns/void#"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:dgu="http://reference.data.gov.uk/def/reference/"
+    xmlns:common-unit="http://codes.wmo.int/common/schema/unit/"
+    xmlns:common-core="http://codes.wmo.int/common/schema/core/"
+    xmlns:qudt="http://qudt.org/schema/qudt#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:qb="http://purl.org/linked-data/cube#"
+    xmlns:grib2-parameter="http://codes.wmo.int/grib2/schema/parameter/"
+    xmlns:qudt-unit="http://qudt.org/vocab/unit#"
+    xmlns:qudt-quantity="http://qudt.org/vocab/quantity#"
+    xmlns:api="http://purl.org/linked-data/api/vocab#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:grib2-core="http://codes.wmo.int/grib2/schema/core/">
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_notObservable">
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <rdfs:label xml:lang="en">Not observable</rdfs:label>
+    <dct:description xml:lang="en">A system failure, sensor failure, or sensor obstruction, prevented the intended observation of the value.</dct:description>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity>
+        <skos:Concept rdf:about="http://codes.wmo.int/common/nil/notObservable">
+          <dct:description xml:lang="en">A system failure, sensor failure, or sensor obstruction, prevented the intended observation of the value.</dct:description>
+          <rdfs:label xml:lang="en">Not observable</rdfs:label>
+        </skos:Concept>
+      </reg:entity>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_notObservable:2#graph"/>
+    </reg:definition>
+    <reg:notation>notObservable</reg:notation>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.654Z</dct:dateSubmitted>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.851Z</dct:modified>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:register>
+      <reg:Register rdf:about="http://codes.wmo.int/common/nil">
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/withheld">
+            <dct:description xml:lang="en">The value is not divulged.</dct:description>
+            <rdfs:label xml:lang="en">Withheld</rdfs:label>
+            <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/gml#clause-8.2.3.1"/>
+            <dc:source xml:lang="en">ISO 19136:2007 'Geographic information - Geography Markup Language' sub-clause 8.2.3.1</dc:source>
+          </skos:Concept>
+        </skos:member>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/inapplicable">
+            <dct:description xml:lang="en">There is no value.</dct:description>
+            <rdfs:label xml:lang="en">Inapplicable</rdfs:label>
+            <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/gml#clause-8.2.3.1"/>
+            <dc:source xml:lang="en">ISO 19136:2007 'Geographic information - Geography Markup Language' sub-clause 8.2.3.1</dc:source>
+          </skos:Concept>
+        </skos:member>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/AboveDetectionRange">
+            <dct:description xml:lang="en">The value was above the detection range of the instrument used to estimate it.</dct:description>
+            <rdfs:label xml:lang="en">Above detection range</rdfs:label>
+          </skos:Concept>
+        </skos:member>
+        <reg:containedItemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/template">
+            <dct:description xml:lang="en">The value will be available later.</dct:description>
+            <rdfs:label xml:lang="en">Template</rdfs:label>
+            <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/gml#clause-8.2.3.1"/>
+            <dc:source xml:lang="en">ISO 19136:2007 'Geographic information - Geography Markup Language' sub-clause 8.2.3.1</dc:source>
+          </skos:Concept>
+        </skos:member>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2014-09-03T09:52:34.941Z</dct:modified>
+        <dct:description xml:lang="en">Nil-reason terms are used to provide an explanation for recording a missing (or void) value within a data product. Terms are drawn from authorities in addition to WMO including ISO/TC 211 (from ISO 19136:2007 Geography markup language clause 8.2.3.1; published on their behalf by the Open Geospatial Consortium).</dct:description>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/notDetectedByAutoSystem">
+            <dct:description xml:lang="en">The automated observing system did not detect a value (e.g. no cloud detected 'NCD').</dct:description>
+            <rdfs:label xml:lang="en">Nothing detected by automated system</rdfs:label>
+          </skos:Concept>
+        </skos:member>
+        <skos:notation>D-1</skos:notation>
+        <skos:member rdf:resource="http://codes.wmo.int/common/nil/notObservable"/>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+        >12</owl:versionInfo>
+        <ldp:membershipPredicate rdf:resource="http://www.w3.org/2004/02/skos/core#member"/>
+        <reg:manager rdf:resource="http://codes.wmo.int/system/organization/www-dm"/>
+        <rdfs:label>Code Table D-1: Nil reasons</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/nothingOfOperationalSignificance">
+            <dct:description xml:lang="en">Nothing was observed or forecast of operational significance (e.g. nil significant cloud 'NSC', nil significant weather 'NSW').</dct:description>
+            <rdfs:label xml:lang="en">Nothing of operational signficance</rdfs:label>
+          </skos:Concept>
+        </skos:member>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/BelowDetectionRange">
+            <dct:description xml:lang="en">The value was below the detection range of the instrument used to estimate it.</dct:description>
+            <rdfs:label xml:lang="en">Below detection range</rdfs:label>
+          </skos:Concept>
+        </skos:member>
+        <reg:owner rdf:resource="http://codes.wmo.int/system/organization/wmo"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/ldp#Container"/>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/missing">
+            <dct:description xml:lang="en">The correct value is not readily available to the sender of this data. Furthermore, a correct value may not exist.</dct:description>
+            <rdfs:label xml:lang="en">Missing</rdfs:label>
+            <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/gml#clause-8.2.3.1"/>
+            <dc:source xml:lang="en">ISO 19136:2007 'Geographic information - Geography Markup Language' sub-clause 8.2.3.1</dc:source>
+          </skos:Concept>
+        </skos:member>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/noSignificantChange">
+            <dct:description xml:lang="en">No significant change is expected to occur.</dct:description>
+            <rdfs:label xml:lang="en">No significant change</rdfs:label>
+            <skos:altLabel>NOSIG</skos:altLabel>
+          </skos:Concept>
+        </skos:member>
+        <skos:member>
+          <skos:Concept rdf:about="http://codes.wmo.int/common/nil/unknown">
+            <dct:description xml:lang="en">The correct value is not known to, and not computable by, the sender of this data. However, a correct value probably exists.</dct:description>
+            <rdfs:label xml:lang="en">Unknown</rdfs:label>
+            <rdfs:seeAlso rdf:resource="http://www.opengis.net/doc/gml#clause-8.2.3.1"/>
+            <dc:source xml:lang="en">ISO 19136:2007 'Geographic information - Geography Markup Language' sub-clause 8.2.3.1</dc:source>
+          </skos:Concept>
+        </skos:member>
+      </reg:Register>
+    </reg:register>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_template">
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.429Z</dct:modified>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <reg:notation>template</reg:notation>
+    <dct:description xml:lang="en">The value will be available later.</dct:description>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <rdfs:label xml:lang="en">Template</rdfs:label>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/template"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_template:2#graph"/>
+    </reg:definition>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.458Z</dct:dateSubmitted>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_BelowDetectionRange">
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.798Z</dct:dateSubmitted>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:notation>BelowDetectionRange</reg:notation>
+    <rdfs:label xml:lang="en">Below detection range</rdfs:label>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <dct:description xml:lang="en">The value was below the detection range of the instrument used to estimate it.</dct:description>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.692Z</dct:modified>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/BelowDetectionRange"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_BelowDetectionRange:2#graph"/>
+    </reg:definition>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_unknown">
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:notation>unknown</reg:notation>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <rdfs:label xml:lang="en">Unknown</rdfs:label>
+    <dct:description xml:lang="en">The correct value is not known to, and not computable by, the sender of this data. However, a correct value probably exists.</dct:description>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.702Z</dct:dateSubmitted>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/unknown"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_unknown:2#graph"/>
+    </reg:definition>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.369Z</dct:modified>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_notDetectedByAutoSystem">
+    <dct:description xml:lang="en">The automated observing system did not detect a value (e.g. no cloud detected 'NCD').</dct:description>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <rdfs:label xml:lang="en">Nothing detected by automated system</rdfs:label>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.379Z</dct:dateSubmitted>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.909Z</dct:modified>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <reg:notation>notDetectedByAutoSystem</reg:notation>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/notDetectedByAutoSystem"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_notDetectedByAutoSystem:2#graph"/>
+    </reg:definition>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_missing">
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <dct:description xml:lang="en">The correct value is not readily available to the sender of this data. Furthermore, a correct value may not exist.</dct:description>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.484Z</dct:modified>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/missing"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_missing:2#graph"/>
+    </reg:definition>
+    <reg:notation>missing</reg:notation>
+    <rdfs:label xml:lang="en">Missing</rdfs:label>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.93Z</dct:dateSubmitted>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_AboveDetectionRange">
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.334Z</dct:dateSubmitted>
+    <reg:notation>AboveDetectionRange</reg:notation>
+    <dct:description xml:lang="en">The value was above the detection range of the instrument used to estimate it.</dct:description>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.779Z</dct:modified>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/AboveDetectionRange"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_AboveDetectionRange:2#graph"/>
+    </reg:definition>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <rdfs:label xml:lang="en">Above detection range</rdfs:label>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_withheld">
+    <dct:description xml:lang="en">The value is not divulged.</dct:description>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.604Z</dct:dateSubmitted>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <rdfs:label xml:lang="en">Withheld</rdfs:label>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.545Z</dct:modified>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <reg:notation>withheld</reg:notation>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/withheld"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_withheld:2#graph"/>
+    </reg:definition>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_noSignificantChange">
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.843Z</dct:dateSubmitted>
+    <rdfs:label>NOSIG</rdfs:label>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.601Z</dct:modified>
+    <dct:description xml:lang="en">No significant change is expected to occur.</dct:description>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:notation>noSignificantChange</reg:notation>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/noSignificantChange"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_noSignificantChange:2#graph"/>
+    </reg:definition>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_inapplicable">
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.301Z</dct:modified>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.888Z</dct:dateSubmitted>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/inapplicable"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_inapplicable:2#graph"/>
+    </reg:definition>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <reg:notation>inapplicable</reg:notation>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <dct:description xml:lang="en">There is no value.</dct:description>
+    <rdfs:label xml:lang="en">Inapplicable</rdfs:label>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/_nil">
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</owl:versionInfo>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil"/>
+      <reg:entityVersion rdf:resource="http://codes.wmo.int/common/nil:1"/>
+    </reg:definition>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.259Z</dct:dateSubmitted>
+    <reg:itemClass rdf:resource="http://www.w3.org/ns/ldp#Container"/>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <rdfs:label>Code Table D-1: Nil reasons</rdfs:label>
+    <reg:itemClass rdf:resource="http://purl.org/linked-data/registry#Register"/>
+    <reg:notation>nil</reg:notation>
+    <reg:register rdf:resource="http://codes.wmo.int/common"/>
+    <dct:description xml:lang="en">Nil-reason terms are used to provide an explanation for recording a missing (or void) value within a data product. Terms are drawn from authorities in addition to WMO including ISO/TC 211 (from ISO 19136:2007 Geography markup language clause 8.2.3.1; published on their behalf by the Open Geospatial Consortium).</dct:description>
+  </reg:RegisterItem>
+  <reg:RegisterItem rdf:about="http://codes.wmo.int/common/nil/_nothingOfOperationalSignificance">
+    <reg:status rdf:resource="http://purl.org/linked-data/registry#statusStable"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</owl:versionInfo>
+    <dct:description xml:lang="en">Nothing was observed or forecast of operational significance (e.g. nil significant cloud 'NSC', nil significant weather 'NSW').</dct:description>
+    <reg:submitter rdf:parseType="Resource">
+      <foaf:name>bootstrap</foaf:name>
+    </reg:submitter>
+    <reg:register rdf:resource="http://codes.wmo.int/common/nil"/>
+    <rdfs:label xml:lang="en">Nothing of operational signficance</rdfs:label>
+    <reg:notation>nothingOfOperationalSignificance</reg:notation>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2019-10-24T10:25:37.965Z</dct:modified>
+    <reg:definition rdf:parseType="Resource">
+      <reg:entity rdf:resource="http://codes.wmo.int/common/nil/nothingOfOperationalSignificance"/>
+      <reg:sourceGraph rdf:resource="http://codes.wmo.int/common/nil/_nothingOfOperationalSignificance:2#graph"/>
+    </reg:definition>
+    <reg:itemClass rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dct:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2014-09-03T09:52:34.536Z</dct:dateSubmitted>
+  </reg:RegisterItem>
+</rdf:RDF>

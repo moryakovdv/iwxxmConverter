@@ -71,7 +71,7 @@ public class SigmetConversionTest {
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
-	String sigmentLines = "UEEE SIGMET 2 VALID 090500/090900 UEEE-\n"
+	String sigmentLines = "WSRS31RUMA 111143 XXX\n" +"UEEE SIGMET 2 VALID 090500/090900 UEEE-\n"
 			+ "UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + "FL310/440 STNR NC=";
 
 	String sigmetSevIce = "WSRS31RUMA 111143 XXX\n"
@@ -85,6 +85,7 @@ public class SigmetConversionTest {
 	String sigmetTestYUDD = "WSRS31RUMA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\r\n" + 
 			"\r\n" + 
 			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
+	
 	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
 			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
 
@@ -93,12 +94,15 @@ public class SigmetConversionTest {
 			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
 	
 	@Test
-	public void testObsAtSigmet() throws SIGMETParsingException {
+	public void testObsAtSigmet() throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 		SIGMETTacMessage sgTac = new SIGMETTacMessage(sigmetObsAt);
 		sgTac.parseMessage();
 		assertTrue(sgTac.getPhenomenonDescription().getPhenomenonTimeStamp()!=null);
 		
-		
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetObsAt);
+
+		System.out.println(result);
 	}
 	
 	@Test
@@ -111,7 +115,7 @@ public class SigmetConversionTest {
 	}
 
 	/**@author alex*/
-	//@Test
+	@Test
 	public void testTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -120,7 +124,7 @@ public class SigmetConversionTest {
 		System.out.println(result);
 	}
 	/**@author alex*/
-	//@Test
+	@Test
 	public void testCnslTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -128,7 +132,7 @@ public class SigmetConversionTest {
 
 		System.out.println(result);
 	}
-	// @Test
+	@Test
 	public void testCommonSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 
@@ -139,7 +143,7 @@ public class SigmetConversionTest {
 
 	}
 
-	// @Test
+	@Test
 	public void testSigmetWithLineCoords()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -149,7 +153,7 @@ public class SigmetConversionTest {
 
 	}
 
-	// @Test
+	@Test
 	public void testLine()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();

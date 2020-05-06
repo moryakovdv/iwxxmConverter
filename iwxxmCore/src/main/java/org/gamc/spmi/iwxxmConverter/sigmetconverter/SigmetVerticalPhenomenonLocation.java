@@ -8,11 +8,12 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 public class SigmetVerticalPhenomenonLocation {
 
 	private boolean topMarginAboveFl = false;
+	private boolean topMarginBelowFl = false;
 	private boolean bottomMarginOnSurface = false;
 	
-	private Optional<Integer> bottomFL;
-	private Optional<Integer> topFL;
-	private Optional<Integer> topMarginMeters;
+	private Optional<Integer> bottomFL = Optional.empty();
+	private Optional<Integer> topFL= Optional.empty();
+	private Optional<Integer> topMarginMeters= Optional.empty();
 	
 	private LENGTH_UNITS units = LENGTH_UNITS.M;
 	
@@ -51,6 +52,12 @@ public class SigmetVerticalPhenomenonLocation {
 	}
 	public void setUnits(LENGTH_UNITS units) {
 		this.units = units;
+	}
+	public boolean isTopMarginBelowFl() {
+		return topMarginBelowFl;
+	}
+	public void setTopMarginBelowFl(boolean topMarginBelowFl) {
+		this.topMarginBelowFl = topMarginBelowFl;
 	}
 	
 	

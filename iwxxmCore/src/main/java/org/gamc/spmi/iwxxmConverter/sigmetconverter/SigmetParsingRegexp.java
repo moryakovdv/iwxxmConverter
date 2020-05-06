@@ -42,9 +42,13 @@ public class SigmetParsingRegexp {
 	/**SIGMET Mandatory header*/
 	public final static Pattern sigmetHeader = Pattern.compile(
 			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
-	       "(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
+	       //"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
+			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?");
+	
+	public final static Pattern sigmetCancel = Pattern.compile("");
+	
 	/**Pattern for phenomenas except VA,VC*/
-	public final static Pattern sigmetPhenomena = Pattern.compile("((?:\\s+|^)?(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY))?\\s+(?<phenomena>.*?)\\s+(?<obsfcst>OBS|FCST)\\s+?(?:AT\\s+(?<atTime>\\d{4})Z)?");
+	public final static Pattern sigmetPhenomena = Pattern.compile("((?:\\s+|^)?(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY))?\\s+(?<phenomena>.*?)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
 	public final static Pattern sigmetPhenomenaTimestamp = Pattern
 			.compile("(?<hh>\\d{2})(?<mm>\\d{2})");
 	
@@ -78,7 +82,7 @@ public class SigmetParsingRegexp {
 	
 	/**Vertical length (height) of the phenomena*/
 	//public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)M))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
-	public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)(?<units>M|FT)))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
+	public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?(?<below>BLW)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)(?<units>M|FT)))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
 	public final static Pattern sigmetIntensityChanges=Pattern.compile("(?<intensity>INTSF|WKN|NC)");
 	
 	/**Radioactive cloud mentioned WITHIN some radius from point*/
