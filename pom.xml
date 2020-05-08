@@ -118,6 +118,16 @@
 			<version>2.26</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+			<version>2.2.6.RELEASE</version>
+		</dependency>
+
+		
+		
+		
 	</dependencies>
 
 
