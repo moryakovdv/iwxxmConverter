@@ -19,14 +19,14 @@ package org.gamc.spmi.iwxxmConverter.airmetconverter;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 
 /**Derived class to throw exception during SIGMET processing*/
-public class AirmetParsingException extends ParsingException {
+public class AIRMETParsingException extends ParsingException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5909939229644148539L;
 
-	public AirmetParsingException(String string) {
+	public AIRMETParsingException(String string) {
 		super(string);
 	}
 

@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 
-
 package org.gamc.spmi.iwxxmConverter.common;
 
-/**Enum to describe common MET messages*/
+/** Enum to describe common MET messages */
 public enum MessageType {
 
-	METAR, SPECI, TAF, SIGMET, SPACEWEATHER;
+	METAR, SPECI, TAF, SIGMET, AIRMET, SPACEWEATHER;
 }
