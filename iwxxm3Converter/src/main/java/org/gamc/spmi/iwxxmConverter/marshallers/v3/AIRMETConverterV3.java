@@ -36,6 +36,7 @@ import schemabindings31._int.icao.iwxxm._3.AIRMETEvolvingConditionCollectionProp
 import schemabindings31._int.icao.iwxxm._3.AIRMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.AIRMETEvolvingConditionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AIRMETEvolvingConditionType;
+import schemabindings31._int.icao.iwxxm._3.AIRMETExpectedIntensityChangeType;
 import schemabindings31._int.icao.iwxxm._3.AIRMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
@@ -231,11 +232,11 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 
 		evolvingType.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedAirmet.getIcaoCode())));
 		if (translatedAirmet.getPhenomenonDescription().getIntencity().name().equals("INTSF")) {
-			// evolvingType.setIntensityChange(ExpectedIntensityChangeType.INTENSIFY);
+			evolvingType.setIntensityChange(AIRMETExpectedIntensityChangeType.INTENSIFY);
 		} else if (translatedAirmet.getPhenomenonDescription().getIntencity().name().equals("WKN")) {
-			// evolvingType.setIntensityChange(ExpectedIntensityChangeType.WEAKEN);
+			evolvingType.setIntensityChange(AIRMETExpectedIntensityChangeType.WEAKEN);
 		} else if (translatedAirmet.getPhenomenonDescription().getIntencity().name().equals("NC")) {
-			// evolvingType.setIntensityChange(ExpectedIntensityChangeType.NO_CHANGE);
+			evolvingType.setIntensityChange(AIRMETExpectedIntensityChangeType.NO_CHANGE);
 		}
 		asType.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedAirmet.getIcaoCode())));
 
