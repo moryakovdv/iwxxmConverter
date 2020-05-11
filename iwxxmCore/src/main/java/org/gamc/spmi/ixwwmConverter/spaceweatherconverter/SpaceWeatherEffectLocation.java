@@ -18,6 +18,7 @@ public class SpaceWeatherEffectLocation implements Comparable<SpaceWeatherEffect
 	private String latEnd;
 	private Optional<Integer> aboveFL;
 	private boolean dayLightSide;
+	private boolean nightSide;
 	
 	public DateTime getEffectsDateTime() {
 		return effectsDateTime;
@@ -59,6 +60,12 @@ public class SpaceWeatherEffectLocation implements Comparable<SpaceWeatherEffect
 	}
 	public void setDayLightSide(boolean dayLightSide) {
 		this.dayLightSide = dayLightSide;
+	}
+	public boolean isNightSide() {
+		return nightSide;
+	}
+	public void setNightSide(boolean nightSide) {
+		this.nightSide = nightSide;
 	}
 	
 	

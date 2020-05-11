@@ -46,7 +46,7 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 	private LinkedList<String> effects = new LinkedList<String>();
 
 	private String remark;
-	
+
 	private DateTime nextAdvDateTime;
 
 	public SPACEWEATHERTacMessage(String initialTacMessage) {
@@ -120,14 +120,14 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 			lastIndex = matcherReplacingNumber.end();
 			tac.delete(matcherReplacingNumber.start(), lastIndex);
 		}
-		
+
 		// extract effects
 		tac = parseEffects(tac);
-		
-		//fill observe section
+
+		// fill observe section
 		tac = parseObservationSection(tac);
 		tac = parseForecastedSections(tac);
-		
+
 		Matcher matcherRemark = SpaceWeatherParsingRegexp.spaceWeatherRemark.matcher(tac);
 		if (matcherRemark.find()) {
 			String rmk = matcherRemark.group("remark");
@@ -135,160 +135,146 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 			lastIndex = matcherRemark.end();
 			tac.delete(matcherRemark.start(), lastIndex);
 		}
-		
-		
+
 		Matcher matcherNextAdv = SpaceWeatherParsingRegexp.spaceWeatherNextAdvisory.matcher(tac);
 		if (matcherNextAdv.find()) {
-			
-			
-			
-			
-			 
+
 			String nextAdvDatetime = matcherNextAdv.group("nextAdv");
 			if (nextAdvDatetime.equalsIgnoreCase("NO FURTHER ADVISORIES")) {
 				return;
 			}
-				
+
 			Matcher matcherNextAdvDateTime = SpaceWeatherParsingRegexp.timeStamp.matcher(nextAdvDatetime);
-			
-			String yearS = matcherNextAdvDateTime.group("year");
-			String monthS = matcherNextAdvDateTime.group("month");
-			String dayS = matcherNextAdvDateTime.group("day");
-			String hourS = matcherNextAdvDateTime.group("hour");
-			String minuteS = matcherNextAdvDateTime.group("minute");
-			 this.nextAdvDateTime = new DateTime(Integer.valueOf(yearS), Integer.valueOf(monthS), Integer.valueOf(dayS),
-					Integer.valueOf(hourS), Integer.valueOf(minuteS), DateTimeZone.UTC);
-			 
-			 
-			 
-		
-			 lastIndex = matcherNextAdvDateTime.end();
-			tac.delete(matcherNextAdvDateTime.start(), lastIndex);
+			if (matcherNextAdvDateTime.find()) {
+				String yearS = matcherNextAdvDateTime.group("year");
+				String monthS = matcherNextAdvDateTime.group("month");
+				String dayS = matcherNextAdvDateTime.group("day");
+				String hourS = matcherNextAdvDateTime.group("hour");
+				String minuteS = matcherNextAdvDateTime.group("minute");
+				this.nextAdvDateTime = new DateTime(Integer.valueOf(yearS), Integer.valueOf(monthS),
+						Integer.valueOf(dayS), Integer.valueOf(hourS), Integer.valueOf(minuteS), DateTimeZone.UTC);
+
+				lastIndex = matcherNextAdvDateTime.end();
+				tac.delete(matcherNextAdvDateTime.start(), lastIndex);
+			}
 		}
 	}
-	
-	/***parse and fill the list of effects*/
+
+	/*** parse and fill the list of effects */
 	private StringBuffer parseEffects(StringBuffer tac) {
 		Matcher matcherEffects = SpaceWeatherParsingRegexp.spaceWeatherEffects.matcher(tac);
-		this.effects=new LinkedList<String>();
+		this.effects = new LinkedList<String>();
 		if (matcherEffects.find()) {
 			String effects = matcherEffects.group("effects");
 			String[] splitted = effects.split("\\s*AND\\s*");
-			for(String effect:splitted) {
+			for (String effect : splitted) {
 				String eff = effect.trim().replaceAll("\\s+", "_");
 				this.effects.add(eff);
 			}
-			
-			
+
 			int lastIndex = matcherEffects.end();
 			tac.delete(matcherEffects.start(), lastIndex);
 		}
 		return tac;
 	}
-	
-	
-	
-	
-	/**parse and fill observation section - time and location*/
+
+	/** parse and fill observation section - time and location */
 	private StringBuffer parseObservationSection(StringBuffer tac) {
 		Matcher matcherObservation = SpaceWeatherParsingRegexp.spaceWeatherObserveArea.matcher(tac);
-		
+
 		if (matcherObservation.find()) {
 			String dayS = matcherObservation.group("day");
 			String hourS = matcherObservation.group("hour");
 			String minuteS = matcherObservation.group("minute");
-			
+
 			String daylight = matcherObservation.group("daylight");
-			
+
 			String hemi1 = matcherObservation.group("hemi1");
-			
+
 			String hemi2 = matcherObservation.group("hemi2");
-			
+
 			String latStart = matcherObservation.group("latStart");
 			String latEnd = matcherObservation.group("latEnd");
-			
+
 			String fl = matcherObservation.group("fl");
-			
+
 			SpaceWeatherEffectLocation observeLocation = new SpaceWeatherEffectLocation();
-			
+
 			int dayObs = Integer.valueOf(dayS);
 			int hourObs = Integer.valueOf(hourS);
 			int minuteObs = Integer.valueOf(minuteS);
-			
-			DateTime obsDateTime = new DateTime(this.getIssued().getYear(),this.getIssued().getMonthOfYear(),dayObs,hourObs,minuteObs,DateTimeZone.UTC);;
-			if (dayObs<this.getIssued().getDayOfYear()) {
+
+			DateTime obsDateTime = new DateTime(this.getIssued().getYear(), this.getIssued().getMonthOfYear(), dayObs,
+					hourObs, minuteObs, DateTimeZone.UTC);
+			;
+			if (dayObs < this.getIssued().getDayOfYear()) {
 				obsDateTime = this.getIssued().plusHours(24).withHourOfDay(hourObs).withMinuteOfHour(minuteObs);
 			}
-			
-			if (hemi1!=null)
+
+			if (hemi1 != null)
 				observeLocation.getHemiSpheres().add(hemi1);
-			if (hemi2!=null)
+			if (hemi2 != null)
 				observeLocation.getHemiSpheres().add(hemi2);
-			
+
 			observeLocation.setLatStart(latStart);
 			observeLocation.setLatEnd(latEnd);
-			
-				
-			observeLocation.setDayLightSide(daylight!=null);
+
+			observeLocation.setDayLightSide(daylight != null);
 			observeLocation.setEffectsDateTime(obsDateTime);
-			observeLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+			observeLocation.setAboveFL(fl == null ? Optional.empty() : Optional.of(Integer.valueOf(fl)));
 			this.setObservedLocation(observeLocation);
-			
+
 			int lastIndex = matcherObservation.end();
 			tac.delete(matcherObservation.start(), lastIndex);
 		}
 		return tac;
 	}
-	
-	/**parse and fill forecasted sections - time and location*/
+
+	/** parse and fill forecasted sections - time and location */
 	private StringBuffer parseForecastedSections(StringBuffer tac) {
 		Matcher matcherForecast = SpaceWeatherParsingRegexp.spaceWeatherForecastArea.matcher(tac);
-		
+
 		while (matcherForecast.find()) {
-			
+
 			String forecastHours = matcherForecast.group("forecastHour");
 			int hoursToAdd = Integer.valueOf(forecastHours);
-			
+
 			String daylight = matcherForecast.group("daylight");
-			
+
 			String hemi1 = matcherForecast.group("hemi1");
-			
+
 			String hemi2 = matcherForecast.group("hemi2");
-			
+
 			String latStart = matcherForecast.group("latStart");
 			String latEnd = matcherForecast.group("latEnd");
-			
+
 			String fl = matcherForecast.group("fl");
-			
+
 			SpaceWeatherEffectLocation forecastLocation = new SpaceWeatherEffectLocation();
-			
-			
+
 			DateTime forecastDateTime = this.getObservedLocation().getEffectsDateTime().plusHours(hoursToAdd);
 			forecastLocation.setEffectsDateTime(forecastDateTime);
-			
-			if (hemi1!=null)
+
+			if (hemi1 != null)
 				forecastLocation.getHemiSpheres().add(hemi1);
-			if (hemi2!=null)
+			if (hemi2 != null)
 				forecastLocation.getHemiSpheres().add(hemi2);
-			
+
 			forecastLocation.setLatStart(latStart);
 			forecastLocation.setLatEnd(latEnd);
-			
-				
-			forecastLocation.setDayLightSide(daylight!=null);
-			forecastLocation.setAboveFL(fl==null?Optional.empty():Optional.of(Integer.valueOf(fl)));
+
+			forecastLocation.setDayLightSide(daylight != null);
+			forecastLocation.setAboveFL(fl == null ? Optional.empty() : Optional.of(Integer.valueOf(fl)));
 			this.forecastedLocations.add(forecastLocation);
-			
+
 			int lastIndex = matcherForecast.end();
 			tac = tac.delete(matcherForecast.start(), lastIndex);
 			matcherForecast.reset();
 		}
-		
-		
-	
+
 		return tac;
 	}
-	
+
 	@Override
 	public Interval getValidityInterval() {
 		if (this.getObservedLocation() == null)
@@ -374,9 +360,9 @@ public class SPACEWEATHERTacMessage extends TacMessageImpl {
 	public void setMessageStatusType(MessageStatusType messageStatusType) {
 		this.messageStatusType = messageStatusType;
 	}
-	
+
 	public boolean hasNextAdvisory() {
-		return this.nextAdvDateTime!=null;
+		return this.nextAdvDateTime != null;
 	}
 
 	public String getRemark() {

@@ -49,10 +49,10 @@ public class SpaceWeatherParsingRegexp {
 	public final static Pattern spaceWeatherEffects = Pattern.compile("(?:SWX\\s+EFFECT:)\\s*(?<effects>.*)\\s*");
 	
 	/**Observation area and time*/
-	public final static Pattern spaceWeatherObserveArea = Pattern.compile("(?:OBS\\s+SWX:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?");
+	public final static Pattern spaceWeatherObserveArea = Pattern.compile("(?:OBS\\s+SWX:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT|DAY\\s+SIDE)?(?<nightlight>NIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{2,5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{2,5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?");
 	
 	/**Forecasting areas and times*/
-	public final static Pattern spaceWeatherForecastArea = Pattern.compile("(?:FCST\\s+SWX\\s+\\+(?<forecastHour>\\d{1,2})\\s+HR\\s*:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?(?<notExpected>NO\\s+SWX\\s+EXP)?");
+	public final static Pattern spaceWeatherForecastArea = Pattern.compile("(?:FCST\\s+SWX\\s+\\+(?<forecastHour>\\d{1,2})\\s+HR\\s*:)\\s*(?<day>\\d\\d)\\/(?<hour>\\d\\d)(?<minute>\\d\\d)Z?\\s+(?<daylight>DAYLIGHT|DAY\\s+SIDE)?(?<nightlight>NIGHT\\s+SIDE)?(?<hemi1>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<hemi2>HNH|HSH|MNH|MSH|EQN|EQS)?\\s*(?<latStart>(E|W)(\\d{2,5}))?\\s*-?\\s*(?<latEnd>(E|W)(\\d{2,5}))?(?:\\s+ABV\\s+FL(?<fl>\\d{2,3}))?(?<notExpected>NO\\s+SWX\\s+EXP)?");
 	
 	/**Remark description**/
 	public final static Pattern spaceWeatherRemark = Pattern.compile("RMK\\s*:\\s+(?<remark>.+)(?=\r|\n|NXT|$)");
