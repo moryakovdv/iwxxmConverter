@@ -23,9 +23,9 @@ import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.SolarCalc;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
+import org.gamc.spmi.iwxxmConverter.spaceweatherconverter.SpaceWeatherEffectLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
-import org.gamc.spmi.ixwwmConverter.spaceweatherconverter.SpaceWeatherEffectLocation;
 import org.joda.time.DateTime;
 
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;

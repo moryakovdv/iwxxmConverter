@@ -1,4 +1,4 @@
-package org.gamc.spmi.ixwwmConverter.spaceweatherconverter;
+package org.gamc.spmi.iwxxmConverter.spaceweatherconverter;
 
 import java.util.LinkedList;
 import java.util.Optional;

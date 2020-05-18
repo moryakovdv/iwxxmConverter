@@ -1,11 +1,14 @@
-2019-10-31 18:09:05,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test DEBUG
-2019-10-31 18:09:05,767[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test ERROR
-2019-10-31 18:09:05,767[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test INFO
-2019-10-31 18:09:05,835[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
-2019-10-31 18:09:05,841[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
-2019-10-31 18:09:05,852[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in SigWx phenomenas: 18
-2019-10-31 18:09:05,859[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
-2019-10-31 18:09:05,876[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
-2019-10-31 18:09:05,884[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
-2019-10-31 18:09:05,895[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
-2019-10-31 18:09:05,899[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2020-05-18 20:49:22,997[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test DEBUG
+2020-05-18 20:49:22,998[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test ERROR
+2020-05-18 20:49:22,998[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test INFO
+2020-05-18 20:49:23,025[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayFriction: 101
+2020-05-18 20:49:23,034[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Reasons: 12
+2020-05-18 20:49:23,039[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Clouds: 10
+2020-05-18 20:49:23,049[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in SigWx phenomenas: 18
+2020-05-18 20:49:23,056[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayDeposits: 11
+2020-05-18 20:49:23,083[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in precipitation: 401
+2020-05-18 20:49:23,090[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in RunwayContaminations: 5
+2020-05-18 20:49:23,095[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2020-05-18 20:49:23,099[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in CloudTypes : 2
+2020-05-18 20:49:23,104[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in Space Weather effects: 9
+2020-05-18 20:49:23,109[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in SpaceWeather locations: 8
