@@ -139,7 +139,29 @@ API methods:
   	
 So ask `http://localhost:8082/iwxxmConverter/api/convertandvalidate?message=METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG`
 to get converted and validated results.
-  
+
+6. Loading jars to your external project with Maven
+If you want to include pre-builded (for example installed into local .m2) jars into your project do the following:
+```
+	<dependency>
+		<groupId>org.gamc.spmi</groupId>
+		<artifactId>iwxxmCore</artifactId>
+		<version>0.3.0</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.gamc.spmi</groupId>
+		<artifactId>iwxxm3Converter</artifactId>
+		<version>0.3.0</version>
+	</dependency>
+	
+	<!--Resolves some issues (NoClassDefFoundError: org/w3c/dom...) with parsing WMO RDF files in cases you already have got conflicting xml-apis in your  	project with different version-->
+	<dependency>
+		<groupId>xml-apis</groupId>
+		<artifactId>xml-apis</artifactId>
+		<version>1.4.01</version>
+	</dependency>
+```
   
 ## Contribution
 Any help from the community will be highly appreciated. There is a lot of work to be done =):
