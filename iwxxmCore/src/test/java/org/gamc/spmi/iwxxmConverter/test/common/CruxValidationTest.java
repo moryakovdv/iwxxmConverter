@@ -40,7 +40,8 @@ public class CruxValidationTest {
 	String fPath = "/output";
 	  
 	
-	@Test
+	//@Test
+	//TODO: DISABLED due to performance
 	public void cruxTest() throws IOException, SAXException, ParserConfigurationException, URISyntaxException {
 		
 		Crux crux = new Crux();

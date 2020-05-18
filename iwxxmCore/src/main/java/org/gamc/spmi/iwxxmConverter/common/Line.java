@@ -45,7 +45,7 @@ public final class Line implements Serializable {
 	}
 	
 	public boolean isSingleLine() {
-		return (this.startPoint!=null & this.endPoint==null & coordinate!=null);
+		return (this.startPoint==null && this.endPoint==null && coordinate!=null);
 	}
 
 	public Coordinate getCoordinate() {

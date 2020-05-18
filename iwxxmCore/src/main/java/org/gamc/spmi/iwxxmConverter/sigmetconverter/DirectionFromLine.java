@@ -13,11 +13,11 @@ public class DirectionFromLine implements Serializable {
 	 */
 	private static final long serialVersionUID = 1937563107841308842L;
 	private RUMB_UNITS direction;
-	private Line sigmetLine;
+	private Line line;
 	
 	public DirectionFromLine(RUMB_UNITS azimuth, Line line) {
 		this.direction=azimuth;
-		this.sigmetLine = line;
+		this.line = line;
 	}
 	
 	public RUMB_UNITS getDirection() {
@@ -26,11 +26,11 @@ public class DirectionFromLine implements Serializable {
 	public void setDirection(RUMB_UNITS direction) {
 		this.direction = direction;
 	}
-	public Line getSigmetLine() {
-		return sigmetLine;
+	public Line getLine() {
+		return line;
 	}
-	public void setSigmetLine(Line sigmetLine) {
-		this.sigmetLine = sigmetLine;
+	public void setLine(Line line) {
+		this.line = line;
 	}
 	
 	

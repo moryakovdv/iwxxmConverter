@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 
-import org.gamc.spmi.iwxxmConverter.common.AnnotationLocaliedName;
+import org.gamc.spmi.iwxxmConverter.common.AnnotationLocalizedName;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.PRESSURE_UNITS;
@@ -35,51 +35,51 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
  */
 public class MetarCommonWeatherSection implements CommonWeatherSection {
 	boolean failWhenMandatorySectionMissed = true;
-	@AnnotationLocaliedName(name = "Направление ветра")
+	@AnnotationLocalizedName(name = "Направление ветра")
 	private Integer windDir;
-	@AnnotationLocaliedName(name = "Скорость ветра")
+	@AnnotationLocalizedName(name = "Скорость ветра")
 	private Integer windSpeed;
-	@AnnotationLocaliedName(name = "Порыв ветра")
+	@AnnotationLocalizedName(name = "Порыв ветра")
 	private Integer gustSpeed;
-	@AnnotationLocaliedName(name = "Единица измерения скорости ветра")
+	@AnnotationLocalizedName(name = "Единица измерения скорости ветра")
 	private SPEED_UNITS speedUnits = SPEED_UNITS.MPS;
 
 	// if wind direction variables and speed>6m/s
-	@AnnotationLocaliedName(name = "Изменение направления ветра от")
+	@AnnotationLocalizedName(name = "Изменение направления ветра от")
 	private Integer windVariableFrom;
-	@AnnotationLocaliedName(name = "Изменение направления ветра до")
+	@AnnotationLocalizedName(name = "Изменение направления ветра до")
 	private Integer windVariableTo;
 
 	// VRB if wind direction variables and speed<6m/s
-	@AnnotationLocaliedName(name = "Наличие перменной")
+	@AnnotationLocalizedName(name = "Наличие перменной")
 	private boolean vrb;
-	@AnnotationLocaliedName(name = "Скорость ветра vrb")
+	@AnnotationLocalizedName(name = "Скорость ветра vrb")
 	private Integer windVrbSpeed;
-	@AnnotationLocaliedName(name = "Единица измерения скорости ветра vrb")
+	@AnnotationLocalizedName(name = "Единица измерения скорости ветра vrb")
 	private SPEED_UNITS vrbSpeedUnits = SPEED_UNITS.MPS;
-	@AnnotationLocaliedName(name = "Наличие CAVOK")
+	@AnnotationLocalizedName(name = "Наличие CAVOK")
 	private boolean cavok = false;
-	@AnnotationLocaliedName(name = "Температура")
+	@AnnotationLocalizedName(name = "Температура")
 	private BigDecimal airTemperature;
-	@AnnotationLocaliedName(name = "Точка росы")
+	@AnnotationLocalizedName(name = "Точка росы")
 	private BigDecimal dewPoint;
-	@AnnotationLocaliedName(name = "Давление QNH")
+	@AnnotationLocalizedName(name = "Давление QNH")
 	private BigDecimal qnh;
-	@AnnotationLocaliedName(name = "Единица измерения давления")
+	@AnnotationLocalizedName(name = "Единица измерения давления")
 	private PRESSURE_UNITS qnhUnits = PRESSURE_UNITS.HECTOPASCALS;
-	@AnnotationLocaliedName(name = "Преобладающая видимость")
+	@AnnotationLocalizedName(name = "Преобладающая видимость")
 	private Integer prevailVisibility;
-	@AnnotationLocaliedName(name = "Минимальная видимость")
+	@AnnotationLocalizedName(name = "Минимальная видимость")
 	private Integer minimumVisibility;
-	@AnnotationLocaliedName(name = "Направление минимальной видимости")
+	@AnnotationLocalizedName(name = "Направление минимальной видимости")
 	private RUMB_UNITS minimumVisibilityDirection;
-	@AnnotationLocaliedName(name = "Единица измерения видимости")
+	@AnnotationLocalizedName(name = "Единица измерения видимости")
 	private LENGTH_UNITS visibilityUnits = LENGTH_UNITS.M;
-	@AnnotationLocaliedName(name = "Список текущих погодных явлений")
+	@AnnotationLocalizedName(name = "Список текущих погодных явлений")
 	private LinkedList<String> currentWeather = new LinkedList<String>();
-	@AnnotationLocaliedName(name = "Список недавних погодных явлений")
+	@AnnotationLocalizedName(name = "Список недавних погодных явлений")
 	private LinkedList<String> recentWeather = new LinkedList<String>();
-	@AnnotationLocaliedName(name = "Список секций вертикальной видимости")
+	@AnnotationLocalizedName(name = "Список секций вертикальной видимости")
 	private LinkedList<METARCloudSection> cloudSections = new LinkedList<METARCloudSection>();
 
 	/**
@@ -492,7 +492,7 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 		Field[] flds = this.getClass().getDeclaredFields();
 		for (Field f : flds) {
 
-			AnnotationLocaliedName ann = f.getAnnotation(AnnotationLocaliedName.class);
+			AnnotationLocalizedName ann = f.getAnnotation(AnnotationLocalizedName.class);
 			if (ann != null) {
 
 				String lname = ann.name();

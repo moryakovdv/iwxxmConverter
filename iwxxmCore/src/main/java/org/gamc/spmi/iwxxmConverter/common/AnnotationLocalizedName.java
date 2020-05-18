@@ -9,6 +9,6 @@ import javax.validation.groups.Default;
 
 @Target(value = ElementType.FIELD)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface AnnotationLocaliedName {
+public @interface AnnotationLocalizedName {
 	String name() default "";
 }

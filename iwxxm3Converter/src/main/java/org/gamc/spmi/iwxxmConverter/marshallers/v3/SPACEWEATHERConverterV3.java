@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.security.acl.Owner;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -218,8 +220,9 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	public List<Double> getListOfDayLightSideCoords(DateTime dt) {
 		SolarCalc sc = new SolarCalc();
 		LinkedList<Double> listOfCoords = new LinkedList<Double>();
-		listOfCoords.add(roundDouble(sc.calcSubSolarPointLatitude(dt),2));
-		listOfCoords.add(roundDouble(sc.calcSubSolarPointLongitude(dt),2));
+		ZonedDateTime zdt = ZonedDateTime.of(dt.getYear(), dt.getMonthOfYear(), dt.getDayOfMonth(), dt.getHourOfDay(), dt.getMinuteOfHour(), dt.getSecondOfMinute(), 0, ZoneId.of("UTC"));
+		listOfCoords.add(roundDouble(sc.calcSubSolarPointLatitude(zdt),2));
+		listOfCoords.add(roundDouble(sc.calcSubSolarPointLongitude(zdt),2));
 	
 		return listOfCoords;
 	};

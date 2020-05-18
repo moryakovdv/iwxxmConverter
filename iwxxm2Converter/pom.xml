@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.gamc.spmi</groupId>
     <artifactId>iwxxmConverter</artifactId>
-    <version>0.1.0</version>
+    <version>0.0.1</version>
   </parent>
   <groupId>org.gamc.spmi</groupId>
   <artifactId>iwxxm2Converter</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.3</version>
   <name>iwxxm2Converter</name>
   <packaging>jar</packaging>
   <url>http://maven.apache.org</url>
@@ -27,7 +27,7 @@
   <dependency>
     <groupId>org.gamc.spmi</groupId>
       <artifactId>iwxxmCore</artifactId>
-      <version>0.0.2</version>
+      <version>0.3.0</version>
   </dependency>
   
   

@@ -6,19 +6,20 @@
 	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
 	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
 	the specific language governing permissions and limitations under the License. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxmConverter</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1.0</version>
+	<version>0.0.1</version>
 
- <modules>
-        <module>iwxxmCore</module>
-        <module>iwxxm2Converter</module>
-        <module>iwxxm3Converter</module>
-    </modules>
+	<modules>
+		<module>iwxxmCore</module>
+		<module>iwxxm2Converter</module>
+		<module>iwxxm3Converter</module>
+	</modules>
 
 	<properties>
 		<javaVersion>1.8</javaVersion>
@@ -26,24 +27,24 @@
 		<project.target.version>${javaVersion}</project.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.encoding>UTF-8</project.encoding>
-		
+
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
 		<maven.compiler.target>${javaVersion}</maven.compiler.target>
 		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
 
-	
+
 
 
 	<dependencies>
-	<!-- Junit -->
+		<!-- Junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -70,12 +71,12 @@
 		</dependency>
 
 
-<!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
-<dependency>
-    <groupId>com.fasterxml.uuid</groupId>
-    <artifactId>java-uuid-generator</artifactId>
-    <version>3.1.4</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
+		<dependency>
+			<groupId>com.fasterxml.uuid</groupId>
+			<artifactId>java-uuid-generator</artifactId>
+			<version>3.1.4</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/edu.ucar.ral.xml/crux -->
 		<dependency>
@@ -111,7 +112,7 @@
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-http</artifactId>
 			<version>2.26</version>
-			
+
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
@@ -120,7 +121,7 @@
 			<artifactId>jersey-hk2</artifactId>
 			<version>2.26</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -128,9 +129,9 @@
 			<version>2.2.6.RELEASE</version>
 		</dependency>
 
-		
-		
-		
+
+
+
 	</dependencies>
 
 
@@ -139,92 +140,105 @@
 
 		<finalName>iwxxmConverter</finalName>
 		<pluginManagement>
-		<plugins>
+			<plugins>
 
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
-				<version>2.9</version> <executions> <execution> <id>copy-dependencies</id> 
-				<phase>prepare-package</phase> <goals> <goal>copy-dependencies</goal> </goals> 
-				<configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
-				<overWriteReleases>true</overWriteReleases> <overWriteSnapshots>true</overWriteSnapshots> 
-				<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> </executions> 
-				</plugin> -->
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-
-					<source>${javaVersion}</source>
-					<target>${javaVersion}</target>
-				</configuration>
-			</plugin>
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+					<version>2.9</version> <executions> <execution> <id>copy-dependencies</id> 
+					<phase>prepare-package</phase> <goals> <goal>copy-dependencies</goal> </goals> 
+					<configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
+					<overWriteReleases>true</overWriteReleases> <overWriteSnapshots>true</overWriteSnapshots> 
+					<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> </executions> 
+					</plugin> -->
 
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/schemabindings</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-				<version>3.0.0</version>
-			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+
+						<source>${javaVersion}</source>
+						<target>${javaVersion}</target>
+					</configuration>
+				</plugin>
 
 
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-resources-config</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-
-							<resources>
-								<resource>
-									<directory>src/main/resources</directory>
-								</resource>
-							</resources>
-
-						</configuration>
-
-					</execution>
-				</executions>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>**/*.properties</exclude>
-					</excludes>
-				</configuration>
-				<version>3.1.0</version>
-			</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/schemabindings</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+					<version>3.0.0</version>
+				</plugin>
 
 
 
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<id>copy-resources-config</id>
+							<!-- here the phase you need -->
+							<phase>validate</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}</outputDirectory>
 
-		</plugins>
+								<resources>
+									<resource>
+										<directory>src/main/resources</directory>
+									</resource>
+								</resources>
+
+							</configuration>
+
+						</execution>
+					</executions>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<excludes>
+							<exclude>**/*.properties</exclude>
+						</excludes>
+					</configuration>
+					<version>3.1.0</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+
+			</plugins>
 		</pluginManagement>
 	</build>
 
