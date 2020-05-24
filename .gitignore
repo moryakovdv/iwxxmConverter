@@ -1,7 +1,7 @@
 /target/
 /.settings/
-/iwxxmConverter.log
+iwxxmConverter.log
+iwxxm2Converter/iwxxmConverter.log
 iwxxm3Converter/iwxxmConverter.log
-iwxxm3Converter/iwxxmConverter.log
-iwxxm3Converter/src/main/java/org/gamc/spmi/iwxxmConverter/marshallers/v3/SIGMETConverterV3.java
-iwxxm3Converter/src/main/java/org/gamc/spmi/iwxxmConverter/marshallers/v3/SIGMETConverterV3.java
+iwxxm2Converter/output/
+
