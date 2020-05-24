@@ -3,6 +3,8 @@ package org.gamc.spmi.iwxxmConverter.common;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.gamc.spmi.gis.model.GTCoordPoint;
+import org.gamc.spmi.gis.model.GTCoordinate;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 /**Describes coordinate point with latitude and longitude*/
@@ -52,5 +54,12 @@ public final class CoordPoint implements Serializable{
 		this.longitude = longitude;
 	}
 	
+	/**Convert to GTCoordinate for GIS calculations*/
+	public GTCoordPoint toGTCoordPoint() {
+		if (this.latitude!=null && this.longitude!=null)
+			return new GTCoordPoint(this.latitude.toGTCoordinate(),this.longitude.toGTCoordinate());
+		else
+			return new GTCoordPoint();
+	}
 		
 }

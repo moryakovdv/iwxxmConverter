@@ -2,6 +2,7 @@ package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
 
+import org.gamc.spmi.gis.model.GTCoordinate;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 public class Coordinate implements Serializable{
@@ -78,6 +79,11 @@ public class Coordinate implements Serializable{
 		if (min != other.min)
 			return false;
 		return true;
+	}
+	
+	/**Convert to GTCoordinate for GIS calculations*/
+	public GTCoordinate toGTCoordinate() {
+		return new GTCoordinate(this.azimuth.name(), this.deg, this.min);
 	}
 
 }

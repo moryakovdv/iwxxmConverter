@@ -2,6 +2,9 @@ package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
 
+import org.gamc.spmi.gis.model.GTCoordinate;
+import org.gamc.spmi.gis.model.GTLine;
+
 /**The sigmet area may be indicated as number of lines.
  *Line itself can have start and end point or just one single point 
  *in the case of vertical or horizontal location indication */
@@ -54,5 +57,30 @@ public final class Line implements Serializable {
 
 	public void setCoordinate(Coordinate coordinate) {
 		this.coordinate = coordinate;
+	}
+	
+	@Override
+	public String toString() {
+		
+		if (isSingleLine()) {
+			return this.coordinate.toString();
+		}
+		else
+			return this.startPoint.toString()+"-"+this.endPoint.toString();
+	}
+	
+	/**Convert to GTLine for GIS calculations*/
+	public GTLine toGTLine() {
+		GTLine line = new GTLine();
+		if (this.coordinate!=null)
+			line.setCoordinate(this.coordinate.toGTCoordinate());
+		if (this.startPoint!=null)
+			line.setStartPoint(startPoint.toGTCoordPoint());
+		
+		if (this.endPoint!=null)
+			line.setEndPoint(endPoint.toGTCoordPoint());
+		
+		return line;
+		
 	}
 }
