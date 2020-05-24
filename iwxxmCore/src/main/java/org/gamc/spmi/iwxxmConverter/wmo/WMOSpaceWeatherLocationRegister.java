@@ -18,6 +18,7 @@ package org.gamc.spmi.iwxxmConverter.wmo;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,93 +42,38 @@ import org.xml.sax.SAXParseException;
  * 
  * @author moryakov
  */
-public class WMOSpaceWeatherLocationRegister implements WMORegister {
+public class WMOSpaceWeatherLocationRegister implements WMORegister<String> {
 
 	private static final String registerFileName = "codes.wmo.int-49-2-SpaceWxLocation.rdf";
 
-	TreeMap<String, String> wmoSWXLocations = new TreeMap<String, String>();
+	TreeMap<String, WMORegisterDescription> wmoSWXLocations = new TreeMap<String, WMORegisterDescription>();
+
+	public WMOSpaceWeatherLocationRegister() {
+
+	}
+
+	private Locale locale = Locale.US;
+
+	public WMOSpaceWeatherLocationRegister(Locale locale) {
+		this.locale = locale;
+	}
 
 	@Override
-	public TreeMap<String, String> getContent() {
+	public Locale getLocale() {
+		return locale;
+	}
+	
+	@Override
+	public TreeMap<String, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoSWXLocations;
 	}
 
-	@Override
-	public String getWMOUrlByCode(Object code) {
-		if (wmoSWXLocations.size() == 0)
-			parseWMOXml();
-
-		return wmoSWXLocations.get(code);
-	}
 
 	@Override
-	public void parseWMOXml() {
-		try (InputStream is = new FileInputStream(registerFileName);) {
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+	public String getRegisterFileName() {
 
-			Document doc = docBuilder.parse(is);
-
-			// normalize text representation
-			doc.getDocumentElement().normalize();
-
-			// Create XPathFactory object
-			XPathFactory xpathFactory = XPathFactory.newInstance();
-
-			// Create XPath object
-			XPath xpath = xpathFactory.newXPath();
-
-			XPathExpression expr = xpath.compile("/RDF/RegisterItem");
-
-			NodeList listOfCloudElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);// root.getElementsByTagName("member");
-			int totalCloudElements = listOfCloudElements.getLength();
-			registerLogger.debug("Total members in SpaceWeather locations: " + totalCloudElements);
-
-			for (int i = 0; i < listOfCloudElements.getLength(); i++) {
-
-				Node currentNode = listOfCloudElements.item(i);
-				if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-
-					String code = "";
-					String url = "";
-
-					Element concept = (Element) currentNode;
-
-					NodeList notationList = concept.getElementsByTagName("reg:notation");
-					if (notationList != null && notationList.getLength() > 0) {
-						Element notation = (Element) notationList.item(0);
-						code = (notation.getTextContent());
-
-					}
-
-					notationList = concept.getElementsByTagName("reg:definition");
-					if (notationList != null && notationList.getLength() > 0) {
-						Element notation = (Element) notationList.item(0);
-						Node entityNode = notation.getElementsByTagName("reg:entity").item(0);
-						
-						Element entityElement = (Element) entityNode;
-						
-						url = entityElement.getAttribute("rdf:resource");
-						
-//						url = notation.getElementsByTagName("reg:entity").item(0).getAttributes()
-//								.getNamedItem("rdf:resource").getTextContent();
-
-					}
-
-					if (code.length() > 0 && url.length()>0)
-						wmoSWXLocations.put(code, url);
-
-				}
-			} // end of for loop with s var
-		} catch (SAXParseException err) {
-			registerLogger.error("Error in parsing ", err);
-		} catch (SAXException e) {
-			registerLogger.error("SAX Exception", e);
-		} catch (Throwable t) {
-			registerLogger.error("Unknown error", t);
-		}
-
+		return registerFileName;
 	}
 
 }

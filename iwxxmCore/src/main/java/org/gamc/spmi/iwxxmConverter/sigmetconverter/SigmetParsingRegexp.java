@@ -65,8 +65,8 @@ public class SigmetParsingRegexp {
 	/**Pattern to extract lines into collection*/
 	public final static Pattern sigmetLines = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
 	
-	/**Pattern to find sectors */
-	public final static Pattern sigmetSectorPoints = Pattern.compile("((N|NE|E|SE|S|SW|W|NW) OF LINE (?<pointStart>(?<latitudeStart>N|S)(?<ladegStart>\\d{2})(?<laminStart>\\d{2})?\\s+(?<longitudeStart>E|W))(?<lodegStart>\\d{2,3})(?<lominStart>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latitudeEnd>N|S)(?<ladegEnd>\\d{2})(?<laminEnd>\\d{2})?\\s+(?<longitudeEnd>E|W)(?<lodegEnd>\\d{2,3})(?<lominEnd>\\d{2})?)");
+	/**Pattern to find several lines */
+	public final static Pattern sigmetMultiLine = Pattern.compile("((?<azimuth>N|NE|E|SE|S|SW|W|NW)(?:\\s+OF\\s+LINE\\s+)(?<pointStart>(?<latStart>N|S)(?<latStartDeg>\\d{2})(?<latStartMin>\\d{2})?\\s+(?<longStart>E|W))(?<longStartDeg>\\d{2,3})(?<longStartMIn>\\d{2})?)\\s+(.)?\\s+(?<pointEnd>(?<latEnd>N|S)(?<latEndDeg>\\d{2})(?<latEndMin>\\d{2})?\\s+(?<longEnd>E|W)(?<longEndDeg>\\d{2,3})(?<longEndMin>\\d{2})?)");
 	
 	/**Within corridor with distance of certain line*/
 	public final static Pattern sigmetWithinCorridor = Pattern.compile("(APRX|WTN)\\s+(?<range>\\d+)\\s?(KM|NM)\\s+(WID|OF)\\s+LINE\\s+(?:BTN|\\/)?");

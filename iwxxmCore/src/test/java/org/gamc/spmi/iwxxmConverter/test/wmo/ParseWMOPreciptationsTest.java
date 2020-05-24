@@ -18,6 +18,8 @@ package org.gamc.spmi.iwxxmConverter.test.wmo;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Locale;
+
 import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
 import org.junit.Test;
 
@@ -29,8 +31,25 @@ public class ParseWMOPreciptationsTest {
 		WMOPrecipitationRegister precipRegister = new WMOPrecipitationRegister();
 		precipRegister.parseWMOXml();
 		assertTrue(precipRegister.getContent().size()>0);
+		
 		assertTrue(precipRegister.getWMOUrlByCode("+TSSNGS").equalsIgnoreCase("http://codes.wmo.int/306/4678/+TSSNGS"));
 		
+		
 	}
+	
+	@Test
+	public void parseLocalizedRegister() {
+		WMOPrecipitationRegister precipRegister = new WMOPrecipitationRegister(Locale.forLanguageTag("ru-RU"));
+		precipRegister.parseWMOXml();
+		assertTrue(precipRegister.getContent().size()>0);
+		
+		assertTrue(precipRegister.getWMOUrlByCode("+SHGRRA").equalsIgnoreCase("http://codes.wmo.int/306/4678/+SHGRRA"));
+		assertTrue(precipRegister.getContent().get("+SHSNGR").getLabel().equalsIgnoreCase("Сильный ливневой снег с градом"));
+		
+		
+		
+		
+	}
+	
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
+import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.tac.TacSectionImpl;
 import org.joda.time.DateTime;

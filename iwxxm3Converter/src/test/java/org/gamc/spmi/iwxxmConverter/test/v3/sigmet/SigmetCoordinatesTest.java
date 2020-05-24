@@ -16,14 +16,29 @@
  */
 package org.gamc.spmi.iwxxmConverter.test.v3.sigmet;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
+import org.gamc.spmi.gis.model.GTCalculatedRegion;
+import org.gamc.spmi.gis.model.GTCoordPoint;
+import org.gamc.spmi.gis.model.GTCoordinate;
+import org.gamc.spmi.gis.model.GTDirectionFromLine;
+import org.gamc.spmi.gis.model.GTLine;
+import org.gamc.spmi.gis.service.GeoService;
+import org.gamc.spmi.gis.service.GeoServiceException;
+import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
@@ -125,5 +140,53 @@ public class SigmetCoordinatesTest {
 		
 	}
 	
+	@Test
+	public void testGisCoordinateConversion() throws SIGMETParsingException, URISyntaxException, GeoServiceException {
+		GeoService gs = new GeoService();
+		gs.init(false, "");
+		SIGMETTacMessage tac = new SIGMETTacMessage(sigmetSevIce);
+		tac.parseMessage();
+		
+		assertTrue(tac.getHorizontalLocation().getPolygonPoints().size()>0);
+		System.out.println(tac.getHorizontalLocation().getPolygonPoints());
+		LinkedList<GTCoordPoint> list = new LinkedList<GTCoordPoint>();
+		tac.getHorizontalLocation().getPolygonPoints()
+				.stream().forEach(new Consumer<CoordPoint>() {
+					
+					@Override
+					public void accept(CoordPoint arg0) {
+						
+						list.add(arg0.toGTCoordPoint());
+					}
+				});
+		
+		
+		List<GTCalculatedRegion> regions = gs.recalcFromPolygon(tac.getFirCode(), list);
+		assertNotNull(regions);
+		System.out.println(regions);
+		
+		
+		String geoJson = gs.jsonFromPolygon(tac.getFirCode(), list);
+		System.out.println(geoJson);
+	}
+	
+	@Test
+	/*UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135*/
+	public void test135() throws URISyntaxException, GeoServiceException {
+		GeoService gs = new GeoService();
+		gs.init(false, "");
+		
+		GTDirectionFromLine lineN70 = new GTDirectionFromLine("N", new GTLine(new GTCoordinate("N", 70, 0)));
+		GTDirectionFromLine lineE135 = new GTDirectionFromLine("E", new GTLine(new GTCoordinate("E", 135, 0)));
+		
+		LinkedList<GTDirectionFromLine> lines = new LinkedList<GTDirectionFromLine>();
+		lines.add(lineN70);
+		lines.add(lineE135);
+		
+		List<GTCalculatedRegion> regions = gs.recalcFromLines("UEEE", lines);
+		assertNotNull(regions);
+		System.out.println(regions);
+		
+	}
 	
 }

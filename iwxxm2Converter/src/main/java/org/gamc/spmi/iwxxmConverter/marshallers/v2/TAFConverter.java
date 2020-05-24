@@ -648,15 +648,15 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 
-			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudSection.getAmount());
-			if (cloudAmount == WMOCloudRegister.missingCode) {
+			
+			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudSection.getHeight());
 				clouds.setVerticalVisibility(vVisibility);
 
 			} else {
 				Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudSection.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}

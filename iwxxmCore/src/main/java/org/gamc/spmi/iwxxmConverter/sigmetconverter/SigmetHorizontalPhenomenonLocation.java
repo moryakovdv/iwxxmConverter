@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
+import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;

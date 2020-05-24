@@ -22,6 +22,7 @@ import java.util.function.BiConsumer;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegisterDescription;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister;
@@ -41,10 +42,10 @@ public class ParseWMONilReasonTest {
 
 	}
 
-	BiConsumer<String, String> prn = new BiConsumer<String, String>() {
+	BiConsumer<String, WMORegisterDescription> prn = new BiConsumer<String, WMORegisterDescription>() {
 
 		@Override
-		public void accept(String arg0, String arg1) {
+		public void accept(String arg0, WMORegisterDescription arg1) {
 			System.out.println(arg0);
 
 		}

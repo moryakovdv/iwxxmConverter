@@ -595,17 +595,18 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		for (METARCloudSection cloudS : translatedMetar.getCommonWeatherSection().getCloudSections()) {
 
-			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
-			String nilReason = null;
-			if (cloudAmount == WMOCloudRegister.missingCode) {
+		
+			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudS.getHeight());
+				
 				clouds.setVerticalVisibility(vVisibility);
+				
 
 			} else {
 				AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
-						cloudS.getType(), nilReason, LENGTH_UNITS.FT));
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+						cloudS.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}
 		}
@@ -630,13 +631,12 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		for (METARCloudSection cloudS : section.getCloudSections()) {
 
-			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
 			String nilReason = null;
-			if (cloudAmount == WMOCloudRegister.missingCode) {
+			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
 				nilReason = "Value is missing or VV provided";
 			}
 			AerodromeCloudForecastType.Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudS.getHeight(),
+			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
 					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
 			clouds.getLayer().add(cloudLayer);
 		}

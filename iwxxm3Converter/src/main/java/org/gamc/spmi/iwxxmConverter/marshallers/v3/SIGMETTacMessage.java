@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
 import org.gamc.spmi.iwxxmConverter.common.Coordinate;
+import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
@@ -29,7 +30,6 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
@@ -376,6 +376,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			return tac;
 
 		fillLineAreaLocation(tac);
+		fillMultiLineLocation(tac);
 
 		return tac;
 	}
@@ -545,6 +546,63 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			this.getHorizontalLocation().setWideness(Integer.parseInt(range));
 			/** TODO: add center corridor line */
 		}
+
+		return tac;
+	}
+	
+	/**Extract location with multilines 
+	 * example:  
+	 * N OF LINE N5100 E03520 - N5017 E04200
+	*  AND S OF LINE N5400 E03150 - N5440 E04400
+	* **/
+	protected StringBuffer fillMultiLineLocation(StringBuffer tac) {
+		Matcher matcherDirLine = SigmetParsingRegexp.sigmetMultiLine.matcher(tac);
+		int lastMatch = 0;
+		while (matcherDirLine.find()) {
+
+			String lineAzimuth = matcherDirLine.group("azimuth");
+			
+			String latitudeStart = matcherDirLine.group("latStart");
+			String latStartDeg = matcherDirLine.group("latStartDeg");
+			String latStartMin = matcherDirLine.group("latStartMin");
+			
+			String longitudeStart = matcherDirLine.group("longStart");
+			String longStartDeg = matcherDirLine.group("longStartDeg");
+			String longStartMin= matcherDirLine.group("longStartMIn");
+			
+			String latitudeEnd = matcherDirLine.group("latEnd");
+			String latEndDeg= matcherDirLine.group("latEndDeg");
+			String latEndMin= matcherDirLine.group("latEndMin");
+			
+			String longitudeEnd= matcherDirLine.group("longEnd");
+			String longEndDeg= matcherDirLine.group("longEndDeg");
+			String longEndMin= matcherDirLine.group("longEndMin");
+			
+			CoordPoint startPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeStart), 
+					Integer.valueOf(latStartDeg), 
+					Integer.valueOf(latStartMin),
+					
+					RUMB_UNITS.valueOf(longitudeStart),
+					Integer.valueOf(longStartDeg),
+					Integer.valueOf(longStartMin)
+					);
+			
+			CoordPoint endPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeEnd), 
+					Integer.valueOf(latEndDeg), 
+					Integer.valueOf(latEndMin),
+					
+					RUMB_UNITS.valueOf(longitudeEnd),
+					Integer.valueOf(longEndDeg),
+					Integer.valueOf(longEndMin)
+					);
+			Line line = new Line(startPoint,endPoint);
+			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(lineAzimuth), line);
+			
+			
+			this.getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			lastMatch = matcherDirLine.end();
+		}
+		tac.delete(0, lastMatch);
 
 		return tac;
 	}

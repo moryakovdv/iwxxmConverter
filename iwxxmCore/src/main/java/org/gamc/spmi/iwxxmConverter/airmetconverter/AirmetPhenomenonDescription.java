@@ -143,7 +143,7 @@ public class AirmetPhenomenonDescription extends TacSectionImpl implements Seria
 			return this.phenomenon;
 		}
 		else
-			return this.phenomenonSeverity.name+"_"+this.phenomenon;
+			return this.phenomenonSeverity.name+" "+this.phenomenon;
 	}
 
 }

@@ -24,6 +24,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
@@ -337,7 +338,7 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	 *            - {@link LENGTH_UNITS} unit of measure.
 	 * @return cloudLayer
 	 */
-	public CloudLayerType createCloudLayerSection(int cloudAmount, double cloudHeight, String cloudTypeCode,
+	public CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
 			String nilReason, LENGTH_UNITS units) {
 
 		// Create layer
@@ -394,7 +395,10 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	public AerodromePresentWeatherType createPresentWeatherSection(String weather) {
 
 		AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
-
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
+			presentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+		else
+		
 		presentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 
 		return presentWeather;
@@ -404,7 +408,10 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	public AerodromeRecentWeatherType createRecentWeatherSection(String weather) {
 
 		AerodromeRecentWeatherType recentWeather = ofIWXXM.createAerodromeRecentWeatherType();
-
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
+			recentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+		else
+		
 		recentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 
 		return recentWeather;
@@ -415,8 +422,10 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	 */
 	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) {
 		AerodromeForecastWeatherType fcstWeather = ofIWXXM.createAerodromeForecastWeatherType();
-
-		fcstWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
+			fcstWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+		else
+			fcstWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 		return fcstWeather;
 	}
 

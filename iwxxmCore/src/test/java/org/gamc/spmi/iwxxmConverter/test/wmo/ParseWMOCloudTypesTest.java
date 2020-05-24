@@ -18,7 +18,10 @@ package org.gamc.spmi.iwxxmConverter.test.wmo;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.TreeMap;
+
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegisterDescription;
 import org.junit.Test;
 
 /**Test for parsing WMO clouds types  registry*/
@@ -29,6 +32,9 @@ public class ParseWMOCloudTypesTest {
 		WMOCloudTypeRegister cloudsRegister = new WMOCloudTypeRegister();
 		cloudsRegister.parseWMOXml();
 		assertTrue(cloudsRegister.getContent().size()>0);
+		System.out.println(cloudsRegister.getContent());
+		TreeMap<Integer,WMORegisterDescription> cnt = cloudsRegister.getContent();
+		
 		 assertTrue(cloudsRegister.getWMOUrlByCode(9).equalsIgnoreCase("http://codes.wmo.int/bufr4/codeflag/0-20-012/9"));
 		
 	}

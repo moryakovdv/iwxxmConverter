@@ -22,7 +22,7 @@ package org.gamc.spmi.iwxxmConverter.iwxxmenums;
  * */
 public enum SPEED_UNITS implements IwxxmEnum {
 	
-	MPS("m/s"), KT("[kn_i]");
+	MPS("m/s"), KT("[kn_i]"),KMH("[km/h]");
 
 	private String name;
 	

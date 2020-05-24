@@ -21,13 +21,13 @@ import java.io.InputStream;
 import java.util.Locale;
 import java.util.TreeMap;
 
-import javax.imageio.stream.FileImageInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -36,65 +36,46 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-/**Class for parsing WMO Cloud codes
+
+
+/**Class for parsing WMO Airmet weather codes
  * @see WMORegister
  * 
  * @author moryakov*/
-public class WMOCloudTypeRegister implements WMORegister<Integer> {
+public class WMOAirWXRegister implements WMORegister<String> {
 
-	private static final String registerFileName = "codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
+	private static final String registerFileName = "codes.wmo.int-49-2-AirWxPhenomena.rdf";
 	
-	TreeMap<Integer, WMORegisterDescription> wmoCloudTypeCodes = new TreeMap<Integer, WMORegisterDescription>();
-	public static final int missingCode = 63; 
-	
-	
-	@Override
-	public TreeMap<Integer, WMORegisterDescription> getContent() {
-		
-		return wmoCloudTypeCodes;
+	public WMOAirWXRegister() {
+
 	}
 
-	public WMOCloudTypeRegister() {
-		
-	}
-	
 	private Locale locale = Locale.US;
-	public WMOCloudTypeRegister(Locale locale) {
+
+	public WMOAirWXRegister(Locale locale) {
 		this.locale = locale;
 	}
-	
-	
+
 	@Override
 	public Locale getLocale() {
 		return locale;
 	}
 	
 	
-	/**Returns integer code for string cloud type representation,*/
-	public Integer getCloudTypeByStringCode(String strType) {
-		
-		switch(strType) {
-			case "CB":
-				return 9;
-			case "TCU":
-				return 32;
-			default:
-				return missingCode;
-		}
-		
-		 
+	TreeMap<String, WMORegisterDescription> wmoPhenomenaCodes = new TreeMap<String, WMORegisterDescription>();
+	
+	@Override
+	public TreeMap<String, WMORegisterDescription> getContent() {
+		// TODO Auto-generated method stub
+		return wmoPhenomenaCodes;
 	}
 
+	
 	@Override
 	public String getRegisterFileName() {
 
 		return registerFileName;
 	}
-
-	@Override
-	public void putToContent(String wmoCode, WMORegisterDescription description) {
-		this.wmoCloudTypeCodes.put(Integer.valueOf(wmoCode), description);
-	}
 	
-
+	
 }

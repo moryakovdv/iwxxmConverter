@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
 import org.gamc.spmi.iwxxmConverter.common.Coordinate;
+import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
@@ -28,7 +29,6 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;

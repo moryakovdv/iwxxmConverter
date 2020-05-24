@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.test.v3.sigmet;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
@@ -64,7 +65,7 @@ public class SigmetConversionTest {
 	public void tearDown() throws Exception {
 	}
 
-	String sigmetCommonTest = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
+	String sigmetFakeFirTest = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
 			+ "      YUDD SHANLON FIR/UIR OBSC TS FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
 	String sigmetLineCoords = "WSRS31RUMA 111143 XXX\n" + "UUWV SIGMET 5 VALID 111200/111500 UUWV-\n"
@@ -92,6 +93,30 @@ public class SigmetConversionTest {
 	String sigmetObsAt = "WSRS31LTAA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\n" + 
 			"\n" + 
 			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
+	
+	String sigmetRealFirTest = "WSRS32RUAA 010154\n" + 
+			"UUYY SIGMET 1 VALID 010200/010600 UUYY-\n" + 
+			"UUYY SYKTYVKAR FIR SEV TURB FCST W OF E06000\n" + 
+			"FL240/370 MOV NE 30KMH NC=";
+	
+	@Test
+	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetFakeFirTest);
+		assertFalse(result.contains("<gml:posList>"));
+		
+		System.out.println(result);
+	}
+	@Test
+	public void testRealFirCoordinates() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+
+		SIGMETConverterV3 mc = new SIGMETConverterV3();
+		String result = mc.convertTacToXML(sigmetRealFirTest);
+		assertTrue(result.contains("<gml:posList "));
+		
+		System.out.println(result);
+	}
 	
 	@Test
 	public void testObsAtSigmet() throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
@@ -133,7 +158,7 @@ public class SigmetConversionTest {
 		System.out.println(result);
 	}
 	@Test
-	public void testCommonSigmet()
+	public void testSigmetHvyGr()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 
 		SIGMETConverterV3 mc = new SIGMETConverterV3();

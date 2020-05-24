@@ -18,6 +18,7 @@
 package org.gamc.spmi.iwxxmConverter.general;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
@@ -96,7 +97,7 @@ public class IWXXMHelpers {
 	}
 	
 	
-	WeakHashMap<String, UUID> hash = new WeakHashMap<>();
+	private WeakHashMap<String, UUID> hash = new WeakHashMap<>();
 	
 	/**Generate V4 or find uuid in temporal storage*/
 	public String generateUUIDv4(String key) {
@@ -108,6 +109,19 @@ public class IWXXMHelpers {
 		
 		return "uuid."+hashU.toString();
 	}
+	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+
+	private Locale locale = Locale.US;
+	
+	
 	
 
 	

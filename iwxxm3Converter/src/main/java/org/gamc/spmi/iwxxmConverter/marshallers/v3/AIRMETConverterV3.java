@@ -427,7 +427,9 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 	public AeronauticalAreaWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
 		AeronauticalAreaWeatherPhenomenonType typePhen = IWXXM31Helpers.ofIWXXM
 				.createAeronauticalAreaWeatherPhenomenonType();
-		String link = iwxxmHelpers.getSigWxPhenomenaRegister()
+		String phenomenon = translatedAirmet.getPhenomenonDescription().getPhenomenonForLink();
+		
+		String link = iwxxmHelpers.getAirWxPhenomenaRegister()
 				.getWMOUrlByCode(translatedAirmet.getPhenomenonDescription().getPhenomenonForLink());
 		typePhen.setHref(link);
 		return typePhen;

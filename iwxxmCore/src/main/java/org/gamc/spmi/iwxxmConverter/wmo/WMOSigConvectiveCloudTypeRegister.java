@@ -18,6 +18,7 @@ package org.gamc.spmi.iwxxmConverter.wmo;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,88 +39,36 @@ import org.xml.sax.SAXParseException;
  * @see WMORegister
  * 
  * @author moryakov*/
-public class WMOSigConvectiveCloudTypeRegister implements WMORegister {
+public class WMOSigConvectiveCloudTypeRegister implements WMORegister<Integer> {
 
 	//private static final String registerFileName = "/wmoregisters/codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
 	private static final String registerFileName = "codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
 	
-	TreeMap<Integer, String> wmoCloudTypeCodes = new TreeMap<Integer, String>();
+	TreeMap<Integer, WMORegisterDescription> wmoCloudTypeCodes = new TreeMap<Integer, WMORegisterDescription>();
 	//public static final int missingCode = 63; 
-	
+	public WMOSigConvectiveCloudTypeRegister() {
+
+	}
+
+	private Locale locale = Locale.US;
+
+	public WMOSigConvectiveCloudTypeRegister(Locale locale) {
+		this.locale = locale;
+	}
+
+	@Override
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	@Override
-	public TreeMap<Integer, String> getContent() {
+	public TreeMap<Integer, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoCloudTypeCodes;
 	}
-
 	@Override
-	public String getWMOUrlByCode(Object code) {
-		if (wmoCloudTypeCodes.size()==0)
-			parseWMOXml();
-		
-		return wmoCloudTypeCodes.get(code);
-	}
-
-	@Override
-	public void parseWMOXml() {
-		try(InputStream is = new FileInputStream(registerFileName);) {
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			
-			
-						
-					//this.getClass().getResourceAsStream(registerFileName);
-		
-			Document doc = docBuilder.parse(is);
-
-			// normalize text representation
-			doc.getDocumentElement().normalize();
-			
-			// Create XPathFactory object
-            XPathFactory xpathFactory = XPathFactory.newInstance();
-
-            // Create XPath object
-            XPath xpath = xpathFactory.newXPath();
-			
-			XPathExpression expr =xpath.compile("/RDF/Container/member/Concept");
-	          
-			
-			
-			NodeList listOfCloudElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);//root.getElementsByTagName("member");
-			int totalCloudElements = listOfCloudElements.getLength();
-			registerLogger.debug("Total members in CloudTypes : " + totalCloudElements);
-
-			for (int i = 0; i < listOfCloudElements.getLength(); i++) {
-
-				Node currentNode = listOfCloudElements.item(i);
-				if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-					
-					Integer code=-1;
-					String url="";
-					
-					Element concept = (Element) currentNode;
-					url = concept.getAttribute("rdf:about");
-					
-					NodeList notationList = concept.getElementsByTagName("skos:notation");
-					if (notationList!=null && notationList.getLength()>0) {
-						Element notation = (Element) notationList.item(0);
-						code = Integer.valueOf(notation.getTextContent());
-					}
-					
-					if (code>-1 && url.length()>0)
-						wmoCloudTypeCodes.put(code, url);
-
-				}
-			} 
-		} catch (SAXParseException err) {
-			registerLogger.error("Error in parsing ", err);
-		} catch (SAXException e) {
-			registerLogger.error("SAX Exception", e);
-		} catch (Throwable t) {
-			registerLogger.error("Unknown error", t);
-		}
-		
+	public void putToContent(String wmoCode, WMORegisterDescription description) {
+		this.wmoCloudTypeCodes.put(Integer.valueOf(wmoCode), description);
 	}
 	
 	/**Returns integer code for string cloud amount representation, e.g. FEW=1*/
@@ -135,6 +84,12 @@ public class WMOSigConvectiveCloudTypeRegister implements WMORegister {
 		}
 		
 		 
+	}
+	
+	@Override
+	public String getRegisterFileName() {
+
+		return registerFileName;
 	}
 	
 

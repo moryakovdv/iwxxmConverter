@@ -29,7 +29,9 @@ public class ParseWMOCloudsTest {
 		WMOCloudRegister cloudsRegister = new WMOCloudRegister();
 		cloudsRegister.parseWMOXml();
 		assertTrue(cloudsRegister.getContent().size()>0);
-		assertTrue(cloudsRegister.getWMOUrlByCode(2).equalsIgnoreCase("http://codes.wmo.int/bufr4/codeflag/0-20-008/2"));
+		assertTrue(cloudsRegister.getWMOUrlByCode("BKN").equalsIgnoreCase("http://codes.wmo.int/49-2/CloudAmountReportedAtAerodrome/BKN"));
+		String bufrUrl = cloudsRegister.getContent().get("BKN").getRelatedUrl();
+		assertTrue(bufrUrl.equalsIgnoreCase("http://codes.wmo.int/bufr4/codeflag/0-20-008/3"));
 		
 	}
 

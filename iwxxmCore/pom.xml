@@ -9,7 +9,7 @@
 		<artifactId>iwxxmConverter</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxmCore</artifactId>
 	<version>0.3.0</version>
@@ -27,9 +27,34 @@
 	</properties>
 
 
+	<!-- In project repository for third-party jars -->
+	<repositories>
+		<repository>
+			<id>Internal company repository</id>
+			<url>file://${basedir}/lib</url>
+		</repository>
+	</repositories>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>gis-tools-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+
+		</dependency>
+
+	</dependencies>
+
 	<build>
 
+
+
 		<finalName>iwxxmCore</finalName>
+
+
+
 
 		<plugins>
 

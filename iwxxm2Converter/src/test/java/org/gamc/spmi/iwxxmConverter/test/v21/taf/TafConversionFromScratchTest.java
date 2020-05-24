@@ -71,6 +71,7 @@ import schemabindings21._int.icao.iwxxm._2.AerodromeForecastChangeIndicatorType;
 import schemabindings21._int.icao.iwxxm._2.AerodromeForecastWeatherType;
 import schemabindings21._int.icao.iwxxm._2.AerodromeSurfaceWindForecastPropertyType;
 import schemabindings21._int.icao.iwxxm._2.AerodromeSurfaceWindForecastType;
+import schemabindings21._int.icao.iwxxm._2.LengthWithNilReasonType;
 import schemabindings21._int.icao.iwxxm._2.MeteorologicalAerodromeForecastRecordPropertyType;
 import schemabindings21._int.icao.iwxxm._2.MeteorologicalAerodromeForecastRecordType;
 import schemabindings21._int.icao.iwxxm._2.PermissibleUsageReasonType;
@@ -768,12 +769,8 @@ public class TafConversionFromScratchTest {
 	 * Creates weather section for given string code with link to WMO register url
 	 */
 	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) {
-		// <iwxxm:weather xlink:href="http://codes.wmo.int/306/4678/-SHRA"/>
-
-		AerodromeForecastWeatherType forecastWeather = ofIWXXM.createAerodromeForecastWeatherType();
-		forecastWeather.setHref(iwxxmHelpers.getPrecipitationReg().getWMOUrlByCode(weatherCode));
-
-		return forecastWeather;
+		System.out.println(weatherCode);
+		return iwxxmHelpers.createForecastWeatherSection(weatherCode);
 	}
 
 	/** Cloud section */
@@ -787,15 +784,17 @@ public class TafConversionFromScratchTest {
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 
-			int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudSection.getAmount());
-			String nilReason = null;
-			if (cloudAmount == WMOCloudRegister.missingCode) {
-				nilReason = "Value is missing or VV provided";
+			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
+						.createVerticalVisibilitySection(cloudSection.getHeight());
+				clouds.setVerticalVisibility(vVisibility);
+
+			} else {
+				Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
+						cloudSection.getType(), null, LENGTH_UNITS.FT));
+				clouds.getLayer().add(cloudLayer);
 			}
-			Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudAmount, cloudSection.getHeight(),
-					cloudSection.getType(), nilReason, LENGTH_UNITS.FT));
-			clouds.getLayer().add(cloudLayer);
 		}
 
 		// Place body into envelop

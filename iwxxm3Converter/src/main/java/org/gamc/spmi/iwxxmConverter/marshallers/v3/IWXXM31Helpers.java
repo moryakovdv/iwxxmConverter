@@ -17,6 +17,7 @@
 
 package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
+import java.net.URISyntaxException;
 import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBElement;
@@ -24,9 +25,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.gamc.spmi.gis.service.GeoService;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
+import org.gamc.spmi.iwxxmConverter.wmo.WMOAirWXRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
@@ -88,6 +91,8 @@ import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
  */
 public class IWXXM31Helpers extends IWXXMHelpers {
 
+	
+	
 	public static final schemabindings31._int.icao.iwxxm._3.ObjectFactory ofIWXXM = new schemabindings31._int.icao.iwxxm._3.ObjectFactory();
 	public static final schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory();
 	public static final schemabindings31.net.opengis.om._2.ObjectFactory ofOM = new schemabindings31.net.opengis.om._2.ObjectFactory();
@@ -112,10 +117,16 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
 
 	final WMOSigWXRegister sigWxPhenomenaRegister = new WMOSigWXRegister();
+	final WMOAirWXRegister airWxPhenomenaRegister  = new WMOAirWXRegister();
 	
+
 
 	final WMOSpaceWeatherRegister swxEffectsRegister = new WMOSpaceWeatherRegister();
 	final WMOSpaceWeatherLocationRegister swxLocationRegister = new WMOSpaceWeatherLocationRegister();
+	
+	
+	final GeoService geoService = new GeoService();
+	
 	
 	public static final String NSW = "NSW";
 	
@@ -410,7 +421,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	 *            - {@link LENGTH_UNITS} unit of measure.
 	 * @return cloudLayer
 	 */
-	public CloudLayerType createCloudLayerSection(int cloudAmount, double cloudHeight, String cloudTypeCode,
+	public CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
 			String nilReason, LENGTH_UNITS units) {
 
 		// Create layer
@@ -469,7 +480,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public AerodromePresentWeatherType createPresentWeatherSection(String weather) {
 
 		AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
-		if (weather.equalsIgnoreCase(NSW)) {
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
 			presentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
 			return presentWeather;
 		}
@@ -483,7 +494,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		AerodromeRecentWeatherType recentWeather = ofIWXXM.createAerodromeRecentWeatherType();
 
-		if (weather.equalsIgnoreCase(NSW)) {
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
 			recentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
 			return recentWeather;
 		}
@@ -502,7 +513,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) {
 		AerodromeForecastWeatherType fcstWeather = ofIWXXM.createAerodromeForecastWeatherType();
 		
-		if (weather.equalsIgnoreCase(NSW)) {
+		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
 			fcstWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
 			return fcstWeather;
 		}
@@ -559,5 +570,18 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public WMONilReasonRegister getNilRegister() {
 		return nilRegister;
 	}
+	
 
+	public WMOAirWXRegister getAirWxPhenomenaRegister() {
+		return airWxPhenomenaRegister;
+	}
+
+	/*returns geoservice initializing it if necessary*/
+	public GeoService getGeoService() throws URISyntaxException {
+		if (!geoService.isServiceInit())
+			geoService.init(false, "");
+		
+		return geoService;
+		
+	}
 }

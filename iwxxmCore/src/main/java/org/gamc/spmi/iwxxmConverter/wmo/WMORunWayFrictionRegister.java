@@ -18,6 +18,7 @@ package org.gamc.spmi.iwxxmConverter.wmo;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Locale;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,87 +39,42 @@ import org.xml.sax.SAXParseException;
  * @see WMORegister
  * 
  * @author moryakov*/
-public class WMORunWayFrictionRegister implements WMORegister {
+public class WMORunWayFrictionRegister implements WMORegister<Integer> {
 
 	private static final String registerFileName = "codes.wmo.int-bufr4-codeflag-0-20-089.rdf";
 	
-	TreeMap<Integer, String> wmoFrictionCodes = new TreeMap<Integer, String>();
+	TreeMap<Integer, WMORegisterDescription> wmoFrictionCodes = new TreeMap<Integer, WMORegisterDescription>();
+	
+	public WMORunWayFrictionRegister() {
+
+	}
+
+	private Locale locale = Locale.US;
+
+	public WMORunWayFrictionRegister(Locale locale) {
+		this.locale = locale;
+	}
+
+	@Override
+	public Locale getLocale() {
+		return locale;
+	}
 	
 	@Override
-	public TreeMap<Integer, String> getContent() {
+	public TreeMap<Integer, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoFrictionCodes;
 	}
 
 	@Override
-	public String getWMOUrlByCode(Object code) {
-		if (wmoFrictionCodes.size()==0)
-			parseWMOXml();
-		
-		return wmoFrictionCodes.get(code);
+	public void putToContent(String wmoCode, WMORegisterDescription description) {
+		this.wmoFrictionCodes.put(Integer.valueOf(wmoCode), description);
 	}
-
+	
 	@Override
-	public void parseWMOXml() {
-		try(InputStream is = new FileInputStream(registerFileName);) {
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			
-			
-			
-			Document doc = docBuilder.parse(is);
+	public String getRegisterFileName() {
 
-			// normalize text representation
-			doc.getDocumentElement().normalize();
-			
-			// Create XPathFactory object
-            XPathFactory xpathFactory = XPathFactory.newInstance();
-
-            // Create XPath object
-            XPath xpath = xpathFactory.newXPath();
-			
-			XPathExpression expr =xpath.compile("/RDF/Register/member/Concept");
-	          
-			
-			
-			NodeList listOfCloudElements = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);//root.getElementsByTagName("member");
-			int totalCloudElements = listOfCloudElements.getLength();
-			registerLogger.debug("Total members in RunwayFriction: " + totalCloudElements);
-
-			for (int i = 0; i < listOfCloudElements.getLength(); i++) {
-
-				Node currentNode = listOfCloudElements.item(i);
-				if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-					
-					Integer code=-1;
-					String url="";
-					
-					Element concept = (Element) currentNode;
-					url = concept.getAttribute("rdf:about");
-					
-						
-					
-					
-					NodeList notationList = concept.getElementsByTagName("skos:notation");
-					if (notationList!=null && notationList.getLength()>0) {
-						Element notation = (Element) notationList.item(0);
-						code = Integer.valueOf(notation.getTextContent());
-					
-					}
-					
-					if (code>-1 && url.length()>0)
-						wmoFrictionCodes.put(code, url);
-
-				}
-			} // end of for loop with s var
-		} catch (SAXParseException err) {
-			registerLogger.error("Error in parsing ", err);
-		} catch (SAXException e) {
-			registerLogger.error("SAX Exception", e);
-		} catch (Throwable t) {
-			registerLogger.error("Unknown error", t);
-		}
-		
+		return registerFileName;
 	}
 
 }

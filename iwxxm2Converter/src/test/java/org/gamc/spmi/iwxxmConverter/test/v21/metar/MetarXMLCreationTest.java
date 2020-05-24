@@ -465,7 +465,7 @@ public class MetarXMLCreationTest {
 		
 		//Create layer
 		AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
-		cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(1, 100,
+		cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection("FEW", 100,
 				"CB", null, LENGTH_UNITS.FT));
 		clouds.getLayer().add(cloudLayer);
 		
