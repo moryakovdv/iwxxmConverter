@@ -2,7 +2,7 @@ package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
 
-import org.gamc.spmi.gis.model.GTDirectionFromLine;
+import org.gamc.gis.model.GTDirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 /**Describes direction from certain line, e.g 'NE OF LINE ...'*/	

@@ -6,10 +6,10 @@ import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.gamc.spmi.gis.model.GTCalculatedRegion;
-import org.gamc.spmi.gis.model.GTCoordPoint;
-import org.gamc.spmi.gis.service.GeoService;
-import org.gamc.spmi.gis.service.GeoServiceException;
+import org.gamc.gis.model.GTCalculatedRegion;
+import org.gamc.gis.model.GTCoordPoint;
+import org.gamc.gis.service.GeoService;
+import org.gamc.gis.service.GeoServiceException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

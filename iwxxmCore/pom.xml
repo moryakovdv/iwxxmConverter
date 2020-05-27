@@ -10,12 +10,10 @@
 		<version>0.0.1</version>
 	</parent>
 
-	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxmCore</artifactId>
 	<version>0.3.0</version>
 	<name>iwxxmCore</name>
 	<packaging>jar</packaging>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<javaVersion>1.8</javaVersion>
@@ -23,9 +21,10 @@
 		<project.target.version>${javaVersion}</project.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.encoding>UTF-8</project.encoding>
-		<slf4jVersion>1.7.25</slf4jVersion>
-	</properties>
+		<geotools.version>18.2</geotools.version>
 
+
+	</properties>
 
 	<!-- In project repository for third-party jars -->
 	<repositories>
@@ -33,17 +32,112 @@
 			<id>Internal company repository</id>
 			<url>file://${basedir}/lib</url>
 		</repository>
+
+		<repository>
+			<id>osgeo</id>
+			<name>OSGeo Release Repository</name>
+			<url>https://repo.osgeo.org/repository/release/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+
 	</repositories>
 
 
 	<dependencies>
 
+
 		<dependency>
-			<groupId>org.gamc.spmi</groupId>
+			<groupId>org.gamc.gis</groupId>
 			<artifactId>gis-tools-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 
 		</dependency>
+
+	<dependency>
+				<groupId>org.geotools</groupId>
+				<artifactId>gt-epsg-wkt</artifactId>
+				<version>${geotools.version}</version>
+			</dependency>
+
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.uuid/java-uuid-generator -->
+		<dependency>
+			<groupId>com.fasterxml.uuid</groupId>
+			<artifactId>java-uuid-generator</artifactId>
+			<version>3.1.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/edu.ucar.ral.xml/crux -->
+		<dependency>
+			<groupId>edu.ucar.ral.xml</groupId>
+			<artifactId>crux</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.helger/ph-schematron -->
+		<dependency>
+			<groupId>com.helger</groupId>
+			<artifactId>ph-schematron</artifactId>
+			<version>5.0.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mariuszgromada.math/MathParser.org-mXparser -->
+		<dependency>
+			<groupId>org.mariuszgromada.math</groupId>
+			<artifactId>MathParser.org-mXparser</artifactId>
+			<version>4.1.1</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-grizzly2-http</artifactId>
+			<version>2.26</version>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.26</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+			<version>2.2.6.RELEASE</version>
+		</dependency>
+
+
+
 
 	</dependencies>
 
@@ -52,9 +146,6 @@
 
 
 		<finalName>iwxxmCore</finalName>
-
-
-
 
 		<plugins>
 

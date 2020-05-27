@@ -2,8 +2,8 @@ package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
 
-import org.gamc.spmi.gis.model.GTCoordinate;
-import org.gamc.spmi.gis.model.GTLine;
+import org.gamc.gis.model.GTCoordinate;
+import org.gamc.gis.model.GTLine;
 
 /**The sigmet area may be indicated as number of lines.
  *Line itself can have start and end point or just one single point 

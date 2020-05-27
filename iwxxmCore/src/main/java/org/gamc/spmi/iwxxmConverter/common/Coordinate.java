@@ -2,7 +2,7 @@ package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
 
-import org.gamc.spmi.gis.model.GTCoordinate;
+import org.gamc.gis.model.GTCoordinate;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 
 public class Coordinate implements Serializable{

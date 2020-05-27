@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.gamc.spmi</groupId>
-    <artifactId>iwxxmConverter</artifactId>
-    <version>0.0.1</version>
-  </parent>
-  <groupId>org.gamc.spmi</groupId>
-  <artifactId>iwxxm2Converter</artifactId>
-  <version>0.0.3</version>
-  <name>iwxxm2Converter</name>
-  <packaging>jar</packaging>
-  <url>http://maven.apache.org</url>
-  <properties>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.gamc.spmi</groupId>
+		<artifactId>iwxxmConverter</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<groupId>org.gamc.spmi</groupId>
+	<artifactId>iwxxm2Converter</artifactId>
+	<version>0.0.3</version>
+	<name>iwxxm2Converter</name>
+	<packaging>jar</packaging>
+	<url>http://maven.apache.org</url>
+	<properties>
 		<javaVersion>1.8</javaVersion>
 		<project.source.version>${javaVersion}</project.source.version>
 		<project.target.version>${javaVersion}</project.target.version>
@@ -21,16 +23,135 @@
 		<project.encoding>UTF-8</project.encoding>
 		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
-	
-	
-  <dependencies>
-  <dependency>
-    <groupId>org.gamc.spmi</groupId>
-      <artifactId>iwxxmCore</artifactId>
-      <version>0.3.0</version>
-  </dependency>
-  
-  
-  
-  </dependencies>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>iwxxmCore</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+
+					<source>${javaVersion}</source>
+					<target>${javaVersion}</target>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/schemabindings</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+				<version>3.0.0</version>
+			</plugin>
+
+
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources-config</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+								</resource>
+							</resources>
+
+						</configuration>
+
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*.properties</exclude>
+					</excludes>
+				</configuration>
+				<version>3.1.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+
+
+	</build>
+
 </project>

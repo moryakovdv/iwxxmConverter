@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.gamc.gis</groupId>
+  <artifactId>gis-tools-core</artifactId>
+  <versioning>
+    <versions>
+      <version>0.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20200527114541</lastUpdated>
+  </versioning>
+</metadata>

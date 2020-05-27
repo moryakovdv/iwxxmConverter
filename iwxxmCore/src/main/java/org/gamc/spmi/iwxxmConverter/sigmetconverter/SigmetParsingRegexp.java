@@ -37,8 +37,8 @@ import java.util.regex.Pattern;
 public class SigmetParsingRegexp {
 
 	/**WMO Bulletin header*/
-	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
-	
+	//public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
+	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})\\s*?(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})");
 	/**SIGMET Mandatory header*/
 	public final static Pattern sigmetHeader = Pattern.compile(
 			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
