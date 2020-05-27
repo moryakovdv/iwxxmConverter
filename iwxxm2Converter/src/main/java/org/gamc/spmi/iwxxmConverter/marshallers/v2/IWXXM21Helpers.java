@@ -73,7 +73,6 @@ import schemabindings21.net.opengis.samplingspatial._2.ShapeType;
  * be extended to provide specific implementation for METAR, TAF, SIGMET etc..
  */
 public class IWXXM21Helpers extends IWXXMHelpers {
-
 	public static final schemabindings21._int.icao.iwxxm._2.ObjectFactory ofIWXXM = new schemabindings21._int.icao.iwxxm._2.ObjectFactory();
 	public static final schemabindings21.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings21.net.opengis.gml.v_3_2_1.ObjectFactory();
 	public static final schemabindings21.net.opengis.om._2.ObjectFactory ofOM = new schemabindings21.net.opengis.om._2.ObjectFactory();

@@ -9,7 +9,6 @@
 		<artifactId>iwxxmConverter</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	<groupId>org.gamc.spmi</groupId>
 	<artifactId>iwxxm2Converter</artifactId>
 	<version>0.0.3</version>
 	<name>iwxxm2Converter</name>
@@ -26,132 +25,42 @@
 
 
 	<dependencies>
+
+
+
+
 		<dependency>
 			<groupId>org.gamc.spmi</groupId>
 			<artifactId>iwxxmCore</artifactId>
 			<version>0.3.0</version>
 		</dependency>
 
+		
 
 
 	</dependencies>
 
-	<build>
-		<plugins>
 
+<build>
+<plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.9</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+	<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
+</plugins>
+</build>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-
-					<source>${javaVersion}</source>
-					<target>${javaVersion}</target>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/schemabindings</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-				<version>3.0.0</version>
-			</plugin>
-
-
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-resources-config</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-
-							<resources>
-								<resource>
-									<directory>src/main/resources</directory>
-								</resource>
-							</resources>
-
-						</configuration>
-
-					</execution>
-				</executions>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>**/*.properties</exclude>
-					</excludes>
-				</configuration>
-				<version>3.1.0</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
-		</plugins>
-
-
-	</build>
 
 </project>
