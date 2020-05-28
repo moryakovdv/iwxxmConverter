@@ -42,7 +42,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SigmetConversionTest {
-
+	//test
 	static IwxxmValidator validator;
 
 	@BeforeClass
