@@ -16,13 +16,18 @@
  */
 package org.gamc.spmi.iwxxmConverter.test.v21.metar;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter;
+import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
+import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,6 +58,9 @@ public class MetarConversionTest {
 	
 	String metarCavok = "METAR ULLI 261230Z 32003MPS 280V360 CAVOK M02/M16 Q1008 R88/190055\n" + 
 			"NOSIG";
+	
+	String metarVVTS = "METAR VVTS 271830Z 24004KT 8000 SCT015 BKN040 27/26 Q1010 NOSIG =";
+	
 	@Test
 	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		METARConverter mc = new METARConverter();
@@ -70,4 +78,17 @@ public class MetarConversionTest {
 		System.out.println(result);
 	}
 
+	@Test
+	public void testMetarVVTS() throws Exception {
+		IwxxmValidator validator = new IwxxmValidator();
+		validator.init();
+		METARConverter mc = new METARConverter();
+		String result = mc.convertTacToXML(metarVVTS);
+		System.out.println(result);
+		List<FailedValidationAssert> asserts = validator.validateString(result);
+		System.out.println(asserts);
+		assertTrue(asserts.size()==0);
+		
+		
+	}
 }

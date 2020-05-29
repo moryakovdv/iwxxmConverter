@@ -30,7 +30,7 @@ public class WebAppStarter {
 
 	 
 	    public static final String ROOT_PATH = "api";
-	    static final Logger logger = LoggerFactory.getLogger(WebAppStarter.class);
+	    //static final Logger logger = LoggerFactory.getLogger(WebAppStarter.class);
 	    public static void main(String[] args) {
 	        try {
 	        	
@@ -43,7 +43,7 @@ public class WebAppStarter {
 	        	}
 	        	
 	        	URI BASE_URI = URI.create(String.format("http://%s:%s/iwxxmConverter/",host,port));
-	        	logger.info("IWXXM Grizzly REST is starting...");
+	        	//logger.info("IWXXM Grizzly REST is starting...");
 
 	            final ResourceConfig resourceConfig = new ResourceConfig(IwxxmRestConverter.class);
 	            final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, resourceConfig, false);
@@ -55,11 +55,10 @@ public class WebAppStarter {
 	            }));
 	            server.start();
 
-	            logger.info(String.format("IWXXM REST started",
-	                    BASE_URI, ROOT_PATH));
+	            //logger.info(String.format("IWXXM REST started", BASE_URI, ROOT_PATH));
 	            Thread.currentThread().join();
 	        } catch (IOException | InterruptedException ex) {
-	        	logger.error("REST service error",ex);
+	        	//logger.error("REST service error",ex);
 	        }
 
 	}

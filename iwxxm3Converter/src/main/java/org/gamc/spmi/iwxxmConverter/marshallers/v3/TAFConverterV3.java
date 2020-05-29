@@ -210,14 +210,14 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 			timedSection.parseSection();
 			MeteorologicalAerodromeForecastPropertyType trendTimedSectionforecast = createTrendResultsSection(timedSection,
 					globalSectionIndex.getAndIncrement());
-			//tafRootTag.getChangeForecast().add(trendTimedSectionforecast);
+			tafRootTag.getChangeForecast().add(trendTimedSectionforecast);
 		}
 
 		for (TafForecastSection probSection : translatedTaf.getProbabilitySections()) {
 			probSection.parseSection();
 			MeteorologicalAerodromeForecastPropertyType probabilitySectionforecast = createTrendResultsSection(probSection,
 					globalSectionIndex.getAndIncrement());
-			//tafRootTag.getChangeForecast().add(probabilitySectionforecast);
+			tafRootTag.getChangeForecast().add(probabilitySectionforecast);
 		}
 
 		return tafRootTag;
@@ -327,8 +327,17 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 			sWindType.setWindGustSpeed(speedGustType);
 		}
 
+
 		// VRB?
-		sWindType.setVariableWindDirection(translatedTaf.getCommonWeatherSection().isVrb());
+		if (translatedTaf.getCommonWeatherSection().isVrb()) {
+			sWindType.setVariableWindDirection(translatedTaf.getCommonWeatherSection().isVrb());
+			
+			SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+			speedMeanType.setUom(translatedTaf.getCommonWeatherSection().getVrbSpeedUnits().getStringValue());
+			speedMeanType.setValue(translatedTaf.getCommonWeatherSection().getWindVrbSpeed());
+			sWindType.setMeanWindSpeed(speedMeanType);
+			
+		}
 
 		// Set mean wind
 		SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
@@ -413,7 +422,10 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		recordType.setChangeIndicator(changeIndicator);
 		// CAVOK
 		recordType.setCloudAndVisibilityOK(section.getCommonWeatherSection().isCavok());
-
+		
+		
+		recordType.setPhenomenonTime(iwxxmHelpers.createTimePeriod(translatedTaf.getIcaoCode(), section.getTrendValidityInterval().getStart(), section.getTrendValidityInterval().getEnd()));
+		
 		// visibility
 		if (section.getCommonWeatherSection().getPrevailVisibility() != null) {
 			LengthType vis = IWXXM31Helpers.ofGML.createLengthType();
@@ -428,6 +440,18 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 				.createAerodromeSurfaceWindForecastPropertyType();
 		AerodromeSurfaceWindForecastType sWindType = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindForecastType();
 		boolean sectionHasWind = false;
+		
+		// VRB?
+		if (section.getCommonWeatherSection().isVrb()) {
+			sWindType.setVariableWindDirection(section.getCommonWeatherSection().isVrb());
+			
+			SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+			speedMeanType.setUom(section.getCommonWeatherSection().getVrbSpeedUnits().getStringValue());
+			speedMeanType.setValue(section.getCommonWeatherSection().getWindVrbSpeed());
+			sWindType.setMeanWindSpeed(speedMeanType);
+			
+			sectionHasWind = true;
+		}
 		// Set gust speed
 		if (section.getCommonWeatherSection().getGustSpeed() != null) {
 			SpeedType speedGustType = IWXXM31Helpers.ofGML.createSpeedType();

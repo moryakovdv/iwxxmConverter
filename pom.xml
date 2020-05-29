@@ -19,6 +19,7 @@
 		<module>iwxxmCore</module>
 		<module>iwxxm2Converter</module>
 		<module>iwxxm3Converter</module>
+		<module>iwxxmConverterRest</module>
 	</modules>
 
 	<properties>
@@ -30,7 +31,8 @@
 
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
 		<maven.compiler.target>${javaVersion}</maven.compiler.target>
-		<slf4jVersion>1.7.25</slf4jVersion>
+
+		<slf4jVersion>1.7.30</slf4jVersion>
 
 
 	</properties>
@@ -46,7 +48,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.11</version>
+				<version>4.13</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -91,13 +93,26 @@
 		<pluginManagement>
 			<plugins>
 
-				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
-					<version>2.9</version> <executions> <execution> <id>copy-dependencies</id> 
-					<phase>prepare-package</phase> <goals> <goal>copy-dependencies</goal> </goals> 
-					<configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
-					<overWriteReleases>true</overWriteReleases> <overWriteSnapshots>true</overWriteSnapshots> 
-					<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> </executions> 
-					</plugin> -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.9</version>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								<overWriteReleases>true</overWriteReleases>
+								<overWriteSnapshots>true</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 
 
 				<plugin>

@@ -246,7 +246,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 	}
 	
-	
+	/**creates XML section with time period, e.g. for validity periods*/
 	public TimePeriodPropertyType createTimePeriod(String icaoCode, DateTime from, DateTime to) {
 		
 		TimePeriodPropertyType timePeriodProperty = IWXXM31Helpers.ofGML.createTimePeriodPropertyType();

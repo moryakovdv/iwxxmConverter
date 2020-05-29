@@ -50,7 +50,17 @@
 
 	<dependencies>
 
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
 
+			</dependency>
+			
+			
 		<dependency>
 			<groupId>org.gamc.gis</groupId>
 			<artifactId>gis-tools-core</artifactId>
@@ -63,6 +73,8 @@
 				<artifactId>gt-epsg-wkt</artifactId>
 				<version>${geotools.version}</version>
 			</dependency>
+
+
 
 
 		<dependency>

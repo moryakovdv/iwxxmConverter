@@ -193,7 +193,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 			this.setVrb(true);
 			// this.setWindSpeed(Integer.valueOf(sVrbS));
 			this.setWindVrbSpeed(Integer.valueOf(sVrbS));
-			this.setSpeedUnits(SPEED_UNITS.valueOf(sVrbU));
+			this.setVrbSpeedUnits(SPEED_UNITS.valueOf(sVrbU));
 
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
