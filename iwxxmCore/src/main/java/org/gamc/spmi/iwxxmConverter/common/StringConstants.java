@@ -31,4 +31,21 @@ public class StringConstants {
 	public static final String SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME = "com.sun.xml.bind.namespacePrefixMapper"; //com.sun.xml.internal.bind.namespacePrefixMapper";
 	public static final String NO_SIGNIFICANT_CHANGES = "http://codes.wmo.int/common/nil/nothingOfOperationalSignificance";
 	public static final String NO_SIGNIFICANT_WEATHER_CHANGES = "NSW";
+	
+	public static final String coalesce(String... strings) {
+		 for (String s : strings) {
+	            if (!isNullOrEmpty(s)) {
+	                return s;
+	            }
+	        }
+	        return "";
+		
+	}
+	
+	private static boolean isNullOrEmpty(String s) {
+		return s==null || s.isEmpty();
+		
+	}
+	
+	
 }

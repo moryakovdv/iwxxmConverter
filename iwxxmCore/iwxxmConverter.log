@@ -1,15 +1,18 @@
-2020-05-26 14:49:18,001[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test DEBUG
-2020-05-26 14:49:18,002[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test ERROR
-2020-05-26 14:49:18,002[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test INFO
-2020-05-26 14:49:18,034[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
-2020-05-26 14:49:18,043[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2020-05-26 14:49:18,048[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2020-05-26 14:49:18,056[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2020-05-26 14:49:18,066[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
-2020-05-26 14:49:18,081[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2020-05-26 14:49:18,095[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2020-05-26 14:49:18,103[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
-2020-05-26 14:49:18,108[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2020-05-26 14:49:18,113[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister: 2
-2020-05-26 14:49:18,122[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
-2020-05-26 14:49:18,127[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7
+2020-06-01 20:18:14,480[ISO8601] [main] INFO  hsqldb.db.HSQLDB4AD417742A.ENGINE  - dataFileCache open start
+2020-06-01 20:18:14,877[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - data store loaded
+2020-06-01 20:18:15,180[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - data store loaded
+2020-06-01 20:18:15,442[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test DEBUG
+2020-06-01 20:18:15,442[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test ERROR
+2020-06-01 20:18:15,442[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.test.common.LoggingTest  - test INFO
+2020-06-01 20:18:15,487[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
+2020-06-01 20:18:15,497[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2020-06-01 20:18:15,502[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2020-06-01 20:18:15,507[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2020-06-01 20:18:15,512[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2020-06-01 20:18:15,537[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2020-06-01 20:18:15,558[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2020-06-01 20:18:15,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2020-06-01 20:18:15,570[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2020-06-01 20:18:15,573[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister: 2
+2020-06-01 20:18:15,577[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
+2020-06-01 20:18:15,579[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7

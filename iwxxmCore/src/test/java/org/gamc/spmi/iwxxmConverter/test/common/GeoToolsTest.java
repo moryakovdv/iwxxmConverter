@@ -47,7 +47,7 @@ static LinkedList<GTCoordPoint> pointList = new LinkedList<GTCoordPoint>();
 	public void testJsonPolygon() throws URISyntaxException, GeoServiceException {
 		
 		GeoService gs = new GeoService();
-		gs.init(false, "");
+		gs.init(false, "",true);
 		String result = gs.jsonFromPolygon("LIMM", pointList);
 		assertNotNull(result);
 		System.out.println(result);
@@ -58,7 +58,7 @@ static LinkedList<GTCoordPoint> pointList = new LinkedList<GTCoordPoint>();
 	public void testPolygon() throws URISyntaxException, GeoServiceException {
 		
 		GeoService gs = new GeoService();
-		gs.init(false, "");
+		gs.init(false, "",true);
 		List<GTCalculatedRegion> result = gs.recalcFromPolygon("ZYSH", pointList);
 		assertNotNull(result);
 		System.out.println(result);

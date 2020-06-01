@@ -70,7 +70,7 @@
 
 	<dependency>
 				<groupId>org.geotools</groupId>
-				<artifactId>gt-epsg-wkt</artifactId>
+				<artifactId>gt-epsg-hsql</artifactId>
 				<version>${geotools.version}</version>
 			</dependency>
 

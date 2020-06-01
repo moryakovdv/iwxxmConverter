@@ -24,7 +24,7 @@ public class AirmetPhenomenonDescription extends TacSectionImpl implements Seria
 
 	public enum Severity implements IwxxmEnum {
 		ISOL("ISOL"), OBSC("OBSC"), SQL("SQL"), EMBD("EMBD"), FRQ("FRQ"), SEV("SEV"),
-		HVY("HVY"), NOTSET("");
+		HVY("HVY"), NOTSET(""), MOD("MOD");
 
 		private String name;
 

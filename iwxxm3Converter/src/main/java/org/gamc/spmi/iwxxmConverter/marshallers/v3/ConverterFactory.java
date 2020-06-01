@@ -28,18 +28,18 @@ public class ConverterFactory {
 	
 	
 	/**Factory produces converter for message using the start token of the input string*/
-	public final static Pattern StartTokenPattern = Pattern.compile("(?<firstToken>\\w+).+");   
+	public final static Pattern messageTypePattern = Pattern.compile("(?<messageType>METAR|TAF|SPECI|SIGMET|AIRMET|SWX(?=\\s+ADVISORY))");   
 	
 	public static TacConverter<?,?> createForTac(String inputTac) throws ParsingException {
 	
-		Matcher m = StartTokenPattern.matcher(inputTac);
+		Matcher m = messageTypePattern.matcher(inputTac);
 		if (!m.find()) {
-			throw new ParsingException("Start token is missed,unknown or  not implemented yet");
+			throw new ParsingException("Can not determine message type");
 		}
 		
-		String startToken = m.group("firstToken").toUpperCase();
+		String messageType = m.group("messageType").toUpperCase();
 		
-		switch(startToken) {
+		switch(messageType) {
 		case "METAR":
 			return new METARConverterV3();	
 			
@@ -49,8 +49,17 @@ public class ConverterFactory {
 		case "TAF":
 			return new TAFConverterV3();	
 			
+		case "SIGMET":
+			return new SIGMETConverterV3();	
+			
+		case "AIRMET":
+			return new AIRMETConverterV3();	
+			
+		case "SWX":
+			return new SPACEWEATHERConverterV3();	
+			
 		default:
-				throw new ParsingException("Start token is missed,unknown or  not implemented yet");
+				throw new ParsingException("Can not determine message type");
 			
 		}
 	}

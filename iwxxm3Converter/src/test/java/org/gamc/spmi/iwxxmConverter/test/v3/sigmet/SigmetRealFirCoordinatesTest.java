@@ -150,7 +150,7 @@ public class SigmetRealFirCoordinatesTest {
 	@Test
 	public void tesRefSigmet2Json() throws URISyntaxException, SIGMETParsingException, GeoServiceException {
 		GeoService gs = new GeoService();
-		gs.init(false, "");
+		gs.init(false, "", true);
 		SIGMETTacMessage tac = new SIGMETTacMessage(referenceSigmet2);
 		tac.parseMessage();
 		

@@ -572,7 +572,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	/*returns geoservice initializing it if necessary*/
 	public GeoService getGeoService() throws URISyntaxException {
 		if (!geoService.isServiceInit())
-			geoService.init(false, "");
+			geoService.init(false, "", true);
 		
 		return geoService;
 		

@@ -129,7 +129,7 @@ public class SigmetCoordinatesTest {
 	@Test
 	public void testGisCoordinateConversion() throws SIGMETParsingException, URISyntaxException, GeoServiceException {
 		GeoService gs = new GeoService();
-		gs.init(false, "");
+		gs.init(false, "",true);
 		SIGMETTacMessage tac = new SIGMETTacMessage(sigmetSevIce);
 		tac.parseMessage();
 		
@@ -160,7 +160,7 @@ public class SigmetCoordinatesTest {
 	/*UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135*/
 	public void test135() throws URISyntaxException, GeoServiceException {
 		GeoService gs = new GeoService();
-		gs.init(false, "");
+		gs.init(false, "",true);
 		
 		GTDirectionFromLine lineN70 = new GTDirectionFromLine("N", new GTLine(new GTCoordinate("N", 70, 0)));
 		GTDirectionFromLine lineE135 = new GTDirectionFromLine("E", new GTLine(new GTCoordinate("E", 135, 0)));

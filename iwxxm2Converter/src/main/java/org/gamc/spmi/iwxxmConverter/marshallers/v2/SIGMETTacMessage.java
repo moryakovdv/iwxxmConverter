@@ -25,6 +25,7 @@ import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.Line;
 import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
 import org.gamc.spmi.iwxxmConverter.common.MessageType;
+import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
@@ -321,9 +322,17 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			
 			while(matcherFcstLocation.find()) {
 				String azimuth = matcherFcstLocation.group("azimuth");
-				String pointCoord = matcherFcstLocation.group("pointCoord");
-				String pointDeg = matcherFcstLocation.group("deg");
-				String pointMin = matcherFcstLocation.group("min");			
+				String pointCoordLat = matcherFcstLocation.group("pointCoordLat");
+				String pointDegLat = matcherFcstLocation.group("degLat");
+				String pointMinLat = matcherFcstLocation.group("minLat");
+				
+				String pointCoordLong = matcherFcstLocation.group("pointCoordLong");
+				String pointDegLong = matcherFcstLocation.group("degLong");
+				String pointMinLong = matcherFcstLocation.group("minLong");
+
+				String pointCoord = StringConstants.coalesce(pointCoordLat,pointCoordLong);
+				String pointDeg = StringConstants.coalesce(pointDegLat,pointDegLong);
+				String pointMin = StringConstants.coalesce(pointMinLat,pointMinLong);
 			
 				Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord),Integer.parseInt(pointDeg),pointMin.isEmpty()?0:Integer.parseInt(pointMin)));
 				DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth),sigmetLine);
@@ -491,9 +500,17 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		while (matcherDirLine.find()) {
 			
 			String azimuth = matcherDirLine.group("azimuth");
-			String pointCoord = matcherDirLine.group("pointCoord");
-			String pointDeg = matcherDirLine.group("deg");
-			String pointMin = matcherDirLine.group("min");			
+			String pointCoordLat = matcherDirLine.group("pointCoordLat");
+			String pointDegLat = matcherDirLine.group("degLat");
+			String pointMinLat = matcherDirLine.group("minLat");
+			
+			String pointCoordLong = matcherDirLine.group("pointCoordLong");
+			String pointDegLong = matcherDirLine.group("degLong");
+			String pointMinLong = matcherDirLine.group("minLong");
+
+			String pointCoord = StringConstants.coalesce(pointCoordLat,pointCoordLong);
+			String pointDeg = StringConstants.coalesce(pointDegLat,pointDegLong);
+			String pointMin = StringConstants.coalesce(pointMinLat,pointMinLong);		
 		
 			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord),Integer.parseInt(pointDeg),pointMin.isEmpty()?0:Integer.parseInt(pointMin)));
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth),sigmetLine);
