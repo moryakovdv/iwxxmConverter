@@ -46,7 +46,9 @@ import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
+import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
+import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETEvolvingConditionCollectionType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceType;
@@ -64,7 +66,10 @@ import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
+import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
+import schemabindings31.net.opengis.gml.v_3_2_1.PointPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.PointType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.StringOrRefType;
@@ -177,8 +182,20 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 			break;
 		default:
-			sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
-			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
+			switch (translatedSigmet.getSigmetType()) {
+			case METEO:
+				sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
+				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
+				break;
+			case CYCLONE:
+				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
+				break;
+			case VOLCANO:
+				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
+				break;
+			default:
+				break;
+			}
 			break;
 		}
 
@@ -187,20 +204,93 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	}
 
 	public AssociationRoleType setAssociationRoleType() {
+		// ---------------Association Role----------------//
+		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
+
 		// ---------------AirspaceVolumePropertyType----------------//
 		AirspaceVolumePropertyType air = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
-		air.setAirspaceVolume(createAirSpaceVolumeSection(getGTCalculatedRegions()));
-
+		List<GTCalculatedRegion> listCoord = getGTCalculatedRegions();
+		air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord));
+		// ---------------SIGMETEvolvingConditionType(Time)----------------//
+		AbstractTimeObjectPropertyType analysisTimeProperty = iwxxmHelpers.createAbstractTimeObject(
+				translatedSigmet.getPhenomenonDescription().getPhenomenonTimeStamp(), translatedSigmet.getIcaoCode());
 		// ---------------SIGMETEvolvingConditionType----------------//
-		SIGMETEvolvingConditionCollectionType sicol = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionCollectionType();
-		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionCollection(sicol);
+		SIGMETEvolvingConditionPropertyType evolvingTypeProp = IWXXM31Helpers.ofIWXXM
+				.createSIGMETEvolvingConditionPropertyType();
+		// ---------------SIGMETEvolvingConditionType----------------//
 		SIGMETEvolvingConditionType evolvingType = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionType();
-		evolvingType.setGeometry(air);
+		switch (translatedSigmet.getSigmetType()) {
+		case METEO:
+			SIGMETEvolvingConditionCollectionType sicol = IWXXM31Helpers.ofIWXXM
+					.createSIGMETEvolvingConditionCollectionType();
+			JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = IWXXM31Helpers.ofIWXXM
+					.createSIGMETEvolvingConditionCollection(sicol);
+			evolvingType.setGeometry(air);
+			sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+				sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
+			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+				sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
+			}
+			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+			sicol.getMember().add(evolvingTypeProp);
+			sicol.setPhenomenonTime(analysisTimeProperty);
+			asType.setAny(evolvingAr);
+			break;
+		case CYCLONE:
+			TropicalCycloneSIGMETEvolvingConditionCollectionType siTropCol = IWXXM31Helpers.ofIWXXM
+					.createTropicalCycloneSIGMETEvolvingConditionCollectionType();
+			JAXBElement<TropicalCycloneSIGMETEvolvingConditionCollectionType> evolvingTropAr = IWXXM31Helpers.ofIWXXM
+					.createTropicalCycloneSIGMETEvolvingConditionCollection(siTropCol);
+			evolvingType.setGeometry(air);
+			siTropCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+				siTropCol.setTimeIndicator(TimeIndicatorType.FORECAST);
+			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+				siTropCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
+			}
+			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+			siTropCol.getMember().add(evolvingTypeProp);
+			siTropCol.setPhenomenonTime(analysisTimeProperty);
+			PointPropertyType prop = IWXXM31Helpers.ofGML.createPointPropertyType();
+			PointType point = IWXXM31Helpers.ofGML.createPointType();
+			DirectPositionType dir = IWXXM31Helpers.ofGML.createDirectPositionType();
+			for (GTCalculatedRegion gtCoordsRegion : listCoord) {
+				LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
+				for (Double dbEntry : coords) {
+					dir.getValue().add(dbEntry);
+				}
+			}
+			point.setPos(dir);
+			JAXBElement<PointType> pointj = IWXXM31Helpers.ofGML.createPoint(point);
+			prop.setPoint(pointj);
+			JAXBElement<PointPropertyType> jtcp = IWXXM31Helpers.ofGML.createCenterOf(prop);
+			siTropCol.getRest().add(jtcp);
+			asType.setAny(evolvingTropAr);
+			break;
+		case VOLCANO:
+			VolcanicAshSIGMETEvolvingConditionCollectionType siVolcCol = IWXXM31Helpers.ofIWXXM
+					.createVolcanicAshSIGMETEvolvingConditionCollectionType();
+			JAXBElement<VolcanicAshSIGMETEvolvingConditionCollectionType> evolvingVolcAr = IWXXM31Helpers.ofIWXXM
+					.createVolcanicAshSIGMETEvolvingConditionCollection(siVolcCol);
+			evolvingType.setGeometry(air);
+			siVolcCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+				siVolcCol.setTimeIndicator(TimeIndicatorType.FORECAST);
+			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+				siVolcCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
+			}
+			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+			siVolcCol.getMember().add(evolvingTypeProp);
+			siVolcCol.setPhenomenonTime(analysisTimeProperty);
+			asType.setAny(evolvingVolcAr);
+			break;
+		}
 		// ---------------SIGMETEvolvingConditionType(Speed-Motion-Id-Intencity)----------------//
 		SpeedType speedType = IWXXM31Helpers.ofGML.createSpeedType();
-
 		if (translatedSigmet.getPhenomenonDescription().getMovingSection() != null
 				&& translatedSigmet.getPhenomenonDescription().getMovingSection().isMoving()) {
 			AngleWithNilReasonType motion = IWXXM31Helpers.ofIWXXM.createAngleWithNilReasonType();
@@ -218,14 +308,10 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 				speedType.setUom(translatedSigmet.getPhenomenonDescription().getMovingSection().getSpeedUnits()
 						.getStringValue());
 				speedType.setValue(translatedSigmet.getPhenomenonDescription().getMovingSection().getMovingSpeed());
-
 				evolvingType.setSpeedOfMotion(speedType);
 			}
-
 		}
-
-		evolvingType
-				.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts-type", translatedSigmet.getIcaoCode())));
+		evolvingType.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
 		if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("INTSF")) {
 			evolvingType.setIntensityChange(ExpectedIntensityChangeType.INTENSIFY);
 		} else if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("WKN")) {
@@ -233,31 +319,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		} else if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("NC")) {
 			evolvingType.setIntensityChange(ExpectedIntensityChangeType.NO_CHANGE);
 		}
-		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-
-		// ---------------SIGMETEvolvingConditionType(Time)----------------//
-		AbstractTimeObjectPropertyType analysisTimeProperty = iwxxmHelpers.createAbstractTimeObject(
-				translatedSigmet.getPhenomenonDescription().getPhenomenonTimeStamp(),
-				translatedSigmet.getDisseminatingCentre());
-		sicol.setPhenomenonTime(analysisTimeProperty);
-
-		// ---------------SIGMETEvolvingConditionType----------------//
-		SIGMETEvolvingConditionPropertyType evolvingTypeProp = IWXXM31Helpers.ofIWXXM
-				.createSIGMETEvolvingConditionPropertyType();
-		evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-		sicol.getMember().add(evolvingTypeProp);
-
-		// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-		if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-			sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
-		} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-			sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-		}
-		// ---------------Association Role----------------//
-		AssociationRoleType asType = IWXXM31Helpers.ofGML.createAssociationRoleType();
-		asType.setAny(evolvingAr);
 		return asType;
-
 	}
 
 	/*
@@ -314,7 +376,8 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	 */
 	/**
 	 * Coordinates calculation
-	 * @throws GeoServiceException 
+	 * 
+	 * @throws GeoServiceException
 	 * 
 	 * @throws URISyntaxException
 	 */

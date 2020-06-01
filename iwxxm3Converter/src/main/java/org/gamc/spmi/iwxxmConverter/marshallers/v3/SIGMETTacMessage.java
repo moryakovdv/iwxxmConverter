@@ -292,7 +292,24 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		if (matcherPhenomena.find()) {
 
 			int lastIndex = matcherPhenomena.end();
-
+			Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac);
+			if (sigmetMachType.find()) {
+				while (sigmetMachType.find()) {
+					switch (sigmetMachType.group("sigmetType").trim()) {
+					case "TC":
+						sigmetType = Type.CYCLONE;
+						break;
+					case "VA":
+						sigmetType = Type.VOLCANO;
+						break;
+					default:
+						sigmetType = Type.METEO;
+						break;
+					}
+				}
+			} else {
+				sigmetType = Type.METEO;
+			}
 			SigmetPhenomenonDescription phenom = new SigmetPhenomenonDescription(tac.substring(0, lastIndex));
 			String sevS = matcherPhenomena.group("severity");
 			String phS = matcherPhenomena.group("phenomena");
