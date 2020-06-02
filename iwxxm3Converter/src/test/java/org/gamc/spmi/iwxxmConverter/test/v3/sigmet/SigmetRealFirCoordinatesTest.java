@@ -118,11 +118,27 @@ public class SigmetRealFirCoordinatesTest {
         {71.26,60.00}
 		
 	};
+	
+	
+	String sigmet6530 = "WSRS31RUMA 111143 XXX UEEE SIGMET 2 VALID 100800/101200 UEEE-\n" + 
+			"UEEE YAKUTSK FIR EMBD TS FCST S OF N6530 TOP FL400 STNR NC=";
+	@Test
+	public void testSigmetZigZagLine() throws SIGMETParsingException {
+		SIGMETTacMessage tac = new SIGMETTacMessage(referenceSigmet1);
+		tac.parseMessage();
+		
+		assertEquals(tac.getHorizontalLocation().getDirectionsFromLines().size(), 1);
+		System.out.println(tac.getHorizontalLocation().getDirectionsFromLines());
+		
+	}
+	
 	@Test
 	public void testRefSigmet1() throws Exception {
 		
 		SIGMETConverterV3 sc = new SIGMETConverterV3();
+		
 		String s1Result = sc.convertTacToXML(referenceSigmet1);
+		
 		System.out.println(s1Result);
 		IwxxmValidator v = new IwxxmValidator();
 		v.init();
@@ -175,6 +191,38 @@ public class SigmetRealFirCoordinatesTest {
 		
 		String geoJson = gs.jsonFromLines(tac.getFirCode(), list);
 		System.out.println(geoJson);
+	}
+	
+	@Test
+	public void test6530() throws URISyntaxException, SIGMETParsingException, GeoServiceException {
+		
+		GeoService gs = new GeoService();
+		gs.init(false, "", true);
+		SIGMETTacMessage tac = new SIGMETTacMessage(sigmet6530);
+		tac.parseMessage();
+		
+		assertTrue(tac.getHorizontalLocation().getDirectionsFromLines().size()>0);
+		System.out.println(tac.getHorizontalLocation().getPolygonPoints());
+		LinkedList<GTDirectionFromLine> list = new LinkedList<GTDirectionFromLine>();
+		tac.getHorizontalLocation().getDirectionsFromLines()
+				.stream().forEach(new Consumer<DirectionFromLine>() {
+					
+					@Override
+					public void accept(DirectionFromLine arg0) {
+						
+						list.add(arg0.toGTDirectionFromLine());
+					}
+				});
+		
+		
+		List<GTCalculatedRegion> regions = gs.recalcFromLines(tac.getFirCode(), list);
+		assertNotNull(regions);
+		System.out.println(regions);
+		
+		
+		String geoJson = gs.jsonFromLines(tac.getFirCode(), list);
+		System.out.println(geoJson);
+		
 	}
 	
 }

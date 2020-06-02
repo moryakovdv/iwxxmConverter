@@ -65,7 +65,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 	private String sigmetNumber;
 	private Type sigmetType = Type.METEO;
-	
+
 	private String cancelSigmetNumber;
 	private DateTime cancelSigmetDateTimeFrom;
 	private DateTime cancelSigmetDateTimeTo;
@@ -172,13 +172,13 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	public SigmetPhenomenonDescription getPhenomenonDescription() {
 		return phenomenonDescription;
 	}
-	
-	/**Description of phenomena*/
+
+	/** Description of phenomena */
 	public void setPhenomenonDescription(SigmetPhenomenonDescription phenomenonDescription) {
 		this.phenomenonDescription = phenomenonDescription;
 	}
 
-	/**Horizontal location of phenomena*/
+	/** Horizontal location of phenomena */
 	public SigmetHorizontalPhenomenonLocation getHorizontalLocation() {
 		return horizontalLocation;
 	}
@@ -187,7 +187,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		this.horizontalLocation = horizontalLocation;
 	}
 
-	/**Vertical extension of phenomena*/
+	/** Vertical extension of phenomena */
 	public SigmetVerticalPhenomenonLocation getVerticalLocation() {
 		return verticalLocation;
 	}
@@ -257,21 +257,22 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			} catch (ParsingException e) {
 				throw new SIGMETParsingException("Check date and time in VALID sections");
 			}
-			
-			//Check if sigmet is CNL
-			boolean isCancel = matcher.group("isCancel")!=null;
+
+			// Check if sigmet is CNL
+			boolean isCancel = matcher.group("isCancel") != null;
 			if (isCancel) {
 				this.setMessageStatusType(MessageStatusType.CANCEL);
 				this.setCancelSigmetNumber(matcher.group("cancelNumber"));
 				try {
-					this.setCancelSigmetDateTimeFrom(IWXXM31Helpers.parseDateTimeToken(matcher.group("cancelDateFrom")));
+					this.setCancelSigmetDateTimeFrom(
+							IWXXM31Helpers.parseDateTimeToken(matcher.group("cancelDateFrom")));
 					this.setCancelSigmetDateTimeTo(IWXXM31Helpers.parseDateTimeToken(matcher.group("cancelDateTo")));
 				} catch (ParsingException e) {
 					throw new SIGMETParsingException("Check date and time for CANCEL section");
 				}
 				return;
 			}
-			
+
 			lastIndex = matcher.end();
 			tac.delete(0, lastIndex);
 
@@ -361,14 +362,14 @@ public class SIGMETTacMessage extends TacMessageImpl {
 				String pointCoordLat = matcherFcstLocation.group("pointCoordLat");
 				String pointDegLat = matcherFcstLocation.group("degLat");
 				String pointMinLat = matcherFcstLocation.group("minLat");
-				
+
 				String pointCoordLong = matcherFcstLocation.group("pointCoordLong");
 				String pointDegLong = matcherFcstLocation.group("degLong");
 				String pointMinLong = matcherFcstLocation.group("minLong");
 
-				String pointCoord = StringConstants.coalesce(pointCoordLat,pointCoordLong);
-				String pointDeg = StringConstants.coalesce(pointDegLat,pointDegLong);
-				String pointMin = StringConstants.coalesce(pointMinLat,pointMinLong);
+				String pointCoord = StringConstants.coalesce(pointCoordLat, pointCoordLong);
+				String pointDeg = StringConstants.coalesce(pointDegLat, pointDegLong);
+				String pointMin = StringConstants.coalesce(pointMinLat, pointMinLong);
 
 				Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
 						pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
@@ -401,8 +402,80 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		if (this.getHorizontalLocation().isWithinRadius())
 			return tac;
 
+		fillZigZagLine(tac);
+
 		fillLineAreaLocation(tac);
 		fillMultiLineLocation(tac);
+		
+		fillOneCoordinatePoint(tac);
+		
+
+		return tac;
+	}
+
+	protected StringBuffer fillOneCoordinatePoint(StringBuffer tac) {
+		Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+		int lastMatch = 0;
+		if (matcherCoordPoint.find()) {
+			int startIndex = matcherCoordPoint.start();
+			String lat = matcherCoordPoint.group("latitude");
+			String laDeg = matcherCoordPoint.group("ladeg");
+			String laMin = matcherCoordPoint.group("lamin");
+			String lon = matcherCoordPoint.group("longitude");
+			String loDeg = matcherCoordPoint.group("lodeg");
+			String loMin = matcherCoordPoint.group("lomin");
+
+			CoordPoint point = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+					laMin!=null?Integer.parseInt(laMin):0, RUMB_UNITS.valueOf(lon),loDeg==null||loDeg.isEmpty()?0:Integer.parseInt(loDeg),
+					loMin==null||loMin.isEmpty()?0:Integer.parseInt(loMin));
+
+			
+			this.getHorizontalLocation().setSinglePoint(true);
+			this.getHorizontalLocation().setPoint(point);
+			lastMatch = matcherCoordPoint.end();
+			tac.delete(startIndex, lastMatch);
+		}
+		
+		return tac;
+		
+		
+	}
+	
+	protected StringBuffer fillZigZagLine(StringBuffer tac) {
+		Matcher matcherZigZag = SigmetParsingRegexp.sigmetMultiPointLine.matcher(tac);
+
+		if (matcherZigZag.find()) {
+
+			int startIndex = matcherZigZag.start();
+			String azimuth = matcherZigZag.group("azimuth");
+			
+			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+			int lastMatch = 0;
+			Line sigmetZigZagLine = new Line();
+			
+			while (matcherCoordPoint.find()) {
+
+				String lat = matcherCoordPoint.group("latitude");
+				String laDeg = matcherCoordPoint.group("ladeg");
+				String laMin = matcherCoordPoint.group("lamin");
+				String lon = matcherCoordPoint.group("longitude");
+				String loDeg = matcherCoordPoint.group("lodeg");
+				String loMin = matcherCoordPoint.group("lomin");
+
+				CoordPoint linePoint = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+						Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg),
+						Integer.parseInt(loMin));
+
+				sigmetZigZagLine.addPoint(linePoint);
+
+				lastMatch = matcherCoordPoint.end();
+
+			}
+			this.getHorizontalLocation().getDirectionsFromLines().add(new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetZigZagLine));
+			
+			tac.delete(startIndex, lastMatch);
+		}
+	
 
 		return tac;
 	}
@@ -425,7 +498,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			this.getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
 			CoordPoint center = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
 					Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
-			this.getHorizontalLocation().getPolygonPoints().add(center);
+			this.getHorizontalLocation().setPoint(center);
 
 			this.getHorizontalLocation().setWideness(Integer.parseInt(radius));
 			/** TODO: add center corridor line */
@@ -456,7 +529,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			boolean onSurface = matcherLevel.group("hassurface") != null;
 			boolean hasBothFL = matcherLevel.group("hasbothfls") != null;
 			boolean aboveFL = matcherLevel.group("above") != null;
-			boolean belowFl = matcherLevel.group("below") !=null;
+			boolean belowFl = matcherLevel.group("below") != null;
 
 			level.setBottomMarginOnSurface(onSurface);
 			level.setTopMarginAboveFl(aboveFL);
@@ -575,56 +648,48 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 		return tac;
 	}
-	
-	/**Extract location with multilines 
-	 * example:  
-	 * N OF LINE N5100 E03520 - N5017 E04200
-	*  AND S OF LINE N5400 E03150 - N5440 E04400
-	* **/
+
+	/**
+	 * Extract location with multilines example: N OF LINE N5100 E03520 - N5017
+	 * E04200 AND S OF LINE N5400 E03150 - N5440 E04400
+	 **/
 	protected StringBuffer fillMultiLineLocation(StringBuffer tac) {
 		Matcher matcherDirLine = SigmetParsingRegexp.sigmetMultiLine.matcher(tac);
 		int lastMatch = 0;
 		while (matcherDirLine.find()) {
 
 			String lineAzimuth = matcherDirLine.group("azimuth");
-			
+
 			String latitudeStart = matcherDirLine.group("latStart");
 			String latStartDeg = matcherDirLine.group("latStartDeg");
 			String latStartMin = matcherDirLine.group("latStartMin");
-			
+
 			String longitudeStart = matcherDirLine.group("longStart");
 			String longStartDeg = matcherDirLine.group("longStartDeg");
-			String longStartMin= matcherDirLine.group("longStartMIn");
-			
+			String longStartMin = matcherDirLine.group("longStartMIn");
+
 			String latitudeEnd = matcherDirLine.group("latEnd");
-			String latEndDeg= matcherDirLine.group("latEndDeg");
-			String latEndMin= matcherDirLine.group("latEndMin");
-			
-			String longitudeEnd= matcherDirLine.group("longEnd");
-			String longEndDeg= matcherDirLine.group("longEndDeg");
-			String longEndMin= matcherDirLine.group("longEndMin");
-			
-			CoordPoint startPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeStart), 
-					Integer.valueOf(latStartDeg), 
+			String latEndDeg = matcherDirLine.group("latEndDeg");
+			String latEndMin = matcherDirLine.group("latEndMin");
+
+			String longitudeEnd = matcherDirLine.group("longEnd");
+			String longEndDeg = matcherDirLine.group("longEndDeg");
+			String longEndMin = matcherDirLine.group("longEndMin");
+
+			CoordPoint startPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeStart), Integer.valueOf(latStartDeg),
 					Integer.valueOf(latStartMin),
-					
-					RUMB_UNITS.valueOf(longitudeStart),
-					Integer.valueOf(longStartDeg),
-					Integer.valueOf(longStartMin)
-					);
-			
-			CoordPoint endPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeEnd), 
-					Integer.valueOf(latEndDeg), 
+
+					RUMB_UNITS.valueOf(longitudeStart), Integer.valueOf(longStartDeg), Integer.valueOf(longStartMin));
+
+			CoordPoint endPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeEnd), Integer.valueOf(latEndDeg),
 					Integer.valueOf(latEndMin),
-					
-					RUMB_UNITS.valueOf(longitudeEnd),
-					Integer.valueOf(longEndDeg),
-					Integer.valueOf(longEndMin)
-					);
-			Line line = new Line(startPoint,endPoint);
+
+					RUMB_UNITS.valueOf(longitudeEnd), Integer.valueOf(longEndDeg), Integer.valueOf(longEndMin));
+			Line line = new Line();
+			line.setStartPoint(startPoint);
+			line.setEndPoint(endPoint);
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(lineAzimuth), line);
-			
-			
+
 			this.getHorizontalLocation().getDirectionsFromLines().add(dirLine);
 			lastMatch = matcherDirLine.end();
 		}
@@ -644,15 +709,15 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			String pointCoordLat = matcherDirLine.group("pointCoordLat");
 			String pointDegLat = matcherDirLine.group("degLat");
 			String pointMinLat = matcherDirLine.group("minLat");
-			
+
 			String pointCoordLong = matcherDirLine.group("pointCoordLong");
 			String pointDegLong = matcherDirLine.group("degLong");
 			String pointMinLong = matcherDirLine.group("minLong");
 
-			String pointCoord = StringConstants.coalesce(pointCoordLat,pointCoordLong);
-			String pointDeg = StringConstants.coalesce(pointDegLat,pointDegLong);
-			String pointMin = StringConstants.coalesce(pointMinLat,pointMinLong);
-			
+			String pointCoord = StringConstants.coalesce(pointCoordLat, pointCoordLong);
+			String pointDeg = StringConstants.coalesce(pointDegLat, pointDegLong);
+			String pointMin = StringConstants.coalesce(pointMinLat, pointMinLong);
+
 			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
 					pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);

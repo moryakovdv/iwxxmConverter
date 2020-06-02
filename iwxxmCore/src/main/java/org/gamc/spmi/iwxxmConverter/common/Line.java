@@ -1,6 +1,7 @@
 package org.gamc.spmi.iwxxmConverter.common;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 
 import org.gamc.gis.model.GTCoordinate;
 import org.gamc.gis.model.GTLine;
@@ -8,79 +9,84 @@ import org.gamc.gis.model.GTLine;
 /**The sigmet area may be indicated as number of lines.
  *Line itself can have start and end point or just one single point 
  *in the case of vertical or horizontal location indication */
-public final class Line implements Serializable {
+public class Line implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8275937527178470577L;
-	private CoordPoint startPoint;
-	private CoordPoint endPoint;
-	
-	private Coordinate coordinate;
-	
-	public Line() {}
-	
-	/**Single point line. 
-	 * If Line is described by only one coordinate it is a meridian(E,W) 
-	 * or parallel(N,S)*/
-	public Line(Coordinate c) {
-		this.setCoordinate(c);
+	private LinkedList<CoordPoint> coordinatesList = new LinkedList<CoordPoint>();
+
+	private Coordinate singlePointCoordinate;
+
+	public Line() {
 		
 	}
 	
-	/**A Line described by start and end points*/
-	public Line(CoordPoint start, CoordPoint end) {
-		this.startPoint=start;
-		this.endPoint=end;
+	/**Construct line (meridian or latitude) through single point*/
+	public Line(Coordinate singlePointCoordinate) {
+		this.singlePointCoordinate=singlePointCoordinate;
 	}
-	
+
+
 	public CoordPoint getStartPoint() {
-		return startPoint;
+		
+			return coordinatesList.getFirst();
+	
 	}
+
 	public void setStartPoint(CoordPoint startPoint) {
-		this.startPoint = startPoint;
+		coordinatesList.add(0, startPoint);
 	}
+
 	public CoordPoint getEndPoint() {
-		return endPoint;
+		return coordinatesList.getLast();
 	}
+
 	public void setEndPoint(CoordPoint endPoint) {
-		this.endPoint = endPoint;
-	}
-	
-	public boolean isSingleLine() {
-		return (this.startPoint==null && this.endPoint==null && coordinate!=null);
-	}
-
-	public Coordinate getCoordinate() {
-		return coordinate;
+		if (this.coordinatesList.size()>0)
+			this.coordinatesList.add(this.coordinatesList.size()-1, endPoint);
+		else
+			this.coordinatesList.add(endPoint);
 	}
 
-	public void setCoordinate(Coordinate coordinate) {
-		this.coordinate = coordinate;
+	public void addPoint(CoordPoint point) {
+		this.coordinatesList.add(point);
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		if (isSingleLine()) {
-			return this.coordinate.toString();
-		}
-		else
-			return this.startPoint.toString()+"-"+this.endPoint.toString();
+
+		return this.coordinatesList.toString();
 	}
-	
-	/**Convert to GTLine for GIS calculations*/
+
+	/** Convert to GTLine for GIS calculations */
 	public GTLine toGTLine() {
 		GTLine line = new GTLine();
-		if (this.coordinate!=null)
-			line.setCoordinate(this.coordinate.toGTCoordinate());
-		if (this.startPoint!=null)
-			line.setStartPoint(startPoint.toGTCoordPoint());
-		
-		if (this.endPoint!=null)
-			line.setEndPoint(endPoint.toGTCoordPoint());
-		
+		if (this.singlePointCoordinate != null)
+			line.setSinglePointCoordinate(this.singlePointCoordinate.toGTCoordinate());
+		this.coordinatesList.forEach(p -> line.addPoint(p.toGTCoordPoint()));
+
 		return line;
-		
+
+	}
+
+	public boolean isSingleLine() {
+		return (this.coordinatesList.isEmpty() && singlePointCoordinate != null);
+	}
+
+	public Coordinate getSinglePointCoordinate() {
+		return singlePointCoordinate;
+	}
+
+	public void setSinglePointCoordinate(Coordinate coordinate) {
+		this.singlePointCoordinate = coordinate;
+	}
+
+	public LinkedList<CoordPoint> getCoordinatesList() {
+		return coordinatesList;
+	}
+
+	public void setCoordinatesList(LinkedList<CoordPoint> coordinates) {
+		this.coordinatesList = coordinates;
 	}
 }

@@ -43,6 +43,12 @@ public class SigmetHorizontalPhenomenonLocation implements Serializable {
 	private LinkedList<CoordPoint> polygonPoints = new LinkedList<>();
 	
 	private LinkedList<DirectionFromLine> directionsFromLines = new LinkedList<>();
+	
+	/**Describes coordinate of central of a circle in the case of within radius, or single phenomena point*/
+	private CoordPoint point;
+	
+	/**If phenomenon reported in a single point*/
+	private boolean singlePoint=false;
 
 	public boolean isEntireFIR() {
 		return entireFIR;
@@ -106,6 +112,22 @@ public class SigmetHorizontalPhenomenonLocation implements Serializable {
 
 	public void setWidenessUnits(LENGTH_UNITS widenessUnits) {
 		this.widenessUnits = widenessUnits;
+	}
+
+	public CoordPoint getPoint() {
+		return point;
+	}
+
+	public void setPoint(CoordPoint point) {
+		this.point = point;
+	}
+
+	public boolean isSinglePoint() {
+		return singlePoint;
+	}
+
+	public void setSinglePoint(boolean singlePoint) {
+		this.singlePoint = singlePoint;
 	}
 	
 	
