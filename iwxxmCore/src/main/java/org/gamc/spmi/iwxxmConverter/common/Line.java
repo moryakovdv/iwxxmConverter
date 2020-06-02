@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import org.gamc.gis.model.GTCoordinate;
 import org.gamc.gis.model.GTLine;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**The sigmet area may be indicated as number of lines.
  *Line itself can have start and end point or just one single point 
  *in the case of vertical or horizontal location indication */
@@ -15,7 +17,6 @@ public class Line implements Serializable {
 	 */
 	private static final long serialVersionUID = -8275937527178470577L;
 	private LinkedList<CoordPoint> coordinatesList = new LinkedList<CoordPoint>();
-
 	private Coordinate singlePointCoordinate;
 
 	public Line() {
@@ -27,21 +28,24 @@ public class Line implements Serializable {
 		this.singlePointCoordinate=singlePointCoordinate;
 	}
 
-
+	@JsonIgnore
 	public CoordPoint getStartPoint() {
 		
 			return coordinatesList.getFirst();
 	
 	}
-
+	
+	@JsonIgnore
 	public void setStartPoint(CoordPoint startPoint) {
 		coordinatesList.add(0, startPoint);
 	}
 
+	@JsonIgnore
 	public CoordPoint getEndPoint() {
 		return coordinatesList.getLast();
 	}
 
+	@JsonIgnore
 	public void setEndPoint(CoordPoint endPoint) {
 		if (this.coordinatesList.size()>0)
 			this.coordinatesList.add(this.coordinatesList.size()-1, endPoint);
