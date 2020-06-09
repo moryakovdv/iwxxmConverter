@@ -16,6 +16,7 @@
  */
 package org.gamc.spmi.iwxxmConverter.validation;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,32 +33,51 @@ import com.helger.schematron.ISchematronResource;
 import com.helger.schematron.svrl.SVRLMarshaller;
 import com.helger.schematron.xslt.SchematronResourceSCH;
 
-/**Class for validation IWXXM XML-file against schemas.
- * Uses ph-schematron
+/**
+ * Class for validation IWXXM XML-file against schemas. Uses ph-schematron
  **/
 public class IwxxmValidator {
 
 	private ISchematronResource aResSCH;
 	final static String tempFilePath = "tempIwxxmFile.xml";
-	
-	/**Prepare and compile schema*/
-	public void init() {
-		aResSCH = SchematronResourceSCH.fromClassPath("iwxxm/schematron/iwxxm.sch");
-		if (!aResSCH.isValidSchematron())
-			throw new IllegalArgumentException("Invalid Schematron!");
+
+	private boolean initialized = false;
+
+	public boolean isInitialized() {
+		return initialized;
 	}
-	
+
+	/** Prepare and compile schema with default iwxxm.sch */
+	public void init() {
+		if (!initialized) {
+			aResSCH = SchematronResourceSCH.fromClassPath("iwxxm/schematron/iwxxm.sch");
+			if (!aResSCH.isValidSchematron())
+				throw new IllegalArgumentException("Invalid Schematron!");
+		}
+	}
+
+	/** Prepare and compile schema from custom file name */
+	public void init(String schematronFilePath) {
+		if (!initialized) {
+			aResSCH = SchematronResourceSCH.fromClassPath(schematronFilePath);
+			if (!aResSCH.isValidSchematron())
+				throw new IllegalArgumentException("Invalid Schematron!");
+		}
+	}
+
 	/**
 	 * Validates input file
-	 * @param inputXmlFile - input file with ready IWXXM XML message
-	 * @param outReportFile - generate report file with given name. Null if not nesessary
+	 * 
+	 * @param inputXmlFile  - input file with ready IWXXM XML message
+	 * @param outReportFile - generate report file with given name. Null if not
+	 *                      nesessary
 	 * @return list of the Failed assertions
-	 * */
+	 */
 	public List<FailedValidationAssert> validate(File inputXmlFile, File outReportFile) throws Exception {
 
-		if (aResSCH==null)
+		if (aResSCH == null)
 			init();
-		
+
 		LinkedList<FailedValidationAssert> failedAssertions = new LinkedList<>();
 		SchematronOutputType results = aResSCH.applySchematronValidationToSVRL(new StreamSource(inputXmlFile));
 
@@ -66,7 +86,7 @@ public class IwxxmValidator {
 
 			if (object instanceof FiredRule) {
 				FiredRule rule = (FiredRule) object;
-				
+
 			}
 
 			if (object instanceof FailedAssert) {
@@ -80,30 +100,59 @@ public class IwxxmValidator {
 			SVRLMarshaller m = new SVRLMarshaller();
 			m.write(results, outReportFile);
 		}
-		
+
 		return failedAssertions;
 
 	}
-	
-	/**Validates input iwxxm string
+
+	/**
+	 * Validates input iwxxm string
+	 * 
 	 * @param inputXml - String with iwxxm text
 	 * @return list of validation errors
 	 * @throws IOException when unable to create temp file
-	 * */
-	public List<FailedValidationAssert> validateString(String inputXml) throws Exception {
-		
-		File f = File.createTempFile(tempFilePath,"rw");
-		
-		try(FileOutputStream fs = new FileOutputStream(f);) {
-			fs.write(inputXml.getBytes("UTF-8"));	
-		}
-		catch(Exception e) {
+	 */
+	public List<FailedValidationAssert> validateStringWithTempFile(String inputXml) throws Exception {
+
+		File f = File.createTempFile(tempFilePath, "rw");
+
+		try (FileOutputStream fs = new FileOutputStream(f);) {
+			fs.write(inputXml.getBytes("UTF-8"));
+		} catch (Exception e) {
 			throw new IOException("Can not create temporary file");
 		}
-		
+
 		List<FailedValidationAssert> result = validate(f, null);
 		return result;
-		
-	} 
+
+	}
+
+	public List<FailedValidationAssert> validateString(String inputXml) throws Exception {
+
+		if (aResSCH == null)
+			init();
+
+		LinkedList<FailedValidationAssert> failedAssertions = new LinkedList<>();
+		ByteArrayInputStream bis = new ByteArrayInputStream(inputXml.getBytes("UTF-8"));
+		SchematronOutputType results = aResSCH.applySchematronValidationToSVRL(new StreamSource(bis));
+
+		List<Object> allAsserts = results.getActivePatternAndFiredRuleAndFailedAssert();
+		for (Object object : allAsserts) {
+
+			if (object instanceof FiredRule) {
+				FiredRule rule = (FiredRule) object;
+
+			}
+
+			if (object instanceof FailedAssert) {
+				FailedAssert failedAssert = (FailedAssert) object;
+				failedAssertions.add(new FailedValidationAssert(failedAssert));
+			}
+
+		}
+
+		return failedAssertions;
+
+	}
 
 }

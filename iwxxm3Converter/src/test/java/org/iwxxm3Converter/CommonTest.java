@@ -35,20 +35,21 @@ public class CommonTest {
 	public void testAcessibility() {
 
 	}
-
+	IWXXM31Helpers helpers = new IWXXM31Helpers();
+	
 	@Test
 	public void sigmetFake() throws UnsupportedEncodingException, JAXBException {
 		SIGMETType sigmet = new SIGMETType();
 		String emptySigmet = marshallMessageToXML(sigmet);
 		
-		AssociationRoleType art = IWXXM31Helpers.ofGML.createAssociationRoleType();
+		AssociationRoleType art = helpers.getOfGML().createAssociationRoleType();
 
 		
-		SIGMETEvolvingConditionCollectionType c = IWXXM31Helpers.ofIWXXM.createSIGMETEvolvingConditionCollectionType();
+		SIGMETEvolvingConditionCollectionType c = helpers.getOfIWXXM().createSIGMETEvolvingConditionCollectionType();
 		
 		c.setTimeIndicator(TimeIndicatorType.OBSERVATION);
 		
-		JAXBElement<SIGMETEvolvingConditionCollectionType> c1 = IWXXM31Helpers.ofIWXXM
+		JAXBElement<SIGMETEvolvingConditionCollectionType> c1 = helpers.getOfIWXXM()
 				.createSIGMETEvolvingConditionCollection(c);
 
 		
@@ -75,7 +76,7 @@ public class CommonTest {
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
-		JAXBElement<SIGMETType> metarRootElement = IWXXM31Helpers.ofIWXXM.createSIGMET(sigmet);
+		JAXBElement<SIGMETType> metarRootElement = helpers.getOfIWXXM().createSIGMET(sigmet);
 
 		jaxbMarshaller.marshal(metarRootElement, stream);
 

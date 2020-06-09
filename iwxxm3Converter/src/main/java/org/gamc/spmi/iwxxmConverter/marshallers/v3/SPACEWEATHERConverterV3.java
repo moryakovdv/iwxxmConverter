@@ -70,7 +70,7 @@ import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantType;
 
-public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMessage, SpaceWeatherAdvisoryType> {
+public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMessage, SpaceWeatherAdvisoryType,IWXXM31Helpers> {
 
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 	final static String DAYLIGHT_SIDE = "DAYLIGHT_SIDE";
@@ -88,7 +88,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 			result = convertMessage(swxMessage);
 
 		} catch (ParsingException pa) {
-			result = IWXXM31Helpers.ofIWXXM.createSpaceWeatherAdvisoryType();
+			result = iwxxmHelpers.getOfIWXXM().createSpaceWeatherAdvisoryType();
 			result.setTranslationFailedTAC(tac);
 
 		}
@@ -154,7 +154,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 			resultSwxType.setNextAdvisoryTime(nextAdvTime);
 		}
 		else {
-			TimeInstantPropertyType nextAdvTimeNil = IWXXM31Helpers.ofGML.createTimeInstantPropertyType();
+			TimeInstantPropertyType nextAdvTimeNil = iwxxmHelpers.getOfGML().createTimeInstantPropertyType();
 			nextAdvTimeNil.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode("inapplicable"));
 			
 			resultSwxType.setNextAdvisoryTime(nextAdvTimeNil);
@@ -166,29 +166,29 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	public UnitPropertyType createIssuingCenterSection(String issuingCenter, DateTime dateTime) {
 
 		// create external envelope
-		UnitPropertyType unitType = IWXXM31Helpers.ofIWXXM.createUnitPropertyType();
-		UnitType unit = IWXXM31Helpers.ofAIXM.createUnitType();
+		UnitPropertyType unitType = iwxxmHelpers.getOfIWXXM().createUnitPropertyType();
+		UnitType unit = iwxxmHelpers.getOfAIXM().createUnitType();
 
 		// add unit data "flesh"
-		UnitTimeSliceType tst = IWXXM31Helpers.ofAIXM.createUnitTimeSliceType();
+		UnitTimeSliceType tst = iwxxmHelpers.getOfAIXM().createUnitTimeSliceType();
 		tst.setId(iwxxmHelpers.generateUUIDv4("utst-" + issuingCenter + "-" + dateTime));
 
 		// add interpretation
 		tst.setInterpretation("SNAPSHOT");
 
 		// add center name
-		TextNameType nType = IWXXM31Helpers.ofAIXM.createTextNameType();
+		TextNameType nType = iwxxmHelpers.getOfAIXM().createTextNameType();
 		nType.setValue(issuingCenter);
-		JAXBElement<TextNameType> ntType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeName(nType);
+		JAXBElement<TextNameType> ntType = iwxxmHelpers.getOfAIXM().createAirspaceTimeSliceTypeName(nType);
 		tst.getRest().add(ntType);
 
 		// add airspace type
-		CodeAirspaceType asType = IWXXM31Helpers.ofAIXM.createCodeAirspaceType();
+		CodeAirspaceType asType = iwxxmHelpers.getOfAIXM().createCodeAirspaceType();
 		asType.setValue("OTHER:SWXC");
-		JAXBElement<CodeAirspaceType> astType = IWXXM31Helpers.ofAIXM.createAirspaceTimeSliceTypeType(asType);
+		JAXBElement<CodeAirspaceType> astType = iwxxmHelpers.getOfAIXM().createAirspaceTimeSliceTypeType(asType);
 		tst.getRest().add(astType);
 
-		UnitTimeSlicePropertyType unitTs = IWXXM31Helpers.ofAIXM.createUnitTimeSlicePropertyType();
+		UnitTimeSlicePropertyType unitTs = iwxxmHelpers.getOfAIXM().createUnitTimeSlicePropertyType();
 		unitTs.setUnitTimeSlice(tst);
 		// place unit in envelop
 		unit.getTimeSlice().add(unitTs);
@@ -238,7 +238,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	/** create link for effect from WMO repository */
 	public SpaceWeatherPhenomenaType createPhenomena(String effect) {
 
-		SpaceWeatherPhenomenaType phenomena = IWXXM31Helpers.ofIWXXM.createSpaceWeatherPhenomenaType();
+		SpaceWeatherPhenomenaType phenomena = iwxxmHelpers.getOfIWXXM().createSpaceWeatherPhenomenaType();
 		String effectLink = iwxxmHelpers.getSpaceWeatherReg().getWMOUrlByCode(effect);
 		phenomena.setHref(effectLink);
 
@@ -249,9 +249,9 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	/** creates section for observed location of phenomenas */
 	public SpaceWeatherAnalysisPropertyType createAnalysisSection(String issuingCenter,
 			SpaceWeatherEffectLocation location, TimeIndicatorType observationOrforecast) {
-		SpaceWeatherAnalysisPropertyType analysisSection = IWXXM31Helpers.ofIWXXM
+		SpaceWeatherAnalysisPropertyType analysisSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherAnalysisPropertyType();
-		SpaceWeatherAnalysisType analysisType = IWXXM31Helpers.ofIWXXM.createSpaceWeatherAnalysisType();
+		SpaceWeatherAnalysisType analysisType = iwxxmHelpers.getOfIWXXM().createSpaceWeatherAnalysisType();
 		analysisType.setTimeIndicator(observationOrforecast);
 
 		// set time of phenomena
@@ -305,20 +305,20 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	 **/
 	public SpaceWeatherRegionPropertyType createSpaceWeatherRegion(String hemi, List<Double> coords) {
 
-		SpaceWeatherRegionPropertyType regionSection = IWXXM31Helpers.ofIWXXM.createSpaceWeatherRegionPropertyType();
-		SpaceWeatherRegionType region = IWXXM31Helpers.ofIWXXM.createSpaceWeatherRegionType();
+		SpaceWeatherRegionPropertyType regionSection = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionPropertyType();
+		SpaceWeatherRegionType region = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionType();
 
 		region.setId(iwxxmHelpers.generateUUIDv4("region-" + hemi));
 
 		// create location
 
-		AirspaceVolumePropertyType airspaceVolumeSection = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
-		AirspaceVolumeType airspaceVolume = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
+		AirspaceVolumePropertyType airspaceVolumeSection = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
+		AirspaceVolumeType airspaceVolume = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
 		airspaceVolume.setId(iwxxmHelpers.generateUUIDv4("airspace-" + hemi));
 
 		// create projection
-		SurfacePropertyType surfaceSection = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
-		SurfaceType sfType = IWXXM31Helpers.ofAIXM.createSurfaceType();
+		SurfacePropertyType surfaceSection = iwxxmHelpers.getOfAIXM().createSurfacePropertyType();
+		SurfaceType sfType = iwxxmHelpers.getOfAIXM().createSurfaceType();
 		sfType.getAxisLabels().add("Lat");
 		sfType.getAxisLabels().add("Long");
 		sfType.setSrsDimension(BigInteger.valueOf(2));
@@ -326,33 +326,33 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		sfType.setId(iwxxmHelpers.generateUUIDv4("surface-" + hemi));
 
 		// add gml patches
-		SurfacePatchArrayPropertyType patchArray = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		SurfacePatchArrayPropertyType patchArray = iwxxmHelpers.getOfGML().createSurfacePatchArrayPropertyType();
 
 		// create polygon
-		PolygonPatchType patchType = IWXXM31Helpers.ofGML.createPolygonPatchType();
-		AbstractRingPropertyType ringType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();
-		LinearRingType linearRingType = IWXXM31Helpers.ofGML.createLinearRingType();
+		PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
+		AbstractRingPropertyType ringType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
+		LinearRingType linearRingType = iwxxmHelpers.getOfGML().createLinearRingType();
 
 		// fill polygon with coords
-		DirectPositionListType dpListType = IWXXM31Helpers.ofGML.createDirectPositionListType();
+		DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
 		dpListType.getValue().addAll(coords);
 		linearRingType.setPosList(dpListType);
 
 		// put polygon in the envelope
-		JAXBElement<LinearRingType> lrPt = IWXXM31Helpers.ofGML.createLinearRing(linearRingType);
+		JAXBElement<LinearRingType> lrPt = iwxxmHelpers.getOfGML().createLinearRing(linearRingType);
 		ringType.setAbstractRing(lrPt);
 		patchType.setExterior(ringType);
 
-		JAXBElement<PolygonPatchType> patch = IWXXM31Helpers.ofGML.createPolygonPatch(patchType);
+		JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
 		patchArray.getAbstractSurfacePatch().add(patch);
 
-		JAXBElement<SurfacePatchArrayPropertyType> pta = IWXXM31Helpers.ofGML.createPatches(patchArray);
+		JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPatches(patchArray);
 
 		sfType.setPatches(pta);
 
-		JAXBElement<SurfaceType> syrfaceElement = IWXXM31Helpers.ofAIXM.createSurface(sfType);
+		JAXBElement<SurfaceType> syrfaceElement = iwxxmHelpers.getOfAIXM().createSurface(sfType);
 		surfaceSection.setSurface(syrfaceElement);
-		JAXBElement<SurfacePropertyType> spt = IWXXM31Helpers.ofAIXM
+		JAXBElement<SurfacePropertyType> spt = iwxxmHelpers.getOfAIXM()
 				.createAirspaceVolumeTypeHorizontalProjection(surfaceSection);
 		// create aixm:horizontalProjection
 		airspaceVolume.setHorizontalProjection(spt);
@@ -364,14 +364,14 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		airspaceVolumeSection.setAirspaceVolume(airspaceVolume);
 
 		// put in iwxxm:region the AirSpaceVolume tree
-		JAXBElement<AirspaceVolumePropertyType> locationSection = IWXXM31Helpers.ofIWXXM
+		JAXBElement<AirspaceVolumePropertyType> locationSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherRegionTypeLocation(airspaceVolumeSection);
 		region.getRest().add(locationSection);
 
 		// add locationIndicator node
-		SpaceWeatherLocationType locationType = IWXXM31Helpers.ofIWXXM.createSpaceWeatherLocationType();
+		SpaceWeatherLocationType locationType = iwxxmHelpers.getOfIWXXM().createSpaceWeatherLocationType();
 		locationType.setHref(iwxxmHelpers.getSpaceWeatherLocationReg().getWMOUrlByCode(hemi));
-		JAXBElement<SpaceWeatherLocationType> locationIndicatorSection = IWXXM31Helpers.ofIWXXM
+		JAXBElement<SpaceWeatherLocationType> locationIndicatorSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherRegionTypeLocationIndicator(locationType);
 		region.getRest().add(locationIndicatorSection);
 
@@ -388,20 +388,20 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	 * </gml:segments> </gml:Curve> </gml:curveMember> </gml:Ring>
 	 **/
 	public SpaceWeatherRegionPropertyType createDayLightSpaceWeatherRegion(List<Double> coords) {
-		SpaceWeatherRegionPropertyType regionSection = IWXXM31Helpers.ofIWXXM.createSpaceWeatherRegionPropertyType();
-		SpaceWeatherRegionType region = IWXXM31Helpers.ofIWXXM.createSpaceWeatherRegionType();
+		SpaceWeatherRegionPropertyType regionSection = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionPropertyType();
+		SpaceWeatherRegionType region = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionType();
 
 		region.setId(iwxxmHelpers.generateUUIDv4("region-" + DAYLIGHT_SIDE));
 
 		// create location
 
-		AirspaceVolumePropertyType airspaceVolumeSection = IWXXM31Helpers.ofIWXXM.createAirspaceVolumePropertyType();
-		AirspaceVolumeType airspaceVolume = IWXXM31Helpers.ofAIXM.createAirspaceVolumeType();
+		AirspaceVolumePropertyType airspaceVolumeSection = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
+		AirspaceVolumeType airspaceVolume = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
 		airspaceVolume.setId(iwxxmHelpers.generateUUIDv4("airspace-" + DAYLIGHT_SIDE));
 
 		// create projection
-		SurfacePropertyType surfaceSection = IWXXM31Helpers.ofAIXM.createSurfacePropertyType();
-		SurfaceType sfType = IWXXM31Helpers.ofAIXM.createSurfaceType();
+		SurfacePropertyType surfaceSection = iwxxmHelpers.getOfAIXM().createSurfacePropertyType();
+		SurfaceType sfType = iwxxmHelpers.getOfAIXM().createSurfaceType();
 		sfType.getAxisLabels().add("Lat");
 		sfType.getAxisLabels().add("Long");
 		sfType.setSrsDimension(BigInteger.valueOf(2));
@@ -409,61 +409,61 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		sfType.setId(iwxxmHelpers.generateUUIDv4("surface-" + DAYLIGHT_SIDE));
 
 		// add gml patches
-		SurfacePatchArrayPropertyType patchArray = IWXXM31Helpers.ofGML.createSurfacePatchArrayPropertyType();
+		SurfacePatchArrayPropertyType patchArray = iwxxmHelpers.getOfGML().createSurfacePatchArrayPropertyType();
 
 		// create polygon
-		PolygonPatchType patchType = IWXXM31Helpers.ofGML.createPolygonPatchType();
-		AbstractRingPropertyType ringType = IWXXM31Helpers.ofGML.createAbstractRingPropertyType();
+		PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
+		AbstractRingPropertyType ringType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
 
 		// create ring with radius and fill it with data
-		RingType internalRingType = IWXXM31Helpers.ofGML.createRingType();
+		RingType internalRingType = iwxxmHelpers.getOfGML().createRingType();
 
-		CurvePropertyType curveType = IWXXM31Helpers.ofGML.createCurvePropertyType();
+		CurvePropertyType curveType = iwxxmHelpers.getOfGML().createCurvePropertyType();
 
-		CurveType curveMemberSection = IWXXM31Helpers.ofGML.createCurveType();
+		CurveType curveMemberSection = iwxxmHelpers.getOfGML().createCurveType();
 		curveMemberSection.setId(iwxxmHelpers.generateUUIDv4("curve-" + DAYLIGHT_SIDE));
 
 		// add segments
-		CurveSegmentArrayPropertyType segmentArraySection = IWXXM31Helpers.ofGML.createCurveSegmentArrayPropertyType();
+		CurveSegmentArrayPropertyType segmentArraySection = iwxxmHelpers.getOfGML().createCurveSegmentArrayPropertyType();
 
 		// describe circle
-		CircleByCenterPointType segmentCircle = IWXXM31Helpers.ofGML.createCircleByCenterPointType();
+		CircleByCenterPointType segmentCircle = iwxxmHelpers.getOfGML().createCircleByCenterPointType();
 
-		LengthType radius = IWXXM31Helpers.ofGML.createLengthType();
+		LengthType radius = iwxxmHelpers.getOfGML().createLengthType();
 		radius.setUom(LENGTH_UNITS.KM.getStringValue());
 		radius.setValue(RADIUS);
 
 		segmentCircle.setRadius(radius);
-		DirectPositionListType dpListType = IWXXM31Helpers.ofGML.createDirectPositionListType();
+		DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
 		dpListType.getValue().addAll(coords);
 		segmentCircle.setPosList(dpListType);
 
-		JAXBElement<CircleByCenterPointType> segmentSection = IWXXM31Helpers.ofGML
+		JAXBElement<CircleByCenterPointType> segmentSection = iwxxmHelpers.getOfGML()
 				.createCircleByCenterPoint(segmentCircle);
 		segmentArraySection.getAbstractCurveSegment().add(segmentSection);
 
 		curveMemberSection.setSegments(segmentArraySection);
 
-		JAXBElement<CurveType> curve = IWXXM31Helpers.ofGML.createCurve(curveMemberSection);
+		JAXBElement<CurveType> curve = iwxxmHelpers.getOfGML().createCurve(curveMemberSection);
 		curveType.setAbstractCurve(curve);
 
 		internalRingType.getCurveMember().add(curveType);
 
 		// put polygon in the envelope
-		JAXBElement<RingType> lrPt = IWXXM31Helpers.ofGML.createRing(internalRingType);
+		JAXBElement<RingType> lrPt = iwxxmHelpers.getOfGML().createRing(internalRingType);
 		ringType.setAbstractRing(lrPt);
 		patchType.setExterior(ringType);
 
-		JAXBElement<PolygonPatchType> patch = IWXXM31Helpers.ofGML.createPolygonPatch(patchType);
+		JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
 		patchArray.getAbstractSurfacePatch().add(patch);
 
-		JAXBElement<SurfacePatchArrayPropertyType> pta = IWXXM31Helpers.ofGML.createPatches(patchArray);
+		JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPatches(patchArray);
 
 		sfType.setPatches(pta);
 
-		JAXBElement<SurfaceType> syrfaceElement = IWXXM31Helpers.ofAIXM.createSurface(sfType);
+		JAXBElement<SurfaceType> syrfaceElement = iwxxmHelpers.getOfAIXM().createSurface(sfType);
 		surfaceSection.setSurface(syrfaceElement);
-		JAXBElement<SurfacePropertyType> spt = IWXXM31Helpers.ofAIXM
+		JAXBElement<SurfacePropertyType> spt = iwxxmHelpers.getOfAIXM()
 				.createAirspaceVolumeTypeHorizontalProjection(surfaceSection);
 		// create aixm:horizontalProjection
 		airspaceVolume.setHorizontalProjection(spt);
@@ -475,14 +475,14 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		airspaceVolumeSection.setAirspaceVolume(airspaceVolume);
 
 		// put in iwxxm:region the AirSpaceVolume tree
-		JAXBElement<AirspaceVolumePropertyType> locationSection = IWXXM31Helpers.ofIWXXM
+		JAXBElement<AirspaceVolumePropertyType> locationSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherRegionTypeLocation(airspaceVolumeSection);
 		region.getRest().add(locationSection);
 
 		// add locationIndicator node
-		SpaceWeatherLocationType locationType = IWXXM31Helpers.ofIWXXM.createSpaceWeatherLocationType();
+		SpaceWeatherLocationType locationType = iwxxmHelpers.getOfIWXXM().createSpaceWeatherLocationType();
 		locationType.setHref(iwxxmHelpers.getSpaceWeatherLocationReg().getWMOUrlByCode(DAYLIGHT_SIDE));
-		JAXBElement<SpaceWeatherLocationType> locationIndicatorSection = IWXXM31Helpers.ofIWXXM
+		JAXBElement<SpaceWeatherLocationType> locationIndicatorSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherRegionTypeLocationIndicator(locationType);
 		region.getRest().add(locationIndicatorSection);
 
@@ -515,11 +515,23 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
-		JAXBElement<SpaceWeatherAdvisoryType> swxRootElement = IWXXM31Helpers.ofIWXXM
+		JAXBElement<SpaceWeatherAdvisoryType> swxRootElement = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherAdvisory(reportType);
 
 		jaxbMarshaller.marshal(swxRootElement, stream);
 
 		return stream.toString("UTF-8");
+	}
+	
+	@Override
+	public IWXXM31Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public SPACEWEATHERConverterV3 withHelper(IWXXM31Helpers helper) {
+		this.iwxxmHelpers = helper;
+		return this;
+		
 	}
 }

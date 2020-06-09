@@ -16,26 +16,8 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Locale;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class for parsing WMO NIL codes
@@ -48,10 +30,9 @@ public class WMONilReasonRegister implements WMORegister<String> {
 
 	private static final String registerFileName = "codes.wmo.int-common-nil.rdf";
 
-	TreeMap<String, WMORegisterDescription> wmoReasonCodes = new TreeMap<String, WMORegisterDescription>();
+	private ConcurrentHashMap<String, WMORegisterDescription> wmoReasonCodes = new ConcurrentHashMap<String, WMORegisterDescription>();
 
 	
-
 	public WMONilReasonRegister() {
 		
 	}
@@ -69,7 +50,7 @@ public class WMONilReasonRegister implements WMORegister<String> {
 	
 	
 	@Override
-	public TreeMap<String, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<String, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoReasonCodes;
 	}
@@ -80,5 +61,8 @@ public class WMONilReasonRegister implements WMORegister<String> {
 
 		return registerFileName;
 	}
+
+
+	
 
 }

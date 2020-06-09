@@ -40,7 +40,7 @@ public class MetarForSharingExamples {
 	public void translateMETAR() throws Exception {
 		
 		METARConverterV3 cv = new METARConverterV3();
-		IwxxmValidator v = new IwxxmValidator();
+		IwxxmValidator v =  new IwxxmValidator();
 		
 		String result = cv.convertTacToXML(metarSnow1);
 		System.out.println(result);

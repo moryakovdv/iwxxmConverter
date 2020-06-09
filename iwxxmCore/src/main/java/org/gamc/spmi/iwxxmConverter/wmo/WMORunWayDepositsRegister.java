@@ -16,26 +16,8 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Locale;
-import java.util.TreeMap;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import com.helger.commons.id.factory.FileIntIDFactory;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**Class for parsing WMO deposit codes (0-20-086)
  * @see WMORegister
@@ -45,7 +27,7 @@ public class WMORunWayDepositsRegister implements WMORegister<Integer>{
 
 	private static final String registerFileName = "codes.wmo.int-bufr4-codeflag-0-20-086.rdf";
 	
-	TreeMap<Integer, WMORegisterDescription> wmoDepositsCodes = new TreeMap<Integer, WMORegisterDescription>();
+	ConcurrentHashMap<Integer, WMORegisterDescription> wmoDepositsCodes = new ConcurrentHashMap<Integer, WMORegisterDescription>();
 	
 	public WMORunWayDepositsRegister() {
 
@@ -63,7 +45,7 @@ public class WMORunWayDepositsRegister implements WMORegister<Integer>{
 	}
 	
 	@Override
-	public TreeMap<Integer, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<Integer, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoDepositsCodes;
 	}

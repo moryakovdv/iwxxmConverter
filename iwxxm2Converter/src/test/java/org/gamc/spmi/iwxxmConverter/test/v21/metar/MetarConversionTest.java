@@ -80,7 +80,7 @@ public class MetarConversionTest {
 
 	@Test
 	public void testMetarVVTS() throws Exception {
-		IwxxmValidator validator = new IwxxmValidator();
+		IwxxmValidator validator =new IwxxmValidator();
 		validator.init();
 		METARConverter mc = new METARConverter();
 		String result = mc.convertTacToXML(metarVVTS);

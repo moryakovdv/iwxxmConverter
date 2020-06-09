@@ -30,7 +30,7 @@ public class ConverterFactory {
 	/**Factory produces converter for message using the start token of the input string*/
 	public final static Pattern messageTypePattern = Pattern.compile("(?<messageType>METAR|TAF|SPECI|SIGMET|AIRMET|SWX(?=\\s+ADVISORY))");   
 	
-	public static TacConverter<?,?> createForTac(String inputTac) throws ParsingException {
+	public static TacConverter<?,?,IWXXM31Helpers> createForTac(String inputTac) throws ParsingException {
 	
 		Matcher m = messageTypePattern.matcher(inputTac);
 		if (!m.find()) {
@@ -63,6 +63,6 @@ public class ConverterFactory {
 			
 		}
 	}
-	
+	 
 
 }

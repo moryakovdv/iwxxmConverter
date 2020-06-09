@@ -16,25 +16,8 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Locale;
-import java.util.TreeMap;
-
-import javax.imageio.stream.FileImageInputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**Class for parsing WMO Cloud codes
  * @see WMORegister
@@ -44,12 +27,12 @@ public class WMOCloudTypeRegister implements WMORegister<Integer> {
 
 	private static final String registerFileName = "codes.wmo.int-49-2-SigConvectiveCloudType.rdf";
 	
-	TreeMap<Integer, WMORegisterDescription> wmoCloudTypeCodes = new TreeMap<Integer, WMORegisterDescription>();
+	ConcurrentHashMap<Integer, WMORegisterDescription> wmoCloudTypeCodes = new ConcurrentHashMap<Integer, WMORegisterDescription>();
 	public static final int missingCode = 63; 
 	
 	
 	@Override
-	public TreeMap<Integer, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<Integer, WMORegisterDescription> getContent() {
 		
 		return wmoCloudTypeCodes;
 	}

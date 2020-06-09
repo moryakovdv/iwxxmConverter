@@ -140,7 +140,7 @@ public class SigmetRealFirCoordinatesTest {
 		String s1Result = sc.convertTacToXML(referenceSigmet1);
 		
 		System.out.println(s1Result);
-		IwxxmValidator v = new IwxxmValidator();
+		IwxxmValidator v =new IwxxmValidator();
 		v.init();
 		List<FailedValidationAssert> asserts = v.validateString(s1Result);
 		

@@ -19,7 +19,7 @@ package org.gamc.spmi.iwxxmConverter.wmo;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Locale;
-import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,12 +44,13 @@ import org.xml.sax.SAXParseException;
  * 
  * @author moryakov
  */
+
 public interface WMORegister<T> {
 
 	public static final String xpathToConcept = "/RDF/*/member/Concept";
 
 	Logger registerLogger = LoggerFactory.getLogger(WMORegister.class);
-
+	
 	/** Parse XML file and populate TreeMap storage */
 	default void parseWMOXml() {
 		try (InputStream is = new FileInputStream(getRegisterFileName())) {
@@ -159,8 +160,9 @@ public interface WMORegister<T> {
 	};
 
 	/** Get All content of a registry as a Map of elements */
-	TreeMap<T, WMORegisterDescription> getContent();
-
+	//TreeMap<T, WMORegisterDescription> getContent();
+	ConcurrentHashMap<T, WMORegisterDescription> getContent();
+	
 	/** Get particular URL for given code */
 	default public String getWMOUrlByCode(T code) {
 		if (getContent().size() == 0)
@@ -169,10 +171,10 @@ public interface WMORegister<T> {
 			code = (T) ((String) code).toUpperCase();
 		return getContent().get(code).getWmoUrl();
 	}
-
+	
 	/** Returns register file name for particular registry */
 	String getRegisterFileName();
-
+	
 	default void putToContent(String wmoCode, WMORegisterDescription description) {
 		getContent().put((T) wmoCode.toUpperCase(), description);
 	};

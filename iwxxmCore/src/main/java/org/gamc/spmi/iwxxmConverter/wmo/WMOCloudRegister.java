@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Locale;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,10 +63,10 @@ public class WMOCloudRegister implements WMORegister<String> {
 		return locale;
 	}
 
-	TreeMap<String, WMORegisterDescription> wmoCloudCodes = new TreeMap<String, WMORegisterDescription>();
+	ConcurrentHashMap<String, WMORegisterDescription> wmoCloudCodes = new ConcurrentHashMap<String, WMORegisterDescription>();
 
 	@Override
-	public TreeMap<String, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<String, WMORegisterDescription> getContent() {
 
 		return wmoCloudCodes;
 	}

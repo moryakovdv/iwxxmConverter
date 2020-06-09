@@ -48,7 +48,7 @@ public class MetarValidation {
 	String metarUS1 = "METAR KORD 170651Z 20014G23KT 10SM SCT250 24/14 A2968 RMK AO2 SLP045 T02390144=";
 
 	//Array of VALID metars to validate in loops
-	String[] metarsValid = new String[] { /*metarTACSimple, metarTACCAVOK, metarTACBecoming,metarTACWeather,*/metarTACVerticalVisibilityObserved };
+	String[] metarsValid = new String[] { metarTACSimple, metarTACCAVOK, metarTACBecoming,metarTACWeather,metarTACVerticalVisibilityObserved };
 	
 	//Array of INVALID metars to validate in loops
 	String[] metarsINValid = new String[] {metarTACVRB};
@@ -69,7 +69,7 @@ public class MetarValidation {
 	}
 	
 	/**Test for these metars should fail because of violation of Schematron rules*/
-	//@Test(expected = AssertionError.class)
+	@Test(expected = AssertionError.class)
 	public void validateInvalidThroughSchematronTest() throws Exception {
 		METARConverterV3 cv = new METARConverterV3();
 		IwxxmValidator v = new IwxxmValidator();

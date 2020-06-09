@@ -19,7 +19,7 @@
 		<module>iwxxmCore</module>
 		<module>iwxxm2Converter</module>
 		<module>iwxxm3Converter</module>
-		
+		<module>iwxxmConverterRest</module>
 	</modules>
 
 	<properties>

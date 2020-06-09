@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Locale;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,10 +63,10 @@ public class WMOAirWXRegister implements WMORegister<String> {
 	}
 	
 	
-	TreeMap<String, WMORegisterDescription> wmoPhenomenaCodes = new TreeMap<String, WMORegisterDescription>();
+	ConcurrentHashMap<String, WMORegisterDescription> wmoPhenomenaCodes = new ConcurrentHashMap<String, WMORegisterDescription>();
 	
 	@Override
-	public TreeMap<String, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<String, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoPhenomenaCodes;
 	}

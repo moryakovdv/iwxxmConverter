@@ -35,7 +35,6 @@ import org.gamc.spmi.iwxxmConverter.general.MetarForecastSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
-
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARBecomingSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARCloudSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.METARRVRSection;
@@ -103,7 +102,7 @@ import schemabindings21.net.opengis.om._2.TimeObjectPropertyType;
  * Base class to perform conversion of TAC into intermediate object
  * {@link METARTacMessage} and further IWXXM conversion and validation
  */
-public class METARConverter implements TacConverter<METARTacMessage, METARType> {
+public class METARConverter implements TacConverter<METARTacMessage, METARType, IWXXM21Helpers> {
 	/*
 	 * First of all we should create any involved object with ObjectFactory helpers
 	 */
@@ -115,7 +114,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 	schemabindings21._int.wmo.def.metce._2013.ObjectFactory ofMetce = new schemabindings21._int.wmo.def.metce._2013.ObjectFactory();
 	schemabindings21.net.opengis.samplingspatial._2.ObjectFactory ofSams = new schemabindings21.net.opengis.samplingspatial._2.ObjectFactory();
 
-	IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
+	private IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
 
 	private METARTacMessage translatedMetar;
 
@@ -873,6 +872,18 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType> 
 
 		return omOM_Observation;
 
+	}
+	
+	@Override
+	public IWXXM21Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public METARConverter withHelper(IWXXM21Helpers helper) {
+		iwxxmHelpers = helper;
+		return this;
+		
 	}
 
 }

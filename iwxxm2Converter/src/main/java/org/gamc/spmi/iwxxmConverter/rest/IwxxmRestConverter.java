@@ -69,7 +69,7 @@ public class IwxxmRestConverter {
 		
 		try {
 			
-			TacConverter<?, ?> converter = ConverterFactory.createForTac(tacMessage);
+			TacConverter<?, ?,?> converter = ConverterFactory.createForTac(tacMessage);
 			String convertedIwxxm = converter.convertTacToXML(tacMessage);
 			
 			return Response.status(Status.OK).entity(convertedIwxxm).build();	
@@ -129,7 +129,7 @@ public class IwxxmRestConverter {
 		
 		try {
 			
-			TacConverter<?, ?> converter = ConverterFactory.createForTac(tacMessage);
+			TacConverter<?, ?,?> converter = ConverterFactory.createForTac(tacMessage);
 			String convertedIwxxm = converter.convertTacToXML(tacMessage);
 			IwxxmValidator validator = new IwxxmValidator();
 			List<FailedValidationAssert> failedList = validator.validateString(convertedIwxxm);

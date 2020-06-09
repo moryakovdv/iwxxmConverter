@@ -80,7 +80,7 @@ import schemabindings21.net.opengis.om._2.TimeObjectPropertyType;
  * Base class to perform conversion of TAC into intermediate object
  * {@link TAFTacMessage} and further IWXXM conversion and validation
  */
-public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
+public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM21Helpers> {
 
 	/*
 	 * First of all we should create any involved object with ObjectFactory helpers
@@ -94,7 +94,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 	schemabindings21.net.opengis.samplingspatial._2.ObjectFactory ofSams = new schemabindings21.net.opengis.samplingspatial._2.ObjectFactory();
 
 	/** Our own helpers to suppress boiler-plate code */
-	static final IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
+	private IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
 
 	private String dateTime = "";
 	private String dateTimePosition = "";
@@ -714,4 +714,16 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType> {
 
 		return stream.toString("UTF-8");
 	}
+	@Override
+	public IWXXM21Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public TAFConverter withHelper(IWXXM21Helpers helper) {
+		iwxxmHelpers = helper;
+		return this;
+		
+	}
+
 }

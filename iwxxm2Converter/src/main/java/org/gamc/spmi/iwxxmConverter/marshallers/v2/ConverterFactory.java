@@ -30,7 +30,7 @@ public class ConverterFactory {
 	/**Factory produces converter for message using the start token of the input string*/
 	public final static Pattern StartTokenPattern = Pattern.compile("(?<firstToken>\\w+).+");   
 	
-	public static TacConverter<?,?> createForTac(String inputTac) throws ParsingException {
+	public static TacConverter<?,?,?> createForTac(String inputTac) throws ParsingException {
 	
 		Matcher m = StartTokenPattern.matcher(inputTac);
 		if (!m.find()) {

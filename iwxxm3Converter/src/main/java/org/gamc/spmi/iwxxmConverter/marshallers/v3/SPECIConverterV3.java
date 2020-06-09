@@ -43,7 +43,7 @@ import schemabindings31._int.icao.iwxxm._3.SPECIType;
  * Base class to perform conversion of TAC into intermediate object
  * {@link METARTacMessage} and further IWXXM conversion and validation
  */
-public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType> {
+public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType,IWXXM31Helpers> {
 
 	schemabindings31._int.icao.iwxxm._3.ObjectFactory ofIWXXM = new schemabindings31._int.icao.iwxxm._3.ObjectFactory();
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
@@ -84,7 +84,7 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 			 result = convertMessage(speciMessage);
 		}
 		catch(ParsingException pe) {
-			result = IWXXM31Helpers.ofIWXXM.createSPECIType();
+			result = iwxxmHelpers.getOfIWXXM().createSPECIType();
 			result.setTranslationFailedTAC(tac);
 		}
 		
@@ -153,5 +153,18 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 
 		return report;
 	}
+	
+	@Override
+	public IWXXM31Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public SPECIConverterV3 withHelper(IWXXM31Helpers helper) {
+		this.iwxxmHelpers = helper;
+		return this;
+		
+	}
+	
 
 }

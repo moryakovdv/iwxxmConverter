@@ -16,24 +16,8 @@
  */
 package org.gamc.spmi.iwxxmConverter.wmo;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Locale;
-import java.util.TreeMap;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class for parsing WMO contamination codes (0-20-087)
@@ -46,7 +30,7 @@ public class WMOSpaceWeatherLocationRegister implements WMORegister<String> {
 
 	private static final String registerFileName = "codes.wmo.int-49-2-SpaceWxLocation.rdf";
 
-	TreeMap<String, WMORegisterDescription> wmoSWXLocations = new TreeMap<String, WMORegisterDescription>();
+	ConcurrentHashMap<String, WMORegisterDescription> wmoSWXLocations = new ConcurrentHashMap<String, WMORegisterDescription>();
 
 	public WMOSpaceWeatherLocationRegister() {
 
@@ -64,7 +48,7 @@ public class WMOSpaceWeatherLocationRegister implements WMORegister<String> {
 	}
 	
 	@Override
-	public TreeMap<String, WMORegisterDescription> getContent() {
+	public ConcurrentHashMap<String, WMORegisterDescription> getContent() {
 		// TODO Auto-generated method stub
 		return wmoSWXLocations;
 	}

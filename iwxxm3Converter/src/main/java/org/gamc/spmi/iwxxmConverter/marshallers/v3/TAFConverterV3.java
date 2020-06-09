@@ -78,11 +78,11 @@ import schemabindings31.net.opengis.gml.v_3_2_1.TimePositionType;
  * Base class to perform conversion of TAC into intermediate object
  * {@link TAFTacMessage} and further IWXXM conversion and validation
  */
-public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
+public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM31Helpers> {
 
 	
 	/** Our own helpers to suppress boiler-plate code */
-	static final IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
+	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 
 	private String dateTime = "";
 	private String dateTimePosition = "";
@@ -116,7 +116,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 			 result = convertMessage(tafMessage);
 		}
 		catch(ParsingException pe) {
-			result = IWXXM31Helpers.ofIWXXM.createTAFType();
+			result = iwxxmHelpers.getOfIWXXM().createTAFType();
 			result.setTranslationFailedTAC(tac);
 		}
 		String xmlResult = marshallMessageToXML(result);
@@ -150,7 +150,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		timePeriodEnd = translatedTaf.getValidityInterval().getEnd().toString(iwxxmHelpers.getDateTimeFormat()) + "Z";
 
 		// <iwxxm:TAF> root tag
-		TAFType tafRootTag = IWXXM31Helpers.ofIWXXM.createTAFType();
+		TAFType tafRootTag = iwxxmHelpers.getOfIWXXM().createTAFType();
 
 		// Id with ICAO code and current timestamp
 		tafRootTag.setId(iwxxmHelpers.generateUUIDv4(String.format("taf-%s-%s", translatedTaf.getIcaoCode(), dateTime)));
@@ -294,9 +294,9 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	/** Result section of the BASE taf */
 	private MeteorologicalAerodromeForecastPropertyType createBaseResultSection() {
 
-		MeteorologicalAerodromeForecastPropertyType recordPropertyType = IWXXM31Helpers.ofIWXXM
+		MeteorologicalAerodromeForecastPropertyType recordPropertyType = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeForecastPropertyType();
-		MeteorologicalAerodromeForecastType recordType = IWXXM31Helpers.ofIWXXM.createMeteorologicalAerodromeForecastType();
+		MeteorologicalAerodromeForecastType recordType = iwxxmHelpers.getOfIWXXM().createMeteorologicalAerodromeForecastType();
 		
 		recordPropertyType.setMeteorologicalAerodromeForecast(recordType);
 		
@@ -308,20 +308,20 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// visibility
 		if (translatedTaf.getCommonWeatherSection().getPrevailVisibility() != null) {
-			LengthType vis = IWXXM31Helpers.ofGML.createLengthType();
+			LengthType vis = iwxxmHelpers.getOfGML().createLengthType();
 			vis.setUom(translatedTaf.getCommonWeatherSection().getVisibilityUnits().getStringValue());
 			vis.setValue(translatedTaf.getCommonWeatherSection().getPrevailVisibility());
 			recordType.setPrevailingVisibility(vis);
 		}
 
 		// surfaceWind
-		AerodromeSurfaceWindForecastPropertyType sWindpropertyType = IWXXM31Helpers.ofIWXXM
+		AerodromeSurfaceWindForecastPropertyType sWindpropertyType = iwxxmHelpers.getOfIWXXM()
 				.createAerodromeSurfaceWindForecastPropertyType();
-		AerodromeSurfaceWindForecastType sWindType = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindForecastType();
+		AerodromeSurfaceWindForecastType sWindType = iwxxmHelpers.getOfIWXXM().createAerodromeSurfaceWindForecastType();
 
 		// Set gust speed
 		if (translatedTaf.getCommonWeatherSection().getGustSpeed() != null) {
-			SpeedType speedGustType = IWXXM31Helpers.ofGML.createSpeedType();
+			SpeedType speedGustType = iwxxmHelpers.getOfGML().createSpeedType();
 			speedGustType.setUom(translatedTaf.getCommonWeatherSection().getSpeedUnits().getStringValue());
 			speedGustType.setValue(translatedTaf.getCommonWeatherSection().getGustSpeed());
 			sWindType.setWindGustSpeed(speedGustType);
@@ -332,7 +332,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		if (translatedTaf.getCommonWeatherSection().isVrb()) {
 			sWindType.setVariableWindDirection(translatedTaf.getCommonWeatherSection().isVrb());
 			
-			SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+			SpeedType speedMeanType = iwxxmHelpers.getOfGML().createSpeedType();
 			speedMeanType.setUom(translatedTaf.getCommonWeatherSection().getVrbSpeedUnits().getStringValue());
 			speedMeanType.setValue(translatedTaf.getCommonWeatherSection().getWindVrbSpeed());
 			sWindType.setMeanWindSpeed(speedMeanType);
@@ -340,14 +340,14 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		}
 
 		// Set mean wind
-		SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+		SpeedType speedMeanType = iwxxmHelpers.getOfGML().createSpeedType();
 		speedMeanType.setUom(translatedTaf.getCommonWeatherSection().getSpeedUnits().getStringValue());
 		speedMeanType.setValue(translatedTaf.getCommonWeatherSection().getWindSpeed());
 		sWindType.setMeanWindSpeed(speedMeanType);
 
 		// Set wind direction
 		if (!translatedTaf.getCommonWeatherSection().isVrb()) {
-			AngleType windAngle = IWXXM31Helpers.ofGML.createAngleType();
+			AngleType windAngle = iwxxmHelpers.getOfGML().createAngleType();
 			windAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
 			windAngle.setValue(translatedTaf.getCommonWeatherSection().getWindDir());
 			sWindType.setMeanWindDirection(windAngle);
@@ -386,9 +386,9 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	private MeteorologicalAerodromeForecastPropertyType createTrendResultsSection(TafForecastSection section,
 			int sectionIndex) {
 
-		MeteorologicalAerodromeForecastPropertyType recordPropertyType = IWXXM31Helpers.ofIWXXM
+		MeteorologicalAerodromeForecastPropertyType recordPropertyType = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeForecastPropertyType();
-		MeteorologicalAerodromeForecastType recordType = IWXXM31Helpers.ofIWXXM.createMeteorologicalAerodromeForecastType();
+		MeteorologicalAerodromeForecastType recordType = iwxxmHelpers.getOfIWXXM().createMeteorologicalAerodromeForecastType();
 		
 		recordPropertyType.setMeteorologicalAerodromeForecast(recordType);
 
@@ -428,7 +428,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		
 		// visibility
 		if (section.getCommonWeatherSection().getPrevailVisibility() != null) {
-			LengthType vis = IWXXM31Helpers.ofGML.createLengthType();
+			LengthType vis = iwxxmHelpers.getOfGML().createLengthType();
 			vis.setUom(section.getCommonWeatherSection().getVisibilityUnits().getStringValue());
 			vis.setValue(section.getCommonWeatherSection().getPrevailVisibility());
 
@@ -436,16 +436,16 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		}
 
 		// surfaceWind
-		AerodromeSurfaceWindForecastPropertyType sWindpropertyType = IWXXM31Helpers.ofIWXXM
+		AerodromeSurfaceWindForecastPropertyType sWindpropertyType = iwxxmHelpers.getOfIWXXM()
 				.createAerodromeSurfaceWindForecastPropertyType();
-		AerodromeSurfaceWindForecastType sWindType = IWXXM31Helpers.ofIWXXM.createAerodromeSurfaceWindForecastType();
+		AerodromeSurfaceWindForecastType sWindType = iwxxmHelpers.getOfIWXXM().createAerodromeSurfaceWindForecastType();
 		boolean sectionHasWind = false;
 		
 		// VRB?
 		if (section.getCommonWeatherSection().isVrb()) {
 			sWindType.setVariableWindDirection(section.getCommonWeatherSection().isVrb());
 			
-			SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+			SpeedType speedMeanType = iwxxmHelpers.getOfGML().createSpeedType();
 			speedMeanType.setUom(section.getCommonWeatherSection().getVrbSpeedUnits().getStringValue());
 			speedMeanType.setValue(section.getCommonWeatherSection().getWindVrbSpeed());
 			sWindType.setMeanWindSpeed(speedMeanType);
@@ -454,7 +454,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 		}
 		// Set gust speed
 		if (section.getCommonWeatherSection().getGustSpeed() != null) {
-			SpeedType speedGustType = IWXXM31Helpers.ofGML.createSpeedType();
+			SpeedType speedGustType = iwxxmHelpers.getOfGML().createSpeedType();
 			speedGustType.setUom(section.getCommonWeatherSection().getSpeedUnits().getStringValue());
 			speedGustType.setValue(section.getCommonWeatherSection().getGustSpeed());
 			sWindType.setWindGustSpeed(speedGustType);
@@ -463,7 +463,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// Set mean wind
 		if (section.getCommonWeatherSection().getWindSpeed() != null) {
-			SpeedType speedMeanType = IWXXM31Helpers.ofGML.createSpeedType();
+			SpeedType speedMeanType = iwxxmHelpers.getOfGML().createSpeedType();
 			speedMeanType.setUom(section.getCommonWeatherSection().getSpeedUnits().getStringValue());
 			speedMeanType.setValue(section.getCommonWeatherSection().getWindSpeed());
 			sWindType.setMeanWindSpeed(speedMeanType);
@@ -472,7 +472,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// Set wind direction
 		if (section.getCommonWeatherSection().getWindDir() != null) {
-			AngleType windAngle = IWXXM31Helpers.ofGML.createAngleType();
+			AngleType windAngle = iwxxmHelpers.getOfGML().createAngleType();
 			windAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
 			windAngle.setValue(section.getCommonWeatherSection().getWindDir());
 			sWindType.setMeanWindDirection(windAngle);
@@ -552,13 +552,13 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	/** Creates sections for min and max temperatures forecasted in TAF */
 	private AerodromeAirTemperatureForecastPropertyType createTemperaturesSection() {
 
-		AerodromeAirTemperatureForecastPropertyType tempPropertyType = IWXXM31Helpers.ofIWXXM
+		AerodromeAirTemperatureForecastPropertyType tempPropertyType = iwxxmHelpers.getOfIWXXM()
 				.createAerodromeAirTemperatureForecastPropertyType();
-		AerodromeAirTemperatureForecastType temps = IWXXM31Helpers.ofIWXXM.createAerodromeAirTemperatureForecastType();
+		AerodromeAirTemperatureForecastType temps = iwxxmHelpers.getOfIWXXM().createAerodromeAirTemperatureForecastType();
 
 		// Set min temperature
 		if (translatedTaf.getCommonWeatherSection().getAirTemperatureMin() != null) {
-			MeasureType minTemperature = IWXXM31Helpers.ofGML.createMeasureType();
+			MeasureType minTemperature = iwxxmHelpers.getOfGML().createMeasureType();
 			minTemperature.setUom(TEMPERATURE_UNITS.CELSIUS.getStringValue());
 			minTemperature.setValue(translatedTaf.getCommonWeatherSection().getAirTemperatureMin().doubleValue());
 
@@ -572,7 +572,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		// Set max temperature
 		if (translatedTaf.getCommonWeatherSection().getAirTemperatureMax() != null) {
-			MeasureType maxTemperature = IWXXM31Helpers.ofGML.createMeasureType();
+			MeasureType maxTemperature = iwxxmHelpers.getOfGML().createMeasureType();
 			maxTemperature.setUom(TEMPERATURE_UNITS.CELSIUS.getStringValue());
 			maxTemperature.setValue(translatedTaf.getCommonWeatherSection().getAirTemperatureMax().doubleValue());
 			TimeInstantPropertyType timeInstantMaxTempProperty = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
@@ -595,7 +595,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) {
 		// <iwxxm:weather xlink:href="http://codes.wmo.int/306/4678/-SHRA"/>
 
-		AerodromeForecastWeatherType forecastWeather = IWXXM31Helpers.ofIWXXM.createAerodromeForecastWeatherType();
+		AerodromeForecastWeatherType forecastWeather = iwxxmHelpers.getOfIWXXM().createAerodromeForecastWeatherType();
 		forecastWeather.setHref(iwxxmHelpers.getPrecipitationReg().getWMOUrlByCode(weatherCode));
 
 		return forecastWeather;
@@ -605,10 +605,10 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 	private AerodromeCloudForecastPropertyType createCloudSectionTag(TafCommonWeatherSection weatherSection,
 			String icaoCode, int sectionIndex) {
 		// Envelop
-		AerodromeCloudForecastPropertyType cloudsType = IWXXM31Helpers.ofIWXXM.createAerodromeCloudForecastPropertyType();
+		AerodromeCloudForecastPropertyType cloudsType = iwxxmHelpers.getOfIWXXM().createAerodromeCloudForecastPropertyType();
 
 		// Body
-		AerodromeCloudForecastType clouds = IWXXM31Helpers.ofIWXXM.createAerodromeCloudForecastType();
+		AerodromeCloudForecastType clouds = iwxxmHelpers.getOfIWXXM().createAerodromeCloudForecastType();
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
@@ -623,7 +623,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 				
 				
 				
-				CloudLayerPropertyType cloudLayer = IWXXM31Helpers.ofIWXXM.createCloudLayerPropertyType();
+				CloudLayerPropertyType cloudLayer = iwxxmHelpers.getOfIWXXM().createCloudLayerPropertyType();
 				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
@@ -676,10 +676,22 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType> {
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
-		JAXBElement<TAFType> metarRootElement = IWXXM31Helpers.ofIWXXM.createTAF(taf);
+		JAXBElement<TAFType> metarRootElement = iwxxmHelpers.getOfIWXXM().createTAF(taf);
 
 		jaxbMarshaller.marshal(metarRootElement, stream);
 
 		return stream.toString("UTF-8");
+	}
+	
+	@Override
+	public IWXXM31Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public TAFConverterV3 withHelper(IWXXM31Helpers helper) {
+		this.iwxxmHelpers = helper;
+		return this;
+		
 	}
 }

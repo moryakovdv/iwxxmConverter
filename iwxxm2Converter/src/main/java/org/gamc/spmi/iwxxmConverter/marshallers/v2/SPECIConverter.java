@@ -43,7 +43,7 @@ import schemabindings21.net.opengis.om._2.OMObservationPropertyType;
  * Base class to perform conversion of TAC into intermediate object
  * {@link METARTacMessage} and further IWXXM conversion and validation
  */
-public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType> {
+public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType, IWXXM21Helpers> {
 
 	schemabindings21._int.icao.iwxxm._2.ObjectFactory ofIWXXM = new schemabindings21._int.icao.iwxxm._2.ObjectFactory();
 	IWXXM21Helpers iwxxmHelpers = new IWXXM21Helpers();
@@ -152,6 +152,18 @@ public class SPECIConverter implements TacConverter<SPECITacMessage, SPECIType> 
 		report.setTranslationFailedTAC("");
 
 		return report;
+	}
+
+	@Override
+	public IWXXM21Helpers getHelper() {
+		return iwxxmHelpers;
+	}
+	
+	@Override
+	public SPECIConverter withHelper(IWXXM21Helpers helper) {
+		iwxxmHelpers = helper;
+		return this;
+		
 	}
 
 }

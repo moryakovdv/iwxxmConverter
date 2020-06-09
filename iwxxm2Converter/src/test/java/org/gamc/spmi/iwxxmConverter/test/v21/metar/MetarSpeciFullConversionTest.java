@@ -177,7 +177,7 @@ public class MetarSpeciFullConversionTest {
 	
 	/**Performs xml conversion using ConverterFactory*/
 	private String convertTacToXML(String message) throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
-		TacConverter<?, ?> tc = ConverterFactory.createForTac(message); 
+		TacConverter<?, ?,?> tc = ConverterFactory.createForTac(message); 
 		String result = tc.convertTacToXML(message);
 		return result;
 	}
