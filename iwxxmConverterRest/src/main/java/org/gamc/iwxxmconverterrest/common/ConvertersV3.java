@@ -98,7 +98,7 @@ public class ConvertersV3 implements Converters {
 	 * @throws ParsingException */
 	@Override
 	public TacConverter<?, ?, ?> createConverterForTac(String initialTac) throws ParsingException {
-		TacConverter<?, ?, ?> converter = ConverterFactory.createForTac(initialTac).withHelper(helper);
+		TacConverter<?, ?, IWXXM31Helpers> converter = ConverterFactory.createForTac(initialTac).withHelper(helper);
 		return converter;
 	}
 }

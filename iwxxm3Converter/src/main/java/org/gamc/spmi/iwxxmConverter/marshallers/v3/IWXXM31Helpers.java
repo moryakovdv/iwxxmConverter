@@ -84,7 +84,6 @@ import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
  * Set of the helper functions. Provides creation of a common objects to use
  * during xml creation. 
  * Helps to reduce boiler-plate code. 
- * The functionality may
  * Can be extended to provide specific implementation for METAR, TAF, SIGMET etc..
  */
 public class IWXXM31Helpers extends IWXXMHelpers {
