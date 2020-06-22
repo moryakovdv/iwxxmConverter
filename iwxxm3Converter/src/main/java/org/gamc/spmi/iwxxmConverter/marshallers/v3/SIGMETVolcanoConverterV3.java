@@ -263,79 +263,22 @@ public class SIGMETVolcanoConverterV3
 				.createSIGMETEvolvingConditionPropertyType();
 		// ---------------SIGMETEvolvingConditionType----------------//
 		SIGMETEvolvingConditionType evolvingType = iwxxmHelpers.getOfIWXXM().createSIGMETEvolvingConditionType();
-		switch (translatedSigmet.getSigmetType()) {
-		case METEO:
-			SIGMETEvolvingConditionCollectionType sicol = iwxxmHelpers.getOfIWXXM()
-					.createSIGMETEvolvingConditionCollectionType();
-			JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = iwxxmHelpers.getOfIWXXM()
-					.createSIGMETEvolvingConditionCollection(sicol);
-			evolvingType.setGeometry(air);
-			sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			sicol.getMember().add(evolvingTypeProp);
-			sicol.setPhenomenonTime(analysisTimeProperty);
-			asType.setAny(evolvingAr);
-			break;
-		case CYCLONE:
-			TropicalCycloneSIGMETEvolvingConditionCollectionType siTropCol = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETEvolvingConditionCollectionType();
-			JAXBElement<TropicalCycloneSIGMETEvolvingConditionCollectionType> evolvingTropAr = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETEvolvingConditionCollection(siTropCol);
-			evolvingType.setGeometry(air);
-			siTropCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				siTropCol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				siTropCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			siTropCol.getMember().add(evolvingTypeProp);
-			siTropCol.setPhenomenonTime(analysisTimeProperty);
-
-			PointType point = iwxxmHelpers.getOfGML().createPointType();
-			DirectPositionType dir = iwxxmHelpers.getOfGML().createDirectPositionType();
-			for (GTCalculatedRegion gtCoordsRegion : listCoord) {
-				LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
-				for (Double dbEntry : coords) {
-					dir.getValue().add(dbEntry);
-				}
-			}
-			point.setPos(dir);
-			JAXBElement<PointType> pointj = iwxxmHelpers.getOfGML().createPoint(point);
-			TropicalCycloneSIGMETPositionCollectionType tropPosColl = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETPositionCollectionType();
-			JAXBElement<TropicalCycloneSIGMETPositionCollectionType> tropCyclArColl = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETPositionCollection(tropPosColl);
-			tropPosColl.getRest().add(pointj);
-			siTropCol.getRest().add(tropCyclArColl);
-			asType.setAny(evolvingTropAr);
-			break;
-		case VOLCANO:
-			VolcanicAshSIGMETEvolvingConditionCollectionType siVolcCol = iwxxmHelpers.getOfIWXXM()
-					.createVolcanicAshSIGMETEvolvingConditionCollectionType();
-			JAXBElement<VolcanicAshSIGMETEvolvingConditionCollectionType> evolvingVolcAr = iwxxmHelpers.getOfIWXXM()
-					.createVolcanicAshSIGMETEvolvingConditionCollection(siVolcCol);
-			evolvingType.setGeometry(air);
-			siVolcCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				siVolcCol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				siVolcCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			siVolcCol.getMember().add(evolvingTypeProp);
-			siVolcCol.setPhenomenonTime(analysisTimeProperty);
-			asType.setAny(evolvingVolcAr);
-			break;
+		VolcanicAshSIGMETEvolvingConditionCollectionType siVolcCol = iwxxmHelpers.getOfIWXXM()
+				.createVolcanicAshSIGMETEvolvingConditionCollectionType();
+		JAXBElement<VolcanicAshSIGMETEvolvingConditionCollectionType> evolvingVolcAr = iwxxmHelpers.getOfIWXXM()
+				.createVolcanicAshSIGMETEvolvingConditionCollection(siVolcCol);
+		evolvingType.setGeometry(air);
+		siVolcCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+		if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+			siVolcCol.setTimeIndicator(TimeIndicatorType.FORECAST);
+		} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+			siVolcCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
 		}
+		evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+		siVolcCol.getMember().add(evolvingTypeProp);
+		siVolcCol.setPhenomenonTime(analysisTimeProperty);
+		asType.setAny(evolvingVolcAr);
 		// ---------------SIGMETEvolvingConditionType(Speed-Motion-Id-Intencity)----------------//
 		SpeedType speedType = iwxxmHelpers.getOfGML().createSpeedType();
 		if (translatedSigmet.getPhenomenonDescription().getMovingSection() != null
@@ -818,7 +761,8 @@ public class SIGMETVolcanoConverterV3
 
 		jaxbMarshaller.setProperty(StringConstants.SUN_JAXB_NAMESPACE_MAPPING_PROPERTY_NAME, new NamespaceMapper());
 
-		JAXBElement<VolcanicAshSIGMETType> sigmetRootElement = iwxxmHelpers.getOfIWXXM().createVolcanicAshSIGMET(reportType);
+		JAXBElement<VolcanicAshSIGMETType> sigmetRootElement = iwxxmHelpers.getOfIWXXM()
+				.createVolcanicAshSIGMET(reportType);
 
 		jaxbMarshaller.marshal(sigmetRootElement, stream);
 
