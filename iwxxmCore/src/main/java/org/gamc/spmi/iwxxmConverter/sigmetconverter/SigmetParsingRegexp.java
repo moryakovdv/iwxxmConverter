@@ -51,7 +51,7 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetPhenomena = Pattern.compile("((?:\\s+|^)?(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY))?\\s+(?<phenomena>.*?)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
 	public final static Pattern sigmetPhenomenaTimestamp = Pattern
 			.compile("(?<hh>\\d{2})(?<mm>\\d{2})");
-	public final static Pattern sigmetType = Pattern.compile("(?<sigmetType>\\sTC|VC\\s)");
+	public final static Pattern sigmetType = Pattern.compile("(?<sigmetType>\\sTC|VA\\s)");
 	/**Pattern to determine entire fir*/
 	public final static Pattern sigmetEntireFir = Pattern.compile("ENTIRE FIR(?:\\/UIR)?");
 	

@@ -29,6 +29,8 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTropicalConverterV3;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETVolcanoConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
@@ -42,7 +44,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SigmetConversionTest {
-	//test
+	// test
 	static IwxxmValidator validator;
 
 	@BeforeClass
@@ -72,7 +74,7 @@ public class SigmetConversionTest {
 			+ " UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200\n"
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400 STNR NC=";
 
-	String sigmentLines = "WSRS31RUMA 111143 XXX\n" +"UEEE SIGMET 2 VALID 090500/090900 UEEE-\n"
+	String sigmentLines = "WSRS31RUMA 111143 XXX\n" + "UEEE SIGMET 2 VALID 090500/090900 UEEE-\n"
 			+ "UEEE YAKUTSK FIR SEV TURB FCST N OF N70 AND E OF E135\n" + "FL310/440 STNR NC=";
 
 	String sigmetSevIce = "WSRS31RUMA 111143 XXX\n"
@@ -83,54 +85,56 @@ public class SigmetConversionTest {
 	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
 			+ "      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
-	String sigmetTestYUDD = "WSRS31RUMA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\r\n" + 
-			"\r\n" + 
-			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
-	
-	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n" + 
-			"      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
+	String sigmetTestYUDDTrop = "WSRS31RUMA 111143 XXX\n" + "YUCC SIGMET 3 VALID 251600/252200 YUDO-\r\n"
+			+ "      YUCC AMSWELL FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC\r\n"
+			+ "      FCST AT 2200Z TC CENTRE PSN N2740 W07345=";
+	String sigmetTestYUDDVolc = "WSRS31RUMA 111143 XXX\n" + "EGGX SIGMET 4 VALID 251600/252200 EGRR \r\n"
+			+ "EGGX SHANWICK OCEANIC FIR VA ERUPTION MT HEKLA PSN N6359 W01940 VA CLD OBS AT 1600Z SFC/FL550 N6000 W01150 - N5900 W01300 - N6000 W01600 - N6000 W01150 NC FCST 2200Z N6000 W01200 - N5800 W01400 - N6000 W01535 - N6000 W01200=";
 
-	String sigmetObsAt = "WSRS31LTAA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\n" + 
-			"\n" + 
-			"LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
-	
-	String sigmetRealFirTest = "WSRS32RUAA 010154\n" + 
-			"UUYY SIGMET 1 VALID 010200/010600 UUYY-\n" + 
-			"UUYY SYKTYVKAR FIR SEV TURB FCST W OF E06000\n" + 
-			"FL240/370 MOV NE 30KMH NC=";
-	
-	@Test
+	String sigmetTestCnslYUDD = "WSRS31RUMA 111143 XXX\n" + "YUDD SIGMET 3 VALID 101345/101600 YUSO-\r\n"
+			+ "      YUDD SHANLON FIR/UIR CNL SIGMET 2 101200/101600";
+
+	String sigmetObsAt = "WSRS31LTAA 111143 XXX\n" + "LTAA SIGMET 5 VALID 101220/101520 LTAC-\n" + "\n"
+			+ "LTAA ANKARA FIR SQL TS OBS AT 1220Z N40 E041 FCST MOV NE 12KT NC=";
+
+	String sigmetRealFirTest = "WSRS32RUAA 010154\n" + "UUYY SIGMET 1 VALID 010200/010600 UUYY-\n"
+			+ "UUYY SYKTYVKAR FIR SEV TURB FCST W OF E06000\n" + "FL240/370 MOV NE 30KMH NC=";
+
+	// @Test
 	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
-		
+
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetFakeFirTest);
 		assertFalse(result.contains("<gml:posList>"));
-		
+
 		System.out.println(result);
 	}
-	@Test
-	public void testRealFirCoordinates() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+
+	// @Test
+	public void testRealFirCoordinates()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetRealFirTest);
 		assertTrue(result.contains("<gml:posList "));
-		
+
 		System.out.println(result);
 	}
-	
-	@Test
-	public void testObsAtSigmet() throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+
+	// @Test
+	public void testObsAtSigmet()
+			throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
 		SIGMETTacMessage sgTac = new SIGMETTacMessage(sigmetObsAt);
 		sgTac.parseMessage();
-		assertTrue(sgTac.getPhenomenonDescription().getPhenomenonTimeStamp()!=null);
-		
+		assertTrue(sgTac.getPhenomenonDescription().getPhenomenonTimeStamp() != null);
+
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetObsAt);
 
 		System.out.println(result);
 	}
-	
-	@Test
+
+	// @Test
 	public void testModIceSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -139,17 +143,28 @@ public class SigmetConversionTest {
 		System.out.println(result);
 	}
 
-	/**@author alex*/
+	/** @author alex */
 	@Test
-	public void testTest()
+	public void testTestTrop()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		SIGMETConverterV3 mc = new SIGMETConverterV3();
-		String result = mc.convertTacToXML(sigmetTestYUDD);
+		SIGMETTropicalConverterV3 mc = new SIGMETTropicalConverterV3();
+		String result = mc.convertTacToXML(sigmetTestYUDDTrop);
 
 		System.out.println(result);
 	}
-	/**@author alex*/
+
+	/** @author alex */
 	@Test
+	public void testTestVolc()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETVolcanoConverterV3 mc = new SIGMETVolcanoConverterV3();
+		String result = mc.convertTacToXML(sigmetTestYUDDVolc);
+
+		System.out.println(result);
+	}
+
+	/** @author alex */
+	// @Test
 	public void testCnslTest()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -157,7 +172,8 @@ public class SigmetConversionTest {
 
 		System.out.println(result);
 	}
-	@Test
+
+	// @Test
 	public void testSigmetHvyGr()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 
@@ -168,7 +184,7 @@ public class SigmetConversionTest {
 
 	}
 
-	@Test
+	// @Test
 	public void testSigmetWithLineCoords()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
@@ -178,7 +194,7 @@ public class SigmetConversionTest {
 
 	}
 
-	@Test
+	// @Test
 	public void testLine()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();

@@ -1,19 +1,3 @@
-/**
- * Copyright (C) 2018 Dmitry Moryakov, Main aeronautical meteorological center, Moscow, Russia
- * moryakovdv[at]gmail[dot]com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
 import java.util.Optional;
@@ -31,27 +15,28 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage.Type;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetMovingSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetParsingRegexp;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Intensity;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.ObservationType;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Severity;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
-/**
- * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV
- * or WC)
- * 
- * @author moryakov
- */
-public class SIGMETTacMessage extends TacMessageImpl {
+public class SIGMETTropicalTacMessage extends TacMessageImpl {
+	/**
+	 * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV
+	 * or WC)
+	 * 
+	 * @author moryakov
+	 */
 
 	public enum Type {
 		METEO, VOLCANO, CYCLONE;
@@ -64,7 +49,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	/* issuedDateTime */
 
 	private String sigmetNumber;
-	private Type sigmetType = Type.METEO;
+	private Type sigmetType = Type.CYCLONE;
 
 	private String cancelSigmetNumber;
 	private DateTime cancelSigmetDateTimeFrom;
@@ -196,10 +181,10 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		this.verticalLocation = verticalLocation;
 	}
 
-	public SIGMETTacMessage(String initialTacMessage) {
-		super(initialTacMessage);
+	public SIGMETTropicalTacMessage(String initialTacMessage) {
+			super(initialTacMessage);
 
-	}
+		}
 
 	MessageStatusType messageStatusType = MessageStatusType.NORMAL;
 
@@ -294,7 +279,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		if (matcherPhenomena.find()) {
 
 			int lastIndex = matcherPhenomena.end();
-			Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac);
+			/*Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac);
 			if (sigmetMachType.find()) {
 				while (sigmetMachType.find()) {
 					switch (sigmetMachType.group("sigmetType").trim()) {
@@ -311,7 +296,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 				}
 			} else {
 				sigmetType = Type.METEO;
-			}
+			}*/
 			SigmetPhenomenonDescription phenom = new SigmetPhenomenonDescription(tac.substring(0, lastIndex));
 			String sevS = matcherPhenomena.group("severity");
 			String phS = matcherPhenomena.group("phenomena");

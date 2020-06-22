@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
@@ -15,6 +16,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.namespace.QName;
 
 import org.gamc.gis.model.GTCalculatedRegion;
 import org.gamc.gis.model.GTCoordPoint;
@@ -43,12 +45,24 @@ import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETPositionPropertyType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETPositionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
 import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETEvolvingConditionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionPropertyType;
+import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETType;
 import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
 import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETEvolvingConditionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETPositionCollectionPropertyType;
+import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETPositionCollectionType;
+import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETType;
+import schemabindings31._int.wmo.def.metce._2013.TropicalCyclonePropertyType;
+import schemabindings31._int.wmo.def.metce._2013.TropicalCycloneType;
+import schemabindings31._int.wmo.def.metce._2013.VolcanoPropertyType;
+import schemabindings31._int.wmo.def.metce._2013.VolcanoType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceType;
@@ -65,12 +79,20 @@ import schemabindings31.aero.aixm.schema._5_1.UnitType;
 import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CircleByCenterPointType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CurvePropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CurveSegmentArrayPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.CurveType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionType;
+import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
+import schemabindings31.net.opengis.gml.v_3_2_1.LocationPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PointPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PointType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
+import schemabindings31.net.opengis.gml.v_3_2_1.RingType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.StringOrRefType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
@@ -174,31 +196,16 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 				translatedSigmet.getValidFrom(), translatedSigmet.getValidTo()));
 
 		switch (translatedMessage.getMessageStatusType()) {
-
 		case CANCEL:
 			sigmetRootTag.setCancelledReportSequenceNumber(translatedSigmet.getCancelSigmetNumber());
 			sigmetRootTag.setCancelledReportValidPeriod(iwxxmHelpers.createTimePeriod(translatedSigmet.getIcaoCode(),
 					translatedSigmet.getCancelSigmetDateTimeFrom(), translatedSigmet.getCancelSigmetDateTimeTo()));
-
 			break;
 		default:
-			switch (translatedSigmet.getSigmetType()) {
-			case METEO:
-				sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
-				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
-				break;
-			case CYCLONE:
-				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
-				break;
-			case VOLCANO:
-				sigmetRootTag.getAnalysis().add(setAssociationRoleType());
-				break;
-			default:
-				break;
-			}
+			sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
+			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
 			break;
 		}
-
 		// create XML representation
 		return sigmetRootTag;
 	}
@@ -219,76 +226,23 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 				.createSIGMETEvolvingConditionPropertyType();
 		// ---------------SIGMETEvolvingConditionType----------------//
 		SIGMETEvolvingConditionType evolvingType = iwxxmHelpers.getOfIWXXM().createSIGMETEvolvingConditionType();
-		switch (translatedSigmet.getSigmetType()) {
-		case METEO:
-			SIGMETEvolvingConditionCollectionType sicol = iwxxmHelpers.getOfIWXXM()
-					.createSIGMETEvolvingConditionCollectionType();
-			JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = iwxxmHelpers.getOfIWXXM()
-					.createSIGMETEvolvingConditionCollection(sicol);
-			evolvingType.setGeometry(air);
-			sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			sicol.getMember().add(evolvingTypeProp);
-			sicol.setPhenomenonTime(analysisTimeProperty);
-			asType.setAny(evolvingAr);
-			break;
-		case CYCLONE:
-			TropicalCycloneSIGMETEvolvingConditionCollectionType siTropCol = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETEvolvingConditionCollectionType();
-			JAXBElement<TropicalCycloneSIGMETEvolvingConditionCollectionType> evolvingTropAr = iwxxmHelpers.getOfIWXXM()
-					.createTropicalCycloneSIGMETEvolvingConditionCollection(siTropCol);
-			evolvingType.setGeometry(air);
-			siTropCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				siTropCol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				siTropCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			siTropCol.getMember().add(evolvingTypeProp);
-			siTropCol.setPhenomenonTime(analysisTimeProperty);
-			PointPropertyType prop = iwxxmHelpers.getOfGML().createPointPropertyType();
-			PointType point = iwxxmHelpers.getOfGML().createPointType();
-			DirectPositionType dir = iwxxmHelpers.getOfGML().createDirectPositionType();
-			for (GTCalculatedRegion gtCoordsRegion : listCoord) {
-				LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
-				for (Double dbEntry : coords) {
-					dir.getValue().add(dbEntry);
-				}
-			}
-			point.setPos(dir);
-			JAXBElement<PointType> pointj = iwxxmHelpers.getOfGML().createPoint(point);
-			prop.setPoint(pointj);
-			JAXBElement<PointPropertyType> jtcp = iwxxmHelpers.getOfGML().createCenterOf(prop);
-			siTropCol.getRest().add(jtcp);
-			asType.setAny(evolvingTropAr);
-			break;
-		case VOLCANO:
-			VolcanicAshSIGMETEvolvingConditionCollectionType siVolcCol = iwxxmHelpers.getOfIWXXM()
-					.createVolcanicAshSIGMETEvolvingConditionCollectionType();
-			JAXBElement<VolcanicAshSIGMETEvolvingConditionCollectionType> evolvingVolcAr = iwxxmHelpers.getOfIWXXM()
-					.createVolcanicAshSIGMETEvolvingConditionCollection(siVolcCol);
-			evolvingType.setGeometry(air);
-			siVolcCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
-			// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
-			if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
-				siVolcCol.setTimeIndicator(TimeIndicatorType.FORECAST);
-			} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
-				siVolcCol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
-			}
-			evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
-			siVolcCol.getMember().add(evolvingTypeProp);
-			siVolcCol.setPhenomenonTime(analysisTimeProperty);
-			asType.setAny(evolvingVolcAr);
-			break;
+
+		SIGMETEvolvingConditionCollectionType sicol = iwxxmHelpers.getOfIWXXM()
+				.createSIGMETEvolvingConditionCollectionType();
+		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = iwxxmHelpers.getOfIWXXM()
+				.createSIGMETEvolvingConditionCollection(sicol);
+		evolvingType.setGeometry(air);
+		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
+		if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
+			sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
+		} else if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("OBS")) {
+			sicol.setTimeIndicator(TimeIndicatorType.OBSERVATION);
 		}
+		evolvingTypeProp.setSIGMETEvolvingCondition(evolvingType);
+		sicol.getMember().add(evolvingTypeProp);
+		sicol.setPhenomenonTime(analysisTimeProperty);
+		asType.setAny(evolvingAr);
 		// ---------------SIGMETEvolvingConditionType(Speed-Motion-Id-Intencity)----------------//
 		SpeedType speedType = iwxxmHelpers.getOfGML().createSpeedType();
 		if (translatedSigmet.getPhenomenonDescription().getMovingSection() != null
@@ -325,8 +279,9 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	/*
 	 * private AirspaceVolumeType setAirspaceVolume() { // ---------------DIR
 	 * Position----------------// DirectPositionListType postDir =
-	 * iwxxmHelpers.getOfGML().createDirectPositionListType(); for (DirectionFromLine
-	 * dir : translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
+	 * iwxxmHelpers.getOfGML().createDirectPositionListType(); for
+	 * (DirectionFromLine dir :
+	 * translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
 	 * postDir.getValue().add(dir.getDirection().getDoubleValue()); } //
 	 * ---------------Linear Ring----------------// LinearRingType ringAb =
 	 * iwxxmHelpers.getOfGML().createLinearRingType(); ringAb.setPosList(postDir);
@@ -334,7 +289,8 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	 * iwxxmHelpers.getOfGML().createLinearRing(ringAb); AbstractRingPropertyType
 	 * exType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
 	 * exType.setAbstractRing(ringAbAr); // ---------------Patches----------------//
-	 * PolygonPatchType surfacePach = iwxxmHelpers.getOfGML().createPolygonPatchType();
+	 * PolygonPatchType surfacePach =
+	 * iwxxmHelpers.getOfGML().createPolygonPatchType();
 	 * surfacePach.setExterior(exType); JAXBElement<PolygonPatchType> arrSurf =
 	 * iwxxmHelpers.getOfGML().createPolygonPatch(surfacePach);
 	 * SurfacePatchArrayPropertyType surPachAr =
@@ -349,9 +305,10 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	 * typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%d-%s", 1,
 	 * translatedSigmet.getIcaoCode()))); typeSyr.getAxisLabels().add("Lat Long");
 	 * typeSyr.setSrsName(""); JAXBElement<SurfaceType> surAr =
-	 * iwxxmHelpers.getOfAIXM().createSurface(typeSyr); SurfacePropertyType srfType =
-	 * iwxxmHelpers.getOfAIXM().createSurfacePropertyType(); srfType.setSurface(surAr);
-	 * JAXBElement<SurfacePropertyType> surArHor = iwxxmHelpers.getOfAIXM()
+	 * iwxxmHelpers.getOfAIXM().createSurface(typeSyr); SurfacePropertyType srfType
+	 * = iwxxmHelpers.getOfAIXM().createSurfacePropertyType();
+	 * srfType.setSurface(surAr); JAXBElement<SurfacePropertyType> surArHor =
+	 * iwxxmHelpers.getOfAIXM()
 	 * .createAirspaceVolumeTypeHorizontalProjection(srfType); //
 	 * ---------------Distance Vertical----------------// ValDistanceVerticalType
 	 * valDisUp = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
@@ -726,16 +683,16 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 		return stream.toString("UTF-8");
 	}
-	
+
 	@Override
 	public IWXXM31Helpers getHelper() {
 		return iwxxmHelpers;
 	}
-	
+
 	@Override
 	public SIGMETConverterV3 withHelper(IWXXM31Helpers helper) {
 		this.iwxxmHelpers = helper;
 		return this;
-		
+
 	}
 }
