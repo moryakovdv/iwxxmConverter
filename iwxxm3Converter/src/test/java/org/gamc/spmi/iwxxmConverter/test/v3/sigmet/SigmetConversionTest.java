@@ -144,7 +144,7 @@ public class SigmetConversionTest {
 	}
 
 	/** @author alex */
-	@Test
+	//@Test
 	public void testTestTrop()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETTropicalConverterV3 mc = new SIGMETTropicalConverterV3();

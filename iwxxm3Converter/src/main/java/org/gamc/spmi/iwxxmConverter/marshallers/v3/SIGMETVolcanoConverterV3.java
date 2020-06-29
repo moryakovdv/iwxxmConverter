@@ -202,15 +202,16 @@ public class SIGMETVolcanoConverterV3
 		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
 		SIGMETPositionPropertyType evolvingTypeProp = iwxxmHelpers.getOfIWXXM().createSIGMETPositionPropertyType();
 		SIGMETPositionType sigPos = iwxxmHelpers.getOfIWXXM().createSIGMETPositionType();
-		SIGMETEvolvingConditionType evolvingType = iwxxmHelpers.getOfIWXXM().createSIGMETEvolvingConditionType();
+		//SIGMETEvolvingConditionType evolvingType = iwxxmHelpers.getOfIWXXM().createSIGMETEvolvingConditionType();
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 		VolcanicAshSIGMETPositionCollectionType siVolcCol = iwxxmHelpers.getOfIWXXM()
 				.createVolcanicAshSIGMETPositionCollectionType();
 		JAXBElement<VolcanicAshSIGMETPositionCollectionType> evolvingVolcAr = iwxxmHelpers.getOfIWXXM()
 				.createVolcanicAshSIGMETPositionCollection(siVolcCol);
-		List<GTCalculatedRegion> listCoord = getGTCalculatedRegions();
-		air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord));
-		evolvingType.setGeometry(air);
+		List<GTCalculatedRegion> listCoord = getForacastGTCalculatedRegions();
+		air.setAirspaceVolume(createForecastAirSpaceVolumeSection(listCoord));
+		sigPos.setGeometry(air);
+		
 		siVolcCol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
 		evolvingTypeProp.setSIGMETPosition(sigPos);
 		siVolcCol.getMember().add(evolvingTypeProp);
@@ -427,6 +428,59 @@ public class SIGMETVolcanoConverterV3
 
 	};
 
+	public List<GTCalculatedRegion> getForacastGTCalculatedRegions() {
+
+		try {
+			// Sigmet phenomena within polygon (WI)
+			if (translatedSigmet.getfSection().getHorizontalLocation().isInPolygon()) {
+				LinkedList<GTCoordPoint> listPolygonPoints = new LinkedList<GTCoordPoint>();
+				translatedSigmet.getfSection().getHorizontalLocation().getPolygonPoints().stream()
+						.forEach(new Consumer<CoordPoint>() {
+
+							@Override
+							public void accept(CoordPoint arg0) {
+
+								listPolygonPoints.add(arg0.toGTCoordPoint());
+							}
+						});
+				if (listPolygonPoints.size() > 0)
+					return iwxxmHelpers.getGeoService().recalcFromPolygon(translatedSigmet.getFirCode(),
+							listPolygonPoints);
+			}
+
+			if (translatedSigmet.getfSection().getHorizontalLocation().isEntireFIR()) {
+				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
+			}
+
+			if (translatedSigmet.getfSection().getHorizontalLocation().isWithinCorridor()) {
+				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
+			}
+			if (translatedSigmet.getfSection().getHorizontalLocation().isWithinRadius()) {
+				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
+			}
+
+			LinkedList<GTDirectionFromLine> listLines = new LinkedList<GTDirectionFromLine>();
+			translatedSigmet.getfSection().getHorizontalLocation().getDirectionsFromLines().stream()
+					.forEach(new Consumer<DirectionFromLine>() {
+
+						@Override
+						public void accept(DirectionFromLine arg0) {
+
+							listLines.add(arg0.toGTDirectionFromLine());
+						}
+					});
+			if (listLines.size() > 0)
+				return iwxxmHelpers.getGeoService().recalcFromLines(translatedSigmet.getFirCode(), listLines);
+		} catch (URISyntaxException e) {
+			logger.error("Unable to calculate coordinates", e);
+		} catch (GeoServiceException e) {
+			logger.error("Unable to calculate coordinates", e);
+		}
+
+		return new LinkedList<GTCalculatedRegion>();
+
+	};
+
 	/** returns section for airspaceVolumeDescription */
 	public AirspaceVolumeType createAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion) {
 
@@ -540,68 +594,20 @@ public class SIGMETVolcanoConverterV3
 
 		// create polygon
 		PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
-		switch (translatedSigmet.getSigmetType()) {
-		case METEO:
-			LinearRingType linearRingType = iwxxmHelpers.getOfGML().createLinearRingType();
+		LinearRingType linearRingTypeVol = iwxxmHelpers.getOfGML().createLinearRingType();
 
-			// fill polygon with coords
-			DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
-			for (GTCalculatedRegion gtCoordsRegion : coordsRegion) {
-				LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
-				dpListType.getValue().addAll(coords);
-				dpListType.setCount(BigInteger.valueOf(coords.size()));
-				linearRingType.setPosList(dpListType);
-			}
-			// put polygon in the envelope
-			JAXBElement<LinearRingType> lrPt = iwxxmHelpers.getOfGML().createLinearRing(linearRingType);
-			absRingType.setAbstractRing(lrPt);
-			patchType.setExterior(absRingType);
-			break;
-		case CYCLONE:
-			RingType ringType = iwxxmHelpers.getOfGML().createRingType();
-			CurvePropertyType curveProp = iwxxmHelpers.getOfGML().createCurvePropertyType();
-			// fill polygon with coords
-			CurveSegmentArrayPropertyType curveSeg = iwxxmHelpers.getOfGML().createCurveSegmentArrayPropertyType();
-			CircleByCenterPointType circle = iwxxmHelpers.getOfGML().createCircleByCenterPointType();
-			DirectPositionType pos = iwxxmHelpers.getOfGML().createDirectPositionType();
-			LengthType length = iwxxmHelpers.getOfGML().createLengthType();
-			pos.getValue().add(27.10);
-			pos.getValue().add(-73.10);
-			length.setValue(250);
-			length.setUom(ANGLE_UNITS.DEGREES.getStringValue());
-			circle.setRadius(length);
-			circle.setPos(pos);
-			JAXBElement<CircleByCenterPointType> jaxCircle = iwxxmHelpers.getOfGML().createCircleByCenterPoint(circle);
-			curveSeg.getAbstractCurveSegment().add(jaxCircle);
-			CurveType cur = iwxxmHelpers.getOfGML().createCurveType();
-			cur.setId(
-					iwxxmHelpers.generateUUIDv4(String.format("unit-%s-%s", translatedSigmet.getIcaoCode(), dateTime)));
-			JAXBElement<CurveType> curveType = iwxxmHelpers.getOfGML().createCurve(cur);
-			curveProp.setAbstractCurve(curveType);
-			cur.setSegments(curveSeg);
-			// put polygon in the envelope
-			JAXBElement<RingType> jaxRing = iwxxmHelpers.getOfGML().createRing(ringType);
-			ringType.getCurveMember().add(curveProp);
-			absRingType.setAbstractRing(jaxRing);
-			patchType.setExterior(absRingType);
-			break;
-		case VOLCANO:
-			LinearRingType linearRingTypeVol = iwxxmHelpers.getOfGML().createLinearRingType();
-
-			// fill polygon with coords
-			DirectPositionListType dpListTypeVol = iwxxmHelpers.getOfGML().createDirectPositionListType();
-			for (GTCalculatedRegion gtCoordsRegion : coordsRegion) {
-				LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
-				dpListTypeVol.getValue().addAll(coords);
-				dpListTypeVol.setCount(BigInteger.valueOf(coords.size()));
-				linearRingTypeVol.setPosList(dpListTypeVol);
-			}
-			// put polygon in the envelope
-			JAXBElement<LinearRingType> lrPtVol = iwxxmHelpers.getOfGML().createLinearRing(linearRingTypeVol);
-			absRingType.setAbstractRing(lrPtVol);
-			patchType.setExterior(absRingType);
-			break;
+		// fill polygon with coords
+		DirectPositionListType dpListTypeVol = iwxxmHelpers.getOfGML().createDirectPositionListType();
+		for (GTCalculatedRegion gtCoordsRegion : coordsRegion) {
+			LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
+			dpListTypeVol.getValue().addAll(coords);
+			dpListTypeVol.setCount(BigInteger.valueOf(coords.size()));
+			linearRingTypeVol.setPosList(dpListTypeVol);
 		}
+		// put polygon in the envelope
+		JAXBElement<LinearRingType> lrPtVol = iwxxmHelpers.getOfGML().createLinearRing(linearRingTypeVol);
+		absRingType.setAbstractRing(lrPtVol);
+		patchType.setExterior(absRingType);
 
 		JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
 
@@ -621,7 +627,151 @@ public class SIGMETVolcanoConverterV3
 		return airspaceVolumeType;
 
 	}
+	public AirspaceVolumeType createForecastAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion) {
 
+		AirspaceVolumeType airspaceVolumeType = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
+		airspaceVolumeType.setId(iwxxmHelpers.generateUUIDv4("airspace-" + translatedSigmet.getIcaoCode()));
+
+		// lower limit if exists and check if on surface
+		if (translatedSigmet.getfSection().getVerticalLocation().getBottomFL().isPresent()) {
+			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+
+			bottomFlType.setUom("FL");
+			bottomFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getBottomFL().get()));
+			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeLowerLimit(bottomFlType);
+			airspaceVolumeType.setLowerLimit(bottomFlSection);
+
+			CodeVerticalReferenceType valueCode = iwxxmHelpers.getOfAIXM().createCodeVerticalReferenceType();
+			valueCode.setValue("STD");
+			JAXBElement<CodeVerticalReferenceType> vertCodeType = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeLowerLimitReference(valueCode);
+			airspaceVolumeType.setLowerLimitReference(vertCodeType);
+		}
+
+		// upper limit if exists
+		if (translatedSigmet.getfSection().getVerticalLocation().getTopFL().isPresent()) {
+
+			ValDistanceVerticalType topFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+			topFlType.setUom("FL");
+
+			if (translatedSigmet.getfSection().getVerticalLocation().isTopMarginAboveFl()) {
+
+				ValDistanceVerticalType unknownType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+				JAXBElement<ValDistanceVerticalType> unknownSection = iwxxmHelpers.getOfAIXM()
+						.createAirspaceLayerTypeUpperLimit(unknownType);
+				airspaceVolumeType.setMaximumLimit(unknownSection);
+				topFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+			}
+			// Below top fl - set max as top fl, set upper as unknown
+			else if (translatedSigmet.getfSection().getVerticalLocation().isTopMarginBelowFl()) {
+
+				ValDistanceVerticalType topMaxType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+				topMaxType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+
+				JAXBElement<ValDistanceVerticalType> topMaxSection = iwxxmHelpers.getOfAIXM()
+						.createAirspaceLayerTypeUpperLimit(topMaxType);
+				airspaceVolumeType.setMaximumLimit(topMaxSection);
+
+				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+			} else {
+				topFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+			}
+
+			JAXBElement<ValDistanceVerticalType> topFlSection = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimit(topFlType);
+			airspaceVolumeType.setUpperLimit(topFlSection);
+
+			CodeVerticalReferenceType valueCode = iwxxmHelpers.getOfAIXM().createCodeVerticalReferenceType();
+			valueCode.setValue("STD");
+			JAXBElement<CodeVerticalReferenceType> vertCodeType = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimitReference(valueCode);
+			airspaceVolumeType.setUpperLimitReference(vertCodeType);
+
+		}
+
+		// if height is observed in feet or meters and low bound is on surface
+		if (translatedSigmet.getfSection().getVerticalLocation().isBottomMarginOnSurface()
+				&& translatedSigmet.getfSection().getVerticalLocation().getTopMarginMeters().isPresent()) {
+			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+			bottomFlType.setUom(translatedSigmet.getfSection().getVerticalLocation().getUnits().getStringValue());
+			bottomFlType.setValue("0");
+			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimit(bottomFlType);
+			airspaceVolumeType.setLowerLimit(bottomFlSection);
+
+			ValDistanceVerticalType topHeightType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
+			topHeightType.setUom(translatedSigmet.getfSection().getVerticalLocation().getUnits().getStringValue());
+			topHeightType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopMarginMeters().get()));
+			JAXBElement<ValDistanceVerticalType> bottomHeightSection = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimit(topHeightType);
+			airspaceVolumeType.setLowerLimit(bottomHeightSection);
+
+			// set flag from SURFACE - see aixm 5.1.1
+			CodeVerticalReferenceType valueCodeSfc = iwxxmHelpers.getOfAIXM().createCodeVerticalReferenceType();
+			valueCodeSfc.setValue("SFC");
+			JAXBElement<CodeVerticalReferenceType> vertCodeTypeSfc = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimitReference(valueCodeSfc);
+
+			CodeVerticalReferenceType valueCodeStd = iwxxmHelpers.getOfAIXM().createCodeVerticalReferenceType();
+			valueCodeSfc.setValue("STD");
+			JAXBElement<CodeVerticalReferenceType> vertCodeTypeStd = iwxxmHelpers.getOfAIXM()
+					.createAirspaceLayerTypeUpperLimitReference(valueCodeStd);
+
+			airspaceVolumeType.setUpperLimitReference(vertCodeTypeStd);
+			airspaceVolumeType.setLowerLimitReference(vertCodeTypeSfc);
+		}
+
+		// create projection
+		SurfacePropertyType surfaceSection = iwxxmHelpers.getOfAIXM().createSurfacePropertyType();
+		SurfaceType sfType = iwxxmHelpers.getOfAIXM().createSurfaceType();
+		sfType.getAxisLabels().add("Lat");
+		sfType.getAxisLabels().add("Long");
+		sfType.setSrsDimension(BigInteger.valueOf(2));
+		sfType.setSrsName("http://www.opengis.net/def/crs/EPSG/0/4326");
+		sfType.setId(iwxxmHelpers.generateUUIDv4("surface-" + translatedSigmet.getIcaoCode()));
+
+		// add gml patches
+		SurfacePatchArrayPropertyType patchArray = iwxxmHelpers.getOfGML().createSurfacePatchArrayPropertyType();
+		AbstractRingPropertyType absRingType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
+		// Create patch for all coordinate regions
+
+		// create polygon
+		PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
+		LinearRingType linearRingTypeVol = iwxxmHelpers.getOfGML().createLinearRingType();
+
+		// fill polygon with coords
+		DirectPositionListType dpListTypeVol = iwxxmHelpers.getOfGML().createDirectPositionListType();
+		for (GTCalculatedRegion gtCoordsRegion : coordsRegion) {
+			LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
+			dpListTypeVol.getValue().addAll(coords);
+			dpListTypeVol.setCount(BigInteger.valueOf(coords.size()));
+			linearRingTypeVol.setPosList(dpListTypeVol);
+		}
+		// put polygon in the envelope
+		JAXBElement<LinearRingType> lrPtVol = iwxxmHelpers.getOfGML().createLinearRing(linearRingTypeVol);
+		absRingType.setAbstractRing(lrPtVol);
+		patchType.setExterior(absRingType);
+
+		JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
+
+		patchArray.getAbstractSurfacePatch().add(patch);
+
+		JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPatches(patchArray);
+
+		sfType.setPatches(pta);
+
+		JAXBElement<SurfaceType> syrfaceElement = iwxxmHelpers.getOfAIXM().createSurface(sfType);
+		surfaceSection.setSurface(syrfaceElement);
+		JAXBElement<SurfacePropertyType> spt = iwxxmHelpers.getOfAIXM()
+				.createAirspaceVolumeTypeHorizontalProjection(surfaceSection);
+		// create aixm:horizontalProjection
+		airspaceVolumeType.setHorizontalProjection(spt);
+
+		return airspaceVolumeType;
+
+	}
 	/** Get link for WMO register record for the phenomena */
 	public AeronauticalSignificantWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
 		AeronauticalSignificantWeatherPhenomenonType typePhen = iwxxmHelpers.getOfIWXXM()
