@@ -60,5 +60,10 @@ public class SigmetVerticalPhenomenonLocation {
 		this.topMarginBelowFl = topMarginBelowFl;
 	}
 	
-	
+	/**Section is filled with data if one of criteria is present*/
+	public boolean isSectionFilled() {
+		
+		boolean filled = bottomFL.isPresent()||topFL.isPresent()||topMarginMeters.isPresent()||bottomMarginOnSurface;
+		return filled;
+	}
 }

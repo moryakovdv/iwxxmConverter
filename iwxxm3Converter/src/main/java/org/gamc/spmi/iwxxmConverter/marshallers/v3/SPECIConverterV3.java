@@ -31,6 +31,8 @@ import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.METARType;
 import schemabindings31._int.icao.iwxxm._3.MeteorologicalAerodromeTrendForecastPropertyType;
@@ -48,6 +50,7 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 	schemabindings31._int.icao.iwxxm._3.ObjectFactory ofIWXXM = new schemabindings31._int.icao.iwxxm._3.ObjectFactory();
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 	private SPECITacMessage translatedSpeci;
+	protected Logger logger = LoggerFactory.getLogger(SPECIConverterV3.class);
 
 	private String dateTime = "";
 	private String dateTimePosition = "";
@@ -77,6 +80,9 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 
 	@Override
 	public String convertTacToXML(String tac) throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		logger.debug("Parsing "+ tac);
+
+		
 		SPECITacMessage speciMessage = new SPECITacMessage(tac);
 		SPECIType result;
 		try {
@@ -86,6 +92,8 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 		catch(ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createSPECIType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 		}
 		
 		String xmlResult = marshallMessageToXML(result); 

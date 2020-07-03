@@ -49,6 +49,8 @@ import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeCloudForecastPropertyType;
@@ -115,7 +117,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	private METARTacMessage translatedMetar;
 
-	
+	protected Logger logger = LoggerFactory.getLogger(METARConverterV3.class);
+
 	
 	// Storage for created runways description
 	private TreeMap<String, String> createdRunways = new TreeMap<>();
@@ -126,6 +129,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		logger.debug("Parsing "+ tac);
 
 		createdRunways.clear();
 
@@ -138,6 +142,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		catch(ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createMETARType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 		}
 		
 

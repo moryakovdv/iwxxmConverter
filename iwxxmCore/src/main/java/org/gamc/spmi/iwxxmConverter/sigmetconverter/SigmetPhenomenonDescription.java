@@ -71,7 +71,7 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 	private Severity phenomenonSeverity = Severity.NOTSET;
 	private ObservationType phenomenonObservation = ObservationType.NOTSET;
 	private DateTime phenomenonTimeStamp;
-
+	private String phenomenonGivenName;
 	
 
 	private Intensity intencity = Intensity.NC;
@@ -144,6 +144,14 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 		}
 		else
 			return this.phenomenonSeverity.name+"_"+this.phenomenon;
+	}
+
+	public String getPhenomenonGivenName() {
+		return phenomenonGivenName;
+	}
+
+	public void setPhenomenonGivenName(String phenomenonGivenName) {
+		this.phenomenonGivenName = phenomenonGivenName;
 	}
 
 }

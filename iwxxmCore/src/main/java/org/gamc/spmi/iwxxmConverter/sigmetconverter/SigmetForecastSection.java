@@ -18,6 +18,12 @@ public class SigmetForecastSection extends TacSectionImpl implements Serializabl
 	 */
 	private static final long serialVersionUID = -4229832662872170289L;
 
+
+	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
+	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation();
+	private LinkedList<DirectionFromLine> areas = new LinkedList<DirectionFromLine>();
+
+	
 	public SigmetForecastSection(String initialTacSection) {
 		super(initialTacSection);
 		
@@ -25,7 +31,6 @@ public class SigmetForecastSection extends TacSectionImpl implements Serializabl
 
 	private DateTime forecastedTime;
 	
-	private LinkedList<DirectionFromLine> areas = new LinkedList<DirectionFromLine>();
 
 	public DateTime getForecastedTime() {
 		return forecastedTime;
@@ -42,6 +47,23 @@ public class SigmetForecastSection extends TacSectionImpl implements Serializabl
 	public void setAreas(LinkedList<DirectionFromLine> areas) {
 		this.areas = areas;
 	}
+
+	public SigmetHorizontalPhenomenonLocation getHorizontalLocation() {
+		return horizontalLocation;
+	}
+
+	public void setHorizontalLocation(SigmetHorizontalPhenomenonLocation horizontalPhenomenonLocation) {
+		this.horizontalLocation = horizontalPhenomenonLocation;
+	}
+
+	public SigmetVerticalPhenomenonLocation getVerticalLocation() {
+		return verticalLocation;
+	}
+
+	public void setVerticalLocation(SigmetVerticalPhenomenonLocation verticalPhenomenonLocation) {
+		this.verticalLocation = verticalPhenomenonLocation;
+	}
+	
 	
 	
 	

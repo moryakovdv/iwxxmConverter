@@ -13,7 +13,9 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import schemabindings31.aero.aixm.schema._5_1.PointPropertyType;
+import schemabindings31.net.opengis.gml.v_3_2_1.PointPropertyType;
+
+//import schemabindings31.aero.aixm.schema._5_1.PointPropertyType;
 
 
 /**

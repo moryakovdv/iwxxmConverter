@@ -81,6 +81,8 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
 	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation();
 
+	private SigmetForecastSection forecastedSection;
+	
 	public String getSigmetDataType() {
 		return sigmetDataType;
 	}
@@ -281,7 +283,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 		fillAndRemovePhenomenaDescription(tac);
 		fillAndRemoveForecastedLocation(tac);
-		fillLocationSection(tac);
+		fillLocationSection(tac, this.getHorizontalLocation());
 		fillIntensity(tac);
 		fillMovingSection(tac);
 		fillLevel(tac);
@@ -355,64 +357,46 @@ public class SIGMETTacMessage extends TacMessageImpl {
 							parentDateTime);
 
 			fSection.setForecastedTime(dtAT);
-			Matcher matcherFcstLocation = SigmetParsingRegexp.sigmetOnePointLine.matcher(location);
-
-			while (matcherFcstLocation.find()) {
-				String azimuth = matcherFcstLocation.group("azimuth");
-				String pointCoordLat = matcherFcstLocation.group("pointCoordLat");
-				String pointDegLat = matcherFcstLocation.group("degLat");
-				String pointMinLat = matcherFcstLocation.group("minLat");
-
-				String pointCoordLong = matcherFcstLocation.group("pointCoordLong");
-				String pointDegLong = matcherFcstLocation.group("degLong");
-				String pointMinLong = matcherFcstLocation.group("minLong");
-
-				String pointCoord = StringConstants.coalesce(pointCoordLat, pointCoordLong);
-				String pointDeg = StringConstants.coalesce(pointDegLat, pointDegLong);
-				String pointMin = StringConstants.coalesce(pointMinLat, pointMinLong);
-
-				Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
-						pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
-				DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);
-
-				fSection.getAreas().add(dirLine);
-			}
-
+			
+			
 			tac.delete(matcherFcst.start(), lastIndex);
+			
+			fillLocationSection(new StringBuffer(location),fSection.getHorizontalLocation());
+			
 		}
 
 		return tac;
 	}
 
-	protected StringBuffer fillLocationSection(StringBuffer tac) {
+	protected StringBuffer fillLocationSection(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
 
-		fillEntireFIRLocation(tac);
-		if (this.getHorizontalLocation().isEntireFIR())
+		fillEntireFIRLocation(tac, location);
+		if (location.isEntireFIR())
 			return tac; // not necessary to check location further
 
-		fillWithinPolygon(tac);
-		if (this.getHorizontalLocation().isInPolygon())
+		fillWithinPolygon(tac,location);
+		if (location.isInPolygon())
 			return tac; // not necessary to check location further
 
-		fillWithinCorridor(tac);
-		if (this.getHorizontalLocation().isWithinCorridor())
+		fillWithinCorridor(tac,location);
+		if (location.isWithinCorridor())
 			return tac; // not necessary to check location further
 
-		fillWithinRadius(tac);
-		if (this.getHorizontalLocation().isWithinRadius())
+		fillWithinRadius(tac,location);
+		if (location.isWithinRadius())
 			return tac;
 
-		fillZigZagLine(tac);
+		fillZigZagLine(tac,location);
 
-		fillLineAreaLocation(tac);
-		fillMultiLineLocation(tac);
+		fillLineAreaLocation(tac,location);
+		fillMultiLineLocation(tac,location);
 
-		fillOneCoordinatePoint(tac);
+		fillOneCoordinatePoint(tac,location);
 
 		return tac;
 	}
 
-	protected StringBuffer fillOneCoordinatePoint(StringBuffer tac) {
+	protected StringBuffer fillOneCoordinatePoint(StringBuffer tac,SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
 		int lastMatch = 0;
 		if (matcherCoordPoint.find()) {
@@ -429,8 +413,8 @@ public class SIGMETTacMessage extends TacMessageImpl {
 					loDeg == null || loDeg.isEmpty() ? 0 : Integer.parseInt(loDeg),
 					loMin == null || loMin.isEmpty() ? 0 : Integer.parseInt(loMin));
 
-			this.getHorizontalLocation().setSinglePoint(true);
-			this.getHorizontalLocation().setPoint(point);
+			location.setSinglePoint(true);
+			location.setPoint(point);
 			lastMatch = matcherCoordPoint.end();
 			tac.delete(startIndex, lastMatch);
 		}
@@ -439,7 +423,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 	}
 
-	protected StringBuffer fillZigZagLine(StringBuffer tac) {
+	protected StringBuffer fillZigZagLine(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherZigZag = SigmetParsingRegexp.sigmetMultiPointLine.matcher(tac);
 
 		if (matcherZigZag.find()) {
@@ -469,7 +453,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 				lastMatch = matcherCoordPoint.end();
 
 			}
-			this.getHorizontalLocation().getDirectionsFromLines()
+			location.getDirectionsFromLines()
 					.add(new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetZigZagLine));
 
 			tac.delete(startIndex, lastMatch);
@@ -478,11 +462,11 @@ public class SIGMETTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
-	protected StringBuffer fillWithinRadius(StringBuffer tac) {
+	protected StringBuffer fillWithinRadius(StringBuffer tac,SigmetHorizontalPhenomenonLocation location) {
 
 		Matcher matcherRadius = SigmetParsingRegexp.sigmetWithinRadius.matcher(tac);
 		if (matcherRadius.find()) {
-			this.getHorizontalLocation().setWithinRadius(true);
+			location.setWithinRadius(true);
 			String radius = matcherRadius.group("radius");
 			String units = matcherRadius.group("radiusUnit");
 
@@ -492,14 +476,13 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			String lon = matcherRadius.group("longitude");
 			String loDeg = matcherRadius.group("lodeg");
 			String loMin = matcherRadius.group("lomin");
-			this.getHorizontalLocation().setWideness(Integer.valueOf(radius));
-			this.getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
+			location.setWideness(Integer.valueOf(radius));
+			location.setWidenessUnits(LENGTH_UNITS.valueOf(units));
 			CoordPoint center = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
 					Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
-			this.getHorizontalLocation().setPoint(center);
+			location.setPoint(center);
 
-			this.getHorizontalLocation().setWideness(Integer.parseInt(radius));
-			/** TODO: add center corridor line */
+			location.setWideness(Integer.parseInt(radius));
 		}
 
 		return tac;
@@ -601,10 +584,10 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	}
 
 	/** check if it has WI flag and fill polygon coordinates */
-	protected StringBuffer fillWithinPolygon(StringBuffer tac) {
+	protected StringBuffer fillWithinPolygon(StringBuffer tac,SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygon.matcher(tac);
 		if (matcherWI.find()) {
-			this.getHorizontalLocation().setInPolygon(true);
+			location.setInPolygon(true);
 			int startIndex = matcherWI.start();
 
 			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
@@ -621,7 +604,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 				CoordPoint polygonApex = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
 						Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg),
 						Integer.parseInt(loMin));
-				this.getHorizontalLocation().getPolygonPoints().add(polygonApex);
+				location.getPolygonPoints().add(polygonApex);
 
 				lastMatch = matcherCoordPoint.end();
 
@@ -636,12 +619,12 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	}
 
 	/** Extract location when it is in corridor */
-	protected StringBuffer fillWithinCorridor(StringBuffer tac) {
+	protected StringBuffer fillWithinCorridor(StringBuffer tac,SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherCorridor = SigmetParsingRegexp.sigmetWithinCorridor.matcher(tac);
 		if (matcherCorridor.find()) {
-			this.getHorizontalLocation().setWithinCorridor(true);
+			location.setWithinCorridor(true);
 			String range = matcherCorridor.group("range");
-			this.getHorizontalLocation().setWideness(Integer.parseInt(range));
+			location.setWideness(Integer.parseInt(range));
 			/** TODO: add center corridor line */
 		}
 
@@ -652,7 +635,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	 * Extract location with multilines example: N OF LINE N5100 E03520 - N5017
 	 * E04200 AND S OF LINE N5400 E03150 - N5440 E04400
 	 **/
-	protected StringBuffer fillMultiLineLocation(StringBuffer tac) {
+	protected StringBuffer fillMultiLineLocation(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherDirLine = SigmetParsingRegexp.sigmetMultiLine.matcher(tac);
 		int lastMatch = 0;
 		while (matcherDirLine.find()) {
@@ -689,7 +672,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			line.setEndPoint(endPoint);
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(lineAzimuth), line);
 
-			this.getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			location.getDirectionsFromLines().add(dirLine);
 			lastMatch = matcherDirLine.end();
 		}
 		tac.delete(0, lastMatch);
@@ -698,7 +681,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	}
 
 	/** check if it has area described by lines e.g. N OF N2000 AND E OF E5555 */
-	protected StringBuffer fillLineAreaLocation(StringBuffer tac) {
+	protected StringBuffer fillLineAreaLocation(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
 
 		Matcher matcherDirLine = SigmetParsingRegexp.sigmetOnePointLine.matcher(tac);
 		int lastMatch = 0;
@@ -720,7 +703,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
 					pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);
-			this.getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			location.getDirectionsFromLines().add(dirLine);
 			lastMatch = matcherDirLine.end();
 		}
 		tac.delete(0, lastMatch);
@@ -729,11 +712,12 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	}
 
 	/** check if it has ENTIRE FIR/UIR flag */
-	protected StringBuffer fillEntireFIRLocation(StringBuffer tac) {
+	protected StringBuffer fillEntireFIRLocation(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
 		Matcher matcherFIR = SigmetParsingRegexp.sigmetEntireFir.matcher(tac);
 		if (matcherFIR.find()) {
 
-			this.getHorizontalLocation().setEntireFIR(true);
+			//this.getHorizontalLocation().setEntireFIR(true);
+			location.setEntireFIR(true);
 			int lastIndex = matcherFIR.end();
 			tac.delete(0, lastIndex);
 			return tac;
@@ -787,5 +771,6 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	public void setCancelSigmetDateTimeTo(DateTime cancelSigmetDateTimeTo) {
 		this.cancelSigmetDateTimeTo = cancelSigmetDateTimeTo;
 	}
+	
 
 }

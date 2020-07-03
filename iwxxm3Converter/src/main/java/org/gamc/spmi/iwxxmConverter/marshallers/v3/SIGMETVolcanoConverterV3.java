@@ -2,6 +2,7 @@ package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.io.ObjectInputStream.GetField;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -92,7 +93,7 @@ import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
 
-public class SIGMETVolcanoConverterV3
+public class SIGMETVolcanoConverterV3 extends SIGMETConverterV3<SIGMETVolcanoTacMessage, VolcanicAshSIGMETType>
 		implements TacConverter<SIGMETVolcanoTacMessage, VolcanicAshSIGMETType, IWXXM31Helpers> {
 	private TreeMap<String, String> createdRunways = new TreeMap<>();
 	String airTrafficUnit = "FIC";
@@ -208,7 +209,7 @@ public class SIGMETVolcanoConverterV3
 				.createVolcanicAshSIGMETPositionCollectionType();
 		JAXBElement<VolcanicAshSIGMETPositionCollectionType> evolvingVolcAr = iwxxmHelpers.getOfIWXXM()
 				.createVolcanicAshSIGMETPositionCollection(siVolcCol);
-		List<GTCalculatedRegion> listCoord = getForacastGTCalculatedRegions();
+		List<GTCalculatedRegion> listCoord = getGTCalculatedRegions();
 		air.setAirspaceVolume(createForecastAirSpaceVolumeSection(listCoord));
 		sigPos.setGeometry(air);
 		
@@ -428,58 +429,7 @@ public class SIGMETVolcanoConverterV3
 
 	};
 
-	public List<GTCalculatedRegion> getForacastGTCalculatedRegions() {
-
-		try {
-			// Sigmet phenomena within polygon (WI)
-			if (translatedSigmet.getfSection().getHorizontalLocation().isInPolygon()) {
-				LinkedList<GTCoordPoint> listPolygonPoints = new LinkedList<GTCoordPoint>();
-				translatedSigmet.getfSection().getHorizontalLocation().getPolygonPoints().stream()
-						.forEach(new Consumer<CoordPoint>() {
-
-							@Override
-							public void accept(CoordPoint arg0) {
-
-								listPolygonPoints.add(arg0.toGTCoordPoint());
-							}
-						});
-				if (listPolygonPoints.size() > 0)
-					return iwxxmHelpers.getGeoService().recalcFromPolygon(translatedSigmet.getFirCode(),
-							listPolygonPoints);
-			}
-
-			if (translatedSigmet.getfSection().getHorizontalLocation().isEntireFIR()) {
-				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
-			}
-
-			if (translatedSigmet.getfSection().getHorizontalLocation().isWithinCorridor()) {
-				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
-			}
-			if (translatedSigmet.getfSection().getHorizontalLocation().isWithinRadius()) {
-				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
-			}
-
-			LinkedList<GTDirectionFromLine> listLines = new LinkedList<GTDirectionFromLine>();
-			translatedSigmet.getfSection().getHorizontalLocation().getDirectionsFromLines().stream()
-					.forEach(new Consumer<DirectionFromLine>() {
-
-						@Override
-						public void accept(DirectionFromLine arg0) {
-
-							listLines.add(arg0.toGTDirectionFromLine());
-						}
-					});
-			if (listLines.size() > 0)
-				return iwxxmHelpers.getGeoService().recalcFromLines(translatedSigmet.getFirCode(), listLines);
-		} catch (URISyntaxException e) {
-			logger.error("Unable to calculate coordinates", e);
-		} catch (GeoServiceException e) {
-			logger.error("Unable to calculate coordinates", e);
-		}
-
-		return new LinkedList<GTCalculatedRegion>();
-
-	};
+	
 
 	/** returns section for airspaceVolumeDescription */
 	public AirspaceVolumeType createAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion) {
@@ -633,11 +583,11 @@ public class SIGMETVolcanoConverterV3
 		airspaceVolumeType.setId(iwxxmHelpers.generateUUIDv4("airspace-" + translatedSigmet.getIcaoCode()));
 
 		// lower limit if exists and check if on surface
-		if (translatedSigmet.getfSection().getVerticalLocation().getBottomFL().isPresent()) {
+		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getBottomFL().isPresent()) {
 			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 
 			bottomFlType.setUom("FL");
-			bottomFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getBottomFL().get()));
+			bottomFlType.setValue(String.valueOf(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getBottomFL().get()));
 			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeLowerLimit(bottomFlType);
 			airspaceVolumeType.setLowerLimit(bottomFlSection);
@@ -650,25 +600,25 @@ public class SIGMETVolcanoConverterV3
 		}
 
 		// upper limit if exists
-		if (translatedSigmet.getfSection().getVerticalLocation().getTopFL().isPresent()) {
+		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopFL().isPresent()) {
 
 			ValDistanceVerticalType topFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 			topFlType.setUom("FL");
 
-			if (translatedSigmet.getfSection().getVerticalLocation().isTopMarginAboveFl()) {
+			if (translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().isTopMarginAboveFl()) {
 
 				ValDistanceVerticalType unknownType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
 				JAXBElement<ValDistanceVerticalType> unknownSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(unknownType);
 				airspaceVolumeType.setMaximumLimit(unknownSection);
-				topFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+				topFlType.setValue(String.valueOf(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopFL().get()));
 			}
 			// Below top fl - set max as top fl, set upper as unknown
-			else if (translatedSigmet.getfSection().getVerticalLocation().isTopMarginBelowFl()) {
+			else if (translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().isTopMarginBelowFl()) {
 
 				ValDistanceVerticalType topMaxType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-				topMaxType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+				topMaxType.setValue(String.valueOf(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopFL().get()));
 
 				JAXBElement<ValDistanceVerticalType> topMaxSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(topMaxType);
@@ -676,7 +626,7 @@ public class SIGMETVolcanoConverterV3
 
 				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
 			} else {
-				topFlType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopFL().get()));
+				topFlType.setValue(String.valueOf(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopFL().get()));
 			}
 
 			JAXBElement<ValDistanceVerticalType> topFlSection = iwxxmHelpers.getOfAIXM()
@@ -692,18 +642,18 @@ public class SIGMETVolcanoConverterV3
 		}
 
 		// if height is observed in feet or meters and low bound is on surface
-		if (translatedSigmet.getfSection().getVerticalLocation().isBottomMarginOnSurface()
-				&& translatedSigmet.getfSection().getVerticalLocation().getTopMarginMeters().isPresent()) {
+		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().isBottomMarginOnSurface()
+				&& translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopMarginMeters().isPresent()) {
 			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-			bottomFlType.setUom(translatedSigmet.getfSection().getVerticalLocation().getUnits().getStringValue());
+			bottomFlType.setUom(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getUnits().getStringValue());
 			bottomFlType.setValue("0");
 			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeUpperLimit(bottomFlType);
 			airspaceVolumeType.setLowerLimit(bottomFlSection);
 
 			ValDistanceVerticalType topHeightType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-			topHeightType.setUom(translatedSigmet.getfSection().getVerticalLocation().getUnits().getStringValue());
-			topHeightType.setValue(String.valueOf(translatedSigmet.getfSection().getVerticalLocation().getTopMarginMeters().get()));
+			topHeightType.setUom(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getUnits().getStringValue());
+			topHeightType.setValue(String.valueOf(translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation().getTopMarginMeters().get()));
 			JAXBElement<ValDistanceVerticalType> bottomHeightSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeUpperLimit(topHeightType);
 			airspaceVolumeType.setLowerLimit(bottomHeightSection);

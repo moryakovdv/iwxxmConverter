@@ -40,6 +40,8 @@ import org.gamc.spmi.iwxxmConverter.tafconverter.TAFCloudSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.AerodromeAirTemperatureForecastPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AerodromeAirTemperatureForecastType;
@@ -94,6 +96,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 	private String timePeriodEndPosition = "";
 
 	private TAFTacMessage translatedTaf;
+	protected Logger logger = LoggerFactory.getLogger(TAFConverterV3.class);
 
 		
 	/**
@@ -106,6 +109,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		logger.debug("Parsing "+ tac);
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
 		
@@ -118,6 +122,8 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 		catch(ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createTAFType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 		}
 		String xmlResult = marshallMessageToXML(result);
 		return xmlResult;

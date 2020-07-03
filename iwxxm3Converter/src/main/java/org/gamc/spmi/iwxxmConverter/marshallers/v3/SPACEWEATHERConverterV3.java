@@ -27,6 +27,8 @@ import org.gamc.spmi.iwxxmConverter.spaceweatherconverter.SpaceWeatherEffectLoca
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AirspaceVolumePropertyType;
@@ -75,10 +77,15 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 	final static String DAYLIGHT_SIDE = "DAYLIGHT_SIDE";
 	final static int RADIUS = 10100;
+	protected Logger logger = LoggerFactory.getLogger(SPACEWEATHERConverterV3.class);
+
 
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		
+		logger.debug("Parsing "+ tac);
+
 		SPACEWEATHERTacMessage swxMessage = new SPACEWEATHERTacMessage(tac);
 
 		SpaceWeatherAdvisoryType result;
@@ -87,9 +94,11 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 			swxMessage.parseMessage();
 			result = convertMessage(swxMessage);
 
-		} catch (ParsingException pa) {
+		} catch (ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createSpaceWeatherAdvisoryType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 
 		}
 

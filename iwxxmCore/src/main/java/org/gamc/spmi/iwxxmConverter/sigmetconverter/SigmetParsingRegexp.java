@@ -43,12 +43,17 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetHeader = Pattern.compile(
 			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	       //"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
-			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?");
+			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})(?:-|–)?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?");
 	
 	public final static Pattern sigmetCancel = Pattern.compile("");
 	
 	/**Pattern for phenomenas except VA,VC*/
 	public final static Pattern sigmetPhenomena = Pattern.compile("((?:\\s+|^)?(?<severity>ISOL|OBSC|SQL|EMBD|FRQ|SEV|HVY))?\\s+(?<phenomena>.*?)\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
+	
+	/**Pattern for TC*/
+	public final static Pattern sigmetCyclonePhenomena = Pattern.compile("((?:\\s+|^)?(?<phenomena>TC))\\s+?(?<name>(.)*)?\\s+?(?<position>(?:PSN)(.*)(?:CB))\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
+
+	
 	public final static Pattern sigmetPhenomenaTimestamp = Pattern
 			.compile("(?<hh>\\d{2})(?<mm>\\d{2})");
 	public final static Pattern sigmetType = Pattern.compile("(?<sigmetType>\\sTC|VA\\s)");
@@ -58,7 +63,6 @@ public class SigmetParsingRegexp {
 	
 	/**Pattern to determine polygon*/
 	public final static Pattern sigmetInPolygon = Pattern.compile("(?<isInPolygon>WI)\\s+(\\D+)");
-	
 	public final static Pattern sigmetInPolygonVolcano = Pattern.compile("(?<isInPolygon>WI|)\\s+(\\D+)");
 	/**Pattern to extract coordinate point*/
 	public final static Pattern sigmetCoordPoint = Pattern.compile("(?<point>(?<latitude>N|S)(?<ladeg>\\d{2})(?<lamin>\\d{2})?\\s+(?<longitude>E|W)(?<lodeg>\\d{3})(?<lomin>\\d{0,2})?)");
@@ -88,7 +92,10 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetMovement = Pattern.compile("((?<isStationery>STNR)|(MOV\\s+(?<movDirection>[A-Z]{1,3})\\s+(?<movSpeed>\\d+)?(?<speedunits>KMH|KT)?))");
 	
 	/**Forecasted position of phenomenon*/
-	public final static Pattern sigmetForecastSection = Pattern.compile("(FCST\\s+AT\\s+|FCST\\s+)(?<time>\\d{4})Z\\s+(?<location>.*)");
+	//public final static Pattern sigmetForecastSection = Pattern.compile("(FCST\\s+AT\\s+|FCST\\s+)(?<time>\\d{4})Z\\s+(?<location>.*)");
+	public final static Pattern sigmetForecastSection = Pattern.compile("FCST(?:\\s+AT\\s+)?(?<time>\\d{4}Z)?\\s+(?<location>(.|\\s)+)");
+	
+	public final static Pattern sigmetCycloneForecastSection = Pattern.compile("FCST(?:\\s+AT\\s+)?(?<time>\\d{4}Z)?\\s+TC\\s+CEN(T)?(E)?R(E)?\\s+PSN\\s+(?<location>(.|\\s)+)");
 	
 	/**Vertical length (height) of the phenomena*/
 	//public final static Pattern sigmetLevel = Pattern.compile("(?<hastopfl>(?<top>TOP)\\s+(?<above>ABV)?\\s*FL(?<fl>\\d+))|(?<hassurface>(?<surface>SFC)\\/(FL(?<topfl>(\\d+))|(?<heightmeters>\\d+)M))|(?<hasbothfls>FL(?<lowfl>\\d+)\\/(?<highfl>\\d+))");
@@ -98,5 +105,8 @@ public class SigmetParsingRegexp {
 	/**Radioactive cloud mentioned WITHIN some radius from point*/
 	public final static Pattern sigmetWithinRadius=Pattern.compile("(?:WI\\s+)(?<radius>\\d+)(?<radiusUnit>KM|NM)(?:\\s+OF\\s+)(?<point>(?<latitude>N|S)(?<ladeg>\\d{2})(?<lamin>\\d{0,2})?\\s+(?<longitude>E|W)(?<lodeg>\\d{3})(?<lomin>\\d{0,2})?)");
 	
+	/**TC radius from center point*/
+	public final static Pattern sigmetCycloneWithinRadius=Pattern.compile("(?:WI\\s+)(?<radius>\\d+)(?<radiusUnit>KM|NM)(?:\\s+OF\\s+TC\\s+CENTRE)");
+
 	
 }

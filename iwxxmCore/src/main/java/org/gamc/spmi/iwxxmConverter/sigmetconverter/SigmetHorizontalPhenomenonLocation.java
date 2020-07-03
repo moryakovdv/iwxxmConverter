@@ -130,5 +130,12 @@ public class SigmetHorizontalPhenomenonLocation implements Serializable {
 		this.singlePoint = singlePoint;
 	}
 	
+	/**Section is filled with data if one of criteria is present*/
+	public boolean isSectionFilled() {
+		
+		boolean filled = isEntireFIR()||isInPolygon()||isWithinCorridor()||isWithinRadius();
+		return filled;
+	}
+	
 	
 }

@@ -94,6 +94,9 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	private  final schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory();
 	private  final schemabindings31.aero.aixm.schema._5_1.ObjectFactory ofAIXM = new schemabindings31.aero.aixm.schema._5_1.ObjectFactory();
 	
+	private  final schemabindings31._int.wmo.def.metce._2013.ObjectFactory ofMETCE = new  schemabindings31._int.wmo.def.metce._2013.ObjectFactory();
+
+	
 	/*WMO registers**/
 	private final WMONilReasonRegister nilRegister = new WMONilReasonRegister();
 	
@@ -612,6 +615,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		
 		return geoService;
 		
+	}
+
+	public schemabindings31._int.wmo.def.metce._2013.ObjectFactory getOfMETCE() {
+		return ofMETCE;
 	}
 
 	

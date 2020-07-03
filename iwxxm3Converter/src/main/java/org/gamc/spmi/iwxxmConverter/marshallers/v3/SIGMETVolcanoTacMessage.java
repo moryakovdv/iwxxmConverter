@@ -38,76 +38,12 @@ import org.joda.time.Interval;
  * 
  * @author moryakov
  */
-public class SIGMETVolcanoTacMessage extends TacMessageImpl {
+public class SIGMETVolcanoTacMessage extends SIGMETTacMessage {
 
-	public enum Type {
-		METEO, VOLCANO, CYCLONE;
-	}
-
-	private String sigmetDataType;
-	private String issueRegion;
-	private int bulletinNumber;
-	private String disseminatingCentre;
-	/* issuedDateTime */
-
-	private String sigmetNumber;
+	
 	private Type sigmetType = Type.VOLCANO;
 
-	private String cancelSigmetNumber;
-	private DateTime cancelSigmetDateTimeFrom;
-	private DateTime cancelSigmetDateTimeTo;
-
-	private DateTime validFrom;
-	private DateTime validTo;
-
-	private String watchOffice;
-	private String firCode;
-	private String firName;
-	private SigmetVolcanoForecastSection fSection;
-	private SigmetVolcanoPhenomenonDescription phenomenonDescription;
-	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
-	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation();
-
-	public String getSigmetDataType() {
-		return sigmetDataType;
-	}
-
-	public void setSigmetDataType(String sigmetDataType) {
-		this.sigmetDataType = sigmetDataType;
-	}
-
-	public String getIssueRegion() {
-		return issueRegion;
-	}
-
-	public void setIssueRegion(String issueRegion) {
-		this.issueRegion = issueRegion;
-	}
-
-	public int getBulletinNumber() {
-		return bulletinNumber;
-	}
-
-	public void setBulletinNumber(int bulletinNumber) {
-		this.bulletinNumber = bulletinNumber;
-	}
-
-	public String getDisseminatingCentre() {
-		return disseminatingCentre;
-	}
-
-	public void setDisseminatingCentre(String disseminatingCentre) {
-		this.disseminatingCentre = disseminatingCentre;
-	}
-
-	public String getSigmetNumber() {
-		return sigmetNumber;
-	}
-
-	public void setSigmetNumber(String sigmetNumber) {
-		this.sigmetNumber = sigmetNumber;
-	}
-
+	
 	public Type getSigmetType() {
 		return sigmetType;
 	}
@@ -116,72 +52,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 		this.sigmetType = sigmetType;
 	}
 
-	public DateTime getValidFrom() {
-		return validFrom;
-	}
 
-	public void setValidFrom(DateTime validFrom) {
-		this.validFrom = validFrom;
-	}
-
-	public DateTime getValidTo() {
-		return validTo;
-	}
-
-	public void setValidTo(DateTime validTo) {
-		this.validTo = validTo;
-	}
-
-	public String getWatchOffice() {
-		return watchOffice;
-	}
-
-	public void setWatchOffice(String watchOffice) {
-		this.watchOffice = watchOffice;
-	}
-
-	public String getFirCode() {
-		return firCode;
-	}
-
-	public void setFirCode(String firCode) {
-		this.firCode = firCode;
-	}
-
-	public String getFirName() {
-		return firName;
-	}
-
-	public void setFirName(String firName) {
-		this.firName = firName;
-	}
-
-	public SigmetVolcanoPhenomenonDescription getPhenomenonDescription() {
-		return phenomenonDescription;
-	}
-
-	/** Description of phenomena */
-	public void setPhenomenonDescription(SigmetVolcanoPhenomenonDescription phenomenonDescription) {
-		this.phenomenonDescription = phenomenonDescription;
-	}
-
-	/** Horizontal location of phenomena */
-	public SigmetHorizontalPhenomenonLocation getHorizontalLocation() {
-		return horizontalLocation;
-	}
-
-	public void setHorizontalLocation(SigmetHorizontalPhenomenonLocation horizontalLocation) {
-		this.horizontalLocation = horizontalLocation;
-	}
-
-	/** Vertical extension of phenomena */
-	public SigmetVerticalPhenomenonLocation getVerticalLocation() {
-		return verticalLocation;
-	}
-
-	public void setVerticalLocation(SigmetVerticalPhenomenonLocation verticalLocation) {
-		this.verticalLocation = verticalLocation;
-	}
 
 	public SIGMETVolcanoTacMessage(String initialTacMessage) {
 		super(initialTacMessage);
@@ -288,7 +159,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			 * Type.CYCLONE; break; case "VA": sigmetType = Type.VOLCANO; break; default:
 			 * sigmetType = Type.METEO; break; } } } else { sigmetType = Type.METEO; }
 			 */
-			SigmetVolcanoPhenomenonDescription phenom = new SigmetVolcanoPhenomenonDescription(
+			SigmetPhenomenonDescription phenom = new SigmetPhenomenonDescription(
 					tac.substring(0, lastIndex));
 			String sevS = matcherPhenomena.group("severity");
 			String phS = matcherPhenomena.group("phenomena");
@@ -296,9 +167,9 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			String atTimeS = matcherPhenomena.group("atTime");
 
 			if (sevS != null)
-				phenom.setPhenomenonSeverity(SigmetVolcanoPhenomenonDescription.Severity.valueOf(sevS));
+				phenom.setPhenomenonSeverity(Severity.valueOf(sevS));
 			phenom.setPhenomenon(phS);
-			phenom.setPhenomenonObservation(SigmetVolcanoPhenomenonDescription.ObservationType.valueOf(obsTypeS));
+			phenom.setPhenomenonObservation(ObservationType.valueOf(obsTypeS));
 
 			DateTime parentDateTime = this.getMessageIssueDateTime();
 
@@ -307,7 +178,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 							parentDateTime);
 			phenom.setPhenomenonTimeStamp(dtAT);
 
-			this.setPhenomenonDescription(phenom);
+			setPhenomenonDescription(phenom);
 
 			tac.delete(0, lastIndex);
 		} else
@@ -321,17 +192,16 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 		if (matcherFcst.find()) {
 			int lastIndex = matcherFcst.end();
 			StringBuffer foracastgr = new StringBuffer(matcherFcst.group());
-			fSection = new SigmetVolcanoForecastSection(tac.substring(matcherFcst.start(), lastIndex));
-			this.getPhenomenonDescription().setForecastSection(fSection);
+			getPhenomenonDescription().setForecastSection(new SigmetForecastSection(tac.substring(matcherFcst.start(), lastIndex)));
 			String time = matcherFcst.group("time");
 			String location = matcherFcst.group("location");
 			DateTime parentDateTime = this.getMessageIssueDateTime();
 
 			DateTime dtAT = time == null ? parentDateTime
-					: fSection.parseSectionDateTimeToken(SigmetParsingRegexp.sigmetPhenomenaTimestamp, time,
+					: 	getPhenomenonDescription().getForecastSection().parseSectionDateTimeToken(SigmetParsingRegexp.sigmetPhenomenaTimestamp, time,
 							parentDateTime);
 
-			fSection.setForecastedTime(dtAT);
+			getPhenomenonDescription().getForecastSection().setForecastedTime(dtAT);
 			tac.delete(matcherFcst.start(), lastIndex);
 			fillForecastLocationSection(foracastgr);
 		}
@@ -370,19 +240,19 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 	protected StringBuffer fillForecastLocationSection(StringBuffer tac) {
 
 		fillForecastEntireFIRLocation(tac);
-		if (this.getfSection().getHorizontalLocation().isEntireFIR())
+		if (getPhenomenonDescription().getForecastSection().getHorizontalLocation().isEntireFIR())
 			return tac; // not necessary to check location further
 
 		fillForecastWithinPolygon(tac);
-		if (this.getfSection().getHorizontalLocation().isInPolygon())
+		if (getPhenomenonDescription().getForecastSection().getHorizontalLocation().isInPolygon())
 			return tac; // not necessary to check location further
 
 		fillForecastWithinCorridor(tac);
-		if (this.getfSection().getHorizontalLocation().isWithinCorridor())
+		if (getPhenomenonDescription().getForecastSection().getHorizontalLocation().isWithinCorridor())
 			return tac; // not necessary to check location further
 
 		fillForecastWithinRadius(tac);
-		if (this.getfSection().getHorizontalLocation().isWithinRadius())
+		if (getPhenomenonDescription().getForecastSection().getHorizontalLocation().isWithinRadius())
 			return tac;
 
 		fillForecastZigZagLine(tac);
@@ -518,7 +388,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 				lastMatch = matcherCoordPoint.end();
 
 			}
-			this.getfSection().getHorizontalLocation().getDirectionsFromLines()
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().getDirectionsFromLines()
 					.add(new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetZigZagLine));
 
 			tac.delete(startIndex, lastMatch);
@@ -558,7 +428,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 
 		Matcher matcherRadius = SigmetParsingRegexp.sigmetWithinRadius.matcher(tac);
 		if (matcherRadius.find()) {
-			this.getfSection().getHorizontalLocation().setWithinRadius(true);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWithinRadius(true);
 			String radius = matcherRadius.group("radius");
 			String units = matcherRadius.group("radiusUnit");
 
@@ -568,13 +438,13 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			String lon = matcherRadius.group("longitude");
 			String loDeg = matcherRadius.group("lodeg");
 			String loMin = matcherRadius.group("lomin");
-			this.getfSection().getHorizontalLocation().setWideness(Integer.valueOf(radius));
-			this.getfSection().getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWideness(Integer.valueOf(radius));
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
 			CoordPoint center = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
 					Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
-			this.getfSection().getHorizontalLocation().setPoint(center);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setPoint(center);
 
-			this.getfSection().getHorizontalLocation().setWideness(Integer.parseInt(radius));
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWideness(Integer.parseInt(radius));
 			/** TODO: add center corridor line */
 		}
 
@@ -587,7 +457,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			String intensity = matcherIntensity.group("intensity");
 
 			this.getPhenomenonDescription()
-					.setIntencity(SigmetVolcanoPhenomenonDescription.Intensity.valueOf(intensity));
+					.setIntencity(SigmetPhenomenonDescription.Intensity.valueOf(intensity));
 			tac.delete(matcherIntensity.start(), matcherIntensity.end());
 		}
 		return tac;
@@ -715,7 +585,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 	protected StringBuffer fillForecastWithinPolygon(StringBuffer tac) {
 		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygonVolcano.matcher(tac);
 		if (matcherWI.find()) {
-			this.getfSection().getHorizontalLocation().setInPolygon(true);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setInPolygon(true);
 			int startIndex = matcherWI.start();
 
 			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
@@ -732,7 +602,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 				CoordPoint polygonApex = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
 						Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg),
 						Integer.parseInt(loMin));
-				this.getfSection().getHorizontalLocation().getPolygonPoints().add(polygonApex);
+				getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPolygonPoints().add(polygonApex);
 
 				lastMatch = matcherCoordPoint.end();
 
@@ -763,9 +633,9 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 	protected StringBuffer fillForecastWithinCorridor(StringBuffer tac) {
 		Matcher matcherCorridor = SigmetParsingRegexp.sigmetWithinCorridor.matcher(tac);
 		if (matcherCorridor.find()) {
-			this.getfSection().getHorizontalLocation().setWithinCorridor(true);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWithinCorridor(true);
 			String range = matcherCorridor.group("range");
-			this.getfSection().getHorizontalLocation().setWideness(Integer.parseInt(range));
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setWideness(Integer.parseInt(range));
 			/** TODO: add center corridor line */
 		}
 
@@ -858,7 +728,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			line.setEndPoint(endPoint);
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(lineAzimuth), line);
 
-			this.getfSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
 			lastMatch = matcherDirLine.end();
 		}
 		tac.delete(0, lastMatch);
@@ -920,7 +790,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
 					pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
 			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);
-			this.getfSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
 			lastMatch = matcherDirLine.end();
 		}
 		tac.delete(0, lastMatch);
@@ -949,7 +819,7 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 		Matcher matcherFIR = SigmetParsingRegexp.sigmetEntireFir.matcher(tac);
 		if (matcherFIR.find()) {
 
-			this.getfSection().getHorizontalLocation().setEntireFIR(true);
+			getPhenomenonDescription().getForecastSection().getHorizontalLocation().setEntireFIR(true);
 			int lastIndex = matcherFIR.end();
 			tac.delete(0, lastIndex);
 			return tac;
@@ -969,47 +839,6 @@ public class SIGMETVolcanoTacMessage extends TacMessageImpl {
 		this.messageStatusType = messageStatusType;
 	}
 
-	@Override
-	public Interval getValidityInterval() {
-
-		return new Interval(this.validFrom, this.validTo);
-	}
-
-	@Override
-	public Pattern getHeaderPattern() {
-		return SigmetParsingRegexp.sigmetHeader;
-	}
-
-	public String getCancelSigmetNumber() {
-		return cancelSigmetNumber;
-	}
-
-	public void setCancelSigmetNumber(String cancelSigmetNumber) {
-		this.cancelSigmetNumber = cancelSigmetNumber;
-	}
-
-	public DateTime getCancelSigmetDateTimeFrom() {
-		return cancelSigmetDateTimeFrom;
-	}
-
-	public void setCancelSigmetDateTimeFrom(DateTime cancelSigmetDateTimeFrom) {
-		this.cancelSigmetDateTimeFrom = cancelSigmetDateTimeFrom;
-	}
-
-	public DateTime getCancelSigmetDateTimeTo() {
-		return cancelSigmetDateTimeTo;
-	}
-
-	public void setCancelSigmetDateTimeTo(DateTime cancelSigmetDateTimeTo) {
-		this.cancelSigmetDateTimeTo = cancelSigmetDateTimeTo;
-	}
-
-	public SigmetVolcanoForecastSection getfSection() {
-		return fSection;
-	}
-
-	public void setfSection(SigmetVolcanoForecastSection fSection) {
-		this.fSection = fSection;
-	}
+	
 
 }

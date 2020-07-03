@@ -21,6 +21,8 @@ import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.AIRMETType;
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
@@ -78,10 +80,16 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 	private String dateTime = "";
 	private String dateTimePosition = "";
 	private AIRMETTacMessage translatedAirmet;
+	
+	protected Logger logger = LoggerFactory.getLogger(AIRMETConverterV3.class);
+
 
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+		
+		logger.debug("Parsing "+ tac);
+		
 		createdRunways.clear();
 
 		AIRMETTacMessage airmetMessage = new AIRMETTacMessage(tac);
@@ -91,9 +99,11 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 		try {
 			airmetMessage.parseMessage();
 			result = convertMessage(airmetMessage);
-		} catch (ParsingException pa) {
+		} catch (ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createAIRMETType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 
 		}
 

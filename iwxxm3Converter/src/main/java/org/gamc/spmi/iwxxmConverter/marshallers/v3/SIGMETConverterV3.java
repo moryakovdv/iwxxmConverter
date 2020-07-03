@@ -27,7 +27,10 @@ import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
+import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -45,6 +48,7 @@ import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
+import schemabindings31._int.icao.iwxxm._3.SIGMETPositionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETPositionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETPositionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
@@ -99,24 +103,26 @@ import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
 
-public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETType, IWXXM31Helpers> {
-	private TreeMap<String, String> createdRunways = new TreeMap<>();
-	String airTrafficUnit = "FIC";
-	String watchOfficeType = "MWO";
-	String firType = "OTHER:FIR_UIR";
-	String interpretation = "SNAPSHOT";
+public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType>
+		implements TacConverter<T, T1, IWXXM31Helpers> {
 
-	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
-	private String dateTime = "";
-	private String dateTimePosition = "";
-	private SIGMETTacMessage translatedSigmet;
+	protected String airTrafficUnit = "FIC";
+	protected String watchOfficeType = "MWO";
+	protected String firType = "OTHER:FIR_UIR";
+	protected String interpretation = "SNAPSHOT";
 
-	Logger logger = LoggerFactory.getLogger(SIGMETConverterV3.class);
+	protected IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
+	protected String dateTime = "";
+	protected String dateTimePosition = "";
+	protected SIGMETTacMessage translatedSigmet;
+
+	protected Logger logger = LoggerFactory.getLogger(SIGMETConverterV3.class);
 
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
-		createdRunways.clear();
+	
+		logger.debug("Parsing "+ tac);
 
 		SIGMETTacMessage sigmetMessage = new SIGMETTacMessage(tac);
 
@@ -125,9 +131,11 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		try {
 			sigmetMessage.parseMessage();
 			result = convertMessage(sigmetMessage);
-		} catch (ParsingException pa) {
+		} catch (ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createSIGMETType();
 			result.setTranslationFailedTAC(tac);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+
 
 		}
 
@@ -140,7 +148,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	public SIGMETType convertMessage(SIGMETTacMessage translatedMessage)
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
 		this.translatedSigmet = translatedMessage;
-		SIGMETType sigmetRootTag = iwxxmHelpers.getOfIWXXM().createSIGMETType();
+		T1 sigmetRootTag = (T1) iwxxmHelpers.getOfIWXXM().createSIGMETType();
 
 		StringOrRefType refTacString = iwxxmHelpers.getOfGML().createStringOrRefType();
 		refTacString.setValue(translatedMessage.getInitialTacString());
@@ -204,20 +212,20 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		default:
 			sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
 			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
+			if (translatedSigmet.getPhenomenonDescription().getForecastSection() != null)
+				sigmetRootTag.getForecastPositionAnalysis().add(setForecastAssociationRoleType());
 			break;
 		}
 		// create XML representation
 		return sigmetRootTag;
 	}
 
+	/** created main analysis section for phenomena description */
 	public AssociationRoleType setAssociationRoleType() {
 		// ---------------Association Role----------------//
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
-		// ---------------AirspaceVolumePropertyType----------------//
-		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
-		List<GTCalculatedRegion> listCoord = getGTCalculatedRegions();
-		air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord));
+		
 		// ---------------SIGMETEvolvingConditionType(Time)----------------//
 		AbstractTimeObjectPropertyType analysisTimeProperty = iwxxmHelpers.createAbstractTimeObject(
 				translatedSigmet.getPhenomenonDescription().getPhenomenonTimeStamp(), translatedSigmet.getIcaoCode());
@@ -231,8 +239,27 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 				.createSIGMETEvolvingConditionCollectionType();
 		JAXBElement<SIGMETEvolvingConditionCollectionType> evolvingAr = iwxxmHelpers.getOfIWXXM()
 				.createSIGMETEvolvingConditionCollection(sicol);
+		
+		// ---------------AirspaceVolumePropertyType----------------//
+		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
+
+		if (this.translatedSigmet.getHorizontalLocation().isSectionFilled() ||
+				this.translatedSigmet.getVerticalLocation().isSectionFilled()) {
+	
+				List<GTCalculatedRegion> listCoord = getGTCalculatedRegions(this.translatedSigmet.getHorizontalLocation());
+				air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord, this.translatedSigmet.getHorizontalLocation(),
+						this.translatedSigmet.getVerticalLocation()));
+		}
+		else {
+			air = createInapplicablePosition();
+		}
+		
 		evolvingType.setGeometry(air);
-		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		
+		
+		
+		
+		sicol.setId(iwxxmHelpers.generateUUIDv4(String.format("collection-%s-ts", translatedSigmet.getIcaoCode())));
 		// ---------------SIGMETEvolvingConditionType(PhenomenonObservation)----------------//
 		if (translatedSigmet.getPhenomenonDescription().getPhenomenonObservation().name().equals("FCST")) {
 			sicol.setTimeIndicator(TimeIndicatorType.FORECAST);
@@ -265,7 +292,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 				evolvingType.setSpeedOfMotion(speedType);
 			}
 		}
-		evolvingType.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%s-ts", translatedSigmet.getIcaoCode())));
+		evolvingType.setId(iwxxmHelpers.generateUUIDv4(String.format("type-%s-ts", translatedSigmet.getIcaoCode())));
 		if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("INTSF")) {
 			evolvingType.setIntensityChange(ExpectedIntensityChangeType.INTENSIFY);
 		} else if (translatedSigmet.getPhenomenonDescription().getIntencity().name().equals("WKN")) {
@@ -274,6 +301,69 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 			evolvingType.setIntensityChange(ExpectedIntensityChangeType.NO_CHANGE);
 		}
 		return asType;
+	}
+
+	/*** creates SIGMETPositionSection with nilReason if position is unknown */
+	public AirspaceVolumePropertyType createInapplicablePosition() {
+
+		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
+		air.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode("inapplicable"));
+
+		return air;
+	}
+
+	/** creates forecast section for phenomena */
+	public AssociationRoleType setForecastAssociationRoleType() {
+		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
+
+		// ---------------AirspaceVolumePropertyType----------------//
+
+		// ---------------SIGMETEvolvingConditionType(Time)----------------//
+		AbstractTimeObjectPropertyType analysisTimeProperty = iwxxmHelpers.createAbstractTimeObject(
+				translatedSigmet.getPhenomenonDescription().getPhenomenonTimeStamp(), translatedSigmet.getIcaoCode());
+		// ---------------SIGMETEvolvingConditionType----------------//
+		SIGMETPositionPropertyType evolvingTypeProp = iwxxmHelpers.getOfIWXXM().createSIGMETPositionPropertyType();
+		// ---------------SIGMETEvolvingConditionType----------------//
+		SIGMETPositionType forecastPositionType = iwxxmHelpers.getOfIWXXM().createSIGMETPositionType();
+
+		SIGMETPositionCollectionType sicol = iwxxmHelpers.getOfIWXXM().createSIGMETPositionCollectionType();
+		JAXBElement<SIGMETPositionCollectionType> evolvingAr = iwxxmHelpers.getOfIWXXM()
+				.createSIGMETPositionCollection(sicol);
+
+		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
+
+		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation().isSectionFilled()
+				||
+
+				translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()
+						.isSectionFilled()) {
+
+			List<GTCalculatedRegion> listCoord = getGTCalculatedRegions(
+					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation());
+
+			air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord,
+					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation(),
+					translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()));
+		} else {
+			
+			air = createInapplicablePosition();
+		}
+
+		forecastPositionType.setGeometry(air);
+
+		sicol.setId(iwxxmHelpers
+				.generateUUIDv4(String.format("collection-%s-forecast-ts", translatedSigmet.getIcaoCode())));
+
+		evolvingTypeProp.setSIGMETPosition(forecastPositionType);
+		sicol.getMember().add(evolvingTypeProp);
+		sicol.setPhenomenonTime(analysisTimeProperty);
+
+		forecastPositionType.setId(
+				iwxxmHelpers.generateUUIDv4(String.format("type-%s-forecast-ts", translatedSigmet.getIcaoCode())));
+
+		asType.setAny(evolvingAr);
+		return asType;
+
 	}
 
 	/*
@@ -332,53 +422,61 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	 * airS.setCentreline(curveProp); return airS; }
 	 */
 	/**
-	 * Coordinates calculation
+	 * Coordinates calculation from horisontal location
 	 * 
 	 * @throws GeoServiceException
 	 * 
 	 * @throws URISyntaxException
 	 */
-	public List<GTCalculatedRegion> getGTCalculatedRegions() {
+	public List<GTCalculatedRegion> getGTCalculatedRegions(SigmetHorizontalPhenomenonLocation location) {
 
 		try {
 			// Sigmet phenomena within polygon (WI)
-			if (translatedSigmet.getHorizontalLocation().isInPolygon()) {
+			if (location.isInPolygon()) {
 				LinkedList<GTCoordPoint> listPolygonPoints = new LinkedList<GTCoordPoint>();
-				translatedSigmet.getHorizontalLocation().getPolygonPoints().stream()
-						.forEach(new Consumer<CoordPoint>() {
+				location.getPolygonPoints().stream().forEach(new Consumer<CoordPoint>() {
 
-							@Override
-							public void accept(CoordPoint arg0) {
+					@Override
+					public void accept(CoordPoint arg0) {
 
-								listPolygonPoints.add(arg0.toGTCoordPoint());
-							}
-						});
+						listPolygonPoints.add(arg0.toGTCoordPoint());
+					}
+				});
 				if (listPolygonPoints.size() > 0)
 					return iwxxmHelpers.getGeoService().recalcFromPolygon(translatedSigmet.getFirCode(),
 							listPolygonPoints);
 			}
 
-			if (translatedSigmet.getHorizontalLocation().isEntireFIR()) {
+			if (location.isEntireFIR()) {
+				return iwxxmHelpers.getGeoService().recalcEntireFir(translatedSigmet.getFirCode());
+			}
+
+			if (location.isSinglePoint()) {
+				List<GTCalculatedRegion> result = new LinkedList<GTCalculatedRegion>();
+				result.add(iwxxmHelpers.getGeoService().recalcFromSinglePoint(location.getPoint().toGTCoordPoint()));
+				return result;
+
+			}
+
+			if (location.isWithinCorridor()) {
 				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
 			}
 
-			if (translatedSigmet.getHorizontalLocation().isWithinCorridor()) {
-				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
-			}
-			if (translatedSigmet.getHorizontalLocation().isWithinRadius()) {
-				throw new IllegalArgumentException("NOT IMPLEMENTED YET");
+			if (location.isWithinRadius()) {
+				List<GTCalculatedRegion> result = new LinkedList<GTCalculatedRegion>();
+				result.add(iwxxmHelpers.getGeoService().recalcFromSinglePoint(location.getPoint().toGTCoordPoint()));
+				return result;
 			}
 
 			LinkedList<GTDirectionFromLine> listLines = new LinkedList<GTDirectionFromLine>();
-			translatedSigmet.getHorizontalLocation().getDirectionsFromLines().stream()
-					.forEach(new Consumer<DirectionFromLine>() {
+			location.getDirectionsFromLines().stream().forEach(new Consumer<DirectionFromLine>() {
 
-						@Override
-						public void accept(DirectionFromLine arg0) {
+				@Override
+				public void accept(DirectionFromLine arg0) {
 
-							listLines.add(arg0.toGTDirectionFromLine());
-						}
-					});
+					listLines.add(arg0.toGTDirectionFromLine());
+				}
+			});
 			if (listLines.size() > 0)
 				return iwxxmHelpers.getGeoService().recalcFromLines(translatedSigmet.getFirCode(), listLines);
 		} catch (URISyntaxException e) {
@@ -392,17 +490,18 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	};
 
 	/** returns section for airspaceVolumeDescription */
-	public AirspaceVolumeType createAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion) {
+	public AirspaceVolumeType createAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion,
+			SigmetHorizontalPhenomenonLocation horizontalLocation, SigmetVerticalPhenomenonLocation verticalLocation) {
 
 		AirspaceVolumeType airspaceVolumeType = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
 		airspaceVolumeType.setId(iwxxmHelpers.generateUUIDv4("airspace-" + translatedSigmet.getIcaoCode()));
 
 		// lower limit if exists and check if on surface
-		if (translatedSigmet.getVerticalLocation().getBottomFL().isPresent()) {
+		if (verticalLocation.getBottomFL().isPresent()) {
 			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 
 			bottomFlType.setUom("FL");
-			bottomFlType.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getBottomFL().get()));
+			bottomFlType.setValue(String.valueOf(verticalLocation.getBottomFL().get()));
 			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeLowerLimit(bottomFlType);
 			airspaceVolumeType.setLowerLimit(bottomFlSection);
@@ -415,25 +514,25 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		}
 
 		// upper limit if exists
-		if (translatedSigmet.getVerticalLocation().getTopFL().isPresent()) {
+		if (verticalLocation.getTopFL().isPresent()) {
 
 			ValDistanceVerticalType topFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 			topFlType.setUom("FL");
 
-			if (translatedSigmet.getVerticalLocation().isTopMarginAboveFl()) {
+			if (verticalLocation.isTopMarginAboveFl()) {
 
 				ValDistanceVerticalType unknownType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
 				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
 				JAXBElement<ValDistanceVerticalType> unknownSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(unknownType);
 				airspaceVolumeType.setMaximumLimit(unknownSection);
-				topFlType.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getTopFL().get()));
+				topFlType.setValue(String.valueOf(verticalLocation.getTopFL().get()));
 			}
 			// Below top fl - set max as top fl, set upper as unknown
-			else if (translatedSigmet.getVerticalLocation().isTopMarginBelowFl()) {
+			else if (verticalLocation.isTopMarginBelowFl()) {
 
 				ValDistanceVerticalType topMaxType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-				topMaxType.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getTopFL().get()));
+				topMaxType.setValue(String.valueOf(verticalLocation.getTopFL().get()));
 
 				JAXBElement<ValDistanceVerticalType> topMaxSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(topMaxType);
@@ -441,7 +540,7 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 
 				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
 			} else {
-				topFlType.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getTopFL().get()));
+				topFlType.setValue(String.valueOf(verticalLocation.getTopFL().get()));
 			}
 
 			JAXBElement<ValDistanceVerticalType> topFlSection = iwxxmHelpers.getOfAIXM()
@@ -457,18 +556,17 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		}
 
 		// if height is observed in feet or meters and low bound is on surface
-		if (translatedSigmet.getVerticalLocation().isBottomMarginOnSurface()
-				&& translatedSigmet.getVerticalLocation().getTopMarginMeters().isPresent()) {
+		if (verticalLocation.isBottomMarginOnSurface() && verticalLocation.getTopMarginMeters().isPresent()) {
 			ValDistanceVerticalType bottomFlType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-			bottomFlType.setUom(translatedSigmet.getVerticalLocation().getUnits().getStringValue());
+			bottomFlType.setUom(verticalLocation.getUnits().getStringValue());
 			bottomFlType.setValue("0");
 			JAXBElement<ValDistanceVerticalType> bottomFlSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeUpperLimit(bottomFlType);
 			airspaceVolumeType.setLowerLimit(bottomFlSection);
 
 			ValDistanceVerticalType topHeightType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-			topHeightType.setUom(translatedSigmet.getVerticalLocation().getUnits().getStringValue());
-			topHeightType.setValue(String.valueOf(translatedSigmet.getVerticalLocation().getTopMarginMeters().get()));
+			topHeightType.setUom(verticalLocation.getUnits().getStringValue());
+			topHeightType.setValue(String.valueOf(verticalLocation.getTopMarginMeters().get()));
 			JAXBElement<ValDistanceVerticalType> bottomHeightSection = iwxxmHelpers.getOfAIXM()
 					.createAirspaceLayerTypeUpperLimit(topHeightType);
 			airspaceVolumeType.setLowerLimit(bottomHeightSection);
@@ -503,34 +601,99 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 		// Create patch for all coordinate regions
 		for (GTCalculatedRegion gtCoordsRegion : coordsRegion) {
 			LinkedList<Double> coords = gtCoordsRegion.getCoordinates();
-			// create polygon
-			PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
-			AbstractRingPropertyType ringType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
-			LinearRingType linearRingType = iwxxmHelpers.getOfGML().createLinearRingType();
 
-			// fill polygon with coords
-			DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
-			dpListType.getValue().addAll(coords);
-			dpListType.setCount(BigInteger.valueOf(coords.size()));
-			linearRingType.setPosList(dpListType);
+			if (horizontalLocation.isInPolygon()) {
 
-			// put polygon in the envelope
-			JAXBElement<LinearRingType> lrPt = iwxxmHelpers.getOfGML().createLinearRing(linearRingType);
-			ringType.setAbstractRing(lrPt);
-			patchType.setExterior(ringType);
+				// create polygon
+				PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
+				LinearRingType linearRingType = iwxxmHelpers.getOfGML().createLinearRingType();
 
-			JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
+				// fill polygon with coords
+				DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
+				dpListType.getValue().addAll(coords);
+				dpListType.setCount(BigInteger.valueOf(coords.size()));
+				linearRingType.setPosList(dpListType);
 
-			patchArray.getAbstractSurfacePatch().add(patch);
+				// put polygon in the envelope
+				JAXBElement<LinearRingType> lrPt = iwxxmHelpers.getOfGML().createLinearRing(linearRingType);
+				AbstractRingPropertyType ringType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
+				ringType.setAbstractRing(lrPt);
+				patchType.setExterior(ringType);
+
+				JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
+
+				patchArray.getAbstractSurfacePatch().add(patch);
+				
+				JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPatches(patchArray);
+
+				sfType.setPatches(pta);
+				
+			}
+
+			if (horizontalLocation.isWithinRadius()) {
+				// create ring with radius
+				PolygonPatchType patchType = iwxxmHelpers.getOfGML().createPolygonPatchType();
+				RingType ringType = iwxxmHelpers.getOfGML().createRingType();
+				
+				CurvePropertyType curveProperty = iwxxmHelpers.getOfGML().createCurvePropertyType();
+				CurveType curve = iwxxmHelpers.getOfGML().createCurveType();
+				curve.setId(iwxxmHelpers.generateUUIDv4("curve-" + translatedSigmet.getIcaoCode()));
+				
+				
+				CurveSegmentArrayPropertyType segmentsArray = iwxxmHelpers.getOfGML().createCurveSegmentArrayPropertyType();
+				
+				CircleByCenterPointType centerCircle =  iwxxmHelpers.getOfGML().createCircleByCenterPointType();
+				
+				//center
+				DirectPositionListType dpListType = iwxxmHelpers.getOfGML().createDirectPositionListType();
+				dpListType.getValue().addAll(coords);
+				dpListType.setCount(BigInteger.valueOf(coords.size()));
+				centerCircle.setPosList(dpListType);
+				
+				
+				
+				//radius
+				LengthType radius = iwxxmHelpers.getOfGML().createLengthType();
+				radius.setUom(horizontalLocation.getWidenessUnits().getStringValue());
+				radius.setValue(horizontalLocation.getWideness());
+				centerCircle.setRadius(radius);
+				
+				
+				
+				JAXBElement<CircleByCenterPointType> centerCircleElement = iwxxmHelpers.getOfGML().createCircleByCenterPoint(centerCircle);
+				segmentsArray.getAbstractCurveSegment().add(centerCircleElement);
+				curve.setSegments(segmentsArray);
+				
+				JAXBElement<CurveType> curveElement = iwxxmHelpers.getOfGML().createCurve(curve);
+				
+				curveProperty.setAbstractCurve(curveElement);
+				ringType.getCurveMember().add(curveProperty);
+				
+				
+			
+
+				// put polygon in the envelope
+				JAXBElement<RingType> lrPt = iwxxmHelpers.getOfGML().createRing(ringType);
+				AbstractRingPropertyType abstractRingType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
+				abstractRingType.setAbstractRing(lrPt);
+				patchType.setExterior(abstractRingType);
+
+				JAXBElement<PolygonPatchType> patch = iwxxmHelpers.getOfGML().createPolygonPatch(patchType);
+
+				patchArray.getAbstractSurfacePatch().add(patch);
+				
+				JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPolygonPatches(patchArray);
+
+				sfType.setPatches(pta);
+			}
 
 		}
 
-		JAXBElement<SurfacePatchArrayPropertyType> pta = iwxxmHelpers.getOfGML().createPatches(patchArray);
-
-		sfType.setPatches(pta);
+		
 
 		JAXBElement<SurfaceType> syrfaceElement = iwxxmHelpers.getOfAIXM().createSurface(sfType);
 		surfaceSection.setSurface(syrfaceElement);
+		
 		JAXBElement<SurfacePropertyType> spt = iwxxmHelpers.getOfAIXM()
 				.createAirspaceVolumeTypeHorizontalProjection(surfaceSection);
 		// create aixm:horizontalProjection
@@ -656,11 +819,10 @@ public class SIGMETConverterV3 implements TacConverter<SIGMETTacMessage, SIGMETT
 	}
 
 	@Override
-	public SIGMETType addTranslationCentreHeader(SIGMETType report) throws DatatypeConfigurationException {
-		report = iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
+	public T1 addTranslationCentreHeader(T1 report) throws DatatypeConfigurationException {
+		return iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWV", "Moscow, RU");
-		// report.setTranslationFailedTAC("");
-		return report;
+
 	}
 
 	@Override
