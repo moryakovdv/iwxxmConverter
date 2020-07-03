@@ -28,6 +28,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETDefiningTypeConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTropicalConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETVolcanoConverterV3;
@@ -85,8 +86,8 @@ public class SigmetConversionTest {
 	String sigmetHeavyGR = "WSRS31RUMA 111143 XXX\n" + " YUDD SIGMET 2 VALID 101200/101600 YUSO-\n"
 			+ "      YUDD SHANLON FIR/UIR FRQ TSGR S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 
-	String sigmetTestYUDDTrop = "WSRS31RUMA 111143 XXX\n" + "YUCC SIGMET 3 VALID 251600/252200 YUDO-\r\n"
-			+ "      YUCC AMSWELL FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC\r\n"
+	String sigmetTestYUDDTrop = "WSRS31RUMA 111143 XXX\n" + "EGGX SIGMET 3 VALID 251600/252200 YUDO-\r\n"
+			+ "      EGGX AMSWELL FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC\r\n"
 			+ "      FCST AT 2200Z TC CENTRE PSN N2740 W07345=";
 	String sigmetTestYUDDVolc = "WSRS31RUMA 111143 XXX\n" + "EGGX SIGMET 4 VALID 251600/252200 EGRR \r\n"
 			+ "EGGX SHANWICK OCEANIC FIR VA ERUPTION MT HEKLA PSN N6359 W01940 VA CLD OBS AT 1600Z SFC/FL550 N6000 W01150 - N5900 W01300 - N6000 W01600 - N6000 W01150 NC FCST 2200Z N6000 W01200 - N5800 W01400 - N6000 W01535 - N6000 W01200=";
@@ -137,24 +138,20 @@ public class SigmetConversionTest {
 	// @Test
 	public void testModIceSigmet()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		SIGMETConverterV3 mc = new SIGMETConverterV3();
-		String result = mc.convertTacToXML(sigmetSevIce);
-
-		System.out.println(result);
-	}
-
-	/** @author alex */
-	//@Test
-	public void testTestTrop()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
-		SIGMETTropicalConverterV3 mc = new SIGMETTropicalConverterV3();
-		String result = mc.convertTacToXML(sigmetTestYUDDTrop);
-
-		System.out.println(result);
+		SIGMETDefiningTypeConverterV3 mc = new SIGMETDefiningTypeConverterV3();
+		mc.convertDefiningType(sigmetSevIce);
 	}
 
 	/** @author alex */
 	@Test
+	public void testTestTrop()
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+		SIGMETDefiningTypeConverterV3 mc = new SIGMETDefiningTypeConverterV3();
+		mc.convertDefiningType(sigmetTestYUDDTrop);
+	}
+
+	/** @author alex */
+	// @Test
 	public void testTestVolc()
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
 		SIGMETVolcanoConverterV3 mc = new SIGMETVolcanoConverterV3();

@@ -23,23 +23,26 @@ import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetMovingSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetParsingRegexp;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalForecastSection;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalPhenomenonDescription;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Intensity;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.ObservationType;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Severity;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalForecastSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+/**
+ * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV
+ * or WC)
+ * 
+ * @author moryakov
+ */
 public class SIGMETTropicalTacMessage extends TacMessageImpl {
-	/**
-	 * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV
-	 * or WC)
-	 * 
-	 * @author moryakov
-	 */
 
 	public enum Type {
-		METEO, VOLCANO, CYCLONE;
+		METEO, Tropical, CYCLONE;
 	}
 
 	private String sigmetDataType;
@@ -49,7 +52,7 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 	/* issuedDateTime */
 
 	private String sigmetNumber;
-	private Type sigmetType = Type.CYCLONE;
+	private Type sigmetType = Type.Tropical;
 
 	private String cancelSigmetNumber;
 	private DateTime cancelSigmetDateTimeFrom;
@@ -61,8 +64,8 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 	private String watchOffice;
 	private String firCode;
 	private String firName;
-
-	private SigmetPhenomenonDescription phenomenonDescription;
+	private SigmetTropicalForecastSection fSection;
+	private SigmetTropicalPhenomenonDescription phenomenonDescription;
 	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
 	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation();
 
@@ -154,12 +157,12 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		this.firName = firName;
 	}
 
-	public SigmetPhenomenonDescription getPhenomenonDescription() {
+	public SigmetTropicalPhenomenonDescription getPhenomenonDescription() {
 		return phenomenonDescription;
 	}
 
 	/** Description of phenomena */
-	public void setPhenomenonDescription(SigmetPhenomenonDescription phenomenonDescription) {
+	public void setPhenomenonDescription(SigmetTropicalPhenomenonDescription phenomenonDescription) {
 		this.phenomenonDescription = phenomenonDescription;
 	}
 
@@ -182,9 +185,9 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 	}
 
 	public SIGMETTropicalTacMessage(String initialTacMessage) {
-			super(initialTacMessage);
+		super(initialTacMessage);
 
-		}
+	}
 
 	MessageStatusType messageStatusType = MessageStatusType.NORMAL;
 
@@ -279,34 +282,24 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		if (matcherPhenomena.find()) {
 
 			int lastIndex = matcherPhenomena.end();
-			/*Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac);
-			if (sigmetMachType.find()) {
-				while (sigmetMachType.find()) {
-					switch (sigmetMachType.group("sigmetType").trim()) {
-					case "TC":
-						sigmetType = Type.CYCLONE;
-						break;
-					case "VA":
-						sigmetType = Type.VOLCANO;
-						break;
-					default:
-						sigmetType = Type.METEO;
-						break;
-					}
-				}
-			} else {
-				sigmetType = Type.METEO;
-			}*/
-			SigmetPhenomenonDescription phenom = new SigmetPhenomenonDescription(tac.substring(0, lastIndex));
+			/*
+			 * Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac); if
+			 * (sigmetMachType.find()) { while (sigmetMachType.find()) { switch
+			 * (sigmetMachType.group("sigmetType").trim()) { case "TC": sigmetType =
+			 * Type.CYCLONE; break; case "VA": sigmetType = Type.Tropical; break; default:
+			 * sigmetType = Type.METEO; break; } } } else { sigmetType = Type.METEO; }
+			 */
+			SigmetTropicalPhenomenonDescription phenom = new SigmetTropicalPhenomenonDescription(
+					tac.substring(0, lastIndex));
 			String sevS = matcherPhenomena.group("severity");
 			String phS = matcherPhenomena.group("phenomena");
 			String obsTypeS = matcherPhenomena.group("obsfcst");
 			String atTimeS = matcherPhenomena.group("atTime");
 
 			if (sevS != null)
-				phenom.setPhenomenonSeverity(Severity.valueOf(sevS));
+				phenom.setPhenomenonSeverity(SigmetTropicalPhenomenonDescription.Severity.valueOf(sevS));
 			phenom.setPhenomenon(phS);
-			phenom.setPhenomenonObservation(ObservationType.valueOf(obsTypeS));
+			phenom.setPhenomenonObservation(SigmetTropicalPhenomenonDescription.ObservationType.valueOf(obsTypeS));
 
 			DateTime parentDateTime = this.getMessageIssueDateTime();
 
@@ -328,11 +321,11 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		Matcher matcherFcst = SigmetParsingRegexp.sigmetForecastSection.matcher(tac);
 		if (matcherFcst.find()) {
 			int lastIndex = matcherFcst.end();
-
-			SigmetForecastSection fSection = new SigmetForecastSection(tac.substring(matcherFcst.start(), lastIndex));
+			StringBuffer foracastgr = new StringBuffer(matcherFcst.group());
+			fSection = new SigmetTropicalForecastSection(tac.substring(matcherFcst.start(), lastIndex));
 			this.getPhenomenonDescription().setForecastSection(fSection);
 			String time = matcherFcst.group("time");
-			String location = matcherFcst.group("location");
+			//String location = matcherFcst.group("location");
 			DateTime parentDateTime = this.getMessageIssueDateTime();
 
 			DateTime dtAT = time == null ? parentDateTime
@@ -340,30 +333,8 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 							parentDateTime);
 
 			fSection.setForecastedTime(dtAT);
-			Matcher matcherFcstLocation = SigmetParsingRegexp.sigmetOnePointLine.matcher(location);
-
-			while (matcherFcstLocation.find()) {
-				String azimuth = matcherFcstLocation.group("azimuth");
-				String pointCoordLat = matcherFcstLocation.group("pointCoordLat");
-				String pointDegLat = matcherFcstLocation.group("degLat");
-				String pointMinLat = matcherFcstLocation.group("minLat");
-
-				String pointCoordLong = matcherFcstLocation.group("pointCoordLong");
-				String pointDegLong = matcherFcstLocation.group("degLong");
-				String pointMinLong = matcherFcstLocation.group("minLong");
-
-				String pointCoord = StringConstants.coalesce(pointCoordLat, pointCoordLong);
-				String pointDeg = StringConstants.coalesce(pointDegLat, pointDegLong);
-				String pointMin = StringConstants.coalesce(pointMinLat, pointMinLong);
-
-				Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
-						pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
-				DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);
-
-				fSection.getAreas().add(dirLine);
-			}
-
 			tac.delete(matcherFcst.start(), lastIndex);
+			fillForecastLocationSection(foracastgr);
 		}
 
 		return tac;
@@ -397,7 +368,62 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	protected StringBuffer fillForecastLocationSection(StringBuffer tac) {
+
+		fillForecastEntireFIRLocation(tac);
+		if (this.getfSection().getHorizontalLocation().isEntireFIR())
+			return tac; // not necessary to check location further
+
+		fillForecastWithinPolygon(tac);
+		if (this.getfSection().getHorizontalLocation().isInPolygon())
+			return tac; // not necessary to check location further
+
+		fillForecastWithinCorridor(tac);
+		if (this.getfSection().getHorizontalLocation().isWithinCorridor())
+			return tac; // not necessary to check location further
+
+		fillForecastWithinRadius(tac);
+		if (this.getfSection().getHorizontalLocation().isWithinRadius())
+			return tac;
+
+		fillForecastZigZagLine(tac);
+
+		fillForecastLineAreaLocation(tac);
+		fillForecastMultiLineLocation(tac);
+
+		fillForecastOneCoordinatePoint(tac);
+
+		return tac;
+	}
+
 	protected StringBuffer fillOneCoordinatePoint(StringBuffer tac) {
+		Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+		int lastMatch = 0;
+		if (matcherCoordPoint.find()) {
+			int startIndex = matcherCoordPoint.start();
+			String lat = matcherCoordPoint.group("latitude");
+			String laDeg = matcherCoordPoint.group("ladeg");
+			String laMin = matcherCoordPoint.group("lamin");
+			String lon = matcherCoordPoint.group("longitude");
+			String loDeg = matcherCoordPoint.group("lodeg");
+			String loMin = matcherCoordPoint.group("lomin");
+
+			CoordPoint point = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+					laMin != null ? Integer.parseInt(laMin) : 0, RUMB_UNITS.valueOf(lon),
+					loDeg == null || loDeg.isEmpty() ? 0 : Integer.parseInt(loDeg),
+					loMin == null || loMin.isEmpty() ? 0 : Integer.parseInt(loMin));
+
+			this.getHorizontalLocation().setSinglePoint(true);
+			this.getHorizontalLocation().setPoint(point);
+			lastMatch = matcherCoordPoint.end();
+			tac.delete(startIndex, lastMatch);
+		}
+
+		return tac;
+
+	}
+
+	protected StringBuffer fillForecastOneCoordinatePoint(StringBuffer tac) {
 		Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
 		int lastMatch = 0;
 		if (matcherCoordPoint.find()) {
@@ -463,6 +489,45 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	protected StringBuffer fillForecastZigZagLine(StringBuffer tac) {
+		Matcher matcherZigZag = SigmetParsingRegexp.sigmetMultiPointLine.matcher(tac);
+
+		if (matcherZigZag.find()) {
+
+			int startIndex = matcherZigZag.start();
+			String azimuth = matcherZigZag.group("azimuth");
+
+			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+			int lastMatch = 0;
+			Line sigmetZigZagLine = new Line();
+
+			while (matcherCoordPoint.find()) {
+
+				String lat = matcherCoordPoint.group("latitude");
+				String laDeg = matcherCoordPoint.group("ladeg");
+				String laMin = matcherCoordPoint.group("lamin");
+				String lon = matcherCoordPoint.group("longitude");
+				String loDeg = matcherCoordPoint.group("lodeg");
+				String loMin = matcherCoordPoint.group("lomin");
+
+				CoordPoint linePoint = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+						Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg),
+						Integer.parseInt(loMin));
+
+				sigmetZigZagLine.addPoint(linePoint);
+
+				lastMatch = matcherCoordPoint.end();
+
+			}
+			this.getfSection().getHorizontalLocation().getDirectionsFromLines()
+					.add(new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetZigZagLine));
+
+			tac.delete(startIndex, lastMatch);
+		}
+
+		return tac;
+	}
+
 	protected StringBuffer fillWithinRadius(StringBuffer tac) {
 
 		Matcher matcherRadius = SigmetParsingRegexp.sigmetWithinRadius.matcher(tac);
@@ -490,12 +555,40 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	protected StringBuffer fillForecastWithinRadius(StringBuffer tac) {
+
+		Matcher matcherRadius = SigmetParsingRegexp.sigmetWithinRadius.matcher(tac);
+		if (matcherRadius.find()) {
+			this.getfSection().getHorizontalLocation().setWithinRadius(true);
+			String radius = matcherRadius.group("radius");
+			String units = matcherRadius.group("radiusUnit");
+
+			String lat = matcherRadius.group("latitude");
+			String laDeg = matcherRadius.group("ladeg");
+			String laMin = matcherRadius.group("lamin");
+			String lon = matcherRadius.group("longitude");
+			String loDeg = matcherRadius.group("lodeg");
+			String loMin = matcherRadius.group("lomin");
+			this.getfSection().getHorizontalLocation().setWideness(Integer.valueOf(radius));
+			this.getfSection().getHorizontalLocation().setWidenessUnits(LENGTH_UNITS.valueOf(units));
+			CoordPoint center = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+					Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg), Integer.parseInt(loMin));
+			this.getfSection().getHorizontalLocation().setPoint(center);
+
+			this.getfSection().getHorizontalLocation().setWideness(Integer.parseInt(radius));
+			/** TODO: add center corridor line */
+		}
+
+		return tac;
+	}
+
 	protected StringBuffer fillIntensity(StringBuffer tac) {
 		Matcher matcherIntensity = SigmetParsingRegexp.sigmetIntensityChanges.matcher(tac);
 		if (matcherIntensity.find()) {
 			String intensity = matcherIntensity.group("intensity");
 
-			this.getPhenomenonDescription().setIntencity(Intensity.valueOf(intensity));
+			this.getPhenomenonDescription()
+					.setIntencity(SigmetTropicalPhenomenonDescription.Intensity.valueOf(intensity));
 			tac.delete(matcherIntensity.start(), matcherIntensity.end());
 		}
 		return tac;
@@ -587,7 +680,7 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 
 	/** check if it has WI flag and fill polygon coordinates */
 	protected StringBuffer fillWithinPolygon(StringBuffer tac) {
-		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygon.matcher(tac);
+		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygonTropical.matcher(tac);
 		if (matcherWI.find()) {
 			this.getHorizontalLocation().setInPolygon(true);
 			int startIndex = matcherWI.start();
@@ -620,6 +713,40 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	protected StringBuffer fillForecastWithinPolygon(StringBuffer tac) {
+		Matcher matcherWI = SigmetParsingRegexp.sigmetInPolygonTropical.matcher(tac);
+		if (matcherWI.find()) {
+			this.getfSection().getHorizontalLocation().setInPolygon(true);
+			int startIndex = matcherWI.start();
+
+			Matcher matcherCoordPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(tac);
+			int lastMatch = 0;
+			while (matcherCoordPoint.find()) {
+
+				String lat = matcherCoordPoint.group("latitude");
+				String laDeg = matcherCoordPoint.group("ladeg");
+				String laMin = matcherCoordPoint.group("lamin");
+				String lon = matcherCoordPoint.group("longitude");
+				String loDeg = matcherCoordPoint.group("lodeg");
+				String loMin = matcherCoordPoint.group("lomin");
+
+				CoordPoint polygonApex = new CoordPoint(RUMB_UNITS.valueOf(lat), Integer.parseInt(laDeg),
+						Integer.parseInt(laMin), RUMB_UNITS.valueOf(lon), Integer.parseInt(loDeg),
+						Integer.parseInt(loMin));
+				this.getfSection().getHorizontalLocation().getPolygonPoints().add(polygonApex);
+
+				lastMatch = matcherCoordPoint.end();
+
+				// matcherCoordPoint.reset();
+			}
+
+			tac.delete(startIndex, lastMatch);
+
+		}
+
+		return tac;
+	}
+
 	/** Extract location when it is in corridor */
 	protected StringBuffer fillWithinCorridor(StringBuffer tac) {
 		Matcher matcherCorridor = SigmetParsingRegexp.sigmetWithinCorridor.matcher(tac);
@@ -627,6 +754,19 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 			this.getHorizontalLocation().setWithinCorridor(true);
 			String range = matcherCorridor.group("range");
 			this.getHorizontalLocation().setWideness(Integer.parseInt(range));
+			/** TODO: add center corridor line */
+		}
+
+		return tac;
+	}
+
+	/** Extract location when it is in corridor */
+	protected StringBuffer fillForecastWithinCorridor(StringBuffer tac) {
+		Matcher matcherCorridor = SigmetParsingRegexp.sigmetWithinCorridor.matcher(tac);
+		if (matcherCorridor.find()) {
+			this.getfSection().getHorizontalLocation().setWithinCorridor(true);
+			String range = matcherCorridor.group("range");
+			this.getfSection().getHorizontalLocation().setWideness(Integer.parseInt(range));
 			/** TODO: add center corridor line */
 		}
 
@@ -682,6 +822,51 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	protected StringBuffer fillForecastMultiLineLocation(StringBuffer tac) {
+		Matcher matcherDirLine = SigmetParsingRegexp.sigmetMultiLine.matcher(tac);
+		int lastMatch = 0;
+		while (matcherDirLine.find()) {
+
+			String lineAzimuth = matcherDirLine.group("azimuth");
+
+			String latitudeStart = matcherDirLine.group("latStart");
+			String latStartDeg = matcherDirLine.group("latStartDeg");
+			String latStartMin = matcherDirLine.group("latStartMin");
+
+			String longitudeStart = matcherDirLine.group("longStart");
+			String longStartDeg = matcherDirLine.group("longStartDeg");
+			String longStartMin = matcherDirLine.group("longStartMIn");
+
+			String latitudeEnd = matcherDirLine.group("latEnd");
+			String latEndDeg = matcherDirLine.group("latEndDeg");
+			String latEndMin = matcherDirLine.group("latEndMin");
+
+			String longitudeEnd = matcherDirLine.group("longEnd");
+			String longEndDeg = matcherDirLine.group("longEndDeg");
+			String longEndMin = matcherDirLine.group("longEndMin");
+
+			CoordPoint startPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeStart), Integer.valueOf(latStartDeg),
+					Integer.valueOf(latStartMin),
+
+					RUMB_UNITS.valueOf(longitudeStart), Integer.valueOf(longStartDeg), Integer.valueOf(longStartMin));
+
+			CoordPoint endPoint = new CoordPoint(RUMB_UNITS.valueOf(latitudeEnd), Integer.valueOf(latEndDeg),
+					Integer.valueOf(latEndMin),
+
+					RUMB_UNITS.valueOf(longitudeEnd), Integer.valueOf(longEndDeg), Integer.valueOf(longEndMin));
+			Line line = new Line();
+			line.setStartPoint(startPoint);
+			line.setEndPoint(endPoint);
+			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(lineAzimuth), line);
+
+			this.getfSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			lastMatch = matcherDirLine.end();
+		}
+		tac.delete(0, lastMatch);
+
+		return tac;
+	}
+
 	/** check if it has area described by lines e.g. N OF N2000 AND E OF E5555 */
 	protected StringBuffer fillLineAreaLocation(StringBuffer tac) {
 
@@ -713,12 +898,59 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 		return tac;
 	}
 
+	/** check if it has area described by lines e.g. N OF N2000 AND E OF E5555 */
+	protected StringBuffer fillForecastLineAreaLocation(StringBuffer tac) {
+
+		Matcher matcherDirLine = SigmetParsingRegexp.sigmetOnePointLine.matcher(tac);
+		int lastMatch = 0;
+		while (matcherDirLine.find()) {
+
+			String azimuth = matcherDirLine.group("azimuth");
+			String pointCoordLat = matcherDirLine.group("pointCoordLat");
+			String pointDegLat = matcherDirLine.group("degLat");
+			String pointMinLat = matcherDirLine.group("minLat");
+
+			String pointCoordLong = matcherDirLine.group("pointCoordLong");
+			String pointDegLong = matcherDirLine.group("degLong");
+			String pointMinLong = matcherDirLine.group("minLong");
+
+			String pointCoord = StringConstants.coalesce(pointCoordLat, pointCoordLong);
+			String pointDeg = StringConstants.coalesce(pointDegLat, pointDegLong);
+			String pointMin = StringConstants.coalesce(pointMinLat, pointMinLong);
+
+			Line sigmetLine = new Line(new Coordinate(RUMB_UNITS.valueOf(pointCoord), Integer.parseInt(pointDeg),
+					pointMin.isEmpty() ? 0 : Integer.parseInt(pointMin)));
+			DirectionFromLine dirLine = new DirectionFromLine(RUMB_UNITS.valueOf(azimuth), sigmetLine);
+			this.getfSection().getHorizontalLocation().getDirectionsFromLines().add(dirLine);
+			lastMatch = matcherDirLine.end();
+		}
+		tac.delete(0, lastMatch);
+
+		return tac;
+	}
+
 	/** check if it has ENTIRE FIR/UIR flag */
 	protected StringBuffer fillEntireFIRLocation(StringBuffer tac) {
 		Matcher matcherFIR = SigmetParsingRegexp.sigmetEntireFir.matcher(tac);
 		if (matcherFIR.find()) {
 
 			this.getHorizontalLocation().setEntireFIR(true);
+			int lastIndex = matcherFIR.end();
+			tac.delete(0, lastIndex);
+			return tac;
+		}
+
+		return tac;
+
+	}
+
+	/** check if it has ENTIRE FIR/UIR flag */
+
+	protected StringBuffer fillForecastEntireFIRLocation(StringBuffer tac) {
+		Matcher matcherFIR = SigmetParsingRegexp.sigmetEntireFir.matcher(tac);
+		if (matcherFIR.find()) {
+
+			this.getfSection().getHorizontalLocation().setEntireFIR(true);
 			int lastIndex = matcherFIR.end();
 			tac.delete(0, lastIndex);
 			return tac;
@@ -771,6 +1003,14 @@ public class SIGMETTropicalTacMessage extends TacMessageImpl {
 
 	public void setCancelSigmetDateTimeTo(DateTime cancelSigmetDateTimeTo) {
 		this.cancelSigmetDateTimeTo = cancelSigmetDateTimeTo;
+	}
+
+	public SigmetTropicalForecastSection getfSection() {
+		return fSection;
+	}
+
+	public void setfSection(SigmetTropicalForecastSection fSection) {
+		this.fSection = fSection;
 	}
 
 }

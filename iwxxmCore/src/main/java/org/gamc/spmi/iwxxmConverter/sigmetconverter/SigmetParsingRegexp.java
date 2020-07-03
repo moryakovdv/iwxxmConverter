@@ -58,7 +58,7 @@ public class SigmetParsingRegexp {
 	
 	/**Pattern to determine polygon*/
 	public final static Pattern sigmetInPolygon = Pattern.compile("(?<isInPolygon>WI)\\s+(\\D+)");
-	
+	public final static Pattern sigmetInPolygonTropical = Pattern.compile("(?<isInPolygon>WI|)\\s+(\\D+)");
 	public final static Pattern sigmetInPolygonVolcano = Pattern.compile("(?<isInPolygon>WI|)\\s+(\\D+)");
 	/**Pattern to extract coordinate point*/
 	public final static Pattern sigmetCoordPoint = Pattern.compile("(?<point>(?<latitude>N|S)(?<ladeg>\\d{2})(?<lamin>\\d{2})?\\s+(?<longitude>E|W)(?<lodeg>\\d{3})(?<lomin>\\d{0,2})?)");
