@@ -87,6 +87,10 @@ public class MetarTranslationTest {
 	
 	String metarUS1 = "METAR KORD 170651Z 20014G23KT 10SM SCT250 24/14 A2968 RMK AO2 SLP045 T02390144=";
 	
+	String metarTACMinimumVisibilityWithDirection = "METAR WIII 232230Z 18004KT 2400 0600E OVC013 27/15 Q1014";
+	
+	String metarTACMinimumVisibilityNoDirection = "METAR WIII 232230Z 18004KT 2400 0600 OVC013 27/15 Q1014";
+	
 	
 	@Test
 	public void translateSimpleMetar() throws METARParsingException {
@@ -291,6 +295,23 @@ public class MetarTranslationTest {
 		assertFalse(metarMessage.getRunwayStateSections().get(0).getDepositDepth().isPresent());
 		
 		
+	}
+	
+	@Test
+	public void translateMinimumVisibilityWithDirection() throws METARParsingException {
+		METARTacMessage metarMessage = new METARTacMessage(metarTACMinimumVisibilityWithDirection);
+		metarMessage.parseMessage();
+		assertEquals(600,metarMessage.getCommonWeatherSection().getMinimumVisibility().intValue());
+		assertEquals("E",metarMessage.getCommonWeatherSection().getMinimumVisibilityDirection().toString());
+	}
+	
+
+	@Test
+	public void translateMinimumVisibilityNoDirection() throws METARParsingException {
+		METARTacMessage metarMessage = new METARTacMessage(metarTACMinimumVisibilityNoDirection);
+		metarMessage.parseMessage();
+		assertEquals(600,metarMessage.getCommonWeatherSection().getMinimumVisibility().intValue());
+		assertNull(metarMessage.getCommonWeatherSection().getMinimumVisibilityDirection());
 	}
 	
 }
