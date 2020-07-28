@@ -157,7 +157,7 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 	public SPECIType addTranslationCentreHeader(SPECIType report) throws DatatypeConfigurationException {
 		report = iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWW", "Vnukovo, RU");
-		report.setTranslationFailedTAC("");
+		//report.setTranslationFailedTAC("");
 
 		return report;
 	}

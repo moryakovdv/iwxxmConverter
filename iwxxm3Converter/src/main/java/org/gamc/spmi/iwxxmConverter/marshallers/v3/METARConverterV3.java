@@ -287,7 +287,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 	public METARType addTranslationCentreHeader(METARType report) throws DatatypeConfigurationException {
 		report = iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWW", "Vnukovo, RU");
-		report.setTranslationFailedTAC("");
+		//report.setTranslationFailedTAC("");
 
 		return report;
 	}

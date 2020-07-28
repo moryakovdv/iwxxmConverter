@@ -657,7 +657,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 
 		taf = iwxxmHelpers.addTranslationCentreHeaders(taf, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWW", "Vnukovo, RU");
-		taf.setTranslationFailedTAC("");
+		//taf.setTranslationFailedTAC("");
 
 		return taf;
 	}
