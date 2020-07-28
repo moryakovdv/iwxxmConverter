@@ -199,7 +199,7 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 			String sMVd = matcher.group("visibilityDirection");
 			if (sMv != null)
 				this.setMinimumVisibility(Integer.valueOf(sMv));
-			if (sMVd != null)
+			if (sMVd != null && !sMVd.isEmpty())
 				this.setMinimumVisibilityDirection(RUMB_UNITS.valueOf(sMVd));
 
 			lastIndex = matcher.end();

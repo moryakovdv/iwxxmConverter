@@ -655,14 +655,16 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 					.createAerodromeHorizontalVisibilityTypeMinimumVisibility(minVis);
 			visibility.setMinimumVisibility(minV);
 
-			Double dirAngleD = translatedMetar.getCommonWeatherSection().getMinimumVisibilityDirection()
-					.getDoubleValue();
-			AngleWithNilReasonType minVisAngle = iwxxmHelpers.getOfIWXXM().createAngleWithNilReasonType();
-			minVisAngle.setValue(dirAngleD);
-			minVisAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
-			JAXBElement<AngleWithNilReasonType> minVisDirection = iwxxmHelpers.getOfIWXXM()
-					.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(minVisAngle);
-			visibility.setMinimumVisibilityDirection(minVisDirection);
+			if (translatedMetar.getCommonWeatherSection().getMinimumVisibilityDirection() != null) {
+				Double dirAngleD = translatedMetar.getCommonWeatherSection().getMinimumVisibilityDirection()
+						.getDoubleValue();
+			    AngleWithNilReasonType minVisAngle = iwxxmHelpers.getOfIWXXM().createAngleWithNilReasonType();
+			    minVisAngle.setValue(dirAngleD);
+			    minVisAngle.setUom(ANGLE_UNITS.DEGREES.getStringValue());
+			    JAXBElement<AngleWithNilReasonType> minVisDirection = iwxxmHelpers.getOfIWXXM()
+			    		.createAerodromeHorizontalVisibilityTypeMinimumVisibilityDirection(minVisAngle);
+			    visibility.setMinimumVisibilityDirection(minVisDirection);
+			}
 		}
 
 		// Prevailing visibility
