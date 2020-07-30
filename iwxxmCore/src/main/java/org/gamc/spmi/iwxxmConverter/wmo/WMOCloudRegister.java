@@ -46,7 +46,7 @@ import org.xml.sax.SAXParseException;
 public class WMOCloudRegister implements WMORegister<String> {
 
 	private static final String registerFileName = "codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf";
-	public static final String missingCode = "VV";
+	public static final String verticalVisibilityCode = "VV";
 
 	public WMOCloudRegister() {
 		

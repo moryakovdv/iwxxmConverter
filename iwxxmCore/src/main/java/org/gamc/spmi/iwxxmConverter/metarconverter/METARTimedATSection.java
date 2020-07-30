@@ -32,6 +32,8 @@ public class METARTimedATSection extends TacSectionImpl implements MetarForecast
 	DateTime dtAT=null;
 	DateTime dtFM=null;
 	DateTime dtTL=null;
+	//by default set BECOMING type
+	ForecastSectionType sectionType = ForecastSectionType.BECMG;
 	
 	public METARTimedATSection(String initialTac, TacMessageImpl parent) {
 		super(initialTac, parent);
@@ -79,9 +81,13 @@ public class METARTimedATSection extends TacSectionImpl implements MetarForecast
 
 	@Override
 	public ForecastSectionType getSectionType() {
-		return ForecastSectionType.BECMG;
+		return this.sectionType;
 	}
-
+	@Override
+	public void setSectionType(ForecastSectionType type) {
+		this.sectionType = type;
+		
+	}
 	/**Validity period is fixed at AT marker*/
 	@Override
 	public Interval getTrendValidityInterval() {
@@ -90,6 +96,8 @@ public class METARTimedATSection extends TacSectionImpl implements MetarForecast
 		//DateTime parentDateTimeEnd = this.getParentIssuedDateTime().plusHours(2);
 		return new Interval(dtAT,dtAT);
 	}
+
+	
 
 	
 

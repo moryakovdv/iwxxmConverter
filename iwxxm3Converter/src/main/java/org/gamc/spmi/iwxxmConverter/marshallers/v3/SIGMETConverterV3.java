@@ -820,6 +820,9 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	@Override
 	public T1 addTranslationCentreHeader(T1 report) throws DatatypeConfigurationException {
+		// report.setTranslationFailedTAC("");
+
+		
 		return iwxxmHelpers.addTranslationCentreHeaders(report, DateTime.now(), DateTime.now(),
 				UUID.randomUUID().toString(), "UUWV", "Moscow, RU");
 

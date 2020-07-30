@@ -241,7 +241,8 @@ public class TAFTacMessage extends TacMessageImpl {
 
 			String sTt = matcher.group("trendTimeType");
 			String sTs = matcher.group("trendTimeSection");
-
+			String sType = matcher.group("trendType");
+			
 			ForecastTimedSectionType sec = ForecastTimedSectionType.valueOf(sTt);
 			TafForecastTimeSection timeSec = null;
 			switch (sec) {
@@ -256,8 +257,11 @@ public class TAFTacMessage extends TacMessageImpl {
 				break;
 
 			}
-			if (timeSec!=null)
+			if (timeSec!=null) {
+				if (sType!=null)
+					timeSec.setSectionType(ForecastSectionType.valueOf(sType));
 				this.timedSections.add(timeSec);
+			}
 		}
 		
 		

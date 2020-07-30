@@ -31,7 +31,7 @@ public class METARTimedTLSection extends TacSectionImpl implements MetarForecast
 	DateTime dtAT=null;
 	DateTime dtFM=null;
 	DateTime dtTL=null;
-	
+	ForecastSectionType sectionType = ForecastSectionType.BECMG;
 	public METARTimedTLSection(String initialTac, TacMessageImpl parent) {
 		super(initialTac, parent);
 		
@@ -76,9 +76,13 @@ public class METARTimedTLSection extends TacSectionImpl implements MetarForecast
 
 	@Override
 	public ForecastSectionType getSectionType() {
-		return ForecastSectionType.BECMG;
+		return this.sectionType;
 	}
-
+	@Override
+	public void setSectionType(ForecastSectionType type) {
+		this.sectionType = type;
+		
+	}
 	/**Validity period from issue time to TL marker*/
 	@Override
 	public Interval getTrendValidityInterval() {

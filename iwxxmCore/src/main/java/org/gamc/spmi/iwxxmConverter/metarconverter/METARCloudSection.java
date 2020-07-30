@@ -25,6 +25,9 @@ public class METARCloudSection extends TacSectionImpl {
 	private Integer height;
 	private String type;
 	
+	private boolean noCloudsDetected;
+	private boolean noSignificantClouds;
+	
 	private boolean isVerticalVisibility;
 	
 	public METARCloudSection(String initialTac) {
@@ -64,6 +67,22 @@ public class METARCloudSection extends TacSectionImpl {
 
 	public void setVerticalVisibility(boolean isVerticalVisibility) {
 		this.isVerticalVisibility = isVerticalVisibility;
+	}
+
+	public boolean isNoCloudsDetected() {
+		return noCloudsDetected;
+	}
+
+	public void setNoCloudsDetected(boolean noCloudsDetected) {
+		this.noCloudsDetected = noCloudsDetected;
+	}
+
+	public boolean isNoSignificantClouds() {
+		return noSignificantClouds;
+	}
+
+	public void setNoSignificantClouds(boolean noSignificantClouds) {
+		this.noSignificantClouds = noSignificantClouds;
 	}
 	
 

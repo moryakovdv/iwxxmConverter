@@ -17,10 +17,12 @@
 
 package org.gamc.spmi.iwxxmConverter.general;
 
+import org.gamc.spmi.iwxxmConverter.common.ForecastSectionType;
+
 /**Interface for AT,TL,FM sections for TAFs*/
 public interface TafForecastTimeSection extends TafForecastSection {
 	
 
-	
+	public void setSectionType(ForecastSectionType type);
 		
 }

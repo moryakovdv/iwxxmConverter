@@ -30,7 +30,9 @@ public class TAFTimedFMSection extends TacSectionImpl implements TafForecastTime
 	DateTime dtAT=null;
 	DateTime dtFM=null;
 	DateTime dtTL=null;
-	
+	//Set default type to BECOMING 
+	ForecastSectionType sectionType = ForecastSectionType.BECMG;
+
 	public TAFTimedFMSection(String initialTac, TacMessageImpl parent) {
 		super(initialTac, parent);
 		
@@ -75,8 +77,15 @@ public class TAFTimedFMSection extends TacSectionImpl implements TafForecastTime
 	}
 	@Override
 	public ForecastSectionType getSectionType() {
-		return ForecastSectionType.BECMG;
+		return this.sectionType;
 	}
+	
+	@Override
+	public void setSectionType(ForecastSectionType sectionType) {
+		this.sectionType = sectionType;
+	}
+
+
 
 	@Override
 	public Interval getTrendValidityInterval() {

@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 
 import org.gamc.spmi.iwxxmConverter.common.AnnotationLocalizedName;
+import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
@@ -72,7 +73,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 	private Integer windVrbSpeed;
 	@AnnotationLocalizedName(name = "Единица измерения скорости ветра vrb")
 	private SPEED_UNITS vrbSpeedUnits = SPEED_UNITS.MPS;
-	
+
 	@AnnotationLocalizedName(name = "Наличие CAVOK")
 	private boolean cavok = false;
 	@AnnotationLocalizedName(name = "Максимальное значение прогнозируемой температуры воздуха")
@@ -287,19 +288,36 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 			String cloudHeight = matcher.group("cloudHeight");
 			String cloudType = matcher.group("cloudType");
+
+			String nsc = matcher.group("noSignificantClouds");
+			String ncd = matcher.group("noCloudsDetected");
+
 			TAFCloudSection cloudSec = new TAFCloudSection(tac.substring(start, end));
 
-			cloudSec.setAmount(cloudAmount);
+			if (nsc == null && ncd == null) {
 
-			/*
-			 * // convert to hundreds of feets if (cloudAmount.equalsIgnoreCase("VV"))
-			 * cloudSec.setVerticalVisibility(true);
-			 */
+				cloudSec.setAmount(cloudAmount);
 
-			if (!cloudHeight.equalsIgnoreCase("///"))
-				cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
+				/*
+				 * // convert to hundreds of feets if (cloudAmount.equalsIgnoreCase("VV"))
+				 * cloudSec.setVerticalVisibility(true);
+				 */
 
-			cloudSec.setType(cloudType);
+				if (!cloudHeight.equalsIgnoreCase("///"))
+					cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
+
+				cloudSec.setType(cloudType);
+			}
+			else {
+				//processing NSC or NCD token
+				if (nsc != null && nsc.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_CLOUDS)) {
+					cloudSec.setNoSignificantClouds(true);
+				}
+				if (ncd != null && ncd.equalsIgnoreCase(StringConstants.NO_CLOUDS_DETECTED)) {
+					cloudSec.setNoCloudsDetected(true);
+				}
+				
+			}
 
 			this.getCloudSections().add(cloudSec);
 

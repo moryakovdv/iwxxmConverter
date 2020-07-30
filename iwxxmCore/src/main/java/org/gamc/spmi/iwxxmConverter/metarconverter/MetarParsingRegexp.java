@@ -39,10 +39,10 @@ public class MetarParsingRegexp {
 	public final static Pattern metarRVR = Pattern.compile("R(?<runwayDesignator>\\d{2,3}(?:L|R|C){0,1})\\/(?<rvrOperator>M|P){0,1}(?<rvr>\\d{2,4})((?<tendency>U|N|P|D)|(?<units>FT)|\\s){1}");
 
 	public final static Pattern metarPrecipitation = Pattern
-			.compile("(?:^|\\s)(?!RE|METAR|NOSIG|WS|ALL|RWY|RMK)(?<weather>(?:\\+|-|VC){0,1}[A-Z]{2,6})(?=\\s)");
+			.compile("(?:^|\\s)(?!RE|METAR|NOSIG|WS|ALL|RWY|RMK|NSC|NCD)(?<weather>(?:\\+|-|VC){0,1}[A-Z]{2,8})(?=\\s)");
 
 	public final static Pattern metarClouds = Pattern
-			.compile("(?<cloudAmount>[A-Z]{2,3})(?<cloudHeight>\\d{3}|\\/{3})(?<cloudType>[A-Z]{2,3}){0,1}(?:\\s|\\=|$)");
+			.compile("(?<noCloudsDetected>NCD)|(?<noSignificantClouds>NSC)|(?<cloudAmount>[A-Z]{2,3})(?<cloudHeight>\\d{3}|\\/{3})(?<cloudType>[A-Z]{2,3}){0,1}(?:\\s|\\=|$)");
 
 	public final static Pattern metarAirTemp = Pattern
 			.compile("((?<tempAir>M{0,1}\\d{2})\\/(?<dewPoint>M{0,1}\\d{2}))\\s");
@@ -56,7 +56,7 @@ public class MetarParsingRegexp {
 	
 	public final static Pattern metarRunwayState = Pattern.compile("(R?)(?<rwCode>\\d\\d(?:L|R|C){0,1})\\/((?<cleared>CLRD)|((?<depositType>\\d|\\/)(?<contamination>\\d|\\/)(?<depth>\\d{2}|\\/{2})))(?<friction>\\d{2}|\\/{2})");
 	
-	public final static Pattern metarRecentWeather = Pattern.compile("(?:RE)(?<recentWeather>[A-Z]{2,6})");
+	public final static Pattern metarRecentWeather = Pattern.compile("(?:RE)(?<recentWeather>[A-Z]{2,8})");
 
 	
 	
@@ -67,8 +67,8 @@ public class MetarParsingRegexp {
 			//.compile("(?<trendTimeType>AT|FM|TL)(?<trendTimeSection>(?:(?!BECMG|TEMPO|RMK|NOSIG|=).|\\s)*)");
 			//.compile("<trendTimeType>AT|FM|TL)(?<trendTimeStamp>\\d{6})(?<trendTimeSectionBody>(?:(?!AT|FM|TL|BECMG|TEMPO|RMK|NOSIG|=).|\\s)*)");
 			//.compile("(?<trendTimeType>AT|FM|TL)(?<trendTimeSection>\\d{6}(?:(?!AT|FM|TL|BECMG|TEMPO|RMK|NOSIG|=).|\\s)*)");
-			.compile("(?<trendTimeType>AT|FM|TL)(?<trendTimeSection>\\d{4}(?:(?!AT|FM|TL|BECMG|TEMPO|RMK|NOSIG|=).|\\s)*)");
-	
+			//.compile("(?<trendTimeType>AT|FM|TL)(?<trendTimeSection>\\d{4}(?:(?!AT|FM|TL|BECMG|TEMPO|RMK|NOSIG|=).|\\s)*)");
+			.compile("(?<trendType>TEMPO|BECMG)\\s+(?<trendTimeType>AT|FM|TL)(?<trendTimeSection>\\d{4}(?:(?!AT|FM|TL|BECMG|TEMPO|RMK|NOSIG|=).)*)");
 	
 	public final static Pattern metarRMKSection = Pattern.compile("(?<=RMK)(?<rmk>(?:(?!BECMG|TEMPO|RMK|NOSIG).|\\s)*)");
 

@@ -31,7 +31,7 @@ public class METARTimedFMSection extends TacSectionImpl implements MetarForecast
 	DateTime dtAT=null;
 	DateTime dtFM=null;
 	DateTime dtTL=null;
-	
+	ForecastSectionType sectionType = ForecastSectionType.BECMG;
 	public METARTimedFMSection(String initialTac, TacMessageImpl parent) {
 		super(initialTac, parent);
 		
@@ -77,7 +77,12 @@ public class METARTimedFMSection extends TacSectionImpl implements MetarForecast
 
 	@Override
 	public ForecastSectionType getSectionType() {
-		return ForecastSectionType.BECMG;
+		return this.sectionType;
+	}
+	@Override
+	public void setSectionType(ForecastSectionType type) {
+		this.sectionType = type;
+		
 	}
 
 	/**Validity period from FM marker to issue time plus 2 hours*/

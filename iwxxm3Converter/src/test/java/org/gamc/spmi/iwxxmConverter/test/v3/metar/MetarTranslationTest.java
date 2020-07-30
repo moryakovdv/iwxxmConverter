@@ -92,6 +92,8 @@ public class MetarTranslationTest {
 	String metarTACMinimumVisibilityNoDirection = "METAR WIII 232230Z 18004KT 2400 0600 OVC013 27/15 Q1014";
 	
 	
+	
+	
 	@Test
 	public void translateSimpleMetar() throws METARParsingException {
 		

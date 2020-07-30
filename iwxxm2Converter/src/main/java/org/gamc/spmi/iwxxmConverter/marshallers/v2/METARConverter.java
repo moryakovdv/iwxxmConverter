@@ -595,7 +595,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 		for (METARCloudSection cloudS : translatedMetar.getCommonWeatherSection().getCloudSections()) {
 
 		
-			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudS.getHeight());
 				
@@ -631,7 +631,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 		for (METARCloudSection cloudS : section.getCloudSections()) {
 
 			String nilReason = null;
-			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				nilReason = "Value is missing or VV provided";
 			}
 			AerodromeCloudForecastType.Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();

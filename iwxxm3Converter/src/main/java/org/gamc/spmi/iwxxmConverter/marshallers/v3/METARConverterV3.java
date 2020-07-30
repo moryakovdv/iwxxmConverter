@@ -691,7 +691,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 			
 			String nilReason = null;
-			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudS.getHeight());
 				cloud.setVerticalVisibility(vVisibility);
@@ -709,6 +709,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	}
 
+	/**Clouds in trend sections**/
 	private AerodromeCloudForecastPropertyType createCloudSectionTag(MetarCommonWeatherSection section, String icaoCode,
 			int sectionIndex) {
 
@@ -716,22 +717,48 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		AerodromeCloudForecastPropertyType cloudsType = iwxxmHelpers.getOfIWXXM()
 				.createAerodromeCloudForecastPropertyType();
 
+		
 		// Body
 		AerodromeCloudForecastType clouds = iwxxmHelpers.getOfIWXXM().createAerodromeCloudForecastType();
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
+		boolean layersCreated = false;
 		for (METARCloudSection cloudS : section.getCloudSections()) {
 
+			
 			//int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
-			String nilReason = null;
-			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
-				nilReason = "Value is missing or VV provided";
-			}
 			CloudLayerPropertyType cloudLayer = iwxxmHelpers.getOfIWXXM().createCloudLayerPropertyType();
-			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
-					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
-			clouds.getLayer().add(cloudLayer);
+
+			if (cloudS.getAmount()!=null && cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("missing");
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+						cloudS.getType(), nilReasonUrl, LENGTH_UNITS.FT));
+				
+			} 
+			else  if (cloudS.isNoCloudsDetected()) {
+				
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("notObservable");
+				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
+				cloudsType.getNilReason().add(nilReasonUrl);
+
+			} 
+			else  if (cloudS.isNoSignificantClouds()) {
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("nothingOfOperationalSignificance");
+
+				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
+				cloudsType.getNilReason().add(nilReasonUrl);
+			}
+			else {
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+						cloudS.getType(), null, LENGTH_UNITS.FT));
+				layersCreated=true;
+			}
+			
+			
+			if (layersCreated)
+				clouds.getLayer().add(cloudLayer);
 		}
 		// Place body into envelop
+		
 		cloudsType.setAerodromeCloudForecast(clouds);
 
 		return cloudsType;

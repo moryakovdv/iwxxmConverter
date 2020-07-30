@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 
 import org.gamc.spmi.iwxxmConverter.common.AnnotationLocalizedName;
+import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.general.CommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.PRESSURE_UNITS;
@@ -215,7 +216,6 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 			this.getCurrentWeather().add(curWeather);
 
 			lastIndex = matcher.end();
-
 		}
 
 		if (this.getCurrentWeather().size() > 0)
@@ -235,19 +235,37 @@ public class MetarCommonWeatherSection implements CommonWeatherSection {
 
 			String cloudHeight = matcher.group("cloudHeight");
 			String cloudType = matcher.group("cloudType");
+
 			METARCloudSection cloudSec = new METARCloudSection(tac.substring(start, end));
 
-			cloudSec.setAmount(cloudAmount);
+			String nsc = matcher.group("noSignificantClouds");
+			String ncd = matcher.group("noCloudsDetected");
 
-			// convert to hundreds of feets
-			if (cloudAmount.equalsIgnoreCase("VV"))
-				cloudSec.setVerticalVisibility(true);
+			if (nsc == null && ncd == null) {
 
-			if (!cloudHeight.equalsIgnoreCase("///"))
-				cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
+				cloudSec.setAmount(cloudAmount);
 
-			cloudSec.setType(cloudType);
+				// convert to hundreds of feets
+				if (cloudAmount.equalsIgnoreCase("VV"))
+					cloudSec.setVerticalVisibility(true);
 
+				if (!cloudHeight.equalsIgnoreCase("///"))
+					cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
+
+				cloudSec.setType(cloudType);
+			}
+			else {
+				//processing NSC or NCD token
+				if (nsc != null && nsc.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_CLOUDS)) {
+					cloudSec.setNoSignificantClouds(true);
+				}
+				if (ncd != null && ncd.equalsIgnoreCase(StringConstants.NO_CLOUDS_DETECTED)) {
+					cloudSec.setNoCloudsDetected(true);
+				}
+				
+			}
+			
+			
 			this.getCloudSections().add(cloudSec);
 
 			lastIndex = matcher.end();

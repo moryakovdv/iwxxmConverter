@@ -431,12 +431,12 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	 * @return cloudLayer
 	 */
 	public  CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
-			String nilReason, LENGTH_UNITS units) {
+			String nilReasonUrl, LENGTH_UNITS units) {
 
 		// Create layer
 		// Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
 		CloudLayerType currentLayer = ofIWXXM.createCloudLayerType();
-
+		
 		// Cloud amount seems to conform WMO schemas with
 		CloudAmountReportedAtAerodromeType amount = ofIWXXM.createCloudAmountReportedAtAerodromeType();
 		
@@ -447,8 +447,8 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		// Height of clouds
 		DistanceWithNilReasonType layerDistanceBase = ofIWXXM.createDistanceWithNilReasonType();
-		if (nilReason != null) {
-			layerDistanceBase.getNilReason().add(nilReason);
+		if (nilReasonUrl != null) {
+			layerDistanceBase.getNilReason().add(nilReasonUrl);
 		} else {
 			layerDistanceBase.setUom(units.getStringValue());
 			layerDistanceBase.setValue(cloudHeight);
@@ -468,6 +468,23 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		}
 
 		// cloudLayer.setCloudLayer(currentLayer);
+		return currentLayer;
+
+	}
+	
+	/**Created cloud section with pointing the nil reason, e.g. for NSC or NCD cases*/
+	public  CloudLayerType createEmptyCloudLayerSection(String nilReasonUrl) {
+
+		// Create layer
+	
+		CloudLayerType currentLayer = ofIWXXM.createCloudLayerType();
+		DistanceWithNilReasonType layerDistanceBase = ofIWXXM.createDistanceWithNilReasonType();
+		
+		layerDistanceBase.getNilReason().add(nilReasonUrl);
+		
+		currentLayer.setBase(layerDistanceBase);
+
+		
 		return currentLayer;
 
 	}

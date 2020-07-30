@@ -616,29 +616,55 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 		// Body
 		AerodromeCloudForecastType clouds = iwxxmHelpers.getOfIWXXM().createAerodromeCloudForecastType();
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
-		
+		boolean layersCreated = false;
+
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
+			
+			CloudLayerPropertyType cloudLayer = iwxxmHelpers.getOfIWXXM().createCloudLayerPropertyType();
 
 			//int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudSection.getAmount());
-			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudSection.getHeight());
 				clouds.setVerticalVisibility(vVisibility);
+				
 
-			} else {
+			} 
+			
+			else  if (cloudSection.isNoCloudsDetected()) {
+				
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("notObservable");
+				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
+				cloudsType.getNilReason().add(nilReasonUrl);
+
+			} 
+			else  if (cloudSection.isNoSignificantClouds()) {
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("nothingOfOperationalSignificance");
+
+				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
+				cloudsType.getNilReason().add(nilReasonUrl);
+				
+			}
+			
+			else {
 				
 				
 				
-				CloudLayerPropertyType cloudLayer = iwxxmHelpers.getOfIWXXM().createCloudLayerPropertyType();
 				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
-				clouds.getLayer().add(cloudLayer);
+				layersCreated = true;
+
+				
 			}
+			if (layersCreated)
+				clouds.getLayer().add(cloudLayer);
+			
 
 		}
 
 		// Place body into envelop
 		cloudsType.setAerodromeCloudForecast(clouds);
+		
 		return cloudsType;
 	}
 

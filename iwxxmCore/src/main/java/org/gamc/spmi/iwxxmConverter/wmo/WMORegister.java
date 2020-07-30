@@ -169,6 +169,8 @@ public interface WMORegister<T> {
 			parseWMOXml();
 		if (code instanceof String)
 			code = (T) ((String) code).toUpperCase();
+		
+		registerLogger.debug("Searching the "+code.toString()+" in "+getRegisterFileName());
 		return getContent().get(code).getWmoUrl();
 	}
 	

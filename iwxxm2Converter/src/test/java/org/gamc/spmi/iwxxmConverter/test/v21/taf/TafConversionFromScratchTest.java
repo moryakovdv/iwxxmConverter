@@ -784,7 +784,7 @@ public class TafConversionFromScratchTest {
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 
-			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudSection.getHeight());
 				clouds.setVerticalVisibility(vVisibility);

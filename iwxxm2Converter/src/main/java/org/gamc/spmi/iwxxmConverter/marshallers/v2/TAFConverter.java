@@ -649,7 +649,7 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 		for (TAFCloudSection cloudSection : weatherSection.getCloudSections()) {
 
 			
-			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.missingCode)) {
+			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudSection.getHeight());
 				clouds.setVerticalVisibility(vVisibility);

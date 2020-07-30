@@ -24,7 +24,8 @@ public class TAFCloudSection extends TacSectionImpl {
 	private String amount;
 	private Integer height;
 	private String type;
-	
+	private boolean noCloudsDetected;
+	private boolean noSignificantClouds;
 	
 	
 	public TAFCloudSection(String initialTac) {
@@ -56,6 +57,22 @@ public class TAFCloudSection extends TacSectionImpl {
 	public void setType(String type) {
 		if (type != null)
 			this.type = type;
+	}
+
+	public boolean isNoCloudsDetected() {
+		return noCloudsDetected;
+	}
+
+	public void setNoCloudsDetected(boolean noCloudsDetected) {
+		this.noCloudsDetected = noCloudsDetected;
+	}
+
+	public boolean isNoSignificantClouds() {
+		return noSignificantClouds;
+	}
+
+	public void setNoSignificantClouds(boolean noSignificantClouds) {
+		this.noSignificantClouds = noSignificantClouds;
 	}
 
 	/*
