@@ -32,6 +32,7 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.IWXXM21Helpers;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.UriConstants;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -121,9 +122,10 @@ public class TafXMLCreationTest {
 		testTimePeriodEnd = dtTest.plusHours(6).toString(dtFormat) + "Z";
 	}
 
-	/** Generate TAF XML from scratch */
+	/** Generate TAF XML from scratch 
+	 * @throws WMORegisterException */
 	@Test
-	public void testTAFCreationFromScratch() throws DatatypeConfigurationException, JAXBException {
+	public void testTAFCreationFromScratch() throws DatatypeConfigurationException, JAXBException, WMORegisterException {
 		// <iwxxm:TAF> root tag
 		TAFType tafRootTag = ofIWXXM.createTAFType();
 
@@ -216,7 +218,7 @@ public class TafXMLCreationTest {
 		return timePeriodProperty;
 	}
 
-	private OMObservationPropertyType createBaseForecast() {
+	private OMObservationPropertyType createBaseForecast() throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -267,8 +269,9 @@ public class TafXMLCreationTest {
 		return omOM_Observation;
 	}
 
-	/**Result section of the BASE taf*/
-	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() {
+	/**Result section of the BASE taf
+	 * @throws WMORegisterException */
+	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() throws WMORegisterException {
 		
 		MeteorologicalAerodromeForecastRecordPropertyType recordPropertyType = ofIWXXM.createMeteorologicalAerodromeForecastRecordPropertyType();
 		MeteorologicalAerodromeForecastRecordType recordType = ofIWXXM.createMeteorologicalAerodromeForecastRecordType();
@@ -382,8 +385,9 @@ public class TafXMLCreationTest {
 		
 	}
 
-	/** Cloud section */
-	private AerodromeCloudForecastPropertyType createCloudSectionTag() {
+	/** Cloud section 
+	 * @throws WMORegisterException */
+	private AerodromeCloudForecastPropertyType createCloudSectionTag() throws WMORegisterException {
 		// Envelop
 		AerodromeCloudForecastPropertyType cloudsType = ofIWXXM.createAerodromeCloudForecastPropertyType();
 

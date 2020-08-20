@@ -14,6 +14,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFProbabilitySection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFTimedTLSection;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -70,7 +71,7 @@ public class TestTrickyTaf {
 		}
 	}
 	@Test
-	public void test2() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void test2() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		
 		TAFConverterV3 tafC = new TAFConverterV3();
 		String xml = tafC.convertTacToXML(t2);

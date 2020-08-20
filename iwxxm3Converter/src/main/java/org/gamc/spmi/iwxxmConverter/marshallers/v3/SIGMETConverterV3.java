@@ -32,6 +32,8 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,7 +122,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 	
 		logger.debug("Parsing "+ tac);
 
@@ -146,7 +148,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	@Override
 	public SIGMETType convertMessage(SIGMETTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 		this.translatedSigmet = translatedMessage;
 		T1 sigmetRootTag = (T1) iwxxmHelpers.getOfIWXXM().createSIGMETType();
 
@@ -220,8 +222,9 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 		return sigmetRootTag;
 	}
 
-	/** created main analysis section for phenomena description */
-	public AssociationRoleType setAssociationRoleType() {
+	/** created main analysis section for phenomena description 
+	 * @throws WMORegisterException */
+	public AssociationRoleType setAssociationRoleType() throws WMORegisterException {
 		// ---------------Association Role----------------//
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
@@ -303,17 +306,19 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 		return asType;
 	}
 
-	/*** creates SIGMETPositionSection with nilReason if position is unknown */
-	public AirspaceVolumePropertyType createInapplicablePosition() {
+	/*** creates SIGMETPositionSection with nilReason if position is unknown 
+	 * @throws WMORegisterException */
+	public AirspaceVolumePropertyType createInapplicablePosition() throws WMORegisterException {
 
 		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
-		air.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode("inapplicable"));
+		air.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_INAPPLICABLE));
 
 		return air;
 	}
 
-	/** creates forecast section for phenomena */
-	public AssociationRoleType setForecastAssociationRoleType() {
+	/** creates forecast section for phenomena 
+	 * @throws WMORegisterException */
+	public AssociationRoleType setForecastAssociationRoleType() throws WMORegisterException {
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
 		// ---------------AirspaceVolumePropertyType----------------//
@@ -489,9 +494,10 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	};
 
-	/** returns section for airspaceVolumeDescription */
+	/** returns section for airspaceVolumeDescription 
+	 * @throws WMORegisterException */
 	public AirspaceVolumeType createAirSpaceVolumeSection(List<GTCalculatedRegion> coordsRegion,
-			SigmetHorizontalPhenomenonLocation horizontalLocation, SigmetVerticalPhenomenonLocation verticalLocation) {
+			SigmetHorizontalPhenomenonLocation horizontalLocation, SigmetVerticalPhenomenonLocation verticalLocation) throws WMORegisterException {
 
 		AirspaceVolumeType airspaceVolumeType = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
 		airspaceVolumeType.setId(iwxxmHelpers.generateUUIDv4("airspace-" + translatedSigmet.getIcaoCode()));
@@ -522,7 +528,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 			if (verticalLocation.isTopMarginAboveFl()) {
 
 				ValDistanceVerticalType unknownType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_UNKNOWN));
 				JAXBElement<ValDistanceVerticalType> unknownSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(unknownType);
 				airspaceVolumeType.setMaximumLimit(unknownSection);
@@ -538,7 +544,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 						.createAirspaceLayerTypeUpperLimit(topMaxType);
 				airspaceVolumeType.setMaximumLimit(topMaxSection);
 
-				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_UNKNOWN));
 			} else {
 				topFlType.setValue(String.valueOf(verticalLocation.getTopFL().get()));
 			}
@@ -703,8 +709,9 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	}
 
-	/** Get link for WMO register record for the phenomena */
-	public AeronauticalSignificantWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
+	/** Get link for WMO register record for the phenomena 
+	 * @throws WMORegisterException */
+	public AeronauticalSignificantWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() throws WMORegisterException {
 		AeronauticalSignificantWeatherPhenomenonType typePhen = iwxxmHelpers.getOfIWXXM()
 				.createAeronauticalSignificantWeatherPhenomenonType();
 		String link = iwxxmHelpers.getSigWxPhenomenaRegister()

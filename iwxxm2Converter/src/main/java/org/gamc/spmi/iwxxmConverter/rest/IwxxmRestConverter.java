@@ -36,6 +36,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v2.ConverterFactory;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,11 +59,12 @@ public class IwxxmRestConverter {
 	}
 	
 	
-	/**Rest for converting TAC to IWXXM*/
+	/**Rest for converting TAC to IWXXM
+	 * @throws WMORegisterException */
 	@GET
 	@Path("/convert")
 	@Produces(MediaType.TEXT_XML)
-	public Response getConvertedMessage(@Context HttpHeaders head, @QueryParam("message") String tacMessage) {
+	public Response getConvertedMessage(@Context HttpHeaders head, @QueryParam("message") String tacMessage) throws WMORegisterException {
 		logger.info("Request to translation received");
 		logger.info(head.getRequestHeaders().toString());
 		logger.info(tacMessage);

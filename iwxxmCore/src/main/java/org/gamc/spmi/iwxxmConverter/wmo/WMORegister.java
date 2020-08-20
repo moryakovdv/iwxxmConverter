@@ -28,6 +28,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -163,15 +164,20 @@ public interface WMORegister<T> {
 	//TreeMap<T, WMORegisterDescription> getContent();
 	ConcurrentHashMap<T, WMORegisterDescription> getContent();
 	
-	/** Get particular URL for given code */
-	default public String getWMOUrlByCode(T code) {
+	/** Get particular URL for given code 
+	 * @throws ParsingException */
+	default public String getWMOUrlByCode(T code) throws WMORegisterException {
 		if (getContent().size() == 0)
 			parseWMOXml();
 		if (code instanceof String)
 			code = (T) ((String) code).toUpperCase();
 		
 		registerLogger.debug("Searching the "+code.toString()+" in "+getRegisterFileName());
-		return getContent().get(code).getWmoUrl();
+		
+		if (getContent().get(code)!=null)
+			return getContent().get(code).getWmoUrl();
+		else
+			throw new WMORegisterException(code.toString()+" was not found in "+getRegisterFileName());
 	}
 	
 	/** Returns register file name for particular registry */
@@ -183,5 +189,16 @@ public interface WMORegister<T> {
 
 	/** gets Locale for using for labels and descriptions */
 	Locale getLocale();
+	
+	public class WMORegisterException extends Exception {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6543777413082761830L;
+		public WMORegisterException(String message) {
+			super(message);
+		}
+	}
 
 }

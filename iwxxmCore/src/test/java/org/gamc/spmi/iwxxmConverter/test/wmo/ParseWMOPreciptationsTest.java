@@ -21,13 +21,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.Locale;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO precipitation registry*/
 public class ParseWMOPreciptationsTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMOPrecipitationRegister precipRegister = new WMOPrecipitationRegister();
 		precipRegister.parseWMOXml();
 		assertTrue(precipRegister.getContent().size()>0);
@@ -38,7 +39,7 @@ public class ParseWMOPreciptationsTest {
 	}
 	
 	@Test
-	public void parseLocalizedRegister() {
+	public void parseLocalizedRegister()  throws WMORegisterException {
 		WMOPrecipitationRegister precipRegister = new WMOPrecipitationRegister(Locale.forLanguageTag("ru-RU"));
 		precipRegister.parseWMOXml();
 		assertTrue(precipRegister.getContent().size()>0);

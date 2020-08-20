@@ -19,13 +19,14 @@ package org.gamc.spmi.iwxxmConverter.test.wmo;
 import static org.junit.Assert.assertTrue;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO Space weather*/
 public class ParseWMOSpaceWeatherLocationTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMOSpaceWeatherLocationRegister phRegister = new WMOSpaceWeatherLocationRegister();
 		phRegister.parseWMOXml();
 		assertTrue(phRegister.getContent().size()>0);

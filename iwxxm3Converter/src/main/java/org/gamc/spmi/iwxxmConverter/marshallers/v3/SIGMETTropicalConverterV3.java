@@ -27,6 +27,7 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +100,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		logger.debug("Parsing "+ tac);
 		SIGMETTropicalTacMessage sigmetMessage = new SIGMETTropicalTacMessage(tac);
@@ -123,7 +124,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 	@Override
 	public TropicalCycloneSIGMETType convertMessage(SIGMETTropicalTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 		translatedSigmet = translatedMessage;
 		StringOrRefType refTacString = iwxxmHelpers.getOfGML().createStringOrRefType();
 		TimeInstantPropertyType obsTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
@@ -192,7 +193,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 	@Override
 	/** created main analysis section for phenomena description */
-	public AssociationRoleType setAssociationRoleType() {
+	public AssociationRoleType setAssociationRoleType() throws WMORegisterException {
 		// ---------------Association Role----------------//
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
@@ -309,7 +310,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 	@Override
 	/** creates forecast section for phenomena */
-	public AssociationRoleType setForecastAssociationRoleType() {
+	public AssociationRoleType setForecastAssociationRoleType() throws WMORegisterException {
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
 		// ---------------SIGMETEvolvingConditionType(Time)----------------//

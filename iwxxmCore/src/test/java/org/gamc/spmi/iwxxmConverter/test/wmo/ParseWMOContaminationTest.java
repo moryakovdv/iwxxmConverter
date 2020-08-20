@@ -19,13 +19,14 @@ package org.gamc.spmi.iwxxmConverter.test.wmo;
 import static org.junit.Assert.assertTrue;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO clouds registry*/
 public class ParseWMOContaminationTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMORunWayContaminationRegister register = new WMORunWayContaminationRegister();
 		register.parseWMOXml();
 		assertTrue(register.getContent().size()>0);

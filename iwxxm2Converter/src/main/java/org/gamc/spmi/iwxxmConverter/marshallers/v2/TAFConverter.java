@@ -40,6 +40,7 @@ import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFCloudSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 
 import schemabindings21._int.icao.iwxxm._2.AerodromeAirTemperatureForecastPropertyType;
@@ -113,10 +114,11 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 	 * @param tac
 	 *            - TAC to convert
 	 * @return - XML String in IWXXM format
+	 * @throws WMORegisterException 
 	 */
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
 		TAFType result;
@@ -139,10 +141,11 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 	 * @param translatedTaf
 	 *            - TAC as internal object
 	 * @return XML String in IWXXM format
+	 * @throws WMORegisterException 
 	 */
 	@Override
 	public TAFType convertMessage(TAFTacMessage translatedTaf)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		this.translatedTaf = translatedTaf;
 
@@ -275,8 +278,9 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 		return timePeriodProperty;
 	}
 
-	/** Creates base section of IWXXM TAF */
-	private OMObservationPropertyType createBaseForecast() {
+	/** Creates base section of IWXXM TAF 
+	 * @throws WMORegisterException */
+	private OMObservationPropertyType createBaseForecast() throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -335,8 +339,9 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 		return omOM_Observation;
 	}
 
-	/** Result section of the BASE taf */
-	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() {
+	/** Result section of the BASE taf 
+	 * @throws WMORegisterException */
+	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() throws WMORegisterException {
 
 		MeteorologicalAerodromeForecastRecordPropertyType recordPropertyType = ofIWXXM
 				.createMeteorologicalAerodromeForecastRecordPropertyType();
@@ -416,9 +421,10 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 	 * @param sectionIndex
 	 *            - index of the processing section
 	 * @return {@link MeteorologicalAerodromeForecastRecordPropertyType} object
+	 * @throws WMORegisterException 
 	 */
 	private MeteorologicalAerodromeForecastRecordPropertyType createTrendResultsSection(TafForecastSection section,
-			int sectionIndex) {
+			int sectionIndex) throws WMORegisterException {
 
 		MeteorologicalAerodromeForecastRecordPropertyType recordPropertyType = ofIWXXM
 				.createMeteorologicalAerodromeForecastRecordPropertyType();
@@ -525,8 +531,9 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 	 * @param sectionIndex
 	 *            - the index of section among all change sections to create unique
 	 *            id for it
+	 * @throws WMORegisterException 
 	 */
-	private OMObservationPropertyType createTrendForecast(TafForecastSection section, int sectionIndex) {
+	private OMObservationPropertyType createTrendForecast(TafForecastSection section, int sectionIndex) throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -626,8 +633,9 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 
 	/**
 	 * Creates weather section for given string code with link to WMO register url
+	 * @throws WMORegisterException 
 	 */
-	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) {
+	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) throws WMORegisterException {
 		// <iwxxm:weather xlink:href="http://codes.wmo.int/306/4678/-SHRA"/>
 
 		AerodromeForecastWeatherType forecastWeather = ofIWXXM.createAerodromeForecastWeatherType();
@@ -636,9 +644,10 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 		return forecastWeather;
 	}
 
-	/** Cloud section */
+	/** Cloud section 
+	 * @throws WMORegisterException */
 	private AerodromeCloudForecastPropertyType createCloudSectionTag(TafCommonWeatherSection weatherSection,
-			String icaoCode, int sectionIndex) {
+			String icaoCode, int sectionIndex) throws WMORegisterException {
 		// Envelop
 		AerodromeCloudForecastPropertyType cloudsType = ofIWXXM.createAerodromeCloudForecastPropertyType();
 
@@ -651,12 +660,12 @@ public class TAFConverter implements TacConverter<TAFTacMessage, TAFType, IWXXM2
 			
 			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
-						.createVerticalVisibilitySection(cloudSection.getHeight());
+						.createVerticalVisibilitySection(cloudSection.getHeight().get());
 				clouds.setVerticalVisibility(vVisibility);
 
 			} else {
 				Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight().get(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}

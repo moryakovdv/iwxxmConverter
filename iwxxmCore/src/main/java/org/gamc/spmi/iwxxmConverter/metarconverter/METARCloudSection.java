@@ -16,13 +16,15 @@
  */
 package org.gamc.spmi.iwxxmConverter.metarconverter;
 
+import java.util.Optional;
+
 import org.gamc.spmi.iwxxmConverter.tac.TacSectionImpl;
 
 /**Describes cloud entry in METAR*/
 public class METARCloudSection extends TacSectionImpl {
 
 	private String amount;
-	private Integer height;
+	private Optional<Integer> height = Optional.empty();
 	private String type;
 	
 	private boolean noCloudsDetected;
@@ -43,11 +45,11 @@ public class METARCloudSection extends TacSectionImpl {
 			this.amount = amount;
 	}
 
-	public Integer getHeight() {
+	public Optional<Integer> getHeight() {
 		return height;
 	}
 
-	public void setHeight(Integer height) {
+	public void setHeight(Optional<Integer> height) {
 		if (height != null)
 			this.height = height;
 	}

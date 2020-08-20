@@ -43,6 +43,7 @@ import org.gamc.spmi.iwxxmConverter.metarconverter.METARTempoSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.MetarCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 
 import schemabindings21._int.icao.iwxxm._2.AerodromeCloudForecastPropertyType;
@@ -126,7 +127,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		createdRunways.clear();
 
@@ -151,7 +152,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 
 	@Override
 	public METARType convertMessage(METARTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		this.translatedMetar = translatedMessage;
 
@@ -253,7 +254,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 
 	// -------------------------------//
 
-	private OMObservationPropertyType createObservationResult() {
+	private OMObservationPropertyType createObservationResult() throws WMORegisterException {
 
 		// тег <>om:OM_Observation
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -320,7 +321,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 	}
 
 	private MeteorologicalAerodromeTrendForecastRecordPropertyType createTrendResultsSection(
-			MetarForecastSection section, int sectionIndex) {
+			MetarForecastSection section, int sectionIndex) throws WMORegisterException {
 
 		MeteorologicalAerodromeTrendForecastRecordPropertyType metarTrendType = ofIWXXM
 				.createMeteorologicalAerodromeTrendForecastRecordPropertyType();
@@ -421,8 +422,9 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 	/**
 	 * Create valuable METAR section as Observation result. Tag
 	 * <iwxxm:MeteorologicalAerodromeObservtionRecord>
+	 * @throws WMORegisterException 
 	 */
-	private MeteorologicalAerodromeObservationRecordPropertyType createMETARRecordTag() {
+	private MeteorologicalAerodromeObservationRecordPropertyType createMETARRecordTag() throws WMORegisterException {
 
 		// Envelop
 		MeteorologicalAerodromeObservationRecordPropertyType metarRecordTag = ofIWXXM
@@ -581,8 +583,9 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 		return visiblityType;
 	}
 
-	/** Cloud section */
-	private JAXBElement<MeteorologicalAerodromeObservationRecordType.Cloud> createCloudSectionTag() {
+	/** Cloud section 
+	 * @throws WMORegisterException */
+	private JAXBElement<MeteorologicalAerodromeObservationRecordType.Cloud> createCloudSectionTag() throws WMORegisterException {
 
 		MeteorologicalAerodromeObservationRecordType.Cloud cloudSection = new Cloud();
 
@@ -597,14 +600,14 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 		
 			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
-						.createVerticalVisibilitySection(cloudS.getHeight());
+						.createVerticalVisibilitySection(cloudS.getHeight().get());
 				
 				clouds.setVerticalVisibility(vVisibility);
 				
 
 			} else {
 				AerodromeObservedCloudsType.Layer cloudLayer = ofIWXXM.createAerodromeObservedCloudsTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight().get(),
 						cloudS.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}
@@ -620,7 +623,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 	}
 
 	private AerodromeCloudForecastPropertyType createTrendCloudSectionTag(MetarCommonWeatherSection section,
-			String icaoCode, int sectionIndex) {
+			String icaoCode, int sectionIndex) throws WMORegisterException {
 
 		// Envelop
 		AerodromeCloudForecastPropertyType cloudsType = ofIWXXM.createAerodromeCloudForecastPropertyType();
@@ -635,7 +638,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 				nilReason = "Value is missing or VV provided";
 			}
 			AerodromeCloudForecastType.Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+			cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight().get(),
 					cloudS.getType(), nilReason, LENGTH_UNITS.FT));
 			clouds.getLayer().add(cloudLayer);
 		}
@@ -737,8 +740,9 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 
 	}
 
-	/** Creates Runway state tag to include into collection */
-	private AerodromeRunwayStatePropertyType createRunwayStateTag(METARRunwayStateSection rwrs) {
+	/** Creates Runway state tag to include into collection 
+	 * @throws WMORegisterException */
+	private AerodromeRunwayStatePropertyType createRunwayStateTag(METARRunwayStateSection rwrs) throws WMORegisterException {
 
 		/**
 		 * output sample <iwxxm:runwayState> <iwxxm:AerodromeRunwayState> <iwxxm:runway>
@@ -821,7 +825,7 @@ public class METARConverter implements TacConverter<METARTacMessage, METARType, 
 				translatedMetar.getIcaoCode());
 	}
 
-	private OMObservationPropertyType createTrendForecast(MetarForecastSection section, int sectionIndex) {
+	private OMObservationPropertyType createTrendForecast(MetarForecastSection section, int sectionIndex) throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();

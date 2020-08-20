@@ -49,6 +49,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v2.UriConstants;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFCloudSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -174,7 +175,7 @@ public class TafConversionFromScratchTest {
 	}
 
 	@Test
-	public void testConversion() throws DatatypeConfigurationException, JAXBException, ParsingException, IOException {
+	public void testConversion() throws DatatypeConfigurationException, JAXBException, ParsingException, IOException, WMORegisterException {
 		System.out.println(convertTacToXML(testTaf));
 
 		InputStream fs = this.getClass().getResourceAsStream("/examples/taf.txt");
@@ -225,7 +226,7 @@ public class TafConversionFromScratchTest {
 	}
 
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 
 		TAFTacMessage tafMessage = new TAFTacMessage(tac);
 		tafMessage.parseMessage();
@@ -246,7 +247,7 @@ public class TafConversionFromScratchTest {
 	private TAFTacMessage translatedTaf;
 
 	private String convertTaf(TAFTacMessage translatedTaf)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		this.translatedTaf = translatedTaf;
 
@@ -418,7 +419,7 @@ public class TafConversionFromScratchTest {
 
 	}
 
-	private OMObservationPropertyType createBaseForecast() {
+	private OMObservationPropertyType createBaseForecast() throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -476,8 +477,9 @@ public class TafConversionFromScratchTest {
 		return omOM_Observation;
 	}
 
-	/** Result section of the BASE taf */
-	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() {
+	/** Result section of the BASE taf 
+	 * @throws WMORegisterException */
+	private MeteorologicalAerodromeForecastRecordPropertyType createBaseResultSection() throws WMORegisterException {
 
 		MeteorologicalAerodromeForecastRecordPropertyType recordPropertyType = ofIWXXM
 				.createMeteorologicalAerodromeForecastRecordPropertyType();
@@ -559,9 +561,10 @@ public class TafConversionFromScratchTest {
 	 * @param sectionIndex
 	 *            - index of the processing section
 	 * @return {@link MeteorologicalAerodromeForecastRecordPropertyType} object
+	 * @throws WMORegisterException 
 	 */
 	private MeteorologicalAerodromeForecastRecordPropertyType createTrendResultsSection(TafForecastSection section,
-			int sectionIndex) {
+			int sectionIndex) throws WMORegisterException {
 
 		MeteorologicalAerodromeForecastRecordPropertyType recordPropertyType = ofIWXXM
 				.createMeteorologicalAerodromeForecastRecordPropertyType();
@@ -667,8 +670,9 @@ public class TafConversionFromScratchTest {
 	 * @param sectionIndex
 	 *            - the index of section among all change sections to create unique
 	 *            id for it
+	 * @throws WMORegisterException 
 	 */
-	private OMObservationPropertyType createTrendForecast(TafForecastSection section, int sectionIndex) {
+	private OMObservationPropertyType createTrendForecast(TafForecastSection section, int sectionIndex) throws WMORegisterException {
 
 		// тег <om:OM_Observation>
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -767,15 +771,17 @@ public class TafConversionFromScratchTest {
 
 	/**
 	 * Creates weather section for given string code with link to WMO register url
+	 * @throws WMORegisterException 
 	 */
-	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) {
+	private AerodromeForecastWeatherType createWeatherSection(String weatherCode) throws WMORegisterException {
 		System.out.println(weatherCode);
 		return iwxxmHelpers.createForecastWeatherSection(weatherCode);
 	}
 
-	/** Cloud section */
+	/** Cloud section 
+	 * @throws WMORegisterException */
 	private AerodromeCloudForecastPropertyType createCloudSectionTag(TafCommonWeatherSection weatherSection,
-			String icaoCode, int sectionIndex) {
+			String icaoCode, int sectionIndex) throws WMORegisterException {
 		// Envelop
 		AerodromeCloudForecastPropertyType cloudsType = ofIWXXM.createAerodromeCloudForecastPropertyType();
 
@@ -786,12 +792,12 @@ public class TafConversionFromScratchTest {
 
 			if (cloudSection.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
-						.createVerticalVisibilitySection(cloudSection.getHeight());
+						.createVerticalVisibilitySection(cloudSection.getHeight().get());
 				clouds.setVerticalVisibility(vVisibility);
 
 			} else {
 				Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudSection.getAmount(), cloudSection.getHeight().get(),
 						cloudSection.getType(), null, LENGTH_UNITS.FT));
 				clouds.getLayer().add(cloudLayer);
 			}

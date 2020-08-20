@@ -30,6 +30,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v2.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -111,7 +112,7 @@ public class TafConversionTest {
 	}
 	
 	@Test()
-	public void testVerticalVisibilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testVerticalVisibilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		
 		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 TEMPO 2206/2209\n" + 
 				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
@@ -138,7 +139,7 @@ public class TafConversionTest {
 	
 	@Test()
 	/**Invalid taf - VV misplaced error*/
-	public void testInvalidTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testInvalidTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		
 		String testTaf = "TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 SCT010 TEMPO 2206/2209\n" + 
 				"1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100\n" + 
@@ -171,7 +172,7 @@ public class TafConversionTest {
 			+ "			\"TNM06/2724Z TEMPO 2703/2710 0700 +SHSN OVC003 BKN015CB PROB40 TEMPO\\n\" + \n"
 			+ "			\"2703/2710 -FZDZ BECMG 2712/2714 9000 NSW BKN012";
 	@Test
-	public void testProbabilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testProbabilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		TAFConverter tafconverter = new TAFConverter();
 		String iwxxm = tafconverter.convertTacToXML(testProbabilityTaf);
 		System.out.println(iwxxm);

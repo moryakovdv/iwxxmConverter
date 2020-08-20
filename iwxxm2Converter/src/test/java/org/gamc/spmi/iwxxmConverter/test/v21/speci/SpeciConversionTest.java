@@ -23,6 +23,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.SPECIConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,7 +52,7 @@ public class SpeciConversionTest {
 			"     R06R/590230 TEMPO 1000 SHSN BKN012CB=";
 	
 	@Test
-	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SPECIConverter sc = new SPECIConverter();
 		String result = sc.convertTacToXML(speci);
 		System.out.println(result);

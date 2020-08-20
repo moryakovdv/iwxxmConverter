@@ -19,6 +19,7 @@ package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
 import java.net.URISyntaxException;
 import java.util.GregorianCalendar;
+import java.util.Optional;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.xml.bind.JAXBElement;
@@ -37,6 +38,7 @@ import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister;
@@ -78,31 +80,27 @@ import schemabindings31.net.opengis.gml.v_3_2_1.TimePeriodType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimePositionType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
 
-
-
 /**
  * Set of the helper functions. Provides creation of a common objects to use
- * during xml creation. 
- * Helps to reduce boiler-plate code. 
- * Can be extended to provide specific implementation for METAR, TAF, SIGMET etc..
+ * during xml creation. Helps to reduce boiler-plate code. Can be extended to
+ * provide specific implementation for METAR, TAF, SIGMET etc..
  */
 public class IWXXM31Helpers extends IWXXMHelpers {
 
 	private Logger logger = LoggerFactory.getLogger(IWXXM31Helpers.class);
 
-	private  final schemabindings31._int.icao.iwxxm._3.ObjectFactory ofIWXXM = new schemabindings31._int.icao.iwxxm._3.ObjectFactory();
-	private  final schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory();
-	private  final schemabindings31.aero.aixm.schema._5_1.ObjectFactory ofAIXM = new schemabindings31.aero.aixm.schema._5_1.ObjectFactory();
-	
-	private  final schemabindings31._int.wmo.def.metce._2013.ObjectFactory ofMETCE = new  schemabindings31._int.wmo.def.metce._2013.ObjectFactory();
+	private final schemabindings31._int.icao.iwxxm._3.ObjectFactory ofIWXXM = new schemabindings31._int.icao.iwxxm._3.ObjectFactory();
+	private final schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory ofGML = new schemabindings31.net.opengis.gml.v_3_2_1.ObjectFactory();
+	private final schemabindings31.aero.aixm.schema._5_1.ObjectFactory ofAIXM = new schemabindings31.aero.aixm.schema._5_1.ObjectFactory();
 
-	
-	/*WMO registers**/
+	private final schemabindings31._int.wmo.def.metce._2013.ObjectFactory ofMETCE = new schemabindings31._int.wmo.def.metce._2013.ObjectFactory();
+
+	/* WMO registers **/
 	private final WMONilReasonRegister nilRegister = new WMONilReasonRegister();
-	
+
 	private final WMOCloudRegister cloudReg = new WMOCloudRegister();
 	private final WMOCloudTypeRegister cloudTypeReg = new WMOCloudTypeRegister();
-	
+
 	private final WMOSigConvectiveCloudTypeRegister sigCloudTypeReg = new WMOSigConvectiveCloudTypeRegister();
 
 	private final WMOPrecipitationRegister precipitationReg = new WMOPrecipitationRegister();
@@ -112,21 +110,17 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	private final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
 
 	private final WMOSigWXRegister sigWxPhenomenaRegister = new WMOSigWXRegister();
-	private final WMOAirWXRegister airWxPhenomenaRegister  = new WMOAirWXRegister();
-	
-
+	private final WMOAirWXRegister airWxPhenomenaRegister = new WMOAirWXRegister();
 
 	private final WMOSpaceWeatherRegister swxEffectsRegister = new WMOSpaceWeatherRegister();
 	private final WMOSpaceWeatherLocationRegister swxLocationRegister = new WMOSpaceWeatherLocationRegister();
-	
-	
+
 	private GeoService geoService = new GeoService();
-	
+
 	private IwxxmValidator iwxxmValidator = new IwxxmValidator();
-	
+
 	public static final String NSW = "NSW";
-	
-	
+
 	public schemabindings31._int.icao.iwxxm._3.ObjectFactory getOfIWXXM() {
 		return ofIWXXM;
 	}
@@ -138,24 +132,23 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	public schemabindings31.aero.aixm.schema._5_1.ObjectFactory getOfAIXM() {
 		return ofAIXM;
 	}
-	
+
 	/**
 	 * Creates TimeInstantPropertyType from given DateTime
 	 * 
-	 * @param dt
-	 *            - dateTime to process
-	 * @param icaoCode
-	 *            - aerodrome ICAO code
+	 * @param dt       - dateTime to process
+	 * @param icaoCode - aerodrome ICAO code
 	 * @return {@link TimeInstantPropertyType}
 	 */
-	public  TimeInstantPropertyType createTimeInstantPropertyTypeForDateTime(DateTime dt, String icaoCode, String suffix) {
+	public TimeInstantPropertyType createTimeInstantPropertyTypeForDateTime(DateTime dt, String icaoCode,
+			String suffix) {
 
 		String sDateTime = dt.toString(getDateTimeFormat()) + "Z";
 		String sDateTimePosition = dt.toString(getDateTimeISOFormat());
 
 		TimeInstantPropertyType timeInstantProperty = ofGML.createTimeInstantPropertyType();
 		TimeInstantType timeInstant = ofGML.createTimeInstantType();
-		timeInstant.setId(generateUUIDv4(String.format("ti-%s-%s-%s", icaoCode, sDateTime,suffix)));
+		timeInstant.setId(generateUUIDv4(String.format("ti-%s-%s-%s", icaoCode, sDateTime, suffix)));
 		TimePositionType timePosition = ofGML.createTimePositionType();
 		timePosition.getValue().add(sDateTimePosition);
 		timeInstant.setTimePosition(timePosition);
@@ -163,61 +156,57 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		return timeInstantProperty;
 	}
-	
-	public  StringWithNilReasonType createStringWithNilReasonForString(String value, String nilReason) {
+
+	public StringWithNilReasonType createStringWithNilReasonForString(String value, String nilReason) {
 		StringWithNilReasonType snrType = ofIWXXM.createStringWithNilReasonType();
-		if (value==null)
+		if (value == null)
 			snrType.getNilReason().add(nilReason);
 		else
 			snrType.setValue(value);
 
 		return snrType;
 	}
-	
-	public  JAXBElement<StringWithNilReasonType> createTagForStringWithNilReasonForString(String value, String nilReason) {
-		StringWithNilReasonType snrType = createStringWithNilReasonForString(value,nilReason);
+
+	public JAXBElement<StringWithNilReasonType> createTagForStringWithNilReasonForString(String value,
+			String nilReason) {
+		StringWithNilReasonType snrType = createStringWithNilReasonForString(value, nilReason);
 		JAXBElement<StringWithNilReasonType> result = ofIWXXM.createStringWithNilReason(snrType);
 		return result;
-		
+
 	}
 
 	/**
 	 * Сreates JAXB TimeInstantSection for a given DateTime
 	 * 
-	 * @param dt
-	 *            - dateTime to process
-	 * @param icaoCode
-	 *            - aerodrome ICAO code
+	 * @param dt       - dateTime to process
+	 * @param icaoCode - aerodrome ICAO code
 	 * @return {@link TimeInstantpropertyType} in JAXB envelope which is ready to
 	 *         embed into getRest() part of the root tag
 	 */
-	public  TimeInstantPropertyType createJAXBTimeSection(DateTime dt, String icaoCode) {
-		TimeInstantPropertyType timeProperty = createTimeInstantPropertyTypeForDateTime(dt, icaoCode,"timeproperty");
+	public TimeInstantPropertyType createJAXBTimeSection(DateTime dt, String icaoCode) {
+		TimeInstantPropertyType timeProperty = createTimeInstantPropertyTypeForDateTime(dt, icaoCode, "timeproperty");
 		return timeProperty;
 
 	}
 
-	
-	public  AbstractTimeObjectPropertyType createAbstractTimeObject(DateTime dt, String icaoCode) {
-		TimeInstantPropertyType timeProperty = this.createTimeInstantPropertyTypeForDateTime(dt,icaoCode, "adt");			
+	public AbstractTimeObjectPropertyType createAbstractTimeObject(DateTime dt, String icaoCode) {
+		TimeInstantPropertyType timeProperty = this.createTimeInstantPropertyTypeForDateTime(dt, icaoCode, "adt");
 		JAXBElement<TimeInstantType> to = this.ofGML.createTimeInstant(timeProperty.getTimeInstant());
 		AbstractTimeObjectPropertyType t = this.ofIWXXM.createAbstractTimeObjectPropertyType();
 		t.setAbstractTimeObject(to);
 		return t;
 	}
+
 	/**
 	 * Creates valid period section for trend sections
 	 * 
-	 * @param start
-	 *            - Begin timestamp
-	 * @param end
-	 *            - End timestamp
-	 * @param sectionIndex
-	 *            - number of the section to create valid id
+	 * @param start        - Begin timestamp
+	 * @param end          - End timestamp
+	 * @param sectionIndex - number of the section to create valid id
 	 * 
 	 * @return TimePeriodPropertyType
 	 */
-	public  TimePeriodPropertyType createTrendPeriodSection(String icaoCode, DateTime start, DateTime end,
+	public TimePeriodPropertyType createTrendPeriodSection(String icaoCode, DateTime start, DateTime end,
 			int sectionIndex) {
 
 		String sectionTimePeriodBeginPosition = start.toString(getDateTimeISOFormat());
@@ -229,11 +218,13 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		TimePeriodPropertyType timePeriodProperty = ofGML.createTimePeriodPropertyType();
 		TimePeriodType timePeriodType = ofGML.createTimePeriodType();
 
-		timePeriodType.setId(generateUUIDv4(String.format("tp-%d-%s-%s", sectionIndex, sectionTimePeriodBegin, sectionTimePeriodEnd)));
+		timePeriodType.setId(generateUUIDv4(
+				String.format("tp-%d-%s-%s", sectionIndex, sectionTimePeriodBegin, sectionTimePeriodEnd)));
 
 		// begin
 		TimeInstantType timeBeginInstant = ofGML.createTimeInstantType();
-		timeBeginInstant.setId(generateUUIDv4(String.format("ti-%d-%s-%s", sectionIndex, icaoCode, sectionTimePeriodBegin)));
+		timeBeginInstant
+				.setId(generateUUIDv4(String.format("ti-%d-%s-%s", sectionIndex, icaoCode, sectionTimePeriodBegin)));
 
 		TimePositionType timePositionBegin = ofGML.createTimePositionType();
 		// timePositionBegin.getValue().add(timePeriodBeginPosition);
@@ -261,10 +252,10 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return timePeriodProperty;
 
 	}
-	
-	/**creates XML section with time period, e.g. for validity periods*/
-	public  TimePeriodPropertyType createTimePeriod(String icaoCode, DateTime from, DateTime to) {
-		
+
+	/** creates XML section with time period, e.g. for validity periods */
+	public TimePeriodPropertyType createTimePeriod(String icaoCode, DateTime from, DateTime to) {
+
 		TimePeriodPropertyType timePeriodProperty = this.ofGML.createTimePeriodPropertyType();
 		TimePeriodType timePeriodType = this.ofGML.createTimePeriodType();
 
@@ -272,7 +263,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		// begin
 		TimeInstantType timeBeginInstant = this.ofGML.createTimeInstantType();
-		timeBeginInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode,from.toString())));
+		timeBeginInstant.setId(generateUUIDv4(String.format("ti-%s-%s", icaoCode, from.toString())));
 		TimePositionType timePositionBegin = this.ofGML.createTimePositionType();
 		timePositionBegin.getValue().add(from.toString());
 		timeBeginInstant.setTimePosition(timePositionBegin);
@@ -297,23 +288,21 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		timePeriodProperty.setTimePeriod(timePeriodType);
 
 		return timePeriodProperty;
-		
+
 	}
-	
 
 	/**
-	 * Сreates FeaturePropertyType for given aerodrome icao code  <iwxxm:aerodrome>
+	 * Сreates FeaturePropertyType for given aerodrome icao code <iwxxm:aerodrome>
 	 * 
-	 * @param icaoCode
-	 *            - ICAO code for the aerodrome.
+	 * @param icaoCode - ICAO code for the aerodrome.
 	 * @return {@link FeaturePropertyType} with aerodrome description
 	 */
-	public  AirportHeliportPropertyType createAirportDescriptionSectionTag(String icaoCode) {
-		
+	public AirportHeliportPropertyType createAirportDescriptionSectionTag(String icaoCode) {
+
 		AirportHeliportPropertyType ahpt = ofIWXXM.createAirportHeliportPropertyType();
 		AirportHeliportType aht = new AirportHeliportType();
 		aht.setId(generateUUIDv4("aerodrome-" + icaoCode));
-		
+
 		AirportHeliportTimeSlicePropertyType ahTimeSliceProperty = ofAIXM.createAirportHeliportTimeSlicePropertyType();
 		AirportHeliportTimeSliceType ahTimeSliceType = ofAIXM.createAirportHeliportTimeSliceType();
 		ahTimeSliceType.setId(generateUUIDv4(String.format("aerodrome-%s-ts", icaoCode)));
@@ -337,60 +326,56 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		ahTimeSliceProperty.setAirportHeliportTimeSlice(ahTimeSliceType);
 
 		aht.getTimeSlice().add(ahTimeSliceProperty);
-		
-		
+
 		ahpt.setAirportHeliport(aht);
-		
+
 		return ahpt;
 
 	}
 
-	/**Creates block for RunwayDirectionPropertyType with AIXXM description of the aerodrome runway*/
-	public  RunwayDirectionPropertyType createRunwayDesignatorSectionTag(String icaoCode, String designator) {
+	/**
+	 * Creates block for RunwayDirectionPropertyType with AIXXM description of the
+	 * aerodrome runway
+	 */
+	public RunwayDirectionPropertyType createRunwayDesignatorSectionTag(String icaoCode, String designator) {
 		RunwayDirectionPropertyType runwayDir = ofIWXXM.createRunwayDirectionPropertyType();
 		RunwayDirectionType rdt = ofAIXM.createRunwayDirectionType();
-		rdt.setId(generateUUIDv4(String.format("runway-%s-%s",icaoCode,designator)));
-		
-		
+		rdt.setId(generateUUIDv4(String.format("runway-%s-%s", icaoCode, designator)));
+
 		RunwayDirectionTimeSlicePropertyType rdts = ofAIXM.createRunwayDirectionTimeSlicePropertyType();
 		RunwayDirectionTimeSliceType rdtst = ofAIXM.createRunwayDirectionTimeSliceType();
-		
+
 		TextDesignatorType textDesignator = ofAIXM.createTextDesignatorType();
 		textDesignator.setValue(designator);
 		JAXBElement<TextDesignatorType> textDesTag = ofAIXM.createRunwayTimeSliceTypeDesignator(textDesignator);
-		rdtst.setId(generateUUIDv4(String.format("runway-%s-%s-ts",icaoCode,designator)));
+		rdtst.setId(generateUUIDv4(String.format("runway-%s-%s-ts", icaoCode, designator)));
 		rdtst.setDesignator(textDesTag);
 		rdtst.setInterpretation("BASELINE");
-		
+
 		TimePrimitivePropertyType tppt = ofGML.createTimePrimitivePropertyType();
 		rdtst.setValidTime(tppt);
-		
+
 		rdts.setRunwayDirectionTimeSlice(rdtst);
 		rdt.getTimeSlice().add(rdts);
-		
+
 		runwayDir.setRunwayDirection(rdt);
 		return runwayDir;
 	}
-	
+
 	/**
 	 * Adds header with translation center properties to the message
 	 * 
-	 * @param report
-	 *            - message of the class, derived from {@link ReportType} - TAFType,
-	 *            METARType, etc...
-	 * @param translationTime
-	 *            - translation time
-	 * @param bulletinReceivedTime
-	 *            - when bulletin was received (or null if not applicable))
-	 * @param bulletinId
-	 *            - bulletin id (or null if not applicable)
-	 * @param designator
-	 *            - ICAO code of the translation center
-	 * @param centreName
-	 *            - name of the translation center
+	 * @param report               - message of the class, derived from
+	 *                             {@link ReportType} - TAFType, METARType, etc...
+	 * @param translationTime      - translation time
+	 * @param bulletinReceivedTime - when bulletin was received (or null if not
+	 *                             applicable))
+	 * @param bulletinId           - bulletin id (or null if not applicable)
+	 * @param designator           - ICAO code of the translation center
+	 * @param centreName           - name of the translation center
 	 * @return The same report object with filled properties
 	 */
-	public  <T extends ReportType> T addTranslationCentreHeaders(T report, DateTime translationTime,
+	public <T extends ReportType> T addTranslationCentreHeaders(T report, DateTime translationTime,
 			DateTime bulletinReceivedTime, String bulletinId, String designator, String centreName)
 			throws DatatypeConfigurationException {
 
@@ -417,29 +402,24 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 	/**
 	 * Creates cloud layer section. Takes the right linkk from WMO register helper
 	 * 
-	 * @param cloudAmount
-	 *            - octants
-	 * @param cloudHeight
-	 *            - height of cloud in given units
-	 * @param cloudTypeCode
-	 *            - significant cloud type if exists
+	 * @param cloudAmount   - octants
+	 * @param cloudHeight   - height of cloud in given units
+	 * @param cloudTypeCode - significant cloud type if exists
 	 * 
-	 * @param nilReason
-	 *            - it should be set when somehow values are missed
-	 * @param units
-	 *            - {@link LENGTH_UNITS} unit of measure.
+	 * @param nilReason     - it should be set when somehow values are missed
+	 * @param units         - {@link LENGTH_UNITS} unit of measure.
 	 * @return cloudLayer
+	 * @throws WMORegisterException 
 	 */
-	public  CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
-			String nilReasonUrl, LENGTH_UNITS units) {
+	public CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
+			String nilReasonUrl, LENGTH_UNITS units) throws WMORegisterException {
 
 		// Create layer
 		// Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
 		CloudLayerType currentLayer = ofIWXXM.createCloudLayerType();
-		
+
 		// Cloud amount seems to conform WMO schemas with
 		CloudAmountReportedAtAerodromeType amount = ofIWXXM.createCloudAmountReportedAtAerodromeType();
-		
 
 		// Get the right link to WMO code table for cloud amount octant
 
@@ -456,7 +436,7 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 
 		currentLayer.setAmount(amount);
 		currentLayer.setBase(layerDistanceBase);
-
+	
 		if (cloudTypeCode != null && !cloudTypeCode.isEmpty()) {
 
 			SigConvectiveCloudTypeType cloudType = ofIWXXM.createSigConvectiveCloudTypeType();
@@ -471,43 +451,50 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return currentLayer;
 
 	}
-	
-	/**Created cloud section with pointing the nil reason, e.g. for NSC or NCD cases*/
-	public  CloudLayerType createEmptyCloudLayerSection(String nilReasonUrl) {
+
+	/**
+	 * Created cloud section with pointing the nil reason, e.g. for NSC or NCD cases
+	 */
+	public CloudLayerType createEmptyCloudLayerSection(String nilReasonUrl) {
 
 		// Create layer
-	
+
 		CloudLayerType currentLayer = ofIWXXM.createCloudLayerType();
 		DistanceWithNilReasonType layerDistanceBase = ofIWXXM.createDistanceWithNilReasonType();
-		
+
 		layerDistanceBase.getNilReason().add(nilReasonUrl);
-		
+
 		currentLayer.setBase(layerDistanceBase);
 
-		
 		return currentLayer;
 
 	}
-	
-	
-	
-	/**Creates tag for vertical visibility*/
-	public  JAXBElement<LengthWithNilReasonType> createVerticalVisibilitySection(double visibilityValue) {
+
+	/** Creates tag for vertical visibility 
+	 * @throws WMORegisterException */
+	public JAXBElement<LengthWithNilReasonType> createVerticalVisibilitySection(Optional<Integer> visibilityValue) throws WMORegisterException {
 		LengthWithNilReasonType vvType = ofIWXXM.createLengthWithNilReasonType();
-		vvType.setUom(LENGTH_UNITS.FT.getStringValue());
-		vvType.setValue(visibilityValue);
-		return ofIWXXM.createAerodromeCloudForecastTypeVerticalVisibility(vvType);
 		
-	
+		//Vertical visibility is present, for example VV015
+		if (visibilityValue.isPresent()) {
+			vvType.setUom(LENGTH_UNITS.FT.getStringValue());
+			vvType.setValue(visibilityValue.get());
+		}
+		else {
+			vvType.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOT_OBSERVABLE));
+		}
+		
+		return ofIWXXM.createAerodromeCloudTypeVerticalVisibility(vvType);
+
 	}
 
-	
-	/** returns link for WMO weather register for present weather in METAR */
-	public  AerodromePresentWeatherType createPresentWeatherSection(String weather) {
+	/** returns link for WMO weather register for present weather in METAR 
+	 * @throws WMORegisterException */
+	public AerodromePresentWeatherType createPresentWeatherSection(String weather) throws WMORegisterException {
 
 		AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
-			presentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			presentWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 			return presentWeather;
 		}
 		presentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
@@ -515,13 +502,14 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return presentWeather;
 	}
 
-	/** returns link for WMO weather register for recent weather in METAR */
-	public  AerodromeRecentWeatherType createRecentWeatherSection(String weather) {
+	/** returns link for WMO weather register for recent weather in METAR 
+	 * @throws WMORegisterException */
+	public AerodromeRecentWeatherType createRecentWeatherSection(String weather) throws WMORegisterException {
 
 		AerodromeRecentWeatherType recentWeather = ofIWXXM.createAerodromeRecentWeatherType();
 
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
-			recentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			recentWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 			return recentWeather;
 		}
 		recentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
@@ -529,114 +517,101 @@ public class IWXXM31Helpers extends IWXXMHelpers {
 		return recentWeather;
 	}
 
-	
-	
-	
-	
 	/**
 	 * returns link for WMO weather register for forecasted weather in METAR and TAF
+	 * @throws WMORegisterException 
 	 */
-	public  AerodromeForecastWeatherType createForecastWeatherSection(String weather) {
+	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) throws WMORegisterException {
 		AerodromeForecastWeatherType fcstWeather = ofIWXXM.createAerodromeForecastWeatherType();
-		
+
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES)) {
-			fcstWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			fcstWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 			return fcstWeather;
 		}
-		
-		
+
 		fcstWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 		return fcstWeather;
-		
-	
-		
+
 	}
 
-	public  WMOCloudRegister getCloudReg() {
+	public WMOCloudRegister getCloudReg() {
 		return cloudReg;
 	}
 
-	public  WMOCloudTypeRegister getCloudTypeReg() {
+	public WMOCloudTypeRegister getCloudTypeReg() {
 		return cloudTypeReg;
 	}
-	
-	
 
-	public  WMOPrecipitationRegister getPrecipitationReg() {
+	public WMOPrecipitationRegister getPrecipitationReg() {
 		return precipitationReg;
 	}
 
-	public  WMORunWayContaminationRegister getRwContaminationReg() {
+	public WMORunWayContaminationRegister getRwContaminationReg() {
 		return rwContaminationReg;
 	}
 
-	public  WMORunWayDepositsRegister getRwDepositReg() {
+	public WMORunWayDepositsRegister getRwDepositReg() {
 		return rwDepositReg;
 	}
 
-	public  WMORunWayFrictionRegister getRwFrictionReg() {
+	public WMORunWayFrictionRegister getRwFrictionReg() {
 		return rwFrictionReg;
 	}
-	
-	public  WMOSigConvectiveCloudTypeRegister getSigCloudTypeReg() {
+
+	public WMOSigConvectiveCloudTypeRegister getSigCloudTypeReg() {
 		return sigCloudTypeReg;
 	}
-	
-	public  WMOSigWXRegister getSigWxPhenomenaRegister() {
+
+	public WMOSigWXRegister getSigWxPhenomenaRegister() {
 		return sigWxPhenomenaRegister;
 	}
-	
-	public  WMOSpaceWeatherRegister getSpaceWeatherReg() {
+
+	public WMOSpaceWeatherRegister getSpaceWeatherReg() {
 		return swxEffectsRegister;
 	}
-	public  WMOSpaceWeatherLocationRegister getSpaceWeatherLocationReg() {
+
+	public WMOSpaceWeatherLocationRegister getSpaceWeatherLocationReg() {
 		return swxLocationRegister;
 	}
 
-	public  WMONilReasonRegister getNilRegister() {
+	public WMONilReasonRegister getNilRegister() {
 		return nilRegister;
 	}
-	
 
-	public  WMOAirWXRegister getAirWxPhenomenaRegister() {
+	public WMOAirWXRegister getAirWxPhenomenaRegister() {
 		return airWxPhenomenaRegister;
 	}
-
-	
 
 	public WMOSpaceWeatherRegister getSwxEffectsRegister() {
 		return swxEffectsRegister;
 	}
 
-
 	public WMOSpaceWeatherLocationRegister getSwxLocationRegister() {
 		return swxLocationRegister;
 	}
 
-	/**set the geoservice. Use this method to pre-set the geoservice with non-default initialization
-	 * e.g. 
-	 * Iwxxm31Helpers helpers = new Iwxxm31Helpers();
-	 * 	GeoService gs = new GeoService();
-	 *  gs.init(true, "my-firs-catalog", true));
-	 *  helpers.setGeoService(gs);
-	 *  */
+	/**
+	 * set the geoservice. Use this method to pre-set the geoservice with
+	 * non-default initialization e.g. Iwxxm31Helpers helpers = new
+	 * Iwxxm31Helpers(); GeoService gs = new GeoService(); gs.init(true,
+	 * "my-firs-catalog", true)); helpers.setGeoService(gs);
+	 */
 	public void setGeoService(GeoService geoService) {
-		
+
 		this.geoService = geoService;
 	}
-	
-	/**returns geoservice initializing it if necessary with default parameters*/
-	public  GeoService getGeoService() throws URISyntaxException {
+
+	/** returns geoservice initializing it if necessary with default parameters */
+	public GeoService getGeoService() throws URISyntaxException {
 		if (!geoService.isServiceInit())
 			geoService.init(false, "", true);
-		
+
 		return geoService;
-		
+
 	}
 
 	public schemabindings31._int.wmo.def.metce._2013.ObjectFactory getOfMETCE() {
 		return ofMETCE;
 	}
 
-	
 }

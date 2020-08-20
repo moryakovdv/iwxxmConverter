@@ -19,13 +19,14 @@ package org.gamc.spmi.iwxxmConverter.test.wmo;
 import static org.junit.Assert.assertTrue;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO clouds registry*/
 public class ParseWMOCloudsTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister() throws WMORegisterException {
 		WMOCloudRegister cloudsRegister = new WMOCloudRegister();
 		cloudsRegister.parseWMOXml();
 		assertTrue(cloudsRegister.getContent().size()>0);

@@ -20,13 +20,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO clouds registry*/
 public class ParseWMOSigConvectiveCloudsTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMOSigConvectiveCloudTypeRegister cloudsRegister = new WMOSigConvectiveCloudTypeRegister();
 		cloudsRegister.parseWMOXml();
 		assertTrue(cloudsRegister.getContent().size()>0);

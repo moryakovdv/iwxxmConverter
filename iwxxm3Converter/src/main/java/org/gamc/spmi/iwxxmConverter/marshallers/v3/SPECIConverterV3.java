@@ -30,6 +30,7 @@ import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +80,7 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 	}
 
 	@Override
-	public String convertTacToXML(String tac) throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public String convertTacToXML(String tac) throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		logger.debug("Parsing "+ tac);
 
 		
@@ -103,7 +104,7 @@ public class SPECIConverterV3 implements TacConverter<SPECITacMessage, SPECIType
 
 	@Override
 	public SPECIType convertMessage(SPECITacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		this.translatedSpeci = translatedMessage;
 

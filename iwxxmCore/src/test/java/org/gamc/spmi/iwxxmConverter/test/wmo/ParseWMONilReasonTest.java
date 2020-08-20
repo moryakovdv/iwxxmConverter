@@ -26,13 +26,14 @@ import org.gamc.spmi.iwxxmConverter.wmo.WMORegisterDescription;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /** Test for parsing WMO NilReasons */
 public class ParseWMONilReasonTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMONilReasonRegister phRegister = new WMONilReasonRegister();
 		phRegister.parseWMOXml();
 		assertTrue(phRegister.getContent().size() > 0);

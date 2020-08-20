@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -152,7 +153,7 @@ public class TafTranslationTest {
 		TAFBecomingSection bcmg1 = tafMessage.getBecomingSections().get(0);
 		bcmg1.parseSection();
 		assertEquals("OVC", bcmg1.getCommonWeatherSection().getCloudSections().get(0).getAmount());
-		assertEquals(Integer.valueOf(1100), bcmg1.getCommonWeatherSection().getCloudSections().get(0).getHeight());
+		assertEquals(Optional.of(1100), bcmg1.getCommonWeatherSection().getCloudSections().get(0).getHeight());
 
 		// second bcmg section -check wind
 		TAFBecomingSection bcmg2 = tafMessage.getBecomingSections().get(1);
@@ -200,7 +201,7 @@ public class TafTranslationTest {
 		assertEquals(2, fmSec.getCommonWeatherSection().getCloudSections().size());
 
 		assertEquals("BKN", fmSec.getCommonWeatherSection().getCloudSections().get(1).getAmount());
-		assertEquals(Integer.valueOf(10000), fmSec.getCommonWeatherSection().getCloudSections().get(1).getHeight());
+		assertEquals(Optional.of(10000), fmSec.getCommonWeatherSection().getCloudSections().get(1).getHeight());
 	}
 
 	@Test

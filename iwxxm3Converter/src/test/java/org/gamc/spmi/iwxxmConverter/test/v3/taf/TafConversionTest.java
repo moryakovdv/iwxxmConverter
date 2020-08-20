@@ -30,6 +30,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -167,7 +168,7 @@ public class TafConversionTest {
 			+ "			\"TNM06/2724Z TEMPO 2703/2710 0700 +SHSN OVC003 BKN015CB PROB40 TEMPO\\n\" + \n"
 			+ "			\"2703/2710 -FZDZ BECMG 2712/2714 9000 NSW BKN012";
 	@Test
-	public void testProbabilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testProbabilityTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		TAFConverterV3 tafconverter = new TAFConverterV3();
 		String iwxxm = tafconverter.convertTacToXML(testProbabilityTaf);
 		System.out.println(iwxxm);

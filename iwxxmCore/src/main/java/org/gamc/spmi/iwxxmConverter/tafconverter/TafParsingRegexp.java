@@ -43,7 +43,7 @@ public class TafParsingRegexp {
 	//public final static Pattern metarRVR = Pattern.compile("R(?<runwayDesignator>\\d{2,3}(?:L|R){0,1})\\/(?<rvrOperator>M|P){0,1}(?<rvr>\\d{2,4})((?<tendency>U|N|P|D)|(?<units>FT)|\\s){1}");
 
 	public final static Pattern tafPrecipitation = Pattern
-			.compile("(?:^|\\s)(?!RE|METAR|NOSIG|WS|ALL|RWY|RMK|NSC|NCD)(?<weather>(?:\\+|-|VC){0,1}[A-Z]{2,8})(?=\\s)");
+			.compile("(?:^|\\s)(?!RE|METAR|NOSIG|WS|ALL|RWY|RMK|NSC|NCD)(?<weather>(?:\\+|-|VC){0,1}[A-Z]{2,8})(?=\\s|=)");
 
 	public final static Pattern tafClouds = Pattern
 			.compile("(?<noCloudsDetected>NCD)|(?<noSignificantClouds>NSC)|(?<cloudAmount>[A-Z]{2,3})(?<cloudHeight>\\d{3}|\\/{3})(?<cloudType>[A-Z]{2,3}){0,1}(?:\\s|\\=|$)");

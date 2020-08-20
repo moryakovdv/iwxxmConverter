@@ -38,6 +38,7 @@ import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFProbabilitySection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFTempoSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFTimedFMSection;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 public class SpaceWeatherTranslationTest {
@@ -83,18 +84,20 @@ public class SpaceWeatherTranslationTest {
 			"RMK:                PERIODIC HF COM ABSORPTION OBS AND LIKELY TO CONT IN THE NEAR TERM. CMPL AND PERIODIC LOSS OF HF ON THE SUNLIT SIDE OF THE EARTH EXP. CONT HF COM DEGRADATION LIKELY OVER THE NXT 7 DAYS. SEE WWW.SPACEWEATHERPROVIDER.WEB \n" + 
 			"NXT ADVISORY:       20161108/0700Z";
 	
-	/**Converts the SWx example*/
+	/**Converts the SWx example
+	 * @throws WMORegisterException */
 	//@Test
-	public void convertSimple() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void convertSimple() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SPACEWEATHERConverterV3 converter = new SPACEWEATHERConverterV3();
 		String xmlResult = converter.convertTacToXML(swxCommonTest);
 		
 		System.out.println(xmlResult);
 	}
 
-	/**Converts the SWx example in new format (one for each effect, no minutes in lat/lon*/
+	/**Converts the SWx example in new format (one for each effect, no minutes in lat/lon
+	 * @throws WMORegisterException */
 	//@Test
-	public void convertNewVersion() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void convertNewVersion() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SPACEWEATHERConverterV3 converter = new SPACEWEATHERConverterV3();
 		String xmlResult = converter.convertTacToXML(swxNewFormatTest);
 		
@@ -102,9 +105,10 @@ public class SpaceWeatherTranslationTest {
 	}
 	
 
-	/**Converts the SWx example in new format (one for each effect, no minutes in lat/lon*/
+	/**Converts the SWx example in new format (one for each effect, no minutes in lat/lon
+	 * @throws WMORegisterException */
 	@Test
-	public void convertDayLightSide() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void convertDayLightSide() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SPACEWEATHERConverterV3 converter = new SPACEWEATHERConverterV3();
 		String xmlResult = converter.convertTacToXML(swxDayLightSide);
 		

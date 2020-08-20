@@ -30,9 +30,11 @@ public class UriConstants {
 	
 	public static final String GLOBAL_SCHEMAS_LOCATION_V3 = "http://icao.int/iwxxm/3.0 http://schemas.wmo.int/iwxxm/3.0/iwxxm.xsd";
 
-	/** Причина отсутствия значения */
+	
+	/** Причина отсутствия значения 
 	public static final String NIL_REASON_NOSIG = "http://codes.wmo.int/common/nil/nothingOfOperationalSignificance";
 
+	*/
 	/** Common URIs */
 	
 	

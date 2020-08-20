@@ -25,6 +25,8 @@ import org.gamc.spmi.iwxxmConverter.general.SolarCalc;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.spaceweatherconverter.SpaceWeatherEffectLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -82,7 +84,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		
 		logger.debug("Parsing "+ tac);
 
@@ -108,7 +110,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 
 	@Override
 	public SpaceWeatherAdvisoryType convertMessage(SPACEWEATHERTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		// instantiating the result object
 		SpaceWeatherAdvisoryType resultSwxType = new SpaceWeatherAdvisoryType();
@@ -164,7 +166,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		}
 		else {
 			TimeInstantPropertyType nextAdvTimeNil = iwxxmHelpers.getOfGML().createTimeInstantPropertyType();
-			nextAdvTimeNil.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode("inapplicable"));
+			nextAdvTimeNil.getNilReason().add(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_UNKNOWN));
 			
 			resultSwxType.setNextAdvisoryTime(nextAdvTimeNil);
 		}
@@ -244,8 +246,9 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 		
 	}
 	
-	/** create link for effect from WMO repository */
-	public SpaceWeatherPhenomenaType createPhenomena(String effect) {
+	/** create link for effect from WMO repository 
+	 * @throws WMORegisterException */
+	public SpaceWeatherPhenomenaType createPhenomena(String effect) throws WMORegisterException {
 
 		SpaceWeatherPhenomenaType phenomena = iwxxmHelpers.getOfIWXXM().createSpaceWeatherPhenomenaType();
 		String effectLink = iwxxmHelpers.getSpaceWeatherReg().getWMOUrlByCode(effect);
@@ -255,9 +258,10 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 
 	}
 
-	/** creates section for observed location of phenomenas */
+	/** creates section for observed location of phenomenas 
+	 * @throws WMORegisterException */
 	public SpaceWeatherAnalysisPropertyType createAnalysisSection(String issuingCenter,
-			SpaceWeatherEffectLocation location, TimeIndicatorType observationOrforecast) {
+			SpaceWeatherEffectLocation location, TimeIndicatorType observationOrforecast) throws WMORegisterException {
 		SpaceWeatherAnalysisPropertyType analysisSection = iwxxmHelpers.getOfIWXXM()
 				.createSpaceWeatherAnalysisPropertyType();
 		SpaceWeatherAnalysisType analysisType = iwxxmHelpers.getOfIWXXM().createSpaceWeatherAnalysisType();
@@ -311,8 +315,9 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	 * </aixm:horizontalProjection> </aixm:AirspaceVolume> </iwxxm:location>
 	 * <iwxxm:locationIndicator xlink:href=
 	 * "http://codes.wmo.int/49-2/SpaceWxLocation/HNH"/> </iwxxm:SpaceWeatherRegion>
+	 * @throws WMORegisterException 
 	 **/
-	public SpaceWeatherRegionPropertyType createSpaceWeatherRegion(String hemi, List<Double> coords) {
+	public SpaceWeatherRegionPropertyType createSpaceWeatherRegion(String hemi, List<Double> coords) throws WMORegisterException {
 
 		SpaceWeatherRegionPropertyType regionSection = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionPropertyType();
 		SpaceWeatherRegionType region = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionType();
@@ -395,8 +400,9 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 	 * <gml:CircleByCenterPoint numArc="1"> <gml:pos>-16.93 160.96</gml:pos>
 	 * <gml:radius uom="km">10100</gml:radius> </gml:CircleByCenterPoint>
 	 * </gml:segments> </gml:Curve> </gml:curveMember> </gml:Ring>
+	 * @throws WMORegisterException 
 	 **/
-	public SpaceWeatherRegionPropertyType createDayLightSpaceWeatherRegion(List<Double> coords) {
+	public SpaceWeatherRegionPropertyType createDayLightSpaceWeatherRegion(List<Double> coords) throws WMORegisterException {
 		SpaceWeatherRegionPropertyType regionSection = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionPropertyType();
 		SpaceWeatherRegionType region = iwxxmHelpers.getOfIWXXM().createSpaceWeatherRegionType();
 

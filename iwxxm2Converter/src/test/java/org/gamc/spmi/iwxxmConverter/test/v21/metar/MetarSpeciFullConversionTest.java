@@ -33,6 +33,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.ConverterFactory;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -73,12 +74,12 @@ public class MetarSpeciFullConversionTest {
 	AtomicInteger failedRulesCounter = new AtomicInteger(0);
 	
 	@Test
-	public void testMetars() throws IOException, ParsingException, DatatypeConfigurationException, JAXBException {
+	public void testMetars() throws IOException, ParsingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		testConvertionAndValidation(selectAllMetarPattern,"METAR");
 	}
 	
 	@Test
-	public void testSpecies() throws IOException, ParsingException, DatatypeConfigurationException, JAXBException {
+	public void testSpecies() throws IOException, ParsingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		testConvertionAndValidation(selectAllSpeciPattern,"SPECI");
 	}
 	
@@ -118,8 +119,9 @@ public class MetarSpeciFullConversionTest {
 			 
 		}
 	int counter = 1;
-	/**gets messages from input file using Pattern*/
-	private void testConvertionAndValidation(Pattern p, String outputPrefix) throws IOException, ParsingException, DatatypeConfigurationException, JAXBException {
+	/**gets messages from input file using Pattern
+	 * @throws WMORegisterException */
+	private void testConvertionAndValidation(Pattern p, String outputPrefix) throws IOException, ParsingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		//System.out.println(convertTacToXML(testTaf));
 
 		InputStream fs = this.getClass().getResourceAsStream("/examples/metar-speci.txt");
@@ -175,8 +177,9 @@ public class MetarSpeciFullConversionTest {
 		}
 	}
 	
-	/**Performs xml conversion using ConverterFactory*/
-	private String convertTacToXML(String message) throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	/**Performs xml conversion using ConverterFactory
+	 * @throws WMORegisterException */
+	private String convertTacToXML(String message) throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		TacConverter<?, ?,?> tc = ConverterFactory.createForTac(message); 
 		String result = tc.convertTacToXML(message);
 		return result;

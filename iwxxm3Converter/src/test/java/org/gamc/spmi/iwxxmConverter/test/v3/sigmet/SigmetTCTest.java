@@ -11,6 +11,7 @@ import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTropicalConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTropicalTacMessage;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Intensity;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 public class SigmetTCTest {
@@ -51,7 +52,7 @@ public class SigmetTCTest {
 		}
 	
 	@Test
-	public void testParsingAndConvertion() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void testParsingAndConvertion() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SIGMETTropicalConverterV3 c1 = new SIGMETTropicalConverterV3();
 		String result = c1.convertTacToXML(sigmetTcWithin);
 		
@@ -59,7 +60,7 @@ public class SigmetTCTest {
 	}
 	
 	@Test
-	public void testRadiusTC() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void testRadiusTC() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SIGMETTropicalConverterV3 c1 = new SIGMETTropicalConverterV3();
 		String result = c1.convertTacToXML(sigmetRadius);
 		

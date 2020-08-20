@@ -22,13 +22,14 @@ import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO Space weather*/
 public class ParseWMOSpaceWeatherPhenomenaTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMOSpaceWeatherRegister phRegister = new WMOSpaceWeatherRegister();
 		phRegister.parseWMOXml();
 		assertTrue(phRegister.getContent().size()>0);

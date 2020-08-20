@@ -25,6 +25,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -60,8 +61,11 @@ public class MetarConversionTest {
 	
 	String metarCavok = "METAR ULLI 261230Z 32003MPS 280V360 CAVOK M02/M16 Q1008 R88/190055\n" + 
 			"NOSIG";
+	
+	String metarTACWindShearRW = "METAR LZIB 211630Z 08005KT 060V120 1200 0900NW FG VCTS +SHRA FEW020 26/15 Q1022 WS RWY04L NOSIG=";
+	
 	@Test
-	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		METARConverterV3 mc = new METARConverterV3();
 		String result = mc.convertTacToXML(metar);
 		
@@ -70,9 +74,17 @@ public class MetarConversionTest {
 		
 	}
 	@Test
-	public void testMetarCavok() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testMetarCavok() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		METARConverterV3 mc = new METARConverterV3();
 		String result = mc.convertTacToXML(metarCavok);
+		
+		System.out.println(result);
+	}
+	
+	@Test
+	public void testMetarWindShear() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
+		METARConverterV3 mc = new METARConverterV3();
+		String result = mc.convertTacToXML(metarTACWindShearRW);
 		
 		System.out.println(result);
 	}

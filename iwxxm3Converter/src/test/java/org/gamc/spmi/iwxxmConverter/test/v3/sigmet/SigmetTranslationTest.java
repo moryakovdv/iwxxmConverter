@@ -29,6 +29,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
@@ -54,7 +55,7 @@ public class SigmetTranslationTest {
 			"N4045 E02330 – N4040 E02248 – N4123 E02045 – N4530 E02052=";
 	
 	@Test
-	public void testReference1() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void testReference1() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3<SIGMETTacMessage, SIGMETType> c1 = new SIGMETConverterV3<SIGMETTacMessage, SIGMETType>();
 		SIGMETTacMessage tac = new SIGMETTacMessage(referenceSigmet1);
 		tac.parseMessage();
@@ -69,7 +70,7 @@ public class SigmetTranslationTest {
 	}
 	
 	@Test
-	public void test_OBS_and_FCST_Sigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void test_OBS_and_FCST_Sigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3<SIGMETTacMessage, SIGMETType> c1 = new SIGMETConverterV3<SIGMETTacMessage, SIGMETType>();
 		SIGMETTacMessage tac = new SIGMETTacMessage(refrenceSigmet2);
 		tac.parseMessage();
@@ -91,7 +92,7 @@ public class SigmetTranslationTest {
 	
 	
 	@Test
-	public void test_FCST_and_FCST_Sigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+	public void test_FCST_and_FCST_Sigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3<SIGMETTacMessage, SIGMETType> c1 = new SIGMETConverterV3<SIGMETTacMessage, SIGMETType>();
 		SIGMETTacMessage tac = new SIGMETTacMessage(refrenceSigmet3);
 		tac.parseMessage();

@@ -28,6 +28,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class WMONilReasonRegister implements WMORegister<String> {
 
+	public static final String NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE = "nothingOfOperationalSignificance";
+	public static final String NIL_REASON_MISSING = "missing";
+	public static final String NIL_REASON_NOT_OBSERVABLE = "notObservable";
+	public static final String NIL_REASON_UNKNOWN = "unknown";
+	
+	public static final String NIL_REASON_INAPPLICABLE = "inapplicable";
+
+	
+	
+	
 	private static final String registerFileName = "codes.wmo.int-common-nil.rdf";
 
 	private ConcurrentHashMap<String, WMORegisterDescription> wmoReasonCodes = new ConcurrentHashMap<String, WMORegisterDescription>();

@@ -16,13 +16,15 @@
  */
 package org.gamc.spmi.iwxxmConverter.tafconverter;
 
+import java.util.Optional;
+
 import org.gamc.spmi.iwxxmConverter.tac.TacSectionImpl;
 
 /**Description of TAF cloud section. E.g. SCT020CB*/
 public class TAFCloudSection extends TacSectionImpl {
 
 	private String amount;
-	private Integer height;
+	private Optional<Integer> height = Optional.empty();
 	private String type;
 	private boolean noCloudsDetected;
 	private boolean noSignificantClouds;
@@ -41,11 +43,11 @@ public class TAFCloudSection extends TacSectionImpl {
 			this.amount = amount;
 	}
 
-	public Integer getHeight() {
+	public  Optional<Integer> getHeight() {
 		return height;
 	}
 
-	public void setHeight(Integer height) {
+	public void setHeight( Optional<Integer> height) {
 		if (height != null)
 			this.height = height;
 	}

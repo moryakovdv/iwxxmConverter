@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetParsingRegexp;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 /**Determines the type of the SIGMET message (weather/TC/VA) and chooses appropriate converter*/
 public class SIGMETDefiningTypeConverterV3 {
 
@@ -15,7 +16,7 @@ public class SIGMETDefiningTypeConverterV3 {
 	}
 
 	public void convertDefiningType(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		Matcher sigmetMachType = SigmetParsingRegexp.sigmetType.matcher(tac);
 		if (sigmetMachType.find()) {
 			while (sigmetMachType.find()) {

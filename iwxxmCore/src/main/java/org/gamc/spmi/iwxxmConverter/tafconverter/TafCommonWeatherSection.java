@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 
 import org.gamc.spmi.iwxxmConverter.common.AnnotationLocalizedName;
@@ -298,13 +299,13 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 				cloudSec.setAmount(cloudAmount);
 
-				/*
-				 * // convert to hundreds of feets if (cloudAmount.equalsIgnoreCase("VV"))
-				 * cloudSec.setVerticalVisibility(true);
-				 */
+				
 
-				if (!cloudHeight.equalsIgnoreCase("///"))
-					cloudSec.setHeight(Integer.valueOf(cloudHeight) * 100);
+				if (!cloudHeight.equalsIgnoreCase("///")) {
+					Integer iHeight = Integer.valueOf(cloudHeight) * 100;
+					Optional<Integer> height = Optional.of(iHeight);
+					cloudSec.setHeight(height);
+				}
 
 				cloudSec.setType(cloudType);
 			}

@@ -38,6 +38,7 @@ import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -103,7 +104,7 @@ public class SigmetConversionTest {
 			+ "UUYY SYKTYVKAR FIR SEV TURB FCST W OF E06000\n" + "FL240/370 MOV NE 30KMH NC=";
 
 	// @Test
-	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void testCommonSigmet() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetFakeFirTest);
@@ -114,7 +115,7 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testRealFirCoordinates()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetRealFirTest);
@@ -125,7 +126,7 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testObsAtSigmet()
-			throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		SIGMETTacMessage sgTac = new SIGMETTacMessage(sigmetObsAt);
 		sgTac.parseMessage();
 		assertTrue(sgTac.getPhenomenonDescription().getPhenomenonTimeStamp() != null);
@@ -138,33 +139,36 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testModIceSigmet()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETDefiningTypeConverterV3 mc = new SIGMETDefiningTypeConverterV3();
 		mc.convertDefiningType(sigmetSevIce);
 	}
 
-	/** @author alex */
+	/** @author alex 
+	 * @throws WMORegisterException */
 	@Test
 	public void testTestTrop()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETDefiningTypeConverterV3 mc = new SIGMETDefiningTypeConverterV3();
 		mc.convertDefiningType(sigmetTestEGGXTrop);
 	}
 
-	/** @author alex */
+	/** @author alex 
+	 * @throws WMORegisterException */
 	// @Test
 	public void testTestVolc()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETVolcanoConverterV3 mc = new SIGMETVolcanoConverterV3();
 		String result = mc.convertTacToXML(sigmetTestYUDDVolc);
 
 		System.out.println(result);
 	}
 
-	/** @author alex */
+	/** @author alex 
+	 * @throws WMORegisterException */
 	// @Test
 	public void testCnslTest()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetTestCnslYUDD);
 
@@ -173,7 +177,7 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testSigmetHvyGr()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetHeavyGR);
@@ -184,7 +188,7 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testSigmetWithLineCoords()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmetLineCoords);
 
@@ -194,7 +198,7 @@ public class SigmetConversionTest {
 
 	// @Test
 	public void testLine()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		SIGMETConverterV3 mc = new SIGMETConverterV3();
 		String result = mc.convertTacToXML(sigmentLines);
 

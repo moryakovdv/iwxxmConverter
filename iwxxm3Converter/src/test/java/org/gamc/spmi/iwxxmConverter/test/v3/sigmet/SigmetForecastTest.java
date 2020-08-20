@@ -7,6 +7,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
@@ -18,7 +19,7 @@ public class SigmetForecastTest {
 			+ " AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400  FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN";
 	
 	@Test
-	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+	public void test() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 			SIGMETConverterV3<SIGMETTacMessage, SIGMETType>	 sConverterV3 = new SIGMETConverterV3<SIGMETTacMessage, SIGMETType>();
 			String result = sConverterV3.convertTacToXML(frctSigmet);
 			System.out.println(result);

@@ -36,6 +36,7 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.TEMPERATURE_UNITS;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.IWXXM21Helpers;
 import org.gamc.spmi.iwxxmConverter.marshallers.v2.UriConstants;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -127,9 +128,10 @@ public class SpeciXMLCreationTest {
 		testDateTimePosition = dtTest.toString(dtFormatISO);
 	}
 
-	/**Generate METAR XML from scratch*/
+	/**Generate METAR XML from scratch
+	 * @throws WMORegisterException */
 	@Test
-	public void testMetarCreationFromScratch() throws DatatypeConfigurationException, JAXBException {
+	public void testMetarCreationFromScratch() throws DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		// <iwxxm:METAR> root tag
 		SPECIType metarRootTag = ofIWXXM.createSPECIType();
@@ -188,7 +190,7 @@ public class SpeciXMLCreationTest {
 		return metar;
 	}
 	
-	private OMObservationPropertyType createObservationResult() {
+	private OMObservationPropertyType createObservationResult() throws WMORegisterException {
 
 		// тег <>om:OM_Observation
 		OMObservationPropertyType omOM_Observation = ofOM.createOMObservationPropertyType();
@@ -314,8 +316,9 @@ public class SpeciXMLCreationTest {
 	
 	/**Create valuable METAR section as Observation result.
 	 * Tag <iwxxm:MeteorologicalAerodromeObservtionRecord>
+	 * @throws WMORegisterException 
 	 */
-	private MeteorologicalAerodromeObservationRecordPropertyType createMETARRecordTag() {
+	private MeteorologicalAerodromeObservationRecordPropertyType createMETARRecordTag() throws WMORegisterException {
 		
 		//Envelop
 		MeteorologicalAerodromeObservationRecordPropertyType metarRecordTag = ofIWXXM
@@ -412,7 +415,7 @@ public class SpeciXMLCreationTest {
 		return surfaceWindType;
 	}
 
-	private AerodromePresentWeatherType createWeatherSection() {
+	private AerodromePresentWeatherType createWeatherSection() throws WMORegisterException {
 		 //<iwxxm:weather xlink:href="http://codes.wmo.int/306/4678/-SHRA"/>
 		 
 		 AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
@@ -448,8 +451,9 @@ public class SpeciXMLCreationTest {
 		return visiblityType;
 	}
 
-	/**Cloud section*/
-	private JAXBElement<MeteorologicalAerodromeObservationRecordType.Cloud> createCloudSectionTag() {
+	/**Cloud section
+	 * @throws WMORegisterException */
+	private JAXBElement<MeteorologicalAerodromeObservationRecordType.Cloud> createCloudSectionTag() throws WMORegisterException {
 		
 		MeteorologicalAerodromeObservationRecordType.Cloud cloudSection = new Cloud();
 		

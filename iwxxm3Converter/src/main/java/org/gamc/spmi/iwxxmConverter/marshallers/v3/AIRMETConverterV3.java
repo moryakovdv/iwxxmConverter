@@ -20,6 +20,8 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,7 +88,7 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		
 		logger.debug("Parsing "+ tac);
 		
@@ -114,7 +116,7 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 
 	@Override
 	public AIRMETType convertMessage(AIRMETTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 		this.translatedAirmet = translatedMessage;
 		AIRMETType airmetRootTag = iwxxmHelpers.getOfIWXXM().createAIRMETType();
 
@@ -192,7 +194,7 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 		return airmetRootTag;
 	}
 
-	public AIRMETEvolvingConditionCollectionType setAssociationRoleType() {
+	public AIRMETEvolvingConditionCollectionType setAssociationRoleType() throws WMORegisterException {
 		// ---------------AirspaceVolumePropertyType----------------//
 		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
 		air.setAirspaceVolume(createAirSpaceVolumeSection(getListOfCoords()));
@@ -292,8 +294,9 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 		return listOfCoords;
 	};
 
-	/** returns section for airspaceVolumeDescription */
-	public AirspaceVolumeType createAirSpaceVolumeSection(List<Double> coords) {
+	/** returns section for airspaceVolumeDescription 
+	 * @throws WMORegisterException */
+	public AirspaceVolumeType createAirSpaceVolumeSection(List<Double> coords) throws WMORegisterException {
 
 		AirspaceVolumeType airspaceVolumeType = iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
 		airspaceVolumeType.setId(iwxxmHelpers.generateUUIDv4("airspace-" + translatedAirmet.getIcaoCode()));
@@ -324,7 +327,7 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 			if (translatedAirmet.getVerticalLocation().isTopMarginAboveFl()) {
 
 				ValDistanceVerticalType unknownType = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+				unknownType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_UNKNOWN));
 				JAXBElement<ValDistanceVerticalType> unknownSection = iwxxmHelpers.getOfAIXM()
 						.createAirspaceLayerTypeUpperLimit(unknownType);
 				airspaceVolumeType.setMaximumLimit(unknownSection);
@@ -340,7 +343,7 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 						.createAirspaceLayerTypeUpperLimit(topMaxType);
 				airspaceVolumeType.setMaximumLimit(topMaxSection);
 
-				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode("unknown"));
+				topFlType.setNilReason(iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_UNKNOWN));
 			} else {
 				topFlType.setValue(String.valueOf(translatedAirmet.getVerticalLocation().getTopFL().get()));
 			}
@@ -434,8 +437,9 @@ public class AIRMETConverterV3 implements TacConverter<AIRMETTacMessage, AIRMETT
 
 	}
 
-	/** Get link for WMO register record for the phenomena */
-	public AeronauticalAreaWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() {
+	/** Get link for WMO register record for the phenomena 
+	 * @throws WMORegisterException */
+	public AeronauticalAreaWeatherPhenomenonType setAeronauticalSignificantWeatherPhenomenonType() throws WMORegisterException {
 		AeronauticalAreaWeatherPhenomenonType typePhen = iwxxmHelpers.getOfIWXXM()
 				.createAeronauticalAreaWeatherPhenomenonType();
 		String phenomenon = translatedAirmet.getPhenomenonDescription().getPhenomenonForLink();

@@ -23,6 +23,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -62,19 +63,21 @@ public class AirmetConversionTest {
 			"UUWV AIRMET 4 VALID 151400/151600 UUWV–\r\n" + 
 			"UUWV MOSCOW FIR CNL AIRMET 2 151200/151600=";
 
-	/**@author alex*/
+	/**@author alex
+	 * @throws WMORegisterException */
 	@Test
 	public void testTest()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		AIRMETConverterV3 mc = new AIRMETConverterV3();
 		String result = mc.convertTacToXML(airmetTestYUDD);
 
 		System.out.println(result);
 	}
-	/**@author alex*/
+	/**@author alex
+	 * @throws WMORegisterException */
 	@Test
 	public void testCnslTest()
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
 		AIRMETConverterV3 mc = new AIRMETConverterV3();
 		String result = mc.convertTacToXML(airmetTestCnslYUDD);
 

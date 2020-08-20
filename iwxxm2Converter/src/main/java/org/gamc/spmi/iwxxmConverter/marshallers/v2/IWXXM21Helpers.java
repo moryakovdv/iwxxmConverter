@@ -29,7 +29,9 @@ import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister;
@@ -90,6 +92,8 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	final WMORunWayContaminationRegister rwContaminationReg = new WMORunWayContaminationRegister();
 	final WMORunWayDepositsRegister rwDepositReg = new WMORunWayDepositsRegister();
 	final WMORunWayFrictionRegister rwFrictionReg = new WMORunWayFrictionRegister();
+	
+	private final WMONilReasonRegister nilRegister = new WMONilReasonRegister();
 
 	
 	/**
@@ -336,9 +340,10 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 	 * @param units
 	 *            - {@link LENGTH_UNITS} unit of measure.
 	 * @return cloudLayer
+	 * @throws WMORegisterException 
 	 */
 	public CloudLayerType createCloudLayerSection(String cloudAmount, double cloudHeight, String cloudTypeCode,
-			String nilReason, LENGTH_UNITS units) {
+			String nilReason, LENGTH_UNITS units) throws WMORegisterException {
 
 		// Create layer
 		// Layer cloudLayer = ofIWXXM.createAerodromeCloudForecastTypeLayer();
@@ -390,12 +395,13 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 
 		
 
-	/** returns link for WMO weather register for present weather in METAR */
-	public AerodromePresentWeatherType createPresentWeatherSection(String weather) {
+	/** returns link for WMO weather register for present weather in METAR 
+	 * @throws WMORegisterException */
+	public AerodromePresentWeatherType createPresentWeatherSection(String weather) throws WMORegisterException {
 
 		AerodromePresentWeatherType presentWeather = ofIWXXM.createAerodromePresentWeatherType();
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
-			presentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			presentWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 		else
 		
 		presentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
@@ -403,12 +409,13 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 		return presentWeather;
 	}
 
-	/** returns link for WMO weather register for recent weather in METAR */
-	public AerodromeRecentWeatherType createRecentWeatherSection(String weather) {
+	/** returns link for WMO weather register for recent weather in METAR 
+	 * @throws WMORegisterException */
+	public AerodromeRecentWeatherType createRecentWeatherSection(String weather) throws WMORegisterException {
 
 		AerodromeRecentWeatherType recentWeather = ofIWXXM.createAerodromeRecentWeatherType();
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
-			recentWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			recentWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 		else
 		
 		recentWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
@@ -418,11 +425,12 @@ public class IWXXM21Helpers extends IWXXMHelpers {
 
 	/**
 	 * returns link for WMO weather register for forecasted weather in METAR and TAF
+	 * @throws WMORegisterException 
 	 */
-	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) {
+	public AerodromeForecastWeatherType createForecastWeatherSection(String weather) throws WMORegisterException {
 		AerodromeForecastWeatherType fcstWeather = ofIWXXM.createAerodromeForecastWeatherType();
 		if (weather.equalsIgnoreCase(StringConstants.NO_SIGNIFICANT_WEATHER_CHANGES))		
-			fcstWeather.getNilReason().add(StringConstants.NO_SIGNIFICANT_CHANGES);
+			fcstWeather.getNilReason().add(nilRegister.getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE));
 		else
 			fcstWeather.setHref(getPrecipitationReg().getWMOUrlByCode(weather));
 		return fcstWeather;

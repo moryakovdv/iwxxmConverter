@@ -23,6 +23,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 
 /** General interface for converter implementation
  * Generic parameters:
@@ -33,10 +34,10 @@ import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 public interface TacConverter<T, R, H> {
 
 	String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException;
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException;
 		
 	R convertMessage(T translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException;
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException;
 
 	R addTranslationCentreHeader(R report) throws DatatypeConfigurationException;
 	

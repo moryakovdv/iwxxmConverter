@@ -23,6 +23,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.general.MetarForecastTimeSection;
@@ -236,7 +237,7 @@ public class MetarTranslationTest {
 		metarMessage.parseMessage();
 		assertTrue(metarMessage.getCommonWeatherSection().getCloudSections().size()==1);
 		assertTrue(metarMessage.getCommonWeatherSection().getCloudSections().get(0).isVerticalVisibility());
-		assertNull(metarMessage.getCommonWeatherSection().getCloudSections().get(0).getHeight());
+		assertEquals(Optional.empty(),metarMessage.getCommonWeatherSection().getCloudSections().get(0).getHeight());
 		
 		
 	}

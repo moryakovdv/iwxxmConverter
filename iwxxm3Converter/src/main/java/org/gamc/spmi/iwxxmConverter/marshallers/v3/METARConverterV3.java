@@ -47,6 +47,8 @@ import org.gamc.spmi.iwxxmConverter.metarconverter.METARTimedTLSection;
 import org.gamc.spmi.iwxxmConverter.metarconverter.MetarCommonWeatherSection;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.slf4j.Logger;
@@ -128,7 +130,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	@Override
 	public String convertTacToXML(String tac)
-			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException {
+			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 		logger.debug("Parsing "+ tac);
 
 		createdRunways.clear();
@@ -155,7 +157,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	@Override
 	public METARType convertMessage(METARTacMessage translatedMessage)
-			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException {
+			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
 
 		this.translatedMetar = translatedMessage;
 
@@ -365,7 +367,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 	 * }
 	 */
 	private MeteorologicalAerodromeTrendForecastPropertyType createTrendResultsSection(MetarForecastSection section,
-			int sectionIndex) {
+			int sectionIndex) throws WMORegisterException {
 
 		MeteorologicalAerodromeTrendForecastPropertyType metarTrendType = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeTrendForecastPropertyType();
@@ -489,8 +491,9 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 	/**
 	 * Create valuable METAR section as Observation result. Tag
 	 * <iwxxm:MeteorologicalAerodromeObservtionRecord>
+	 * @throws WMORegisterException 
 	 */
-	private MeteorologicalAerodromeObservationPropertyType createMETARRecordTag() {
+	private MeteorologicalAerodromeObservationPropertyType createMETARRecordTag() throws WMORegisterException {
 
 		// Envelop
 		MeteorologicalAerodromeObservationPropertyType metarRecordTag = iwxxmHelpers.getOfIWXXM()
@@ -552,7 +555,8 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		// set wind shear
 		JAXBElement<MeteorologicalAerodromeObservationType.WindShear> wsTag = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeObservationTypeWindShear(createWindShearTag());
-		metarRecord.setWindShear(wsTag);
+		if (wsTag!=null)
+			metarRecord.setWindShear(wsTag);
 
 		// process runway visible range sections
 		for (METARRVRSection rvrs : translatedMetar.getRvrSections()) {
@@ -681,12 +685,18 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		return resultVisibility;
 	}
 
-	/** Cloud section */
-	private MeteorologicalAerodromeObservationType.Cloud createCloudSectionTag() {
+	/** Cloud section 
+	 * @throws WMORegisterException */
+	private MeteorologicalAerodromeObservationType.Cloud createCloudSectionTag() throws WMORegisterException {
 		// Body
 		MeteorologicalAerodromeObservationType.Cloud clouds = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeObservationTypeCloud();
 		AerodromeCloudType cloud = iwxxmHelpers.getOfIWXXM().createAerodromeCloudType();
+		boolean layersCreated = false;
+		boolean cloudsCreated = false;
+		
+		
+		
 		for (METARCloudSection cloudS : translatedMetar.getCommonWeatherSection().getCloudSections()) {
 
 			
@@ -694,24 +704,32 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 			if (cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
 				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
 						.createVerticalVisibilitySection(cloudS.getHeight());
+				
+				
 				cloud.setVerticalVisibility(vVisibility);
+				cloudsCreated  =true;
 
 			} else {
 				Layer cloudLayer = iwxxmHelpers.getOfIWXXM().createAerodromeCloudTypeLayer();
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight().get(),
 						cloudS.getType(), nilReason, LENGTH_UNITS.FT));
 				cloud.getLayer().add(cloudLayer);
+				
+				layersCreated= true;
 			}
 		}
 
-		clouds.setAerodromeCloud(cloud);
+		if (cloudsCreated || layersCreated)
+			clouds.setAerodromeCloud(cloud);
+		
 		return clouds;
 
 	}
 
-	/**Clouds in trend sections**/
+	/**Clouds in trend sections
+	 * @throws WMORegisterException **/
 	private AerodromeCloudForecastPropertyType createCloudSectionTag(MetarCommonWeatherSection section, String icaoCode,
-			int sectionIndex) {
+			int sectionIndex) throws WMORegisterException {
 
 		// Envelop
 		AerodromeCloudForecastPropertyType cloudsType = iwxxmHelpers.getOfIWXXM()
@@ -722,33 +740,40 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		AerodromeCloudForecastType clouds = iwxxmHelpers.getOfIWXXM().createAerodromeCloudForecastType();
 		clouds.setId(iwxxmHelpers.generateUUIDv4(String.format("acf-%d-%s", sectionIndex, icaoCode)));
 		boolean layersCreated = false;
+		boolean cloudsCreated = false;
 		for (METARCloudSection cloudS : section.getCloudSections()) {
 
 			
-			//int cloudAmount = iwxxmHelpers.getCloudReg().getCloudAmountByStringCode(cloudS.getAmount());
 			CloudLayerPropertyType cloudLayer = iwxxmHelpers.getOfIWXXM().createCloudLayerPropertyType();
 
 			if (cloudS.getAmount()!=null && cloudS.getAmount().equalsIgnoreCase(WMOCloudRegister.verticalVisibilityCode)) {
-				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("missing");
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
-						cloudS.getType(), nilReasonUrl, LENGTH_UNITS.FT));
+				//String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_MISSING);
+				iwxxmHelpers.createVerticalVisibilitySection(cloudS.getHeight());
+				JAXBElement<LengthWithNilReasonType> vVisibility = iwxxmHelpers
+						.createVerticalVisibilitySection(cloudS.getHeight());
+				
+				clouds.setVerticalVisibility(vVisibility);
+				cloudsCreated=true;
+
+				//cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight().get(),
+				//		cloudS.getType(), nilReasonUrl, LENGTH_UNITS.FT));
 				
 			} 
 			else  if (cloudS.isNoCloudsDetected()) {
 				
-				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("notObservable");
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOT_OBSERVABLE);
 				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
 				cloudsType.getNilReason().add(nilReasonUrl);
 
 			} 
 			else  if (cloudS.isNoSignificantClouds()) {
-				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode("nothingOfOperationalSignificance");
+				String nilReasonUrl = iwxxmHelpers.getNilRegister().getWMOUrlByCode(WMONilReasonRegister.NIL_REASON_NOTHING_OF_OPERATIONAL_SIGNIFICANCE);
 
 				//cloudLayer.setCloudLayer(iwxxmHelpers.createEmptyCloudLayerSection(nilReasonUrl));
 				cloudsType.getNilReason().add(nilReasonUrl);
 			}
 			else {
-				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight(),
+				cloudLayer.setCloudLayer(iwxxmHelpers.createCloudLayerSection(cloudS.getAmount(), cloudS.getHeight().get(),
 						cloudS.getType(), null, LENGTH_UNITS.FT));
 				layersCreated=true;
 			}
@@ -758,20 +783,26 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 				clouds.getLayer().add(cloudLayer);
 		}
 		// Place body into envelop
-		
-		cloudsType.setAerodromeCloudForecast(clouds);
+		if (cloudsCreated || layersCreated)
+			cloudsType.setAerodromeCloudForecast(clouds);
 
 		return cloudsType;
 
 	}
 
-	/** Wind shear section */
+	/** Wind shear section 
+	 * Creates tag AerodromeWindShear if wind shear is reported for all or any of runways
+	 * @return WindShear or null if wind shear was not reported*/
 	private MeteorologicalAerodromeObservationType.WindShear createWindShearTag() {
+		
+		boolean insertWindShear = false;
 		// body
 		AerodromeWindShearType windShear = iwxxmHelpers.getOfIWXXM().createAerodromeWindShearType();
 
-		if (translatedMetar.isWindShearForAll())
+		if (translatedMetar.isWindShearForAll()) {
 			windShear.setAllRunways(true);
+			insertWindShear = true;
+		}
 		else
 			for (String rwWs : translatedMetar.getWindShearSections()) {
 				// Runway description
@@ -784,6 +815,7 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 				runwayType.setRunwayDirection(runway);
 
 				windShear.getRunway().add(runwayType);
+				insertWindShear = true;
 
 			}
 
@@ -792,7 +824,9 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 		MeteorologicalAerodromeObservationType.WindShear resultWindShear = iwxxmHelpers.getOfIWXXM()
 				.createMeteorologicalAerodromeObservationTypeWindShear();
 		resultWindShear.setAerodromeWindShear(windShear);
-		return resultWindShear;
+		
+		
+		return insertWindShear?resultWindShear:null;
 	}
 
 	/** Creates Runway visual range tag */
@@ -864,8 +898,9 @@ public class METARConverterV3 implements TacConverter<METARTacMessage, METARType
 
 	}
 
-	/** Creates Runway state tag to include into collection */
-	private MeteorologicalAerodromeObservationType.RunwayState createRunwayStateTag(METARRunwayStateSection rwrs) {
+	/** Creates Runway state tag to include into collection 
+	 * @throws WMORegisterException */
+	private MeteorologicalAerodromeObservationType.RunwayState createRunwayStateTag(METARRunwayStateSection rwrs) throws WMORegisterException {
 
 		/**
 		 * output sample <iwxxm:runwayState> <iwxxm:AerodromeRunwayState> <iwxxm:runway>

@@ -23,13 +23,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.gamc.spmi.iwxxmConverter.wmo.WMOCloudTypeRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegisterDescription;
+import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
 /**Test for parsing WMO clouds types  registry*/
 public class ParseWMOCloudTypesTest {
 
 	@Test
-	public void parseRegister() {
+	public void parseRegister()  throws WMORegisterException {
 		WMOCloudTypeRegister cloudsRegister = new WMOCloudTypeRegister();
 		cloudsRegister.parseWMOXml();
 		assertTrue(cloudsRegister.getContent().size()>0);
