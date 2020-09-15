@@ -4,12 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeMap;
-import java.util.UUID;
-import java.util.function.Consumer;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -18,11 +13,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.namespace.QName;
 
 import org.gamc.gis.model.GTCalculatedRegion;
-import org.gamc.gis.model.GTCoordPoint;
-import org.gamc.gis.model.GTDirectionFromLine;
-import org.gamc.gis.service.GeoServiceException;
-import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
-import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
@@ -30,87 +20,43 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
-import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
-import schemabindings31._int.icao.iwxxm._3.AeronauticalSignificantWeatherPhenomenonType;
-import schemabindings31._int.icao.iwxxm._3.AirspacePropertyType;
 import schemabindings31._int.icao.iwxxm._3.AirspaceVolumePropertyType;
 import schemabindings31._int.icao.iwxxm._3.AngleWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.ExpectedIntensityChangeType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.ReportStatusType;
-import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETEvolvingConditionType;
-import schemabindings31._int.icao.iwxxm._3.SIGMETPositionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETPositionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETPositionType;
-import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneObservedConditionsPropertyType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneObservedConditionsType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETEvolvingConditionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionPropertyType;
 import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPropertyType;
 import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETType;
-import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
-import schemabindings31._int.icao.iwxxm._3.VolcanicAshAdvisoryPropertyType;
 import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETEvolvingConditionCollectionType;
 import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETPropertyType;
-import schemabindings31._int.wmo.def.metce._2013.TropicalCyclonePropertyType;
-import schemabindings31._int.wmo.def.metce._2013.TropicalCycloneType;
 import schemabindings31._int.wmo.def.metce._2013.VolcanoPropertyType;
 import schemabindings31._int.wmo.def.metce._2013.VolcanoType;
-import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSlicePropertyType;
-import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSliceType;
-import schemabindings31.aero.aixm.schema._5_1.AirspaceType;
-import schemabindings31.aero.aixm.schema._5_1.AirspaceVolumeType;
-import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceDesignatorType;
-import schemabindings31.aero.aixm.schema._5_1.CodeAirspaceType;
-import schemabindings31.aero.aixm.schema._5_1.CodeVerticalReferenceType;
-
-import schemabindings31.aero.aixm.schema._5_1.SurfacePropertyType;
-import schemabindings31.aero.aixm.schema._5_1.SurfaceType;
-import schemabindings31.aero.aixm.schema._5_1.TextNameType;
-import schemabindings31.aero.aixm.schema._5_1.UnitTimeSlicePropertyType;
-import schemabindings31.aero.aixm.schema._5_1.UnitTimeSliceType;
-import schemabindings31.aero.aixm.schema._5_1.UnitType;
-import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
-import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CircleByCenterPointType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CoordinatesType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CurvePropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CurveSegmentArrayPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CurveType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionType;
-import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LocationPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PointType;
-import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
-import schemabindings31.net.opengis.gml.v_3_2_1.RingType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
 import schemabindings31.net.opengis.gml.v_3_2_1.StringOrRefType;
-import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.TimePrimitivePropertyType;
 
-public class SIGMETVolcanoConverterV3Alex extends SIGMETConverterV3<SIGMETTropicalTacMessage, VolcanicAshSIGMETType>
-		implements TacConverter<SIGMETTropicalTacMessage, VolcanicAshSIGMETType, IWXXM31Helpers> {
+public class SIGMETVolcanoConverterV3Alex extends SIGMETConverterV3<SIGMETVolcanoTacMessageAlex, VolcanicAshSIGMETType>
+		implements TacConverter<SIGMETVolcanoTacMessageAlex, VolcanicAshSIGMETType, IWXXM31Helpers> {
 
 	@Override
 	public String convertTacToXML(String tac)
 			throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
 
 		logger.debug("Parsing " + tac);
-		SIGMETTropicalTacMessage sigmetMessage = new SIGMETTropicalTacMessage(tac);
+		SIGMETVolcanoTacMessageAlex sigmetMessage = new SIGMETVolcanoTacMessageAlex(tac);
 
 		VolcanicAshSIGMETType result;
 
@@ -130,9 +76,8 @@ public class SIGMETVolcanoConverterV3Alex extends SIGMETConverterV3<SIGMETTropic
 
 		return xmlResult;
 	}
-
 	@Override
-	public VolcanicAshSIGMETType convertMessage(SIGMETTropicalTacMessage translatedMessage)
+	public VolcanicAshSIGMETType convertMessage(SIGMETVolcanoTacMessageAlex translatedMessage)
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException,
 			WMORegisterException {
 		translatedSigmet = translatedMessage;
@@ -355,7 +300,7 @@ public class SIGMETVolcanoConverterV3Alex extends SIGMETConverterV3<SIGMETTropic
 		sicol.getMember().add(evolvingTypeProp);
 		sicol.setPhenomenonTime(analysisTimeProperty);
 		sicol.getRest().add(createTropicalCyclonePosition(
-				this.translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation()));
+				this.translatedSigmet.getHorizontalLocation()));
 
 		asType.setAny(evolvingAr);
 

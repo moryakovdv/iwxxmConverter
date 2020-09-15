@@ -62,7 +62,7 @@ public class SIGMETVolcanoTacMessageAlex extends SIGMETTacMessage {
 	@Override
 	protected StringBuffer fillAndRemovePhenomenaDescription(StringBuffer tac) throws SIGMETParsingException {
 
-		Matcher matcherPhenomena = SigmetParsingRegexp.sigmetCyclonePhenomena.matcher(tac);
+		Matcher matcherPhenomena = SigmetParsingRegexp.sigmetVolcanicPhenomena.matcher(tac);
 		if (matcherPhenomena.find()) {
 
 			int lastIndex = matcherPhenomena.end();
@@ -71,10 +71,10 @@ public class SIGMETVolcanoTacMessageAlex extends SIGMETTacMessage {
 
 			String phS = matcherPhenomena.group("phenomena");
 			String name = matcherPhenomena.group("name");
-			String cycloneCenterPosition = matcherPhenomena.group("position");
+			String volcanicCenterPosition = matcherPhenomena.group("position");
 
-			if (cycloneCenterPosition != null) {
-				Matcher matcherCenterPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(cycloneCenterPosition);
+			if (volcanicCenterPosition != null) {
+				Matcher matcherCenterPoint = SigmetParsingRegexp.sigmetCoordPoint.matcher(volcanicCenterPosition);
 				if (matcherCenterPoint.find()) {
 
 					String lat = matcherCenterPoint.group("latitude");
@@ -126,7 +126,7 @@ public class SIGMETVolcanoTacMessageAlex extends SIGMETTacMessage {
 	/**Overrides method in common weather sigmet to extract forecasted cyclone center position*/
 	@Override
 	protected StringBuffer fillAndRemoveForecastedLocation(StringBuffer tac) {
-		Matcher matcherFcst = SigmetParsingRegexp.sigmetCycloneForecastSection.matcher(tac);
+		Matcher matcherFcst = SigmetParsingRegexp.sigmetVolcanoSection.matcher(tac);
 		if (matcherFcst.find()) {
 			int lastIndex = matcherFcst.end();
 
@@ -155,7 +155,7 @@ public class SIGMETVolcanoTacMessageAlex extends SIGMETTacMessage {
 	
 	@Override
 	protected StringBuffer fillWithinRadius(StringBuffer tac, SigmetHorizontalPhenomenonLocation location) {
-		Matcher matcherRadius = SigmetParsingRegexp.sigmetCycloneWithinRadius.matcher(tac);
+		Matcher matcherRadius = SigmetParsingRegexp.sigmetVolcanoWithinRadius.matcher(tac);
 		if (matcherRadius.find()) {
 			this.getHorizontalLocation().setWithinRadius(true);
 			String radius = matcherRadius.group("radius");
