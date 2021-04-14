@@ -189,6 +189,9 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 
 		tafRootTag = addTranslationCentreHeader(tafRootTag);
 
+		tafRootTag.setAerodrome(createAirportDescriptionSectionTag());
+
+		
 		// issuetime and valid period are top-level tags
 		tafRootTag.setIssueTime(createIssueTimesection());
 		tafRootTag.setValidPeriod(iwxxmHelpers.createTimePeriod(translatedTaf.getIcaoCode(),translatedTaf.getValidityInterval().getStart(), translatedTaf.getValidityInterval().getEnd()));

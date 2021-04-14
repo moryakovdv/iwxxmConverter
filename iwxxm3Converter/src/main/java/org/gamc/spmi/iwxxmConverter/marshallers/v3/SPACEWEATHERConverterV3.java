@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import schemabindings31._int.icao.iwxxm._3.AbstractTimeObjectPropertyType;
 import schemabindings31._int.icao.iwxxm._3.AirspaceVolumePropertyType;
+import schemabindings31._int.icao.iwxxm._3.PermissibleUsageReasonType;
 import schemabindings31._int.icao.iwxxm._3.PermissibleUsageType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.SpaceWeatherAdvisoryType;
@@ -120,6 +121,7 @@ public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMess
 
 		// set operational status
 		resultSwxType.setPermissibleUsage(PermissibleUsageType.NON_OPERATIONAL);
+		resultSwxType.setPermissibleUsageReason(PermissibleUsageReasonType.TEST);
 
 		// set current swx number
 		StringWithNilReasonType advNumber = iwxxmHelpers

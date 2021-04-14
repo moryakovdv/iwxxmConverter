@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -38,6 +39,8 @@ import org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFProbabilitySection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFTempoSection;
 import org.gamc.spmi.iwxxmConverter.tafconverter.TAFTimedFMSection;
+import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
+import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
 import org.junit.Test;
 
@@ -85,12 +88,16 @@ public class SpaceWeatherTranslationTest {
 			"NXT ADVISORY:       20161108/0700Z";
 	
 	/**Converts the SWx example
-	 * @throws WMORegisterException */
-	//@Test
-	public void convertSimple() throws ParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
+	 * @throws Exception */
+	@Test
+	public void convertSimple() throws Exception {
 		SPACEWEATHERConverterV3 converter = new SPACEWEATHERConverterV3();
 		String xmlResult = converter.convertTacToXML(swxCommonTest);
-		
+		IwxxmValidator validator = new IwxxmValidator();
+		validator.init();
+		List<FailedValidationAssert> asserts = validator.validateString(xmlResult);
+		System.out.println(asserts);
+		assertEquals(0, asserts.size());
 		System.out.println(xmlResult);
 	}
 

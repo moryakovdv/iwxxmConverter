@@ -15,12 +15,13 @@
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<javaVersion>1.8</javaVersion>
-		<project.source.version>${javaVersion}</project.source.version>
+				<project.source.version>${javaVersion}</project.source.version>
 		<project.target.version>${javaVersion}</project.target.version>
+
+		<maven.compiler.source>${javaVersion}</maven.compiler.source>
+		<maven.compiler.target>${javaVersion}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.encoding>UTF-8</project.encoding>
-		<slf4jVersion>1.7.25</slf4jVersion>
 	</properties>
 
 

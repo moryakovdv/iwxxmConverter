@@ -10,6 +10,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.SPECIConverterV3;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.gamc.spmi.iwxxmConverter.validation.IwxxmValidator;
 import org.junit.Test;
@@ -46,10 +47,17 @@ public class MetarValidation {
 	String metarUS = "METAR KORD 041656Z 19020G26KT 6SM -SHRA BKN070 12/08 A3016 RMK AO2";
 
 	String metarUS1 = "METAR KORD 170651Z 20014G23KT 10SM SCT250 24/14 A2968 RMK AO2 SLP045 T02390144=";
+	
+	String speci = "SPECI UUEE 270845Z 02006MPS 2100 -SN OVC009 M04/M06 Q1008 R06L/590230\n" + 
+			"     R06R/590230 TEMPO 1000 SHSN BKN012CB=";
+	
+	String metarUUEE = "METAR UUEE 270830Z 02006MPS 2100 -SN OVC009 M04/M06 Q1008 R06L/590230\n" + 
+			"     R06R/590230 TEMPO 1000 SHSN BKN012CB=";
 
 	//Array of VALID metars to validate in loops
 	String[] metarsValid = new String[] { metarTACSimple, metarTACCAVOK, metarTACBecoming,metarTACWeather,metarTACVerticalVisibilityObserved };
 	
+
 	//Array of INVALID metars to validate in loops
 	String[] metarsINValid = new String[] {metarTACVRB};
 	
@@ -81,6 +89,34 @@ public class MetarValidation {
 			System.out.println(results);
 			assertTrue(results.size() == 0);
 		}
+	}
+	
+	@Test
+	public void validateSpeciThroughSchematronTest() throws Exception {
+		SPECIConverterV3 cv = new SPECIConverterV3();
+		IwxxmValidator v = new IwxxmValidator();
+
+		
+			String xml = cv.convertTacToXML(speci);
+			System.out.println(xml);
+			List<FailedValidationAssert> results = v.validateString(xml);
+			System.out.println(results);
+			assertTrue(results.size() == 0);
+		
+	}
+	
+	@Test
+	public void validateMetarUUEEThroughSchematronTest() throws Exception {
+		METARConverterV3 cv = new METARConverterV3();
+		IwxxmValidator v = new IwxxmValidator();
+
+		
+			String xml = cv.convertTacToXML(metarUUEE);
+			System.out.println(xml);
+			List<FailedValidationAssert> results = v.validateString(xml);
+			System.out.println(results);
+			assertTrue(results.size() == 0);
+		
 	}
 
 }

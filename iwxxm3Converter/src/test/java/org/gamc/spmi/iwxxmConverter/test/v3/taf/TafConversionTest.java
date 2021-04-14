@@ -184,5 +184,31 @@ public class TafConversionTest {
 		}
 		
 	}
+	
+	String tafManyBECMG = "TAF BIAR 210810Z 2109/2209 16020G30KT 9999 BKN020 OVC065\n" + 
+			"      TX07/2115Z\n" + 
+			"      TN00/2206Z\n" + 
+			"      BECMG 2109/2111 13035G50KT 9999 SCT030 BKN045\n" + 
+			"      BECMG 2113/2115 16048G62KT\n" + 
+			"      FM211700 21015G25KT\n" + 
+			"      BECMG 2120/2122 VRB02KT CAVOK=";
+	
+	@Test
+	public void testManyBecmgTaf() throws UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, ParsingException, WMORegisterException {
+		TAFConverterV3 tafconverter = new TAFConverterV3();
+		String iwxxm = tafconverter.convertTacToXML(tafManyBECMG);
+		System.out.println(iwxxm);
+		
+		
+		List<FailedValidationAssert> failedResults;
+		try {
+			failedResults = validator.validateString(iwxxm);
+			assertTrue(failedResults.size()==0);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

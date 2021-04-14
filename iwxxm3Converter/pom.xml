@@ -16,8 +16,13 @@
 	<name>iwxxm3Converter</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+			<project.source.version>${javaVersion}</project.source.version>
+		<project.target.version>${javaVersion}</project.target.version>
+
+		<maven.compiler.source>${javaVersion}</maven.compiler.source>
+		<maven.compiler.target>${javaVersion}</maven.compiler.target>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.encoding>UTF-8</project.encoding>	</properties>
 
 	<dependencies>
 
