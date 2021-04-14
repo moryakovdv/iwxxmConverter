@@ -40,11 +40,12 @@ public class SigmetParsingRegexp {
 	//public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})"); 
 	public final static Pattern sigmetBulletinHeader = Pattern.compile("(?<sigmetDataType>[A-Z]{2})(?<issueRegion>[A-Z]{2})(?<bulletinNumber>\\d{2})\\s*?(?<disseminatingCentre>[A-Z]{4})\\s+(?<issuedDateTime>\\d{6})");
 	/**SIGMET Mandatory header*/
-	public final static Pattern sigmetHeader = Pattern.compile(
+			//public final static Pattern sigmetHeader = Pattern.compile(
 			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<ddf>\\d\\d)(?<hhf>\\d\\d)(?<mmf>\\d\\d)\\/(?<ddt>\\d\\d)(?<hht>\\d\\d)(?<mmt>\\d\\d)\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
 	       //"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})-?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?");
-			"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})(?:-|–)?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?");
-	
+			//"(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})(?:-|–)?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?");
+	public final static Pattern sigmetHeader = Pattern.compile("(?<icao>[A-Z]{4})\\s+(?<isSigmet>SIGMET)\\s+(?<sigmetNumber>(([A-Z]+)?\\s*\\d+))\\s+(?<isValid>VALID)\\s+(?<dateFrom>\\d{6})\\/(?<dateTo>\\d{6})\\s+(?<watchOffice>[A-Z]{4})\\s*?(?:-|–)?\\s*(?<firCode>[A-Z]{4})?\\s+((?<firName>.+)\\s+(FIR|CTA))+(?<uir>\\/UIR)?(?<isCancel>\\s*CNL\\s*SIGMET\\s*(?<cancelNumber>\\d)\\s*(?<cancelDateFrom>\\d{6})\\/(?<cancelDateTo>\\d{6}))?"); 
+
 	public final static Pattern sigmetCancel = Pattern.compile("");
 	
 	/**Pattern for phenomenas except VA,VC*/
@@ -63,7 +64,12 @@ public class SigmetParsingRegexp {
 	
 	/**Pattern to determine polygon*/
 	public final static Pattern sigmetInPolygon = Pattern.compile("(?<isInPolygon>WI)\\s+(\\D+)");
-	public final static Pattern sigmetInPolygonVolcano = Pattern.compile("(?<isInPolygon>WI|)\\s+(\\D+)");
+	//public final static Pattern sigmetInPolygonVolcano = Pattern.compile("(?<isInPolygon>WI|)\\s+(\\D+)");
+	public final static Pattern sigmetInPolygonVolcano = Pattern.compile("(?<isInPolygon>WI)\\s+(\\D+)"); 
+
+	
+	
+	
 	/**Pattern to extract coordinate point*/
 	public final static Pattern sigmetCoordPoint = Pattern.compile("(?<point>(?<latitude>N|S)(?<ladeg>\\d{2})(?<lamin>\\d{2})?\\s+(?<longitude>E|W)(?<lodeg>\\d{3})(?<lomin>\\d{0,2})?)");
 
@@ -74,7 +80,7 @@ public class SigmetParsingRegexp {
 	//public final static Pattern sigmetOnePointLine = Pattern.compile("(?<direction>(?<azimuth>N|NE|E|SE|S|SW|W|NW)\\s+OF\\s+(?<singlepointcoord>(?<pointCoord>N|S|E|W)(?<deg>\\d{3}?)(?<min>\\d{0,2})))");
 	public final static Pattern sigmetOnePointLine = Pattern.compile("(?<azimuth>N|NE|E|SE|S|SW|W|NW)\\s+OF\\s+(?<singlepointcoord>(?<pointCoordLat>N|S)(?<degLat>\\d{2}?)(?<minLat>\\d{0,2})|(?<pointCoordLong>E|W)(?<degLong>\\d{3}?)(?<minLong>\\d{0,2}))");
 	
-	public final static Pattern sigmetVolcanePoint = Pattern.compile("(?<azimuth>N|NE|E|SE|S|SW|W|NW)\\s+OF\\s+(?<singlepointcoord>(?<pointCoordLat>N|S)(?<degLat>\\d{2}?)(?<minLat>\\d{0,2})|(?<pointCoordLong>E|W)(?<degLong>\\d{3}?)(?<minLong>\\d{0,2}))");
+	public final static Pattern sigmetVolcanoPoint = Pattern.compile("(?<azimuth>N|NE|E|SE|S|SW|W|NW)\\s+OF\\s+(?<singlepointcoord>(?<pointCoordLat>N|S)(?<degLat>\\d{2}?)(?<minLat>\\d{0,2})|(?<pointCoordLong>E|W)(?<degLong>\\d{3}?)(?<minLong>\\d{0,2}))");
 	
 	/**Pattern to find several lines (S OF LINE ... AND N OF LINE.... AND ...)*/
 	//public final static Pattern sigmetMultiLine = Pattern.compile("((?<azimuth>N|NE|E|SE|S|SW|W|NW)(?:\\s+OF\\s+LINE\\s+)(?<pointStart>(?<latStart>N|S)(?<latStartDeg>\\d{2})(?<latStartMin>\\d{0,2})?\\s+(?<longStart>E|W))(?<longStartDeg>\\d{3})(?<longStartMIn>\\d{0,2})?)\\s+(.)?\\s+(?<pointEnd>(?<latEnd>N|S)(?<latEndDeg>\\d{2})(?<latEndMin>\\d{0,2})?\\s+(?<longEnd>E|W)(?<longEndDeg>\\d{3})(?<longEndMin>\\d{0,2})?)");
@@ -109,4 +115,10 @@ public class SigmetParsingRegexp {
 	public final static Pattern sigmetCycloneWithinRadius=Pattern.compile("(?:WI\\s+)(?<radius>\\d+)(?<radiusUnit>KM|NM)(?:\\s+OF\\s+TC\\s+CENTRE)");
 
 	
+	
+	/***Alex*/
+	public final static Pattern sigmetVolcanicPhenomena = Pattern.compile("((?:\\s+|^)?(?<phenomena>VA\\s+ERUPTION))\\s+?(?<name>(.)*)?\\s+?(?<position>(?:PSN)(.*)(?:VA\\sCLD))\\s+(?<obsfcst>OBS|FCST)\\s+(?:AT\\s+(?<atTime>\\d{4})Z)?");
+	public final static Pattern sigmetCycloneSection = Pattern.compile("FCST(?:\\s+AT\\s+)?(?<time>\\d{4}Z)?\\s+TC\\s+CEN(T)?(E)?R(E)?\\s+PSN\\s+(?<location>(.|\\s)+)");  
+	public final static Pattern sigmetVolcanoForecastSection = Pattern.compile("FCST(?:\\s+AT\\s+)?(?<time>\\d{4}Z)?\\s+(?<location>(.(?!FCST))+)");
+	public final static Pattern sigmetVolcanoWithinRadius=Pattern.compile("(?:WI\\s+)(?<radius>\\d+)(?<radiusUnit>KM|NM)"); 
 }

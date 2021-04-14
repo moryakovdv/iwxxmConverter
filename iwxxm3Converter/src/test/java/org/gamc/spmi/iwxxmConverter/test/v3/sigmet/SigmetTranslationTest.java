@@ -82,9 +82,11 @@ public class SigmetTranslationTest {
 		assertTrue(tac.getVerticalLocation().getTopFL().get()==370);
 		
 		assertNotNull(tac.getPhenomenonDescription().getForecastSection());
-		assertEquals(16, tac.getPhenomenonDescription().getForecastSection().getForecastedTime().getHourOfDay());
-		assertTrue(tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().isInPolygon());
-		assertEquals(6, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPolygonPoints().size());
+		
+		assertEquals(1, tac.getPhenomenonDescription().getForecastSection().size());
+		assertEquals(16, tac.getPhenomenonDescription().getForecastSection().get(0).getForecastedTime().getHourOfDay());
+		assertTrue(tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().isInPolygon());
+		assertEquals(6, tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().getPolygonPoints().size());
 		
 		
 		c1.convertMessage(tac);
@@ -104,9 +106,10 @@ public class SigmetTranslationTest {
 		assertTrue(tac.getVerticalLocation().getTopFL().get()==370);
 		
 		assertNotNull(tac.getPhenomenonDescription().getForecastSection());
-		assertEquals(16, tac.getPhenomenonDescription().getForecastSection().getForecastedTime().getHourOfDay());
-		assertTrue(tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().isInPolygon());
-		assertEquals(6, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPolygonPoints().size());
+		assertEquals(1, tac.getPhenomenonDescription().getForecastSection().size());
+		assertEquals(16, tac.getPhenomenonDescription().getForecastSection().get(0).getForecastedTime().getHourOfDay());
+		assertTrue(tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().isInPolygon());
+		assertEquals(6, tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().getPolygonPoints().size());
 		
 		
 		String result = c1.marshallMessageToXML(c1.convertMessage(tac));

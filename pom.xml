@@ -20,6 +20,7 @@
 		<module>iwxxm2Converter</module>
 		<module>iwxxm3Converter</module>
 		<module>iwxxmConverterRest</module>
+		<module>gis-tools-core</module>
 	</modules>
 
 	<properties>
@@ -37,8 +38,39 @@
 
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+
+			<scope>test</scope>
+		</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+
+			</dependency>
 
 
+		<dependency>
+
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+	</dependencies>
 
 
 	<dependencyManagement>
@@ -63,24 +95,33 @@
 
 			</dependency>
 
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.3.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-core</artifactId>
+				<version>2.3.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>2.3.0</version>
+			</dependency>
 
-
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>gis-tools-core</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+			
 
 
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-
-	</dependencies>
 
 
 
@@ -123,54 +164,6 @@
 					</configuration>
 				</plugin>
 
-<!-- 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<executions>
-						<execution>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>add-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>src/schemabindings</source>
-								</sources>
-							</configuration>
-						</execution>
-					</executions>
-					<version>3.0.0</version>
-				</plugin>
- -->
-
-<!-- 
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.6</version>
-					<executions>
-						<execution>
-							<id>copy-resources-config</id>
-							
-							<phase>validate</phase>
-							<goals>
-								<goal>copy-resources</goal>
-							</goals>
-							<configuration>
-								<outputDirectory>${project.build.directory}</outputDirectory>
-
-								<resources>
-									<resource>
-										<directory>src/main/resources</directory>
-									</resource>
-								</resources>
-
-							</configuration>
-
-						</execution>
-					</executions>
-				</plugin>
- -->
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

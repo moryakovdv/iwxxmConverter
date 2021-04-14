@@ -310,7 +310,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			int lastIndex = matcherFcst.end();
 			
 			SigmetForecastSection fSection = new SigmetForecastSection(tac.substring(matcherFcst.start(),lastIndex));
-			this.getPhenomenonDescription().setForecastSection(fSection);
+			this.getPhenomenonDescription().getForecastSection().add(fSection);
 			String time = matcherFcst.group("time");
 			String location = matcherFcst.group("location");
 			DateTime parentDateTime = this.getMessageIssueDateTime();

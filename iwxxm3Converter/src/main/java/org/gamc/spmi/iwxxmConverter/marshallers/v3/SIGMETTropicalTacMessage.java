@@ -1,37 +1,16 @@
 package org.gamc.spmi.iwxxmConverter.marshallers.v3;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.gamc.spmi.iwxxmConverter.common.CoordPoint;
-import org.gamc.spmi.iwxxmConverter.common.Coordinate;
-import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
-import org.gamc.spmi.iwxxmConverter.common.Line;
-import org.gamc.spmi.iwxxmConverter.common.MessageStatusType;
-import org.gamc.spmi.iwxxmConverter.common.MessageType;
-import org.gamc.spmi.iwxxmConverter.common.StringConstants;
-import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.LENGTH_UNITS;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
-import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
-import org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETTacMessage.Type;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SIGMETParsingException;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetMovingSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetParsingRegexp;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalForecastSection;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalPhenomenonDescription;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Intensity;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.ObservationType;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetPhenomenonDescription.Severity;
-import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetTropicalForecastSection;
-import org.gamc.spmi.iwxxmConverter.tac.TacMessageImpl;
 import org.joda.time.DateTime;
-import org.joda.time.Interval;
 
 /**
  * Implemetation of a SIGMET Tac message for meteorological sigmet (WS, not WV
@@ -127,11 +106,17 @@ public class SIGMETTropicalTacMessage extends SIGMETTacMessage {
 	@Override
 	protected StringBuffer fillAndRemoveForecastedLocation(StringBuffer tac) {
 		Matcher matcherFcst = SigmetParsingRegexp.sigmetCycloneForecastSection.matcher(tac);
-		if (matcherFcst.find()) {
+		int lastMatch = 0;
+		int firstMatch = 0;
+		while (matcherFcst.find()) {
+			
+			if (firstMatch == 0)
+				firstMatch = matcherFcst.start();
+			
 			int lastIndex = matcherFcst.end();
 
 			SigmetForecastSection fSection = new SigmetForecastSection(tac.substring(matcherFcst.start(), lastIndex));
-			this.getPhenomenonDescription().setForecastSection(fSection);
+			this.getPhenomenonDescription().getForecastSection().add(fSection);
 			String time = matcherFcst.group("time");
 			String location = matcherFcst.group("location");
 			DateTime parentDateTime = this.getMessageIssueDateTime();
@@ -143,11 +128,13 @@ public class SIGMETTropicalTacMessage extends SIGMETTacMessage {
 			fSection.setForecastedTime(dtAT);
 			
 			
-			tac.delete(matcherFcst.start(), lastIndex);
+			
 			
 			fillLocationSection(new StringBuffer(location),fSection.getHorizontalLocation());
-			
+			lastMatch = matcherFcst.end();
 		}
+		
+		tac.delete(firstMatch, lastMatch);
 
 		return tac;
 	}

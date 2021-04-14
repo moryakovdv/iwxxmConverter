@@ -25,6 +25,7 @@ import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
@@ -182,7 +183,14 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 		default:
 			sigmetRootTagCycl.getAnalysis().add(setAssociationRoleType());
-			sigmetRootTagCycl.getForecastPositionAnalysis().add(setForecastAssociationRoleType());
+			if (translatedSigmet.getPhenomenonDescription().getForecastSection() != null) {
+				
+				for(SigmetForecastSection fcsection : translatedSigmet.getPhenomenonDescription().getForecastSection()) {
+					sigmetRootTagCycl.getForecastPositionAnalysis().add(setForecastAssociationRoleType(fcsection));
+				}
+				
+			}		
+			
 			sigmetRootTagCycl.getTropicalCyclone().add(setTropCyclone());
 
 			break;
@@ -310,7 +318,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 	@Override
 	/** creates forecast section for phenomena */
-	public AssociationRoleType setForecastAssociationRoleType() throws WMORegisterException {
+	public AssociationRoleType setForecastAssociationRoleType(SigmetForecastSection fcsection) throws WMORegisterException {
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
 		// ---------------SIGMETEvolvingConditionType(Time)----------------//
@@ -328,18 +336,18 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 
 		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
 
-		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation().isSectionFilled()
+		if (fcsection.getHorizontalLocation().isSectionFilled()
 				||
 
-				translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()
+				fcsection.getVerticalLocation()
 						.isSectionFilled()) {
 
 			List<GTCalculatedRegion> listCoord = getGTCalculatedRegions(
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation());
+					fcsection.getHorizontalLocation());
 
 			air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord,
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation(),
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()));
+					fcsection.getHorizontalLocation(),
+					fcsection.getVerticalLocation()));
 		} else {
 
 			air = createInapplicablePosition();
@@ -352,7 +360,7 @@ public class SIGMETTropicalConverterV3 extends SIGMETConverterV3<SIGMETTropicalT
 		evolvingTypeProp.setSIGMETPosition(forecastedPositionType);
 		sicol.getMember().add(evolvingTypeProp);
 		sicol.setPhenomenonTime(analysisTimeProperty);
-		sicol.getRest().add(createTropicalCyclonePosition(this.translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation()));
+		sicol.getRest().add(createTropicalCyclonePosition(fcsection.getHorizontalLocation()));
 
 		asType.setAny(evolvingAr);
 

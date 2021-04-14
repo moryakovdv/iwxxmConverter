@@ -81,7 +81,7 @@ public class SIGMETTacMessage extends TacMessageImpl {
 	private SigmetHorizontalPhenomenonLocation horizontalLocation = new SigmetHorizontalPhenomenonLocation();
 	private SigmetVerticalPhenomenonLocation verticalLocation = new SigmetVerticalPhenomenonLocation();
 
-	private SigmetForecastSection forecastedSection;
+	
 	
 	public String getSigmetDataType() {
 		return sigmetDataType;
@@ -343,11 +343,17 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 	protected StringBuffer fillAndRemoveForecastedLocation(StringBuffer tac) {
 		Matcher matcherFcst = SigmetParsingRegexp.sigmetForecastSection.matcher(tac);
-		if (matcherFcst.find()) {
+		
+		int lastMatch = 0;
+		int firstMatch = 0;
+		while (matcherFcst.find()) {
+			
+			if (firstMatch == 0)
+				firstMatch = matcherFcst.start();
 			int lastIndex = matcherFcst.end();
 
 			SigmetForecastSection fSection = new SigmetForecastSection(tac.substring(matcherFcst.start(), lastIndex));
-			this.getPhenomenonDescription().setForecastSection(fSection);
+			this.getPhenomenonDescription().getForecastSection().add(fSection);
 			String time = matcherFcst.group("time");
 			String location = matcherFcst.group("location");
 			DateTime parentDateTime = this.getMessageIssueDateTime();
@@ -359,11 +365,13 @@ public class SIGMETTacMessage extends TacMessageImpl {
 			fSection.setForecastedTime(dtAT);
 			
 			
-			tac.delete(matcherFcst.start(), lastIndex);
+			
 			
 			fillLocationSection(new StringBuffer(location),fSection.getHorizontalLocation());
-			
+			lastMatch = matcherFcst.end();
 		}
+		
+		tac.delete(firstMatch, lastMatch);
 
 		return tac;
 	}
@@ -506,7 +514,9 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 			SigmetVerticalPhenomenonLocation level = new SigmetVerticalPhenomenonLocation();
 
-			boolean hasTop = matcherLevel.group("hastopfl") != null;
+			boolean hasOnlyTop = matcherLevel.group("hastopfl") != null;
+			boolean hasTop = matcherLevel.group("topfl") != null;
+
 			boolean onSurface = matcherLevel.group("hassurface") != null;
 			boolean hasBothFL = matcherLevel.group("hasbothfls") != null;
 			boolean aboveFL = matcherLevel.group("above") != null;
@@ -518,11 +528,18 @@ public class SIGMETTacMessage extends TacMessageImpl {
 
 			// top FL
 
-			if (hasTop) {
+			if (hasOnlyTop) {
 				String topFL = matcherLevel.group("fl");
 				Optional<Integer> oTop = Optional.of(Integer.valueOf(topFL));
 				level.setTopFL(oTop);
 			}
+			
+			if (hasTop) {
+				String topFL = matcherLevel.group("topfl");
+				Optional<Integer> oTop = Optional.of(Integer.valueOf(topFL));
+				level.setTopFL(oTop);
+			}
+
 
 			// if on surface - set height
 

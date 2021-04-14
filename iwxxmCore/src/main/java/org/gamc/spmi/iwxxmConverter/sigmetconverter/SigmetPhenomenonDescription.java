@@ -1,6 +1,8 @@
 package org.gamc.spmi.iwxxmConverter.sigmetconverter;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.IwxxmEnum;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.RUMB_UNITS;
@@ -77,7 +79,7 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 	private Intensity intencity = Intensity.NC;
 	
 	private SigmetMovingSection movingSection;
-	private SigmetForecastSection forecastSection;
+	private List<SigmetForecastSection> forecastSection = new LinkedList<SigmetForecastSection>();
 	
 	public String getPhenomenon() {
 		return phenomenon;
@@ -113,11 +115,11 @@ public class SigmetPhenomenonDescription extends TacSectionImpl implements Seria
 
 	
 
-	public SigmetForecastSection getForecastSection() {
+	public List<SigmetForecastSection> getForecastSection() {
 		return forecastSection;
 	}
 
-	public void setForecastSection(SigmetForecastSection forecastSection) {
+	public void setForecastSection(List<SigmetForecastSection> forecastSection) {
 		this.forecastSection = forecastSection;
 	}
 

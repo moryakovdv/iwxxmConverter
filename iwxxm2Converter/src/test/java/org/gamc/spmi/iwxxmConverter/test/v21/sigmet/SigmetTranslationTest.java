@@ -49,8 +49,9 @@ public class SigmetTranslationTest {
 		assertEquals(sigmetTac.getPhenomenonDescription().getPhenomenonTimeStamp().getHourOfDay(),9);
 		
 		//FCST AT
-		assertEquals(sigmetTac.getPhenomenonDescription().getForecastSection().getForecastedTime().getHourOfDay(),13);
-		assertEquals(sigmetTac.getPhenomenonDescription().getForecastSection().getAreas().size(),2);
+		assertEquals(1, sigmetTac.getPhenomenonDescription().getForecastSection().size());
+		assertEquals(sigmetTac.getPhenomenonDescription().getForecastSection().get(0).getForecastedTime().getHourOfDay(),13);
+		assertEquals(sigmetTac.getPhenomenonDescription().getForecastSection().get(0).getAreas().size(),2);
 		
 	}
 	

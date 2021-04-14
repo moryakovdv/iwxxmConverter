@@ -4,10 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -16,7 +14,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.namespace.QName;
 
 import org.gamc.gis.model.GTCalculatedRegion;
 import org.gamc.gis.model.GTCoordPoint;
@@ -27,8 +24,8 @@ import org.gamc.spmi.iwxxmConverter.common.DirectionFromLine;
 import org.gamc.spmi.iwxxmConverter.common.NamespaceMapper;
 import org.gamc.spmi.iwxxmConverter.common.StringConstants;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
-import org.gamc.spmi.iwxxmConverter.general.IWXXMHelpers;
 import org.gamc.spmi.iwxxmConverter.iwxxmenums.ANGLE_UNITS;
+import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetForecastSection;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetHorizontalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.sigmetconverter.SigmetVerticalPhenomenonLocation;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
@@ -56,19 +53,7 @@ import schemabindings31._int.icao.iwxxm._3.SIGMETPositionType;
 import schemabindings31._int.icao.iwxxm._3.SIGMETType;
 import schemabindings31._int.icao.iwxxm._3.StringWithNilReasonType;
 import schemabindings31._int.icao.iwxxm._3.TimeIndicatorType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETEvolvingConditionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionPropertyType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETPositionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.TropicalCycloneSIGMETType;
 import schemabindings31._int.icao.iwxxm._3.UnitPropertyType;
-import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETEvolvingConditionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETPositionCollectionPropertyType;
-import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETPositionCollectionType;
-import schemabindings31._int.icao.iwxxm._3.VolcanicAshSIGMETType;
-import schemabindings31._int.wmo.def.metce._2013.TropicalCyclonePropertyType;
-import schemabindings31._int.wmo.def.metce._2013.TropicalCycloneType;
-import schemabindings31._int.wmo.def.metce._2013.VolcanoPropertyType;
-import schemabindings31._int.wmo.def.metce._2013.VolcanoType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.AirspaceType;
@@ -86,17 +71,12 @@ import schemabindings31.aero.aixm.schema._5_1.ValDistanceVerticalType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AssociationRoleType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CircleByCenterPointType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurvePropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurveSegmentArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurveType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
-import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
-import schemabindings31.net.opengis.gml.v_3_2_1.LocationPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.PointPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.PointType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
 import schemabindings31.net.opengis.gml.v_3_2_1.RingType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SpeedType;
@@ -214,8 +194,14 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 		default:
 			sigmetRootTag.setPhenomenon(setAeronauticalSignificantWeatherPhenomenonType());
 			sigmetRootTag.getAnalysis().add(setAssociationRoleType());
-			if (translatedSigmet.getPhenomenonDescription().getForecastSection() != null)
-				sigmetRootTag.getForecastPositionAnalysis().add(setForecastAssociationRoleType());
+			if (translatedSigmet.getPhenomenonDescription().getForecastSection() != null) {
+				
+				for(SigmetForecastSection fcsection : translatedSigmet.getPhenomenonDescription().getForecastSection()) {
+					sigmetRootTag.getForecastPositionAnalysis().add(setForecastAssociationRoleType(fcsection));
+				}
+				
+			}
+				
 			break;
 		}
 		// create XML representation
@@ -318,7 +304,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	/** creates forecast section for phenomena 
 	 * @throws WMORegisterException */
-	public AssociationRoleType setForecastAssociationRoleType() throws WMORegisterException {
+	public AssociationRoleType setForecastAssociationRoleType(SigmetForecastSection fcsection) throws WMORegisterException {
 		AssociationRoleType asType = iwxxmHelpers.getOfGML().createAssociationRoleType();
 
 		// ---------------AirspaceVolumePropertyType----------------//
@@ -337,18 +323,18 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 		AirspaceVolumePropertyType air = iwxxmHelpers.getOfIWXXM().createAirspaceVolumePropertyType();
 
-		if (translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation().isSectionFilled()
+		if (fcsection.getHorizontalLocation().isSectionFilled()
 				||
 
-				translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()
+				fcsection.getVerticalLocation()
 						.isSectionFilled()) {
 
 			List<GTCalculatedRegion> listCoord = getGTCalculatedRegions(
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation());
+					fcsection.getHorizontalLocation());
 
 			air.setAirspaceVolume(createAirSpaceVolumeSection(listCoord,
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getHorizontalLocation(),
-					translatedSigmet.getPhenomenonDescription().getForecastSection().getVerticalLocation()));
+					fcsection.getHorizontalLocation(),
+					fcsection.getVerticalLocation()));
 		} else {
 			
 			air = createInapplicablePosition();
@@ -371,61 +357,7 @@ public class SIGMETConverterV3<T extends SIGMETTacMessage, T1 extends SIGMETType
 
 	}
 
-	/*
-	 * private AirspaceVolumeType setAirspaceVolume() { // ---------------DIR
-	 * Position----------------// DirectPositionListType postDir =
-	 * iwxxmHelpers.getOfGML().createDirectPositionListType(); for
-	 * (DirectionFromLine dir :
-	 * translatedSigmet.getHorizontalLocation().getDirectionsFromLines()) {
-	 * postDir.getValue().add(dir.getDirection().getDoubleValue()); } //
-	 * ---------------Linear Ring----------------// LinearRingType ringAb =
-	 * iwxxmHelpers.getOfGML().createLinearRingType(); ringAb.setPosList(postDir);
-	 * JAXBElement<LinearRingType> ringAbAr =
-	 * iwxxmHelpers.getOfGML().createLinearRing(ringAb); AbstractRingPropertyType
-	 * exType = iwxxmHelpers.getOfGML().createAbstractRingPropertyType();
-	 * exType.setAbstractRing(ringAbAr); // ---------------Patches----------------//
-	 * PolygonPatchType surfacePach =
-	 * iwxxmHelpers.getOfGML().createPolygonPatchType();
-	 * surfacePach.setExterior(exType); JAXBElement<PolygonPatchType> arrSurf =
-	 * iwxxmHelpers.getOfGML().createPolygonPatch(surfacePach);
-	 * SurfacePatchArrayPropertyType surPachAr =
-	 * iwxxmHelpers.getOfGML().createSurfacePatchArrayPropertyType();
-	 * surPachAr.getAbstractSurfacePatch().add(arrSurf); //
-	 * ---------------Surface----------------//
-	 * JAXBElement<SurfacePatchArrayPropertyType> pathPol =
-	 * iwxxmHelpers.getOfGML().createPolygonPatches(surPachAr); BigInteger intDim =
-	 * BigInteger.valueOf(2); SurfaceType typeSyr =
-	 * iwxxmHelpers.getOfAIXM().createSurfaceType(); typeSyr.setPatches(pathPol);
-	 * typeSyr.setSrsDimension(intDim);
-	 * typeSyr.setId(iwxxmHelpers.generateUUIDv4(String.format("unit-%d-%s", 1,
-	 * translatedSigmet.getIcaoCode()))); typeSyr.getAxisLabels().add("Lat Long");
-	 * typeSyr.setSrsName(""); JAXBElement<SurfaceType> surAr =
-	 * iwxxmHelpers.getOfAIXM().createSurface(typeSyr); SurfacePropertyType srfType
-	 * = iwxxmHelpers.getOfAIXM().createSurfacePropertyType();
-	 * srfType.setSurface(surAr); JAXBElement<SurfacePropertyType> surArHor =
-	 * iwxxmHelpers.getOfAIXM()
-	 * .createAirspaceVolumeTypeHorizontalProjection(srfType); //
-	 * ---------------Distance Vertical----------------// ValDistanceVerticalType
-	 * valDisUp = iwxxmHelpers.getOfAIXM().createValDistanceVerticalType();
-	 * valDisUp.setUom("FL");
-	 * valDisUp.setValue(String.valueOf(translatedSigmet.getVerticalLocation().
-	 * getTopFL().get())); JAXBElement<ValDistanceVerticalType> valDisJaxUp =
-	 * iwxxmHelpers.getOfAIXM() .createAirspaceLayerTypeUpperLimit(valDisUp); //
-	 * ---------------Vertical Refeence----------------// CodeVerticalReferenceType
-	 * valueCode = iwxxmHelpers.getOfAIXM().createCodeVerticalReferenceType();
-	 * valueCode.setValue("STD"); JAXBElement<CodeVerticalReferenceType>
-	 * vertCodeType = iwxxmHelpers.getOfAIXM()
-	 * .createAirspaceLayerTypeUpperLimitReference(valueCode); //
-	 * ---------------Airspace Volume----------------// AirspaceVolumeType airS =
-	 * iwxxmHelpers.getOfAIXM().createAirspaceVolumeType();
-	 * airS.setUpperLimit(valDisJaxUp); airS.setHorizontalProjection(surArHor);
-	 * airS.setUpperLimitReference(vertCodeType); // ---------------Curve
-	 * Property----------------// CurvePropertyType curvePropType =
-	 * iwxxmHelpers.getOfAIXM().createCurvePropertyType();
-	 * JAXBElement<CurvePropertyType> curveProp = iwxxmHelpers.getOfAIXM()
-	 * .createAirspaceVolumeTypeCentreline(curvePropType);
-	 * airS.setCentreline(curveProp); return airS; }
-	 */
+	
 	/**
 	 * Coordinates calculation from horisontal location
 	 * 

@@ -43,11 +43,12 @@ public class SigmetTCTest {
 		assertTrue(tac.getVerticalLocation().getTopFL().get()==500);
 
 		assertTrue(tac.getPhenomenonDescription().getIntencity()==Intensity.NC);
+		assertEquals(1, tac.getPhenomenonDescription().getForecastSection().size());
 		
-		assertEquals(18,tac.getPhenomenonDescription().getForecastSection().getForecastedTime().getHourOfDay());
+		assertEquals(18,tac.getPhenomenonDescription().getForecastSection().get(0).getForecastedTime().getHourOfDay());
 		
-		assertEquals(23, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPoint().getLatitude().getDeg());
-		assertEquals(63, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPoint().getLongitude().getDeg());
+		assertEquals(23, tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().getPoint().getLatitude().getDeg());
+		assertEquals(63, tac.getPhenomenonDescription().getForecastSection().get(0).getHorizontalLocation().getPoint().getLongitude().getDeg());
 
 		}
 	
