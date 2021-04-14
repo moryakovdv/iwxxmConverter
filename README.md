@@ -34,6 +34,15 @@ As an alternative way of validation the [PH-SHEMATRON](https://github.com/phax/p
 The comparing results look similar but ph-schematron's performance out-of-the-box is much better.   
 Bonus: ph-shematron can generate SVRL report files with validation results.
 
+## Implemented converters
+The following TAC message types are supported so far:
+1. METAR
+2. SPECI
+3. TAF
+4. SIGMET WS, TC, VA
+5. AIRMET
+6. SWX ADVISORY (SPACEWEATHER ADVISORY)
+
 ## Using
 There are some steps from TAC to IWXXM messages:
  - Parsing TAC
@@ -173,6 +182,9 @@ Any help from the community will be highly appreciated. There is a lot of work t
  - The IwxxmConverter is distributed under The APACHE 2.0 License
  - CRUX software as dependency is distributed under The CRUX License
  - PH-Schematron as dependency is distributed under The APACHE 2.0 License.
+
+## Wiki
+Please, have a look to the project wiki page (under development)
 
 ## Contacts
 Dmitry Moryakov  
