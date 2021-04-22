@@ -24,7 +24,7 @@ public class TafParsingRegexp {
 	public final static Pattern tafHeader = Pattern
 			//.compile("(?<header>^TAF)\\s+(?<icao>[A-Z]{4})\\s+(?<datetime>\\d{6})(?<zulu>Z){0,1}");
 			//.compile("(?<header>^TAF)\\s+(?<changeIndicator>(?:AMD|COR)\\s+){0,1}(?<icao>[A-Z]{4})\\s+(?<datetime>\\d{6})(?<zulu>Z){0,1}");
-			.compile("(?<header>^TAF)\\s+((?<changeIndicator>AMD|COR|CNL)(?:\\s)){0,1}(?<icao>[A-Z]{4})\\s+(?<datetime>\\d{6})(?<zulu>Z){0,1}");
+			.compile("(?<header>^TAF)\\s+((?<changeIndicator>AMD|COR|CNL)(?:\\s)){0,1}(?<icao>[A-Z]{4})\\s+(?<datetime>\\d{6}Z)?");
 	public final static Pattern tafValidity = Pattern.compile("(?<tafDayFrom>\\d{2})(?<tafHourFrom>\\d{2})\\/(?<tafDayTo>\\d{2})(?<tafHourTo>\\d{2})");
 	
 	public final static Pattern tafWind = Pattern.compile(

@@ -99,7 +99,7 @@ public class TAFTacMessage extends TacMessageImpl {
 
 			String dt = matcher.group("datetime");
 			try {
-			this.setMessageIssueDateTime(IWXXM31Helpers.parseDateTimeToken(dt));
+				this.setMessageIssueDateTime(IWXXM31Helpers.parseDateTimeToken(dt));
 			}
 			catch(ParsingException e) {
 				throw new TAFParsingException("Check date and time section");

@@ -125,7 +125,7 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 		catch(ParsingException pe) {
 			result = iwxxmHelpers.getOfIWXXM().createTAFType();
 			result.setTranslationFailedTAC(tac);
-			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below",pe);
+			logger.error("Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below ",pe);
 
 		}
 		String xmlResult = marshallMessageToXML(result);

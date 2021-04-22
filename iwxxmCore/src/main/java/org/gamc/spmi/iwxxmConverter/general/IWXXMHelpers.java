@@ -55,6 +55,10 @@ public class IWXXMHelpers {
 	/** Helper function to parse dateTime */
 	public static DateTime parseDateTimeToken(String dtToken) throws ParsingException {
 
+		if (dtToken==null || dtToken.isEmpty()) {
+			throw new ParsingException("Error occured on DateTime parsing");			
+		}
+			
 		try {
 		DateTime dtNow = DateTime.now();
 		int year = dtNow.getYear();
