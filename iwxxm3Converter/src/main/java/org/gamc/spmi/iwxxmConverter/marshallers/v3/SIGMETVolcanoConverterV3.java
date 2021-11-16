@@ -110,7 +110,7 @@ public class SIGMETVolcanoConverterV3 extends SIGMETConverterV3<SIGMETVolcanoTac
 	IWXXM31Helpers iwxxmHelpers = new IWXXM31Helpers();
 	private String dateTime = "";
 	private String dateTimePosition = "";
-	private SIGMETVolcanoTacMessage translatedSigmet;
+	//private SIGMETVolcanoTacMessage translatedSigmet;
 
 	Logger logger = LoggerFactory.getLogger(SIGMETVolcanoConverterV3.class);
 
@@ -140,7 +140,7 @@ public class SIGMETVolcanoConverterV3 extends SIGMETConverterV3<SIGMETVolcanoTac
 	@Override
 	public VolcanicAshSIGMETType convertMessage(SIGMETVolcanoTacMessage translatedMessage)
 			throws DatatypeConfigurationException, UnsupportedEncodingException, JAXBException, ParsingException, WMORegisterException {
-		this.translatedSigmet = translatedMessage;
+		translatedSigmet = translatedMessage;
 		StringOrRefType refTacString = iwxxmHelpers.getOfGML().createStringOrRefType();
 		TimeInstantPropertyType obsTimeType = iwxxmHelpers.createTimeInstantPropertyTypeForDateTime(
 				translatedSigmet.getMessageIssueDateTime(), translatedSigmet.getIcaoCode(), "issue");

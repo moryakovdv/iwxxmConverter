@@ -23,8 +23,9 @@ public class SigmetVolcanoTest {
 			+ "FCST AT 0815Z WI N2939 E13308 - N2936 E13456 - N3116 E14050 - N2923 E13534 - N2856 E13219 - N2939 E13308= AND WI N3134 E13042 – N3121 E13117 – N3110 E13108 – N3119 E13031 – N3134 E13042 SFC/FL170 NC "
 			+ "FCST AT 0815Z WI N3113 E13012 – N3129 E13045 – N3020 E13114 – N3045 E13627 – N2946 E13155 – N3003 E13034 – N3113 E13012 =";
 	
+	String nov16TestVAMessage = "WVRS31 UUWV 160800 UUWV SIGMET 1 VALID 160800/161400 UUWV- UUWV MOSCOW FIR VA ERUPTION MT EYJAFJALLAJOKULL PSN N6338 W01938 VA CLD OBS AT 0600Z ENTIRE FIR SFC/FL200 FCST AT 1400Z ENTIRE FIR=";
 	
-	@Test
+		@Test
 	public void testParsing() throws SIGMETParsingException {
 		SIGMETVolcanoTacMessage tac = new SIGMETVolcanoTacMessage(sigmetIcaoExample);
 		tac.parseMessage();
@@ -49,6 +50,18 @@ public class SigmetVolcanoTest {
 		//assertEquals(23, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPoint().getLatitude().getDeg());
 		//assertEquals(63, tac.getPhenomenonDescription().getForecastSection().getHorizontalLocation().getPoint().getLongitude().getDeg());
 
+		
+	}
+	
+	@Test
+	public void testParsing1() throws SIGMETParsingException {
+		SIGMETVolcanoTacMessage tac = new SIGMETVolcanoTacMessage(nov16TestVAMessage);
+		tac.parseMessage();
+		
+		assertEquals("1", tac.getSigmetNumber());
+	
+
+		assertEquals("MT EYJAFJALLAJOKULL", tac.getPhenomenonDescription().getPhenomenonGivenName());
 		
 	}
 	

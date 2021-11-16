@@ -205,5 +205,17 @@ public class SigmetConversionTest {
 		System.out.println(result);
 
 	}
+	
+	String nov16TestVAMessage = "WVRS31 UUWV 160800 UUWV SIGMET 1 VALID 160800/161400 UUWV- UUWV MOSCOW FIR VA ERUPTION MT EYJAFJALLAJOKULL PSN N6338 W01938 VA CLD OBS AT 0600Z ENTIRE FIR SFC/FL200 FCST AT 1400Z ENTIRE FIR=";
+	
+	@Test
+	public void testConvertVASigmet()
+			throws SIGMETParsingException, UnsupportedEncodingException, DatatypeConfigurationException, JAXBException, WMORegisterException {
+
+		SIGMETVolcanoConverterV3 mc = new SIGMETVolcanoConverterV3();
+		String result = mc.convertTacToXML(nov16TestVAMessage);
+
+		System.out.println(result);
+	}
 
 }
