@@ -16,7 +16,7 @@
 		<project.encoding>UTF-8</project.encoding>
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
 		<maven.compiler.target>${javaVersion}</maven.compiler.target>
-		<spring.boot.version>2.3.0.RELEASE</spring.boot.version>
+		<spring.boot.version>2.5.12</spring.boot.version>
 	</properties>
 
 
