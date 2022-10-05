@@ -29,7 +29,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.encoding>UTF-8</project.encoding>
 		<geotools.version>25.0</geotools.version>
-		<fasterxml.version>2.11.0</fasterxml.version>
+		<fasterxml.version>2.12.6.1</fasterxml.version>
 		<geojson.version>1.8</geojson.version>
 
 	</properties>
