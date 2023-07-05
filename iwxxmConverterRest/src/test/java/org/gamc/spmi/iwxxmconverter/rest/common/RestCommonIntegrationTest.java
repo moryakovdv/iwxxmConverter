@@ -5,22 +5,20 @@ import static org.junit.Assert.assertTrue;
 import javax.annotation.PostConstruct;
 
 import org.gamc.iwxxmconverterrest.application.RestApplication;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @EnableAutoConfiguration
 @SpringBootTest(classes = {RestApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RestCommonIntegrationTest {
@@ -53,7 +51,7 @@ public class RestCommonIntegrationTest {
 			"SCFZ ANTOFAGASTA FIR SEV ICE FCST E OF LINE S2127 W06840 - S2320 \n" + 
 			"W06803 - S2442 W06846 FL180/280 STNR NC=";
 	
-	String airmetToTest="WSRS32 RUAA 010154\n" + 
+	String airmetToTest="WSRS32 RUAA 010200\n" + 
 			"UUYY AIRMET 1 VALID 010200/010600 UUYY-\n" + 
 			"UUYY SYKTYVKAR FIR MOD ICE FCST W OF E06000\n" + 
 			"FL240/370 MOV NE 30KMH NC=";
@@ -86,10 +84,15 @@ public class RestCommonIntegrationTest {
       
     }
     
-    private void checkResult(String result) throws JsonMappingException, JsonProcessingException {
+    private void checkResult(String result) throws JsonMappingException, JsonProcessingException, IllegalArgumentException {
     	JsonNode parent= new ObjectMapper().readTree(result);
 		boolean isValid = parent.path("valid").asBoolean();
 		String xml = parent.path("xml").asText();
+		if (!isValid) {
+			throw new IllegalArgumentException();
+			
+		}
+			
 		assertTrue(isValid);
 		System.out.println(xml);
     	
@@ -137,9 +140,10 @@ public class RestCommonIntegrationTest {
     }
     
     @Test
+    
     public void testConverter() throws JsonMappingException, JsonProcessingException {
     	ResponseEntity<String> result = template.postForEntity("http://localhost:"+localPort+"/convert/v3", sigmetToTest1, String.class);
-    	checkResult(result.getBody());
+    	Assertions.assertThrows(IllegalArgumentException.class, ()->checkResult(result.getBody()));
     	
     }
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
+  <runtime name="java-17-openjdk-amd64"/>
   <installed facet="java" version="1.8"/>
 </faceted-project>

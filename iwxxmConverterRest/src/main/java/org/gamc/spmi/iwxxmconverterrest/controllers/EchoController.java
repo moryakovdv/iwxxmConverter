@@ -15,7 +15,7 @@ public class EchoController {
 	
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public @ResponseBody String echo() {
-		return "It works. Please request /rest/help to get usage info.";
+		return "It works. Please request /help to get usage info.";
 	}
 	
 	@RequestMapping(value="/help", method = RequestMethod.GET)

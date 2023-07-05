@@ -16,27 +16,19 @@
 		<project.encoding>UTF-8</project.encoding>
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
 		<maven.compiler.target>${javaVersion}</maven.compiler.target>
-		<spring.boot.version>2.3.0.RELEASE</spring.boot.version>
+		<spring.boot.version>3.1.1</spring.boot.version>
 	</properties>
 
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.gamc.spmi</groupId>
-			<artifactId>iwxxmCore</artifactId>
-			<version>0.3.0</version>
-		</dependency>
+		
 
 
 
 
-		<dependency>
-			<groupId>org.gamc.spmi</groupId>
-			<artifactId>iwxxm3Converter</artifactId>
-			<version>0.3.0</version>
-		</dependency>
 
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -68,12 +60,7 @@
 			<version>${spring.boot.version}</version>
 			<scope>test</scope>
 
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -95,11 +82,9 @@
 			<version>${spring.boot.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-rest-webmvc</artifactId>
-			<version>3.3.0.RELEASE</version>
-		</dependency>
+		
+	
+
 
 
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
@@ -129,6 +114,21 @@
 
 
 
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>iwxxm3Converter</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>iwxxmCore</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>gis-tools-core</artifactId>
+			<version>0.3.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -139,8 +139,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.1.1</version>
 				<configuration>
-					<fork>true</fork>
+					
 					<mainClass>org.gamc.iwxxmconverterrest.application.RestApplication</mainClass>
 				</configuration>
 				<executions>

@@ -51,10 +51,7 @@
 		
 			
 		
-	<dependency>
-			<groupId>org.gamc.spmi</groupId>
-			<artifactId>gis-tools-core</artifactId>
-			</dependency>
+	
 
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -71,7 +68,7 @@
 			<version>3.1.4</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/edu.ucar.ral.xml/crux -->
+		<!-- https://mvnrepository.com/artifact/edu.ucar.ral.xml/crux 
 		<dependency>
 			<groupId>edu.ucar.ral.xml</groupId>
 			<artifactId>crux</artifactId>
@@ -88,7 +85,7 @@
 			
 			</exclusions>
 		</dependency>
-
+		-->
 
 		<!-- https://mvnrepository.com/artifact/com.helger/ph-schematron -->
 		<dependency>
@@ -131,9 +128,14 @@
 
 
 
-		
-	
-	
+
+
+
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>gis-tools-core</artifactId>
+			<version>0.3.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
