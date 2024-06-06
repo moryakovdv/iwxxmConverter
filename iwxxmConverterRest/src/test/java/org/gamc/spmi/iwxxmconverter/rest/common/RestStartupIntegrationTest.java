@@ -5,16 +5,13 @@ import static org.junit.Assert.assertTrue;
 import javax.annotation.PostConstruct;
 
 import org.gamc.iwxxmconverterrest.application.RestApplication;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @EnableAutoConfiguration
 @SpringBootTest(classes = {RestApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RestStartupIntegrationTest {

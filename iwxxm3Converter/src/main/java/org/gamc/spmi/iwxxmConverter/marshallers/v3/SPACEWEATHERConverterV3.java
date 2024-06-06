@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.security.acl.Owner;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
@@ -27,7 +26,6 @@ import org.gamc.spmi.iwxxmConverter.spaceweatherconverter.SpaceWeatherEffectLoca
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister;
 import org.gamc.spmi.iwxxmConverter.wmo.WMORegister.WMORegisterException;
-import org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,25 +53,18 @@ import schemabindings31.aero.aixm.schema._5_1.TextNameType;
 import schemabindings31.aero.aixm.schema._5_1.UnitTimeSlicePropertyType;
 import schemabindings31.aero.aixm.schema._5_1.UnitTimeSliceType;
 import schemabindings31.aero.aixm.schema._5_1.UnitType;
-import schemabindings31.net.opengis.gml.v_3_2_1.AbstractCurveSegmentType;
 import schemabindings31.net.opengis.gml.v_3_2_1.AbstractRingPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.AbstractSurfacePatchType;
-import schemabindings31.net.opengis.gml.v_3_2_1.AbstractTimeObjectType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CircleByCenterPointType;
-import schemabindings31.net.opengis.gml.v_3_2_1.CodeType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurvePropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurveSegmentArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.CurveType;
 import schemabindings31.net.opengis.gml.v_3_2_1.DirectPositionListType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LengthType;
-import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.LinearRingType;
-import schemabindings31.net.opengis.gml.v_3_2_1.LocationPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.PolygonPatchType;
 import schemabindings31.net.opengis.gml.v_3_2_1.RingType;
 import schemabindings31.net.opengis.gml.v_3_2_1.SurfacePatchArrayPropertyType;
 import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantPropertyType;
-import schemabindings31.net.opengis.gml.v_3_2_1.TimeInstantType;
 
 public class SPACEWEATHERConverterV3 implements TacConverter<SPACEWEATHERTacMessage, SpaceWeatherAdvisoryType,IWXXM31Helpers> {
 

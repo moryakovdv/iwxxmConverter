@@ -15,7 +15,7 @@
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
-				<project.source.version>${javaVersion}</project.source.version>
+		<project.source.version>${javaVersion}</project.source.version>
 		<project.target.version>${javaVersion}</project.target.version>
 
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
@@ -28,6 +28,26 @@
 	<dependencies>
 
 
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+
+		</dependency>
 
 
 		<dependency>
@@ -35,65 +55,58 @@
 			<artifactId>iwxxmCore</artifactId>
 			<version>0.3.0</version>
 		</dependency>
-			
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
 
-			</dependency>
-		
-
-
+		<dependency>
+			<groupId>org.gamc.spmi</groupId>
+			<artifactId>gis-tools-core</artifactId>
+			<version>0.3.0</version>
+		</dependency>
 	</dependencies>
 
 
-<build>
+	<build>
 
-	 <finalName>iwxxm3Converter</finalName>
+		<finalName>iwxxm3Converter</finalName>
 
 
-<plugins>
-<plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.2.0</version>
-            <executions>
-                <execution>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>add-source</goal>
-                    </goals>
-                    <configuration>
-                        <sources>
-                            <source>src/schemabindings</source>
-                        </sources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-	
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/schemabindings</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-	<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
 
-</plugins>
-</build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
 
 
 </project>

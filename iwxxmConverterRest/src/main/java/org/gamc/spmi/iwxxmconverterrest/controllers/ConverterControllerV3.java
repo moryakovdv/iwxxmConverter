@@ -1,6 +1,5 @@
 package org.gamc.spmi.iwxxmconverterrest.controllers;
 
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,6 @@ import org.gamc.iwxxmconverterrest.common.Converters;
 import org.gamc.iwxxmconverterrest.common.Validator;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
-import org.hsqldb.types.Charset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

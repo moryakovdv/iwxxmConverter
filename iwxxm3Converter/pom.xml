@@ -4,29 +4,49 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.gamc.spmi</groupId>
 		<artifactId>iwxxmConverter</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<artifactId>iwxxm3Converter</artifactId>
 	<version>0.3.0</version>
 	<name>iwxxm3Converter</name>
 
 	<properties>
-			<project.source.version>${javaVersion}</project.source.version>
+		<project.source.version>${javaVersion}</project.source.version>
 		<project.target.version>${javaVersion}</project.target.version>
 
 		<maven.compiler.source>${javaVersion}</maven.compiler.source>
 		<maven.compiler.target>${javaVersion}</maven.compiler.target>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.encoding>UTF-8</project.encoding>	</properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.encoding>UTF-8</project.encoding>
+	</properties>
 
 	<dependencies>
 
 
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+
+		</dependency>
 
 
 		<dependency>
@@ -34,64 +54,51 @@
 			<artifactId>iwxxmCore</artifactId>
 			<version>0.3.0</version>
 		</dependency>
-	
-		<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-
-			</dependency>
-		
-
-
 	</dependencies>
 
 
-<build>
-		
-	 <finalName>iwxxm3Converter</finalName>
+	<build>
 
-<plugins>
+		<finalName>iwxxm3Converter</finalName>
 
- <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.2.0</version>
-            <executions>
-                <execution>
-                    <phase>generate-sources</phase>
-                    <goals>
-                        <goal>add-source</goal>
-                    </goals>
-                    <configuration>
-                        <sources>
-                            <source>src/schemabindings</source>
-                        </sources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+		<plugins>
 
-	<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/schemabindings</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-</plugins>
-</build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
 
 
 </project>

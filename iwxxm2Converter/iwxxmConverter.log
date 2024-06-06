@@ -1,24 +1,168 @@
-2020-05-27 22:43:21,493[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.rest.WebAppStarter  - IWXXM Grizzly REST is starting...
-2020-05-27 22:43:22,729[ISO8601] [main] INFO  org.gamc.spmi.iwxxmConverter.rest.WebAppStarter  - IWXXM REST started
-2020-05-27 22:45:38,332[ISO8601] [grizzly-http-server-1] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Request to validation received
-2020-05-27 22:45:38,332[ISO8601] [grizzly-http-server-1] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - {host=[localhost:8082], user-agent=[Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0], accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8], accept-language=[en-US,en;q=0.5], accept-encoding=[gzip, deflate], connection=[keep-alive], cookie=[_ga=GA1.1.1930525053.1581006519], upgrade-insecure-requests=[1]}
-2020-05-27 22:45:38,333[ISO8601] [grizzly-http-server-1] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - METAR VVTS 271830Z 24004KT 8000 SCT015 BKN040 27/26 Q1010 NOSIG =
-2020-05-27 22:45:38,494[ISO8601] [grizzly-http-server-1] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2020-05-27 22:45:41,207[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/classes/iwxxm/schematron/iwxxm.sch]
-2020-05-27 22:45:41,208[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
-2020-05-27 22:45:42,518[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
-2020-05-27 22:45:42,559[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
-2020-05-27 22:45:42,563[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2020-05-27 22:45:42,650[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2020-05-27 22:45:43,493[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/classes/iwxxm/schematron/iwxxm.sch]
-2020-05-27 22:45:43,579[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/classes/iwxxm/schematron/iwxxm.sch]
-2020-05-27 22:45:43,891[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/classes/iwxxm/schematron/iwxxm.sch]
-2020-05-27 22:45:44,287[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm2Converter/target/classes/iwxxm/schematron/iwxxm.sch]
-2020-05-27 22:45:44,334[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2020-05-27 22:45:44,433[ISO8601] [grizzly-http-server-1] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2020-05-27 22:45:44,466[ISO8601] [grizzly-http-server-1] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader sun.misc.Launcher$AppClassLoader@75b84c92
-2020-05-27 22:45:44,506[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
-2020-05-27 22:45:44,513[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
-2020-05-27 22:45:44,519[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
-2020-05-27 22:45:44,519[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
-2020-05-27 22:45:44,520[ISO8601] [grizzly-http-server-1] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class sun.misc.Launcher$AppClassLoader
+2023-07-05 12:40:34,071[ISO8601] [grizzly-http-server-3] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Request to validation received
+2023-07-05 12:40:34,073[ISO8601] [grizzly-http-server-3] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - {host=[localhost:8082], user-agent=[Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0], accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8], accept-language=[en-US,en;q=0.5], accept-encoding=[gzip, deflate, br], connection=[keep-alive], upgrade-insecure-requests=[1], sec-fetch-dest=[document], sec-fetch-mode=[navigate], sec-fetch-site=[none], sec-fetch-user=[?1]}
+2023-07-05 12:40:34,073[ISO8601] [grizzly-http-server-3] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG
+2023-07-05 12:40:34,210[ISO8601] [grizzly-http-server-3] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2023-07-05 12:40:34,211[ISO8601] [grizzly-http-server-3] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2023-07-05 12:40:34,219[ISO8601] [grizzly-http-server-3] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2023-07-05 12:40:34,219[ISO8601] [grizzly-http-server-3] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2023-07-05 12:40:34,220[ISO8601] [grizzly-http-server-3] ERROR org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Validation error
+org.gamc.spmi.iwxxmConverter.wmo.WMORegister$WMORegisterException: 0 was not found in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+	at org.gamc.spmi.iwxxmConverter.wmo.WMORegister.getWMOUrlByCode(WMORegister.java:180)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createRunwayStateTag(METARConverter.java:795)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createMETARRecordTag(METARConverter.java:492)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createObservationResult(METARConverter.java:312)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertMessage(METARConverter.java:194)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertTacToXML(METARConverter.java:140)
+	at org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter.getConvertsionResults(IwxxmRestConverter.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:316)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:298)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:268)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-07-05 12:42:30,946[ISO8601] [grizzly-http-server-4] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Request to validation received
+2023-07-05 12:42:30,946[ISO8601] [grizzly-http-server-4] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - {host=[localhost:8082], user-agent=[Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0], accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8], accept-language=[en-US,en;q=0.5], accept-encoding=[gzip, deflate, br], connection=[keep-alive], upgrade-insecure-requests=[1], sec-fetch-dest=[document], sec-fetch-mode=[navigate], sec-fetch-site=[none], sec-fetch-user=[?1]}
+2023-07-05 12:42:30,947[ISO8601] [grizzly-http-server-4] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG
+2023-07-05 12:42:30,958[ISO8601] [grizzly-http-server-4] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2023-07-05 12:42:52,008[ISO8601] [grizzly-http-server-4] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2023-07-05 12:42:52,017[ISO8601] [grizzly-http-server-4] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2023-07-05 12:42:53,557[ISO8601] [grizzly-http-server-4] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2023-07-05 12:42:53,558[ISO8601] [grizzly-http-server-4] ERROR org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Validation error
+org.gamc.spmi.iwxxmConverter.wmo.WMORegister$WMORegisterException: 0 was not found in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+	at org.gamc.spmi.iwxxmConverter.wmo.WMORegister.getWMOUrlByCode(WMORegister.java:180)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createRunwayStateTag(METARConverter.java:795)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createMETARRecordTag(METARConverter.java:492)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createObservationResult(METARConverter.java:312)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertMessage(METARConverter.java:194)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertTacToXML(METARConverter.java:140)
+	at org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter.getConvertsionResults(IwxxmRestConverter.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:316)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:298)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:268)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-07-05 12:43:53,987[ISO8601] [grizzly-http-server-5] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Request to validation received
+2023-07-05 12:43:53,987[ISO8601] [grizzly-http-server-5] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - {host=[localhost:8082], user-agent=[Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0], accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8], accept-language=[en-US,en;q=0.5], accept-encoding=[gzip, deflate, br], connection=[keep-alive], upgrade-insecure-requests=[1], sec-fetch-dest=[document], sec-fetch-mode=[navigate], sec-fetch-site=[none], sec-fetch-user=[?1]}
+2023-07-05 12:43:53,988[ISO8601] [grizzly-http-server-5] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG
+2023-07-05 12:44:19,971[ISO8601] [grizzly-http-server-5] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2023-07-05 12:44:28,139[ISO8601] [grizzly-http-server-5] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2023-07-05 12:46:11,655[ISO8601] [grizzly-http-server-5] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2023-07-05 12:46:22,249[ISO8601] [grizzly-http-server-5] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2023-07-05 12:47:24,031[ISO8601] [grizzly-http-server-5] ERROR org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Validation error
+org.gamc.spmi.iwxxmConverter.wmo.WMORegister$WMORegisterException: 0 was not found in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+	at org.gamc.spmi.iwxxmConverter.wmo.WMORegister.getWMOUrlByCode(WMORegister.java:180)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createRunwayStateTag(METARConverter.java:795)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createMETARRecordTag(METARConverter.java:492)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createObservationResult(METARConverter.java:312)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertMessage(METARConverter.java:194)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertTacToXML(METARConverter.java:140)
+	at org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter.getConvertsionResults(IwxxmRestConverter.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:316)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:298)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:268)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-07-05 12:47:29,144[ISO8601] [grizzly-http-server-6] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Request to validation received
+2023-07-05 12:47:29,144[ISO8601] [grizzly-http-server-6] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - {host=[localhost:8082], user-agent=[Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/114.0], accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8], accept-language=[en-US,en;q=0.5], accept-encoding=[gzip, deflate, br], connection=[keep-alive], upgrade-insecure-requests=[1], sec-fetch-dest=[document], sec-fetch-mode=[navigate], sec-fetch-site=[none], sec-fetch-user=[?1]}
+2023-07-05 12:47:29,144[ISO8601] [grizzly-http-server-6] INFO  org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG
+2023-07-05 12:47:40,434[ISO8601] [grizzly-http-server-6] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2023-07-05 12:47:41,841[ISO8601] [grizzly-http-server-6] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2023-07-05 12:47:55,696[ISO8601] [grizzly-http-server-6] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2023-07-05 12:48:00,093[ISO8601] [grizzly-http-server-6] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 0 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2023-07-05 12:48:38,428[ISO8601] [grizzly-http-server-6] ERROR org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter  - Validation error
+org.gamc.spmi.iwxxmConverter.wmo.WMORegister$WMORegisterException: 0 was not found in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+	at org.gamc.spmi.iwxxmConverter.wmo.WMORegister.getWMOUrlByCode(WMORegister.java:180)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createRunwayStateTag(METARConverter.java:795)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createMETARRecordTag(METARConverter.java:492)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.createObservationResult(METARConverter.java:312)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertMessage(METARConverter.java:194)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v2.METARConverter.convertTacToXML(METARConverter.java:140)
+	at org.gamc.spmi.iwxxmConverter.rest.IwxxmRestConverter.getConvertsionResults(IwxxmRestConverter.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:76)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:148)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:191)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:200)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:103)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:493)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:415)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:104)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:272)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:268)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:316)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:298)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:268)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:289)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:256)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:377)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:224)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:593)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:573)
+	at java.base/java.lang.Thread.run(Thread.java:833)

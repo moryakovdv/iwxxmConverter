@@ -149,6 +149,9 @@ API methods:
 So ask `http://localhost:8082/iwxxmConverter/api/convertandvalidate?message=METAR UUWW 090830Z 23005MPS CAVOK 14/03 Q1021 R24/000070 NOSIG`
 to get converted and validated results.
 
+**NOTE!** These rest-based methods are included only for IWXXM 2.1. validation. To use IWXXM 3.0 validation please use included Spring-boot API (Start RestApplication and send GET-request with payload in BODY. 
+See test samples in org.gamc.spmi.iwxxmconverter.rest.common.RestCommonIntegrationTest class.
+
 6. Loading jars to your external project with Maven
 If you want to include pre-builded (for example installed into local .m2) jars into your project do the following:
 ```
