@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.gamc.iwxxmconverterrest.common.Converters;
 import org.gamc.iwxxmconverterrest.common.Validator;
+import org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage;
 import org.gamc.spmi.iwxxmConverter.tac.TacConverter;
 import org.gamc.spmi.iwxxmConverter.validation.FailedValidationAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@RestController
 @RequestMapping("convert/v3")
 public class ConverterControllerV3 {
 	
@@ -33,6 +37,25 @@ public class ConverterControllerV3 {
 		ValidationResult result = new ValidationResult(asserts, xml);
 		return result;
 	}
+	
+	@RequestMapping(value = "/taf/raw",produces=  MediaType.APPLICATION_JSON_VALUE)
+	public TAFTacMessage getParsedTaf(@RequestBody String taf) throws Exception {
+		
+		TAFTacMessage parsed = converters.getTafConverter().convertTacToTAFMessage(taf);
+		
+		ObjectMapper m = new ObjectMapper();
+		m.findAndRegisterModules();
+
+		String s = m.writeValueAsString(parsed);
+		
+		return parsed;
+	}
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/taf",produces= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE  })
 	public @ResponseBody ValidationResult convertTaf(@RequestBody String taf) throws Exception {

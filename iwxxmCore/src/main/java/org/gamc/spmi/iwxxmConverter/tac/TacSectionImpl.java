@@ -21,11 +21,17 @@ import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TacSectionImpl implements TacSection {
 
+	@JsonBackReference
 	private TacMessageImpl parentMessage;
 	
 	private String initialTacSection;
+	
+	
 	
 	/**Constructor to be overridden in children
 	 * @param initialTacSection string representation of a TAC message
@@ -48,7 +54,10 @@ public class TacSectionImpl implements TacSection {
 		return initialTacSection;
 	}
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	public DateTime getParentIssuedDateTime() {
+		if (parentMessage==null)
+			return new DateTime();
 		return parentMessage.getMessageIssueDateTime();
 	}
 

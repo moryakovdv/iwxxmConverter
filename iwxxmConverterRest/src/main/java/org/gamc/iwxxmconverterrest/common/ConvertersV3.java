@@ -23,13 +23,13 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class ConvertersV3 implements Converters {
 
-	@Value("${iwxxm.geoservice.storePath}")
+	@Value("${iwxxm.geoservice.storePath:/home/moryakov/iwxxm-gis/shapes/}")
 	private String storePath;
 	
-	@Value("${iwxxm.geoservice.useExternalStorage}")
+	@Value("${iwxxm.geoservice.useExternalStorage:true}")
 	private boolean useExternalStorage;
 	
-	@Value("${iwxxm.geoservice.useLatitudeFirst}")
+	@Value("${iwxxm.geoservice.useLatitudeFirst:true}")
 	private boolean latitudeFirst;
 	
 	private METARConverterV3 metarConverter;

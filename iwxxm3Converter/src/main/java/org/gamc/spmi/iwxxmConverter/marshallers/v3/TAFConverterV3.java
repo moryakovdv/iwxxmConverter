@@ -131,6 +131,23 @@ public class TAFConverterV3 implements TacConverter<TAFTacMessage, TAFType,IWXXM
 		String xmlResult = marshallMessageToXML(result);
 		return xmlResult;
 	}
+	
+	public TAFTacMessage convertTacToTAFMessage(String tac) {
+		logger.debug("Parsing "+ tac);
+
+		TAFTacMessage tafMessage = new TAFTacMessage(tac);
+		try {
+			tafMessage.parseMessage();
+			
+			tafMessage.parseAllTafSections();
+			
+			return tafMessage;
+		}
+		catch(ParsingException pe) {
+			return null;
+		}
+		
+	}
 
 	/**
 	 * Mapps internal TAC representation to JAXB-objects

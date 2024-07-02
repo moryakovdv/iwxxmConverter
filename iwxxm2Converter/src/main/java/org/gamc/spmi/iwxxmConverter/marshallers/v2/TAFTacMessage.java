@@ -40,6 +40,8 @@ import org.gamc.spmi.iwxxmConverter.tafconverter.TafParsingRegexp;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * Implemetation of a TAF Tac message
  * 
@@ -52,14 +54,20 @@ public class TAFTacMessage extends TacMessageImpl {
 	private TafCommonWeatherSection commonWeatherSection = new TafCommonWeatherSection(true);
 
 	private boolean noSignificantChanges = false;
-
+	
+	@JsonManagedReference
 	private LinkedList<TAFBecomingSection> becomingSections = new LinkedList<TAFBecomingSection>();
 	
+	@JsonManagedReference
 	private LinkedList<TAFTempoSection> tempoSections = new LinkedList<TAFTempoSection>();
 	
+	@JsonManagedReference
 	private LinkedList<TAFProbabilitySection> probabilitySections = new LinkedList<TAFProbabilitySection>();
 	
+	@JsonManagedReference
 	private LinkedList<TAFRemarkSection> remarkSections = new LinkedList<TAFRemarkSection>();
+	
+	@JsonManagedReference
 	private LinkedList<TafForecastTimeSection> timedSections = new LinkedList<TafForecastTimeSection>();
 
 	public TAFTacMessage(String initialTac) {

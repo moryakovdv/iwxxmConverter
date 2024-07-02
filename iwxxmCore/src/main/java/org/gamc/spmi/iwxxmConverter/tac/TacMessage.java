@@ -21,6 +21,8 @@ import org.gamc.spmi.iwxxmConverter.common.MessageType;
 import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**General interface for TAC messages*/
 public interface TacMessage {
 
@@ -35,6 +37,7 @@ public interface TacMessage {
 	
 	MessageStatusType getMessageStatusType();
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	DateTime getMessageIssueDateTime();
 	
 	/**ICAO code*/

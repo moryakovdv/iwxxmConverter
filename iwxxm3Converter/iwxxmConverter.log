@@ -1,26 +1,26 @@
-2023-07-05 12:26:21,217[ISO8601] [main] INFO  hsqldb.db.HSQLDB6BD103EBD8.ENGINE  - dataFileCache open start
-2023-07-05 12:26:23,780[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2023-07-05 12:26:23,782[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
-2023-07-05 12:26:24,844[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
-2023-07-05 12:26:24,874[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
-2023-07-05 12:26:24,877[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2023-07-05 12:26:24,931[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
-2023-07-05 12:26:25,552[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2023-07-05 12:26:25,634[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2023-07-05 12:26:25,981[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2023-07-05 12:26:26,354[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
-2023-07-05 12:26:26,357[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Parsing WARS51 RUMA 151130
+2024-06-13 14:04:57,783[ISO8601] [main] INFO  hsqldb.db.HSQLDB6BD103EBD8.ENGINE  - dataFileCache open start
+2024-06-13 14:05:00,286[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxm-test/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2024-06-13 14:05:00,286[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 1 template
+2024-06-13 14:05:01,104[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 2 template
+2024-06-13 14:05:01,129[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Creating XSLT step 3 template
+2024-06-13 14:05:01,131[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2024-06-13 14:05:01,183[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource iso_schematron_skeleton_for_saxon.xsl from base jar:file:/home/moryakov/.m2/repository/com/helger/ph-schematron/5.0.1/ph-schematron-5.0.1.jar!/schematron/20100710-xslt2/iso_svrl_for_xslt2.xsl
+2024-06-13 14:05:01,818[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 1 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxm-test/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2024-06-13 14:05:01,889[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 2 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxm-test/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2024-06-13 14:05:02,177[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronProviderXSLTFromSCH  - Finished applying XSLT step 3 on [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxm-test/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2024-06-13 14:05:02,456[ISO8601] [main] DEBUG com.helger.schematron.xslt.SchematronResourceSCHCache  - Finished compiling Schematron instance [cpPath=iwxxm/schematron/iwxxm.sch; urlResolved=true; URL=file:/home/moryakov/git/repository/iwxxm-test/iwxxmConverter/iwxxm3Converter/target/test-classes/iwxxm/schematron/iwxxm.sch]
+2024-06-13 14:05:02,459[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Parsing WARS51 RUMA 151130
   YUDD AIRMET 1 VALID 151520/151800 YUSO- 
     YUDD SHANLON FIR ISOL TS 
     OBS N OF S50 TOP ABV FL100 STNR WKN=
-2023-07-05 12:26:26,434[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOAirWXRegister: 18
-2023-07-05 12:26:26,435[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the ISOL TS in codes.wmo.int-49-2-AirWxPhenomena.rdf
-2023-07-05 12:26:26,439[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:26,440[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:27,089[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Parsing WARS51 RUMA 151355
+2024-06-13 14:05:02,529[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOAirWXRegister: 18
+2024-06-13 14:05:02,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the ISOL TS in codes.wmo.int-49-2-AirWxPhenomena.rdf
+2024-06-13 14:05:02,534[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:02,535[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:03,295[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Parsing WARS51 RUMA 151355
 UUWV AIRMET 4 VALID 151400/151600 UUWV–
 UUWV MOSCOW FIR CNL AIRMET 2 151200/151600=
-2023-07-05 12:26:27,090[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below
+2024-06-13 14:05:03,297[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3  - Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below
 org.gamc.spmi.iwxxmConverter.airmetconverter.AIRMETParsingException: Mandatory header section is missed in AIRMET
 	at org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETTacMessage.parseMessage(AIRMETTacMessage.java:257)
 	at org.gamc.spmi.iwxxmConverter.marshallers.v3.AIRMETConverterV3.convertTacToXML(AIRMETConverterV3.java:102)
@@ -49,15 +49,19 @@ org.gamc.spmi.iwxxmConverter.airmetconverter.AIRMETParsingException: Mandatory h
 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-2023-07-05 12:26:27,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SPACEWEATHERConverterV3  - Parsing SWX ADVISORY
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+2024-06-13 14:05:04,014[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SPACEWEATHERConverterV3  - Parsing SWX ADVISORY
 DTG:                20161108/0100Z 
 SWXC:               DONLON
 ADVISORY NR:        2016/1
@@ -69,15 +73,15 @@ FCST SWX +18 HR:    08/1900Z DAYLIGHT SIDE
 FCST SWX +24 HR:    09/0100Z DAYLIGHT SIDE
 RMK:                PERIODIC HF COM ABSORPTION OBS AND LIKELY TO CONT IN THE NEAR TERM. CMPL AND PERIODIC LOSS OF HF ON THE SUNLIT SIDE OF THE EARTH EXP. CONT HF COM DEGRADATION LIKELY OVER THE NXT 7 DAYS. SEE WWW.SPACEWEATHERPROVIDER.WEB 
 NXT ADVISORY:       20161108/0700Z
-2023-07-05 12:26:27,746[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
-2023-07-05 12:26:27,746[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HF_COM_SEV in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
-2023-07-05 12:26:27,753[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7
-2023-07-05 12:26:27,754[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:27,754[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:27,755[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:27,755[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:27,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,354[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SPACEWEATHERConverterV3  - Parsing SWX ADVISORY
+2024-06-13 14:05:04,021[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
+2024-06-13 14:05:04,021[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HF_COM_SEV in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
+2024-06-13 14:05:04,026[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7
+2024-06-13 14:05:04,027[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,027[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,028[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,028[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,028[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DAYLIGHT_SIDE in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,581[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SPACEWEATHERConverterV3  - Parsing SWX ADVISORY
 DTG:                20161108/0100Z 
 SWXC:               DONLON
 ADVISORY NR:        2016/2
@@ -90,143 +94,143 @@ FCST SWX +18 HR:    08/1900Z HNH HSH E18000 - W18000
 FCST SWX +24 HR:    09/0100Z NO SWX EXP
 RMK:                LOW LVL GEOMAGNETIC STORMING CAUSING INCREASED AURORAL ACT AND SUBSEQUENT MOD DEGRADATION OF GNSS AND HF COM AVBL IN THE AURORAL ZONE. THIS STORMING EXP TO SUBSIDE IN THE FCST PERIOD. SEE WWW.SPACEWEATHERPROVIDER.WEB 
 NXT ADVISORY:       NO FURTHER ADVISORIES
-2023-07-05 12:26:28,359[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
-2023-07-05 12:26:28,359[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HF_COM_MOD in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
-2023-07-05 12:26:28,359[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the GNSS_MOD in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
-2023-07-05 12:26:28,365[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7
-2023-07-05 12:26:28,365[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,365[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,366[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,366[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,366[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
-2023-07-05 12:26:28,372[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:28,372[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:28,926[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:29,029[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SpaceWxLocation.rdf from base 
-2023-07-05 12:26:29,035[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SpaceWxPhenomena.rdf from base 
-2023-07-05 12:26:29,053[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:29,070[ISO8601] [main] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader jdk.internal.loader.ClassLoaders$AppClassLoader@5cb0d902
-2023-07-05 12:26:29,096[ISO8601] [main] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
-2023-07-05 12:26:29,101[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
-2023-07-05 12:26:29,106[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
-2023-07-05 12:26:29,107[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
-2023-07-05 12:26:29,107[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class jdk.internal.loader.ClassLoaders$AppClassLoader
-2023-07-05 12:26:29,252[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR UUEE 270830Z 02006MPS 2100 -SN OVC009 M04/M06 Q1008 R06L/590230
+2024-06-13 14:05:04,587[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherRegister: 8
+2024-06-13 14:05:04,588[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HF_COM_MOD in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
+2024-06-13 14:05:04,588[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the GNSS_MOD in codes.wmo.int-49-2-SpaceWxPhenomena.rdf
+2024-06-13 14:05:04,590[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSpaceWeatherLocationRegister: 7
+2024-06-13 14:05:04,591[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,591[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,591[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,591[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,592[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,592[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,592[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HNH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,592[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the HSH in codes.wmo.int-49-2-SpaceWxLocation.rdf
+2024-06-13 14:05:04,596[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:04,596[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:05,182[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:05,311[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SpaceWxLocation.rdf from base 
+2024-06-13 14:05:05,324[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SpaceWxPhenomena.rdf from base 
+2024-06-13 14:05:05,345[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:05,360[ISO8601] [main] INFO  com.helger.jaxb.JAXBContextCache  - Creating JAXB context for package org.oclc.purl.dsdl.svrl using ClassLoader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a
+2024-06-13 14:05:05,383[ISO8601] [main] DEBUG com.helger.commons.lang.ServiceLoaderHelper  - Finished retrieving all 2 SPI implementations of interface com.helger.commons.hashcode.IHashCodeImplementationRegistrarSPI
+2024-06-13 14:05:05,387[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Reinitialized com.helger.commons.hashcode.HashCodeImplementationRegistry
+2024-06-13 14:05:05,391[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.String
+2024-06-13 14:05:05,392[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class java.lang.Package
+2024-06-13 14:05:05,392[ISO8601] [main] DEBUG com.helger.commons.hashcode.HashCodeImplementationRegistry  - Found no hashCode implementation for class jdk.internal.loader.ClassLoaders$AppClassLoader
+2024-06-13 14:05:05,514[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR UUEE 270830Z 02006MPS 2100 -SN OVC009 M04/M06 Q1008 R06L/590230
      R06R/590230 TEMPO 1000 SHSN BKN012CB R06L/590330=
-2023-07-05 12:26:29,285[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:29,290[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:29,293[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:29,293[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:29,296[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
-2023-07-05 12:26:29,297[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:29,299[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
-2023-07-05 12:26:29,299[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:29,307[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
-2023-07-05 12:26:29,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 30 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:29,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:29,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:29,309[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 30 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:29,310[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:29,312[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2023-07-05 12:26:29,312[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:29,313[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:29,851[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR LZIB 211630Z 08005KT 060V120 1200 0900NW FG VCTS +SHRA FEW020 26/15 Q1022 WS RWY04L NOSIG=
-2023-07-05 12:26:29,864[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:29,867[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:29,867[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the VCTS in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:29,867[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:29,871[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:29,871[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FEW in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:30,375[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR ULLI 261230Z 32003MPS 280V360 CAVOK M02/M16 Q1008 R88/190055
+2024-06-13 14:05:05,543[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:05,547[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:05,552[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:05,552[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:05,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2024-06-13 14:05:05,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:05,560[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2024-06-13 14:05:05,560[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:05,571[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
+2024-06-13 14:05:05,573[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 30 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:05,573[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:05,573[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:05,574[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 30 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:05,575[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:05,577[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2024-06-13 14:05:05,578[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:05,578[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:06,147[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR LZIB 211630Z 08005KT 060V120 1200 0900NW FG VCTS +SHRA FEW020 26/15 Q1022 WS RWY04L NOSIG=
+2024-06-13 14:05:06,165[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:06,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:06,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the VCTS in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:06,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:06,173[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:06,174[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FEW in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:06,665[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.METARConverterV3  - Parsing METAR ULLI 261230Z 32003MPS 280V360 CAVOK M02/M16 Q1008 R88/190055
 NOSIG
-2023-07-05 12:26:30,379[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
-2023-07-05 12:26:30,379[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:30,381[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
-2023-07-05 12:26:30,382[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:30,386[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
-2023-07-05 12:26:30,387[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 55 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:30,834[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:30,834[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:31,258[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:31,282[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:31,285[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:31,316[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:31,318[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:31,320[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
-2023-07-05 12:26:31,320[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:31,322[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
-2023-07-05 12:26:31,322[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:31,326[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
-2023-07-05 12:26:31,326[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 42 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:31,327[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:31,754[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:31,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:31,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DRSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:31,756[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:31,758[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:31,758[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTOBSERVABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:31,761[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
-2023-07-05 12:26:31,761[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:31,763[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
-2023-07-05 12:26:31,763[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:31,766[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
-2023-07-05 12:26:31,767[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
-2023-07-05 12:26:32,606[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF LZIB 101058Z 1012/1112 24015KT 9999 -SHRA FEW018 BKN028 TX10/1112Z TN05/1100Z BECMG 1014/1017 18012KT BECMG 1104/1107 14022KT 7000 RADZ SCT010 BKN015CB OVC025
-2023-07-05 12:26:32,615[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:32,615[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FEW in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:32,615[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:32,621[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:32,623[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:32,624[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:32,624[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:32,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2023-07-05 12:26:32,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:32,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:32,627[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the RADZ in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,015[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:33,036[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:33,042[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
-2023-07-05 12:26:33,043[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:33,047[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:33,057[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF UUWW 270203Z 2703/2803 36006MPS 3100 -SN BR OVC007 TX00/2703Z\n" + 
+2024-06-13 14:05:06,669[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2024-06-13 14:05:06,669[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:06,671[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2024-06-13 14:05:06,671[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:06,675[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
+2024-06-13 14:05:06,676[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 55 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:07,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:07,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:07,618[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:07,643[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:07,655[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:07,687[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:07,689[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:07,692[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2024-06-13 14:05:07,692[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:07,695[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2024-06-13 14:05:07,695[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:07,700[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
+2024-06-13 14:05:07,701[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 42 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:07,701[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:08,157[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:08,159[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:08,159[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the DRSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:08,159[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:08,162[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:08,162[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTOBSERVABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:08,165[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayDepositsRegister: 11
+2024-06-13 14:05:08,165[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:08,166[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayContaminationRegister: 5
+2024-06-13 14:05:08,167[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:08,170[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMORunWayFrictionRegister: 101
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 1 in codes.wmo.int-bufr4-codeflag-0-20-086.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 5 in codes.wmo.int-bufr4-codeflag-0-20-087.rdf
+2024-06-13 14:05:08,171[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 90 in codes.wmo.int-bufr4-codeflag-0-20-089.rdf
+2024-06-13 14:05:09,045[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF LZIB 101058Z 1012/1112 24015KT 9999 -SHRA FEW018 BKN028 TX10/1112Z TN05/1100Z BECMG 1014/1017 18012KT BECMG 1104/1107 14022KT 7000 RADZ SCT010 BKN015CB OVC025
+2024-06-13 14:05:09,051[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:09,052[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FEW in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,052[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,059[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:09,060[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2024-06-13 14:05:09,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:09,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,063[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the RADZ in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,494[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:09,520[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:09,533[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
+2024-06-13 14:05:09,534[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:09,539[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:09,549[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF UUWW 270203Z 2703/2803 36006MPS 3100 -SN BR OVC007 TX00/2703Z\n" + 
 			"TNM06/2724Z TEMPO 2703/2710 0700 +SHSN OVC003 BKN015CB PROB40 TEMPO\n" + 
 			"2703/2710 -FZDZ BECMG 2712/2714 9000 NSW BKN012
-2023-07-05 12:26:33,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:33,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,065[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:33,066[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,066[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,067[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,068[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:33,069[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:33,069[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,069[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,070[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2023-07-05 12:26:33,071[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:33,071[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,071[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -FZDZ in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,454[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:33,473[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:33,477[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
-2023-07-05 12:26:33,478[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:33,481[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:33,489[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF UUBW 220457Z 2206/2306 28005MPS CAVOK 8000 BKN012
+2024-06-13 14:05:09,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:09,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,560[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:09,561[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,562[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,562[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,564[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:09,564[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:09,565[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,565[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:09,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2024-06-13 14:05:09,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:09,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the +SHSN in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -FZDZ in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:09,989[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:10,011[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:10,017[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
+2024-06-13 14:05:10,018[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:10,022[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:10,032[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF UUBW 220457Z 2206/2306 28005MPS CAVOK 8000 BKN012
 TXM10/2212Z TNM16/2305Z
 TEMPO 2206/2215 3100 -SHSN BKN015CB=
-2023-07-05 12:26:33,489[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below 
+2024-06-13 14:05:10,032[ISO8601] [main] ERROR org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Message was NOT parsed properly. XML message with translationFailedTAC attribute was created. See error below 
 org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException: It is CAVOK
-	at org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection.parseSection(TafCommonWeatherSection.java:223)
-	at org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage.processCommonWeatherSection(TAFTacMessage.java:181)
-	at org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage.parseMessage(TAFTacMessage.java:127)
+	at org.gamc.spmi.iwxxmConverter.tafconverter.TafCommonWeatherSection.parseSection(TafCommonWeatherSection.java:232)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage.processCommonWeatherSection(TAFTacMessage.java:191)
+	at org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFTacMessage.parseMessage(TAFTacMessage.java:137)
 	at org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3.convertTacToXML(TAFConverterV3.java:122)
 	at org.gamc.spmi.iwxxmConverter.test.v3.taf.TafConversionTest.testMisplacedCAVOKTaf(TafConversionTest.java:103)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -253,193 +257,197 @@ org.gamc.spmi.iwxxmConverter.tafconverter.TAFParsingException: It is CAVOK
 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-2023-07-05 12:26:33,866[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:33,868[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:33,874[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 TEMPO 2206/2209 1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100 BR BKN003 TEMPO 2217/2306 0400 FZFG=
-2023-07-05 12:26:33,880[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:33,881[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,883[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:33,883[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,884[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:33,884[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:33,884[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:33,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:33,885[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:34,267[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:34,285[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:34,290[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:34,293[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:34,298[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF BIAR 210810Z 2109/2209 16020G30KT 9999 BKN020 OVC065
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+2024-06-13 14:05:10,500[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:10,504[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:10,511[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 TEMPO 2206/2209 1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100 BR BKN003 TEMPO 2217/2306 0400 FZFG=
+2024-06-13 14:05:10,524[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:10,526[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:10,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:10,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:10,533[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:10,533[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:10,534[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:10,534[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:10,535[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:10,535[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:10,535[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:11,021[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:11,041[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:11,047[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:11,051[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:11,057[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF BIAR 210810Z 2109/2209 16020G30KT 9999 BKN020 OVC065
       TX07/2115Z
       TN00/2206Z
       BECMG 2109/2111 13035G50KT 9999 SCT030 BKN045
       BECMG 2113/2115 16048G62KT
       FM211700 21015G25KT
       BECMG 2120/2122 VRB02KT CAVOK=
-2023-07-05 12:26:34,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:34,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,303[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,303[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,696[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:34,717[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:34,721[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:34,726[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 SCT010 TEMPO 2206/2209
+2024-06-13 14:05:11,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:11,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,061[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,062[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,062[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,485[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:11,511[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:11,515[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:11,520[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF ULLI 220455Z 2206/2306 27003MPS 0300 FZFG VV010 SCT010 TEMPO 2206/2209
 1500 BR OVC002 BECMG 2209/2210 6000 NSW SCT011 BECMG 2215/2217 3100
 BR BKN003 TEMPO 2217/2306 0400 FZFG=
-2023-07-05 12:26:34,728[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:34,728[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,732[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:34,732[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:34,733[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:34,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:34,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,735[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:34,736[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:34,736[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:34,736[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,105[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:35,122[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:35,126[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:35,130[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:35,140[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:35,141[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,143[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:35,143[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,144[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:35,144[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:35,144[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,144[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,144[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,145[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,145[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,522[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:35,539[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:35,543[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:35,546[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:35,553[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF BIAR 210810Z 2109/2209 16020G30KT 9999 BKN020 OVC065
+2024-06-13 14:05:11,523[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:11,523[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,528[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:11,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:11,530[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:11,532[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:11,533[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:11,955[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:11,977[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:11,982[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:11,986[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:11,998[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:11,999[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:12,000[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:12,000[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,002[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:12,002[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the NOTHINGOFOPERATIONALSIGNIFICANCE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:12,002[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,002[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:12,002[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,003[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BR in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:12,003[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the FZFG in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:12,403[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:12,427[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:12,432[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:12,435[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:12,441[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.TAFConverterV3  - Parsing TAF BIAR 210810Z 2109/2209 16020G30KT 9999 BKN020 OVC065
       TX07/2115Z
       TN00/2206Z
       BECMG 2109/2111 13035G50KT 9999 SCT030 BKN045
       BECMG 2113/2115 16048G62KT
       FM211700 21015G25KT
       BECMG 2120/2122 VRB02KT CAVOK=
-2023-07-05 12:26:35,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:35,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,557[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,558[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,558[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,953[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:35,953[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,955[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2023-07-05 12:26:35,955[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:35,959[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:35,959[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:35,960[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:35,960[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:35,960[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -TSRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:36,337[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:36,353[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:36,356[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
-2023-07-05 12:26:36,356[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:36,359[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:36,366[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
-2023-07-05 12:26:36,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:36,367[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:36,369[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
-2023-07-05 12:26:36,369[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:36,371[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
-2023-07-05 12:26:36,372[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:36,372[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
-2023-07-05 12:26:36,373[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
-2023-07-05 12:26:36,373[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -TSRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
-2023-07-05 12:26:36,732[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:36,747[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
-2023-07-05 12:26:36,749[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
-2023-07-05 12:26:36,750[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
-2023-07-05 12:26:36,752[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:36,771[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX
+2024-06-13 14:05:12,445[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:12,445[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,445[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the OVC in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,445[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,446[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,876[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:12,876[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,876[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,878[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2024-06-13 14:05:12,878[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:12,881[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:12,882[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:12,883[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:12,883[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:12,883[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -TSRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:13,293[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:13,311[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:13,314[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
+2024-06-13 14:05:13,314[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:13,317[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:13,325[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOCloudRegister: 10
+2024-06-13 14:05:13,326[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:13,326[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SCT in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:13,328[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigConvectiveCloudTypeRegister: 2
+2024-06-13 14:05:13,328[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:13,332[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOPrecipitationRegister: 401
+2024-06-13 14:05:13,333[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -SHRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:13,333[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the BKN in codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf
+2024-06-13 14:05:13,333[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the 9 in codes.wmo.int-49-2-SigConvectiveCloudType.rdf
+2024-06-13 14:05:13,333[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the -TSRA in codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf
+2024-06-13 14:05:13,746[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:13,764[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-AerodromePresentOrForecastWeather.rdf from base 
+2024-06-13 14:05:13,767[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigConvectiveCloudType.rdf from base 
+2024-06-13 14:05:13,767[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-CloudAmountReportedAtAerodrome.rdf from base 
+2024-06-13 14:05:13,770[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:13,788[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX
 EGGX SIGMET 3 VALID 251600/252200 EGGX-
       EGGX AMSWELL FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC
       FCST AT 2200Z TC CENTRE PSN N2740 W07345=
-2023-07-05 12:26:37,299[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:37,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:37,302[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:37,780[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX
+2024-06-13 14:05:14,258[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:14,261[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:14,261[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:14,728[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX
 EGGX SIGMET 3 VALID 251600/252200 EGGX-
       EGGX AMSWELL FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC
       FCST AT 2200Z TC CENTRE PSN N2740 W07345=
-2023-07-05 12:26:37,786[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:37,788[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:37,788[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:38,187[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:38,421[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:38,837[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:39,027[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
+2024-06-13 14:05:14,734[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:14,737[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:14,737[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:15,202[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:15,474[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:15,900[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:16,080[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
 SCFZ SIGMET A1 VALID 011035/011435 SCFA-
 SCFZ ANTOFAGASTA FIR SEV ICE FCST E OF LINE S2127 W06840 - S2320 
 W06803 - S2442 W06846 FL180/280 STNR NC=
-2023-07-05 12:26:39,030[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:39,031[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_ICE in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:39,035[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:39,525[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:39,535[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigWxPhenomena.rdf from base 
-2023-07-05 12:26:39,544[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:39,551[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS32 RUAA 010154
+2024-06-13 14:05:16,083[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:16,083[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_ICE in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:16,087[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:16,545[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:16,554[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigWxPhenomena.rdf from base 
+2024-06-13 14:05:16,562[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:16,566[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS32 RUAA 010154
 UUYY SIGMET 1 VALID 010200/010600 UUYY-
 UUYY SYKTYVKAR FIR SEV TURB FCST W OF E06000
 FL240/370 MOV NE 30KMH NC=
-2023-07-05 12:26:39,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:39,554[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:39,558[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:39,986[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
-2023-07-05 12:26:39,993[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigWxPhenomena.rdf from base 
-2023-07-05 12:26:40,001[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
-2023-07-05 12:26:40,008[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,053[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,070[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,099[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX UUWV SIGMET 5 VALID 111200/111500 UUWV-
+2024-06-13 14:05:16,569[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:16,569[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:16,574[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,019[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [start]
+2024-06-13 14:05:17,027[ISO8601] [main] DEBUG com.helger.commons.io.resourceresolver.DefaultResourceResolver  - Trying to resolve resource codes.wmo.int-49-2-SigWxPhenomena.rdf from base 
+2024-06-13 14:05:17,039[ISO8601] [main] DEBUG com.helger.schematron.xslt.AbstractSchematronXSLTBasedResource  - Applying Schematron XSLT on XML [end]
+2024-06-13 14:05:17,047[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,096[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,114[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,155[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSRS31RUMA 111143 XXX UUWV SIGMET 5 VALID 111200/111500 UUWV-
  UUWV MOSCOW FIR EMBD TSGR FCST N OF LINE N5100 E03520 - N5017 E04200
  AND S OF LINE N5400 E03150 - N5440 E04400 TOP FL400  FCST S OF N54 AND E OF W012 TOP FL390 MOV E 20KT WKN
-2023-07-05 12:26:40,102[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:40,102[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the EMBD_TSGR in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:40,105[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,157[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:40,157[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:40,556[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
+2024-06-13 14:05:17,159[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:17,159[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the EMBD_TSGR in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:17,163[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,215[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:17,215[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:17,648[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
 SCFZ SIGMET 2 VALID 101200/101800 SCFA–
 SCFZ ANTOFAGASTA FIR TC GLORIA PSN N2200 W06145 CB OBS AT 1200Z WI N2200 W06200 – N2230 W06215
 – N2300 W06200 - N2245 W06245 – N2215 W06245 – N2145 W06230 –N2200 W06200 TOP BLW FL500 NC
 FCST AT 1800Z TC CENTRE PSN N2330 W06315=
-2023-07-05 12:26:40,560[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,581[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:40,582[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:40,582[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:40,949[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
+2024-06-13 14:05:17,654[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:17,686[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:17,687[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the UNKNOWN in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:17,687[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:18,147[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.marshallers.v3.SIGMETConverterV3  - Parsing WSCH31SCFA 011035
 SCFZ SIGMET 3 VALID 251600/252200 SCFA-
       SCFZ ANTOFAGASTA FIR TC GLORIA PSN N2706 W07306 CB OBS AT 1600Z WI 250NM OF TC CENTRE TOP FL500 NC
       FCST AT 2200Z TC CENTRE PSN N2740 W07345
-2023-07-05 12:26:40,953[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:40,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
-2023-07-05 12:26:40,954[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
-2023-07-05 12:26:41,290[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:41,290[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:41,293[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:41,331[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:41,331[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_ICE in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:41,334[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
-2023-07-05 12:26:41,346[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
-2023-07-05 12:26:41,346[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
-2023-07-05 12:26:41,348[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:18,152[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:18,153[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMONilReasonRegister: 11
+2024-06-13 14:05:18,153[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the INAPPLICABLE in codes.wmo.int-common-nil.rdf
+2024-06-13 14:05:18,556[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:18,556[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:18,559[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:18,606[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:18,606[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_ICE in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:18,609[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded
+2024-06-13 14:05:18,624[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Total members in register org.gamc.spmi.iwxxmConverter.wmo.WMOSigWXRegister: 17
+2024-06-13 14:05:18,624[ISO8601] [main] DEBUG org.gamc.spmi.iwxxmConverter.wmo.WMORegister  - Searching the SEV_TURB in codes.wmo.int-49-2-SigWxPhenomena.rdf
+2024-06-13 14:05:18,627[ISO8601] [main] INFO  org.gamc.gis.service.GeoService  - FIR data store loaded

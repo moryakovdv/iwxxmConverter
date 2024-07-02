@@ -35,6 +35,13 @@ import org.gamc.spmi.iwxxmConverter.iwxxmenums.SPEED_UNITS;
 import org.joda.time.DateTime;
 import org.mariuszgromada.math.mxparser.Expression;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.NullSerializer;
+
 /**
  * Embedded objects of this class are used to describe common weather condition
  * in METAR itself, BECMG or TEMPO sections
@@ -44,8 +51,10 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 	private String tacContent;
 
 	boolean failWhenMandatorySectionMissed = true;
+	
 	@AnnotationLocalizedName(name = "Начало действия день")
 	private Integer validityDayFrom;
+	
 	@AnnotationLocalizedName(name = "Начало действия часы")
 	private Integer validityHourFrom;
 	@AnnotationLocalizedName(name = "Конец действия день")
@@ -551,7 +560,8 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 		this.airTemperatureMin = airTemperatureMin;
 	}
 
-	public Integer getValidityDayFrom() {
+	 public Integer getValidityDayFrom() {
+		
 		return validityDayFrom;
 	}
 
@@ -601,6 +611,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 
 	HashMap<String, Object> hashNames = new HashMap<String, Object>();
 
+	@JsonIgnore
 	public HashMap<String, Object> getHashNames() {
 		return hashNames;
 	}
@@ -609,6 +620,7 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 		this.hashNames = hashNames;
 	}
 
+	@JsonIgnore
 	public HashMap<String, Object> getLocalizedNameValues() {
 
 		Field[] flds = this.getClass().getDeclaredFields();
@@ -624,7 +636,6 @@ public class TafCommonWeatherSection implements CommonWeatherSection {
 					hashNames.put(lname, fieldValue);
 					f.setAccessible(false);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

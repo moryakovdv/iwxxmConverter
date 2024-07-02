@@ -11,7 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.Nulls;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @EnableAutoConfiguration
 
@@ -21,8 +24,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class RestApplication extends Application {
 
 	
-	
-
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(RestApplication.class, args);
 	}
@@ -35,6 +36,18 @@ public class RestApplication extends Application {
 	@Bean
 	public Converters getConvertersImpl() {
 		return new ConvertersV3();
+	}
+	
+	
+	
+	@Bean
+	public ObjectMapper getObjectMapper() {
+	
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.findAndRegisterModules();
+		
+		return mapper;
 	}
 
 }

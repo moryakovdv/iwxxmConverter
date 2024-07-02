@@ -54,7 +54,9 @@ public interface WMORegister<T> {
 	
 	/** Parse XML file and populate TreeMap storage */
 	default void parseWMOXml() {
-		try (InputStream is = new FileInputStream(getRegisterFileName())) {
+		
+		String fileRegistryPath = "/home/moryakov/iwxxm-gis/"+getRegisterFileName();
+		try (InputStream is = new FileInputStream(fileRegistryPath)) {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 

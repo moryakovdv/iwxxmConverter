@@ -22,14 +22,15 @@ import org.gamc.spmi.iwxxmConverter.exceptions.ParsingException;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**Base implementation of a TacMessage object*/
 public abstract class TacMessageImpl implements TacMessage {
 
 	private String icaoCode;
 	private DateTime messageIssueDateTime;
-	
-	
 	private String initialTacMessage;
+	
 	
 	/**Constructor to be overridden in children
 	 * @param initialTacMessage string representation of a TAC message
@@ -58,6 +59,7 @@ public abstract class TacMessageImpl implements TacMessage {
 	}
 
 	/**@return Message issue date and time*/
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	public DateTime getMessageIssueDateTime() {
 		return messageIssueDateTime;
 	}
@@ -74,6 +76,7 @@ public abstract class TacMessageImpl implements TacMessage {
 	
 	@Override
 	public abstract void parseMessage() throws ParsingException;
+	
 	
 	public abstract Interval getValidityInterval();
 	
